@@ -1,29 +1,29 @@
 const siteData = {
   site: {
     name: "Lumen Forge",
-    tagline: "专注新手友好的建站、编程、AI 与效率资源分享",
+    tagline: "新手能直接用的建站、编程、AI 与效率资源库",
     author: "Avery Lin",
     email: "18922729798@163.com",
     github: "https://github.com/hello1yjx/myweb",
     newsletter: "#newsletter",
-    bio: "这里优先整理适合新手上手的官方文档、免费资源、模板入口和实用教程，先帮你快速找到靠谱资料，再慢慢补成长文教程。",
+    bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
-      { value: "10", label: "资源型主题" },
-      { value: "20+", label: "官方入口" },
-      { value: "3", label: "核心内容方向" }
+      { value: "10", label: "主题路线" },
+      { value: "30+", label: "精选入口" },
+      { value: "1", label: "持续更新的资源库" }
     ],
     valueCards: [
       {
-        title: "先找准入口",
-        text: "很多新手不是学不会，而是不知道应该先看哪一个官方文档、哪一个教程、哪一个下载入口。"
+        title: "先给路线，再给链接",
+        text: "不是把资料堆在一起，而是先告诉你适合谁、从哪开始、下一步看什么。"
       },
       {
-        title: "资料尽量可靠",
-        text: "优先收录官方文档、官方模板库、官方课程和长期可访问的学习资源，减少失效链接。"
+        title: "优先长期可用",
+        text: "入口优先选择官方文档、稳定工具和可持续更新的资料，减少踩坑和失效链接。"
       },
       {
-        title: "内容可持续扩展",
-        text: "先把资源导航页搭好，再把高需求主题逐步扩成图文教程、示例代码和可下载资料。"
+        title: "每个主题都能长大",
+        text: "资源卡可以继续扩成长文教程、下载页、广告位或联盟推荐，让网站越做越有价值。"
       }
     ]
   },
@@ -1481,9 +1481,9 @@ function injectResourcesPage() {
       <div class="section-heading">
         <div>
           <p class="eyebrow">精选入口</p>
-          <h2>适合先收藏的核心官方资源</h2>
+          <h2>先收藏这几个入口，后面查资料就不用到处翻</h2>
         </div>
-        <p>这一组更像总导航，适合第一次来到站里的读者先快速建立方向感。</p>
+        <p>这一组负责快速建立方向感：官方入口、核心工具、长期可用的学习路线先放在最前面。</p>
       </div>
       <div class="resource-grid">
         ${siteData.resources.map(buildResourceCard).join("")}
@@ -1496,9 +1496,9 @@ function injectResourcesPage() {
       <div class="section-heading">
         <div>
           <p class="eyebrow">按主题浏览</p>
-          <h2>把 10 个内容方向拆成可直接进入的资源分区</h2>
+          <h2>10 个主题分区，从“我想学什么”直接进入</h2>
         </div>
-        <p>每个分区都连到对应文章，适合先看导航，再深入看教程和后续扩展内容。</p>
+        <p>每个分区都连到对应文章，适合先看导航，再深入看教程、示例和后续扩展内容。</p>
       </div>
       ${siteData.posts.map(buildTopicResourceSection).join("")}
     </section>
