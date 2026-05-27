@@ -1,232 +1,1153 @@
 const siteData = {
   site: {
     name: "Lumen Forge",
-    tagline: "分享高点击教程、资料整理和可持续变现的内容型博客。",
+    tagline: "专注新手友好的建站、编程、AI 与效率资源分享",
     author: "Avery Lin",
     email: "18922729798@163.com",
     github: "https://github.com/hello1yjx/myweb",
     newsletter: "#newsletter",
-    bio: "这里重点整理高搜索需求的建站教程、编程入门、AI 工具和高效办公资料，让新手也能快速找到真正有用的内容。",
+    bio: "这里优先整理适合新手上手的官方文档、免费资源、模板入口和实用教程，先帮你快速找到靠谱资料，再慢慢补成长文教程。",
     heroStats: [
-      { value: "10", label: "高点击选题" },
-      { value: "8", label: "精选工具" },
-      { value: "5", label: "展示项目" }
+      { value: "10", label: "资源型主题" },
+      { value: "20+", label: "官方入口" },
+      { value: "3", label: "核心内容方向" }
     ],
     valueCards: [
       {
-        title: "建站实战",
-        text: "从 GitHub Pages 到内容结构、SEO 和页面优化，专门写给想开始的人。 "
+        title: "先找准入口",
+        text: "很多新手不是学不会，而是不知道应该先看哪一个官方文档、哪一个教程、哪一个下载入口。"
       },
       {
-        title: "效率工具",
-        text: "挑真正值得长期用的工具，避免信息过载，用体验和场景来做推荐。 "
+        title: "资料尽量可靠",
+        text: "优先收录官方文档、官方模板库、官方课程和长期可访问的学习资源，减少失效链接。"
       },
       {
-        title: "成长记录",
-        text: "公开复盘写作、学习和个人品牌经营过程，让读者看到真实路径。 "
+        title: "内容可持续扩展",
+        text: "先把资源导航页搭好，再把高需求主题逐步扩成图文教程、示例代码和可下载资料。"
       }
     ]
   },
   posts: [
     {
       id: "github-pages-blog-tutorial",
-      title: "零基础 GitHub Pages 搭建博客教程：从创建仓库到成功上线",
-      date: "2026-05-20",
+      title: "零基础 GitHub Pages 搭建博客教程：资源入口、上线流程与避坑清单",
+      date: "2026-05-27",
       category: "建站指南",
-      readTime: "12 分钟",
-      excerpt: "适合新手程序员、学生和内容创作者的一篇完整上手教程，覆盖仓库创建、页面结构、发布与常见问题。",
-      tags: ["GitHub Pages", "博客搭建", "零基础"],
+      readTime: "10 分钟",
+      excerpt: "适合新手程序员、学生和内容创作者的 GitHub Pages 资源导航页，先带你找到官方入口、学习顺序和可直接照着做的上线步骤。",
+      tags: ["GitHub Pages", "博客搭建", "新手教程"],
       featured: true,
-      body: `
-        <p>这篇文章适合完全没有博客经验的读者，目标是用最少的概念，让你从 0 到 1 把 GitHub Pages 博客发上网。内容结构可以分成：准备工作、创建仓库、写首页、绑定 Pages、排查访问问题。</p>
-        <p>建议在正文里搭配截图和示例代码，因为新手最怕“看懂了但做不出来”。每一步最好都给一个可复制的例子，让读者能跟着完成。</p>
-        <h2>受众与形式</h2>
-        <p>受众主要是新手程序员、学生和内容创作者，形式建议做成图文教程，必要时补一段演示视频。这样停留时间会更高，收藏和分享也更自然。</p>
-        <h2>广告与联盟建议</h2>
-        <p>文章中段可以放博客模板、域名或主机类联盟推荐；文章底部适合放 AdSense 广告和“继续阅读”入口，让流量继续留在站内。</p>
-      `
+      intro: [
+        "如果你准备先用最低成本把个人博客或作品页发到网上，GitHub Pages 依然是最稳妥的起点之一。它免费、部署流程清晰，而且和 GitHub 仓库天然结合，适合边学边做。",
+        "这篇先做成资源分享页，重点不是一次讲完所有细节，而是帮你快速找到靠谱入口、知道先学什么，再学什么，少走弯路。"
+      ],
+      audience: [
+        "第一次做个人网站的新手程序员",
+        "想展示作品、简历或学习记录的学生",
+        "想低成本搭建内容站的个人创作者"
+      ],
+      format: [
+        "建议最终扩成图文教程 + 示例代码",
+        "正文中可以补充仓库截图、分支设置截图和自定义域名截图"
+      ],
+      roadmap: [
+        "先看 GitHub Pages 官方入门页，理解 user site 和 project site 的区别",
+        "再看 GitHub Docs 里的自定义域名和 Jekyll 相关说明",
+        "最后结合 GitHub Skills 或你自己的示例仓库完成第一次部署"
+      ],
+      officialLinks: [
+        {
+          label: "GitHub Pages 官方入口",
+          url: "https://pages.github.com/",
+          note: "最适合第一步打开的官方起点页。"
+        },
+        {
+          label: "GitHub Docs：使用 GitHub Pages 创建站点",
+          url: "https://docs.github.com/pages/getting-started-with-github-pages/creating-a-github-pages-site",
+          note: "从仓库到发布的标准流程。"
+        },
+        {
+          label: "GitHub Docs：自定义域名",
+          url: "https://docs.github.com/pages/configuring-a-custom-domain-for-your-github-pages-site",
+          note: "适合后续把博客换成独立域名。"
+        },
+        {
+          label: "GitHub Skills",
+          url: "https://skills.github.com/",
+          note: "适合完全没接触过 GitHub 的读者做入门练习。"
+        }
+      ],
+      curatedLinks: [
+        "先准备一个公开仓库，并确定站点是挂在用户名域名下，还是挂在项目路径下。",
+        "如果你暂时不想碰静态站点生成器，可以直接从纯 HTML 页面开始，先把内容发出去。",
+        "如果站点打不开，先检查仓库名、分支来源、Pages 构建状态和首页文件名是否正确。"
+      ],
+      downloadIdeas: [
+        "可以补一个“零基础 GitHub Pages 上线检查清单”PDF 下载",
+        "可以提供示例首页代码包或最小博客模板仓库"
+      ],
+      monetization: "文章中部适合放博客模板、域名、托管或主题类联盟入口；正文底部适合预留 AdSense 广告位和继续阅读卡片。",
+      extraSections: [
+        {
+          title: "5 步快速上线路线",
+          items: [
+            "创建一个公开仓库，并确认首页文件是 index.html，或者直接用 Jekyll 模板起步。",
+            "在仓库设置里打开 Pages，选好发布来源，优先使用官方支持的分支或 Actions 流程。",
+            "第一次访问默认域名，确认站点能正常打开，再继续做标题、描述和导航。",
+            "如果准备绑独立域名，先看自定义域名文档，再改 DNS，避免把站点改挂。",
+            "最后补 404 页面、README 和基础说明页，这样站点会更像一个完整作品。"
+          ]
+        },
+        {
+          title: "建议先看的官方页面",
+          links: [
+            {
+              label: "GitHub Pages 文档首页",
+              url: "https://docs.github.com/en/pages",
+              note: "适合总览所有设置、Jekyll、404 和发布方式。"
+            },
+            {
+              label: "Configuring a publishing source",
+              url: "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site",
+              note: "适合搞清楚分支发布和 GitHub Actions 发布。"
+            },
+            {
+              label: "Creating a custom 404 page",
+              url: "https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-custom-404-page-for-your-github-pages-site",
+              note: "很适合加到教程里，用户能马上看到效果。"
+            },
+            {
+              label: "Troubleshooting Jekyll build errors",
+              url: "https://docs.github.com/articles/troubleshooting-jekyll-builds",
+              note: "构建报错时优先查这里。"
+            }
+          ]
+        },
+        {
+          title: "新手最常踩的坑",
+          items: [
+            "仓库名不对：用户主页站点通常需要使用 username.github.io 这种仓库名。",
+            "首页文件缺失：如果没有 index.html 或正确的 Jekyll 首页，访问时会像没部署成功一样。",
+            "编码问题：Jekyll 构建时会检查文件编码，非 UTF-8 文件可能直接导致构建失败。",
+            "域名配置过早：默认域名没通之前先不要急着改自定义域名，排错会更简单。",
+            "把静态文件和生成文件混在一起：如果后面用静态站点生成器，最好提前理清源文件和发布文件。"
+          ]
+        },
+        {
+          title: "最小可用首页示例",
+          text: "如果你要把这篇文章继续扩成图文教程，建议正文里放一个可以直接复制的最小首页示例，降低新手上手门槛。",
+          code: `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My First GitHub Pages Site</title>
+</head>
+<body>
+  <h1>Hello GitHub Pages</h1>
+  <p>这是我发布的第一个静态页面。</p>
+</body>
+</html>`,
+          language: "html"
+        }
+      ]
     },
     {
       id: "hexo-next-theme-guide",
-      title: "Hexo / NexT 博客主题完整配置指南：从基础设置到个性化美化",
-      date: "2026-05-19",
+      title: "Hexo / NexT 博客主题完整配置指南：官方文档、主题设置与扩展入口",
+      date: "2026-05-27",
       category: "博客主题",
-      readTime: "11 分钟",
-      excerpt: "把最常用的 Hexo 与 NexT 配置拆成清晰步骤，适合博客爱好者快速照着调。",
+      readTime: "9 分钟",
+      excerpt: "给博客爱好者准备的 Hexo 与 NexT 主题资源页，覆盖安装、配置、常用功能和后续美化方向。",
       tags: ["Hexo", "NexT", "博客主题"],
       featured: true,
-      body: `
-        <p>Hexo / NexT 相关内容一直很稳，因为它覆盖了“想搭博客但不想从头写前端”的用户群。文章可以按安装、主题配置、菜单设置、评论系统、SEO、美化插件几个部分拆开写。</p>
-        <p>如果能补充短视频或 GIF 演示，用户会更愿意停留，也更容易理解配置前后的差异。</p>
-        <h2>变现思路</h2>
-        <p>这类文章适合在底部放模板下载、付费插件、图标库或托管服务的联盟链接。读者已经投入精力配置博客，转化意愿通常会更高。</p>
-      `
+      intro: [
+        "如果你想做博客，但又不想从头写前端，Hexo 配合 NexT 仍然是很适合中文用户的经典组合。资料多、生态成熟、配置项丰富，非常适合做长期内容站。",
+        "第一阶段我们先把它整理成资源导航页，后面再扩成完整图文教程和视频演示脚本。"
+      ],
+      audience: [
+        "喜欢折腾博客样式和结构的个人站长",
+        "已经接触过 Markdown 和命令行的博客爱好者"
+      ],
+      format: [
+        "适合图文教程 + GIF 演示",
+        "后续可以补一段从安装到换主题的录屏视频"
+      ],
+      roadmap: [
+        "先看 Hexo 官方文档，理解初始化、写作和部署命令",
+        "再看 NexT 文档，完成菜单、评论、代码高亮、SEO 等设置",
+        "最后按自己的站点需求补评论系统、统计和主题美化"
+      ],
+      officialLinks: [
+        {
+          label: "Hexo 官方文档",
+          url: "https://hexo.io/docs/",
+          note: "安装、写作、部署和配置都以这里为准。"
+        },
+        {
+          label: "NexT 官方文档",
+          url: "https://theme-next.js.org/docs/",
+          note: "主题菜单、侧边栏、评论和外观设置入口。"
+        },
+        {
+          label: "Hexo 配置说明",
+          url: "https://hexo.io/docs/configuration",
+          note: "适合搭配主题配置一起看。"
+        }
+      ],
+      curatedLinks: [
+        "优先整理最常用的 5 类配置：站点信息、菜单导航、评论系统、SEO、页面美化。",
+        "录 GIF 或短视频时，重点演示改配置前后页面的变化，读者更容易理解。",
+        "如果未来准备做付费主题或模板下载，这篇底部非常适合承接联盟或付费资源入口。"
+      ],
+      downloadIdeas: [
+        "可以补一个 NexT 常用配置对照表",
+        "可以提供自定义配置片段或 starter repo"
+      ],
+      monetization: "文章底部适合放模板下载、图标库、评论服务、托管服务或付费插件联盟链接。",
+      extraSections: [
+        {
+          title: "更适合落地的配置顺序",
+          items: [
+            "先完成基础站点初始化，确保 Hexo 本地能正常启动和生成页面。",
+            "再切到 NexT 主题，先改站点标题、菜单、头像和社交链接。",
+            "然后补评论、代码高亮、搜索、SEO 和统计，不要一开始就改太多视觉细节。",
+            "最后再做主题美化、页面动效和第三方服务接入。"
+          ]
+        },
+        {
+          title: "适合加入正文的官方入口",
+          links: [
+            {
+              label: "Hexo Commands",
+              url: "https://hexo.io/docs/commands",
+              note: "适合讲本地预览、生成和部署命令。"
+            },
+            {
+              label: "Hexo Writing",
+              url: "https://hexo.io/docs/writing",
+              note: "适合解释文章、草稿和资源文件夹。"
+            },
+            {
+              label: "NexT Getting Started",
+              url: "https://theme-next.js.org/docs/getting-started/",
+              note: "适合快速入门主题配置。"
+            }
+          ]
+        },
+        {
+          title: "示例命令：本地启动与生成静态文件",
+          text: "如果这篇后面扩成长文教程，建议在最前面就放这组最常用命令。",
+          code: `hexo init my-blog
+cd my-blog
+npm install
+hexo server
+hexo generate`,
+          language: "bash"
+        }
+      ]
     },
     {
       id: "python-beginner-series",
-      title: "Python 入门教程系列：语法、练习代码和学习路径一次整理",
-      date: "2026-05-18",
+      title: "Python 入门教程系列：官方教程、练习资源与学习路线整理",
+      date: "2026-05-27",
       category: "编程入门",
-      readTime: "13 分钟",
-      excerpt: "把 Python 初学者最常遇到的语法、练习与学习顺序整理成可连载的系列内容。",
+      readTime: "11 分钟",
+      excerpt: "把 Python 初学者最需要的官方教程、练习路径和配套资料集中整理，适合后续扩成分章节图文教程和 PDF 下载页。",
       tags: ["Python", "新手教程", "练习代码"],
       featured: true,
-      body: `
-        <p>Python 系列很适合做成长线内容。你可以把它拆成变量、判断、循环、函数、文件处理、实战小项目几个章节，每篇文末再引到下一篇，形成自然回访。</p>
-        <p>这类内容适合图文教程加 PDF 下载，尤其是初学者会很喜欢“练习题 + 参考答案 + 汇总笔记”这种形式。</p>
-        <h2>广告与联盟建议</h2>
-        <p>每个章节底部可以放编程书籍、在线课程、IDE 插件或学习平台的联盟广告。因为用户已经进入学习状态，相关资源点击率通常不低。</p>
-      `
+      intro: [
+        "Python 很适合做系列内容，因为它的学习路径天然可以拆成变量、分支、循环、函数、文件处理和小项目。先把入口整理好，后续扩章节就会顺很多。",
+        "这篇资源页优先服务完全零基础或刚学编程不久的读者。"
+      ],
+      audience: [
+        "第一次接触编程的学生和自学者",
+        "想用 Python 做自动化、数据处理或爬虫入门的读者"
+      ],
+      format: [
+        "适合分章节图文教程 + 练习代码",
+        "后续可增加笔记 PDF、练习答案和源码包下载"
+      ],
+      roadmap: [
+        "先看 Python Beginner's Guide 和官方 Tutorial 建立基础",
+        "再用小练习巩固变量、条件、循环和函数",
+        "最后通过一个真实小项目把输入输出、文件处理和调试串起来"
+      ],
+      officialLinks: [
+        {
+          label: "Python 官方教程",
+          url: "https://docs.python.org/3/tutorial/",
+          note: "最核心的官方学习材料。"
+        },
+        {
+          label: "Python Beginner's Guide",
+          url: "https://wiki.python.org/moin/BeginnersGuide",
+          note: "适合刚开始学的人找安装、学习路径和社区资源。"
+        },
+        {
+          label: "Python 文档首页",
+          url: "https://docs.python.org/3/",
+          note: "后续查标准库和语法细节很有用。"
+        }
+      ],
+      curatedLinks: [
+        "如果读者真的很新，建议正文里减少抽象概念，多给能直接运行的小例子。",
+        "后续系列可以拆成 6 到 8 篇，每篇末尾放一组练习题和下一篇入口。",
+        "练习代码非常重要，可以做成站内代码块 + 单独打包下载。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Python 入门学习清单 PDF",
+        "可以提供练习代码压缩包和章节笔记下载"
+      ],
+      monetization: "每章节底部适合放编程书籍、在线课程、IDE 插件或学习平台类联盟资源。",
+      extraSections: [
+        {
+          title: "建议拆成的章节结构",
+          items: [
+            "第 1 章：安装 Python、运行第一个程序、认识解释器。",
+            "第 2 章：变量、字符串、数字与基础输入输出。",
+            "第 3 章：条件判断、循环、列表与字典。",
+            "第 4 章：函数、模块、文件读写与异常处理。",
+            "第 5 章：虚拟环境、安装第三方库、做一个真实小项目。"
+          ]
+        },
+        {
+          title: "新手一定要补的官方入口",
+          links: [
+            {
+              label: "Python Tutorial",
+              url: "https://docs.python.org/3/tutorial/",
+              note: "主线学习材料。"
+            },
+            {
+              label: "venv 文档",
+              url: "https://docs.python.org/3/library/venv.html",
+              note: "学会虚拟环境后，后面装库和做项目会顺很多。"
+            },
+            {
+              label: "Python Packaging User Guide",
+              url: "https://packaging.python.org/en/latest/tutorials/installing-packages/",
+              note: "适合配合 pip 和包管理一起讲。"
+            },
+            {
+              label: "IDLE 文档",
+              url: "https://docs.python.org/3/library/idle.html",
+              note: "对完全零基础的读者很友好。"
+            }
+          ]
+        },
+        {
+          title: "适合放在正文里的练习方向",
+          items: [
+            "做一个猜数字小游戏，练 if、while 和输入输出。",
+            "做一个学生成绩统计小程序，练列表、字典和循环。",
+            "做一个待办事项文本版工具，练文件读写和函数拆分。",
+            "做一个批量改名或整理文件的小脚本，练真实使用场景。"
+          ]
+        },
+        {
+          title: "示例代码：读取文本文件并统计行数",
+          text: "这类小例子很适合放在教程中段，既不难，又能让读者开始接触真实文件处理。",
+          code: `from pathlib import Path
+
+file_path = Path("notes.txt")
+
+if file_path.exists():
+    lines = file_path.read_text(encoding="utf-8").splitlines()
+    print(f"文件共有 {len(lines)} 行")
+else:
+    print("文件不存在，请先创建 notes.txt")`,
+          language: "python"
+        }
+      ]
     },
     {
       id: "vscode-ai-plugins-guide",
-      title: "VS Code 插件使用指南：Codex、AI 编程工具和效率插件推荐",
-      date: "2026-05-17",
+      title: "VS Code 插件使用指南：AI 编码、效率插件与官方入口整理",
+      date: "2026-05-27",
       category: "效率工具",
       readTime: "9 分钟",
-      excerpt: "整理最值得新手程序员安装的 VS Code 插件，并说明适合场景、安装方式和使用技巧。",
+      excerpt: "面向程序员的 VS Code 资源分享页，优先整理扩展市场、官方文档、AI 编码工具和常用效率插件的入口。",
       tags: ["VS Code", "AI 工具", "插件推荐"],
       featured: true,
-      body: `
-        <p>这类内容非常适合用图文加 GIF，读者可以直接看到插件装完后的效果。建议结构按“适合谁、解决什么问题、怎么安装、使用时要注意什么”来写。</p>
-        <p>如果你把 AI 工具、代码格式化、主题美化、Git 协作分别拆成几个小节，文章会更清晰，也更利于搜索引擎抓取。</p>
-        <h2>广告位建议</h2>
-        <p>可以放插件官网、开发工具、付费 AI 订阅或键盘类硬件联盟链接，文章底部再接 AdSense，会比较自然。</p>
-      `
+      intro: [
+        "VS Code 插件类内容天然适合做资源导航，因为很多人会先搜索“某个插件值不值得装、怎么装、装完怎么用”。只要把入口、用途和安装顺序讲清楚，就很容易形成收藏型文章。",
+        "这类文章后续非常适合补 GIF、演示视频和场景化截图。"
+      ],
+      audience: [
+        "希望提升编码效率的程序员",
+        "想尝试 AI 编码工具的新手开发者"
+      ],
+      format: [
+        "适合图文教程 + GIF 演示",
+        "后续可按 AI、格式化、Git 协作、前端开发分专题扩写"
+      ],
+      roadmap: [
+        "先用 VS Code 官方文档理解扩展、设置同步和工作区概念",
+        "再进入 Marketplace 按场景挑插件，不要一上来装一堆",
+        "AI 工具优先讲清楚用途、适合场景和使用边界"
+      ],
+      officialLinks: [
+        {
+          label: "VS Code 官方文档",
+          url: "https://code.visualstudio.com/docs",
+          note: "先理解编辑器本身，再谈插件。"
+        },
+        {
+          label: "VS Code 扩展使用说明",
+          url: "https://code.visualstudio.com/docs/editor/extension-marketplace",
+          note: "扩展安装、禁用、同步和管理入口。"
+        },
+        {
+          label: "VS Code Marketplace",
+          url: "https://marketplace.visualstudio.com/vscode",
+          note: "查插件详情和下载量最直接。"
+        },
+        {
+          label: "OpenAI API 文档",
+          url: "https://platform.openai.com/docs",
+          note: "如果后续要介绍与 OpenAI 相关的开发者工作流，可优先引用这里。"
+        }
+      ],
+      curatedLinks: [
+        "推荐先按 4 类整理插件：AI 编码、代码格式化、Git 协作、语言增强。",
+        "插件文章不要只罗列名称，最好写清楚“解决什么问题、适合谁、有没有替代方案”。",
+        "如果后面补演示，优先录插件安装后 30 秒内就能看到效果的功能。"
+      ],
+      downloadIdeas: [
+        "可以提供 VS Code 新手必装插件清单",
+        "可以补工作区设置模板或 settings.json 示例"
+      ],
+      monetization: "插件官方下载链接适合放正文里，文章底部适合预留 AdSense 和开发工具类联盟资源。",
+      extraSections: [
+        {
+          title: "更适合新手的阅读顺序",
+          items: [
+            "先学 VS Code 基础：扩展、设置、工作区、Profiles。",
+            "再学效率增强：格式化、Git 集成、Settings Sync。",
+            "最后再上 AI 编码工具，避免一开始就把工作流搞得太复杂。"
+          ]
+        },
+        {
+          title: "建议加入正文的官方入口",
+          links: [
+            {
+              label: "Settings Sync",
+              url: "https://code.visualstudio.com/docs/editor/settings-sync",
+              note: "适合讲多设备同步和环境迁移。"
+            },
+            {
+              label: "Profiles in VS Code",
+              url: "https://code.visualstudio.com/docs/configure/profiles",
+              note: "适合讲不同开发场景如何隔离插件和设置。"
+            },
+            {
+              label: "User and workspace settings",
+              url: "https://code.visualstudio.com/docs/configure/settings",
+              note: "适合解释 settings.json 和工作区定制。"
+            },
+            {
+              label: "Use tools with agents",
+              url: "https://code.visualstudio.com/docs/copilot/agents/agent-tools",
+              note: "如果后续要写 AI agent 工作流，这篇很关键。"
+            },
+            {
+              label: "Using Codex with your ChatGPT plan",
+              url: "https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan",
+              note: "适合介绍 Codex 客户端、IDE 扩展与使用前提。"
+            },
+            {
+              label: "Introducing upgrades to Codex",
+              url: "https://openai.com/index/introducing-upgrades-to-codex/",
+              note: "适合补充 Codex IDE 扩展的定位和能力。"
+            }
+          ]
+        },
+        {
+          title: "插件文章的推荐分组",
+          items: [
+            "AI 编码：用于生成、解释、重构和多文件修改。",
+            "代码质量：格式化、Lint、拼写检查和测试辅助。",
+            "协作效率：Git、Pull Request、工作区共享和注释类工具。",
+            "语言增强：前端、Python、Markdown、JSON 和配置文件支持。"
+          ]
+        },
+        {
+          title: "示例配置：适合教程中展示的 settings.json 片段",
+          text: "这类片段适合放在正文下半段，让读者装完插件以后还能顺手把常用设置带走。",
+          code: `{
+  "editor.formatOnSave": true,
+  "files.autoSave": "afterDelay",
+  "editor.minimap.enabled": false,
+  "workbench.startupEditor": "none",
+  "editor.tabSize": 2
+}`,
+          language: "json"
+        }
+      ]
     },
     {
       id: "study-materials-pdf-collection",
-      title: "高效学习资料整理：热门 PDF 合集下载与分类指南",
-      date: "2026-05-16",
+      title: "高效学习资料整理：免费课程、PDF 入口与长期可用的学习资源",
+      date: "2026-05-27",
       category: "资料整理",
       readTime: "8 分钟",
-      excerpt: "把常见的学习资料按考试、编程、效率和办公场景分类，方便学生和自学者快速找到入口。",
+      excerpt: "把适合学生和考证人群的免费课程、开放教材和学习资料入口整理成一页，优先放可长期访问的权威资源。",
       tags: ["PDF 合集", "学习资料", "学生资源"],
-      featured: false,
-      body: `
-        <p>资料整理类内容很容易获得点击，因为用户目标非常明确：想快速找到可用资源。建议按用途分类，比如编程入门、考证资料、英语学习、办公模板等。</p>
-        <p>文章结构要尽量清晰，少讲抽象理念，多给目录和下载说明。每一类资料最好都补一句适合谁、为什么值得看。</p>
-        <h2>转化建议</h2>
-        <p>PDF 下载按钮旁边很适合放赞助按钮、网盘会员、学习平台或电子书工具的联盟推荐，但文案要偏“补充资源”，不要太强推。</p>
-      `
+      featured: true,
+      intro: [
+        "学习资料类内容很容易带来点击，但也最容易因为链接失效和来源不稳而掉口碑。所以第一阶段最好优先整理官方开放课程、开放教材和长期可访问的平台。",
+        "这篇先做资源分享页，重点是让读者一眼看懂从哪里开始找资料。"
+      ],
+      audience: [
+        "找免费学习资料的学生",
+        "准备考试或自学转行的人群"
+      ],
+      format: [
+        "适合文章介绍 + 分类导航",
+        "后续可以整理成 PDF 合集索引或专题页"
+      ],
+      roadmap: [
+        "先给出按用途分组的入口：编程、通识课程、教材、模板",
+        "每类资源只放少量高质量入口，避免一次堆太多",
+        "如果需要下载页，先做索引清单，再逐步增加介绍和使用建议"
+      ],
+      officialLinks: [
+        {
+          label: "MIT OpenCourseWare",
+          url: "https://ocw.mit.edu/",
+          note: "公开课、讲义和课程资料很丰富。"
+        },
+        {
+          label: "Khan Academy",
+          url: "https://www.khanacademy.org/",
+          note: "适合学生做基础课程补充。"
+        },
+        {
+          label: "OpenStax",
+          url: "https://openstax.org/",
+          note: "长期可用的免费教材平台。"
+        }
+      ],
+      curatedLinks: [
+        "不要只给下载按钮，最好补一句每个资源适合谁、推荐怎么用。",
+        "如果整理 PDF 合集，要优先核查版权与公开授权，避免放来路不清的文件。",
+        "下载区旁边的赞助或联盟入口，文案最好偏“补充工具”而不是强推广告。"
+      ],
+      downloadIdeas: [
+        "可以制作按主题分类的资料清单 PDF",
+        "可以把常用课程入口整理成可打印版本"
+      ],
+      monetization: "PDF 下载按钮旁边适合放赞助入口、学习平台、云盘会员或教育服务类联盟资源。",
+      extraSections: [
+        {
+          title: "建议按用途整理的资源分类",
+          items: [
+            "编程与技术：适合放 Python、前端、Git 等学习入口。",
+            "通识课程：适合放数学、写作、经济学和基础科学课程。",
+            "开放教材：适合放教材型资源，而不是来路不明的 PDF 下载。",
+            "考试与办公：适合后续承接模板、清单和学习辅助资料。"
+          ]
+        },
+        {
+          title: "更稳的长期入口",
+          links: [
+            {
+              label: "MIT OpenCourseWare",
+              url: "https://ocw.mit.edu/",
+              note: "公开课和讲义资源非常稳定。"
+            },
+            {
+              label: "Khan Academy",
+              url: "https://www.khanacademy.org/",
+              note: "适合基础知识补强。"
+            },
+            {
+              label: "OpenStax",
+              url: "https://openstax.org/",
+              note: "适合做免费教材推荐。"
+            },
+            {
+              label: "Microsoft Create",
+              url: "https://create.microsoft.com/templates",
+              note: "适合把学习资料页和模板资源页串起来。"
+            }
+          ]
+        }
+      ]
     },
     {
       id: "git-github-complete-manual",
-      title: "Git / GitHub 完整操作手册：常用命令、协作流程和报错排查",
-      date: "2026-05-15",
+      title: "Git / GitHub 完整操作手册：官方命令文档、协作流程与排错入口",
+      date: "2026-05-27",
       category: "开发工具",
       readTime: "10 分钟",
-      excerpt: "从最常见的提交、分支、推送，到多人协作和冲突解决，适合编程初学者长期收藏。",
+      excerpt: "适合编程初学者长期收藏的 Git / GitHub 资源页，先解决“命令找哪里看、协作流程怎么学、报错怎么查”。",
       tags: ["Git", "GitHub", "命令手册"],
       featured: false,
-      body: `
-        <p>Git / GitHub 是编程新手早晚都会碰到的门槛内容，很适合写成“手册型文章”。结构上建议先写常用命令，再写分支协作、Pull Request 和常见报错。</p>
-        <p>这类内容适合大量示例命令，因为读者通常不是来看概念，而是想快速解决眼前问题。</p>
-        <h2>广告与联盟建议</h2>
-        <p>文章底部适合挂 AdSense，也可以顺带推荐 Git/GitHub 相关图书、课程或代码托管进阶服务。</p>
-      `
+      intro: [
+        "Git 和 GitHub 类文章非常适合做收藏型内容，因为读者往往不是来系统学习概念，而是来快速查命令、查流程、查报错。",
+        "所以第一阶段先做一页稳的资源导航，比一开始硬写超长教程更有用。"
+      ],
+      audience: [
+        "刚开始接触版本控制的编程初学者",
+        "需要跟团队协作但还不熟悉 GitHub 流程的人"
+      ],
+      format: [
+        "适合图文教程 + 示例命令",
+        "后续可拆成 commit、branch、merge、PR、冲突解决等专题"
+      ],
+      roadmap: [
+        "先看 Git 官方文档理解仓库、提交和分支",
+        "再看 GitHub Docs 学 Pull Request、Issue 和协作流程",
+        "最后整理常见错误和速查命令表做成长期流量页"
+      ],
+      officialLinks: [
+        {
+          label: "Git 官方文档",
+          url: "https://git-scm.com/docs",
+          note: "命令解释最权威。"
+        },
+        {
+          label: "Pro Git 在线书",
+          url: "https://git-scm.com/book/en/v2",
+          note: "适合系统性入门。"
+        },
+        {
+          label: "GitHub Docs",
+          url: "https://docs.github.com/",
+          note: "GitHub 流程、仓库设置和 Pull Request 说明。"
+        }
+      ],
+      curatedLinks: [
+        "正文建议先放最常查的 10 到 15 个命令，再继续讲协作流程。",
+        "如果做长期更新页，可以追加“常见报错 -> 原因 -> 解决方法”的速查模块。",
+        "这类文章底部很适合承接 Git/GitHub 书籍、课程或进阶服务。"
+      ],
+      downloadIdeas: [
+        "可以提供 Git 常用命令速查表",
+        "可以做 Pull Request 流程图或协作清单下载"
+      ],
+      monetization: "底部适合放 AdSense 与 Git/GitHub 相关书籍、课程或代码托管服务类广告。",
+      extraSections: [
+        {
+          title: "最适合正文前半段的必学命令",
+          items: [
+            "git init、git clone：开始一个本地仓库或拉代码。",
+            "git status、git add、git commit：本地修改与提交。",
+            "git branch、git switch：分支切换与开发隔离。",
+            "git pull、git push：同步远端和提交到远端仓库。"
+          ]
+        },
+        {
+          title: "官方入口建议这样放",
+          links: [
+            {
+              label: "Git Docs",
+              url: "https://git-scm.com/docs",
+              note: "命令速查。"
+            },
+            {
+              label: "Pro Git",
+              url: "https://git-scm.com/book/en/v2",
+              note: "适合系统学原理和协作。"
+            },
+            {
+              label: "About pull requests",
+              url: "https://docs.github.com/articles/using-pull-requests?lang=en",
+              note: "适合讲 GitHub 协作流程。"
+            },
+            {
+              label: "Creating a pull request",
+              url: "https://docs.github.com/en/articles/creating-a-pull-request",
+              note: "适合做图文步骤教程。"
+            }
+          ]
+        },
+        {
+          title: "示例命令：从修改到推送的最小流程",
+          code: `git status
+git add .
+git commit -m "feat: update homepage content"
+git push origin main`,
+          language: "bash"
+        }
+      ]
     },
     {
       id: "frontend-beginner-roadmap",
-      title: "前端开发入门教程：HTML、CSS、JavaScript 学习路线和示例代码",
-      date: "2026-05-14",
+      title: "前端开发入门教程：HTML、CSS、JavaScript 学习路线与官方资料",
+      date: "2026-05-27",
       category: "前端入门",
-      readTime: "14 分钟",
-      excerpt: "把前端新手最常见的学习顺序、代码示例和练习建议整理成一篇可反复查看的路线图。",
+      readTime: "10 分钟",
+      excerpt: "把前端新手最需要的学习顺序、官方教程和练习建议整理在一起，适合后续扩成系列图文教程。",
       tags: ["HTML", "CSS", "JavaScript"],
       featured: false,
-      body: `
-        <p>前端入门系列很适合做搜索流量入口。建议先给一张学习路线图，再分章节讲 HTML 结构、CSS 样式和 JavaScript 交互，让读者知道先学什么、后学什么。</p>
-        <p>这类内容最好带代码示例和可下载的小练习项目，用户会更有完成感，也更容易收藏。</p>
-        <h2>广告建议</h2>
-        <p>代码下载按钮附近适合放编辑器、UI 模板、图标库或在线课程的联盟入口，和内容关联度会很高。</p>
-      `
+      intro: [
+        "前端入门类搜索需求一直很稳，但很多新手的问题不是找不到内容，而是不知道先学 HTML、CSS 还是 JavaScript，也不知道该用哪套资料。",
+        "这篇资源页先帮读者把顺序和入口理顺。"
+      ],
+      audience: [
+        "零基础学习前端的学生和转行者",
+        "想自己做网页、作品集或小项目的新手"
+      ],
+      format: [
+        "适合系列图文教程 + 代码示例",
+        "后续可以补在线练习、小项目下载和代码仓库"
+      ],
+      roadmap: [
+        "先学 HTML 结构，再学 CSS 样式，最后用 JavaScript 做交互",
+        "每学完一部分就做一个小页面，不要只停留在看教程",
+        "后续把布局、表单、DOM 操作和异步请求拆成专题"
+      ],
+      officialLinks: [
+        {
+          label: "MDN Learn Web Development",
+          url: "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+          note: "最适合新手的官方学习入口之一。"
+        },
+        {
+          label: "MDN HTML 指南",
+          url: "https://developer.mozilla.org/en-US/docs/Web/HTML",
+          note: "查标签和语义化时很好用。"
+        },
+        {
+          label: "MDN CSS 指南",
+          url: "https://developer.mozilla.org/en-US/docs/Web/CSS",
+          note: "查布局、盒模型和属性说明。"
+        },
+        {
+          label: "MDN JavaScript 指南",
+          url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+          note: "查语法和浏览器端能力。"
+        }
+      ],
+      curatedLinks: [
+        "正文里建议先放一张学习路线图，再展开每一步要学什么。",
+        "代码示例最好从完整小页面出发，而不是只有零散片段。",
+        "代码下载区适合承接编辑器、图标库、模板和课程类资源。"
+      ],
+      downloadIdeas: [
+        "可以提供前端入门路线图 PDF",
+        "可以提供 HTML/CSS/JS 示例代码包"
+      ],
+      monetization: "代码下载链接处适合放插件、工具、课程或模板类联盟资源。",
+      extraSections: [
+        {
+          title: "更清晰的学习主线",
+          items: [
+            "HTML：先理解结构、语义化、链接、图片和表单。",
+            "CSS：再理解选择器、盒模型、布局和响应式。",
+            "JavaScript：最后补交互、DOM、事件和基础数据处理。"
+          ]
+        },
+        {
+          title: "适合正文里直接引用的官方入口",
+          links: [
+            {
+              label: "MDN Learn Web Development",
+              url: "https://developer.mozilla.org/en-US/docs/Learn",
+              note: "最适合做总导航。"
+            },
+            {
+              label: "MDN HTML 模块",
+              url: "https://developer.mozilla.org/en-US/docs/Learn/HTML",
+              note: "适合讲 HTML 学习顺序。"
+            },
+            {
+              label: "Getting started with CSS",
+              url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Getting_started",
+              note: "适合搭配小页面示例。"
+            },
+            {
+              label: "Your first website",
+              url: "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web",
+              note: "适合零基础用户起步。"
+            }
+          ]
+        },
+        {
+          title: "示例代码：最小前端页面骨架",
+          code: `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My First Web Page</title>
+  <style>
+    body { font-family: sans-serif; padding: 24px; }
+    button { padding: 10px 16px; }
+  </style>
+</head>
+<body>
+  <h1>欢迎来到我的网页</h1>
+  <button id="helloBtn">点我</button>
+  <script>
+    document.getElementById("helloBtn").addEventListener("click", () => {
+      alert("Hello Frontend");
+    });
+  </script>
+</body>
+</html>`,
+          language: "html"
+        }
+      ]
     },
     {
       id: "common-programming-errors-fixes",
-      title: "快速解决常见编程报错技巧：从错误信息到排查思路",
-      date: "2026-05-13",
+      title: "快速解决常见编程报错技巧：错误定位、排查顺序与资料入口",
+      date: "2026-05-27",
       category: "问题排查",
-      readTime: "7 分钟",
-      excerpt: "适合学生和程序员收藏的一篇报错速查内容，把高频报错按现象、原因和解决办法整理清楚。",
+      readTime: "8 分钟",
+      excerpt: "面向学生和程序员的报错资源页，先教你怎么读错误信息、怎么缩小问题范围，再补针对语言和工具的查错入口。",
       tags: ["报错排查", "编程技巧", "调试"],
       featured: false,
-      body: `
-        <p>报错类内容的优势是搜索需求非常强，尤其适合用“问题 - 原因 - 解决方法”的结构来写。每个错误都尽量给一个最短解决路径，别让读者再去猜。</p>
-        <p>如果你能把 Python、前端、Git 三类常见报错分成小节，整篇文章会更有实用性，也更容易拿到长尾流量。</p>
-        <h2>商业化建议</h2>
-        <p>侧边栏适合长期放工具推荐、学习书籍和调试插件广告，因为读者在这类页面的需求通常很即时。</p>
-      `
+      intro: [
+        "报错类内容的核心价值不是堆很多错误名词，而是给读者一套稳定的排查顺序。只要顺序讲清楚，这类页面就很容易形成收藏和回访。",
+        "先做资源导航页，后续再按 Python、前端、Git 分专题扩写。"
+      ],
+      audience: [
+        "经常被报错卡住的学生",
+        "想建立稳定调试思路的程序员"
+      ],
+      format: [
+        "适合问题 - 原因 - 解决方案结构",
+        "后续可以追加语言专题和工具专题"
+      ],
+      roadmap: [
+        "先看完整报错信息，不要只看最后一行",
+        "复现最小问题，再对照官方文档或工具文档核查",
+        "最后再查环境、版本、路径、依赖和权限问题"
+      ],
+      officialLinks: [
+        {
+          label: "Python 文档首页",
+          url: "https://docs.python.org/3/",
+          note: "查标准报错、语法和库文档。"
+        },
+        {
+          label: "MDN JavaScript 文档",
+          url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+          note: "前端报错定位时很常用。"
+        },
+        {
+          label: "Git 官方文档",
+          url: "https://git-scm.com/docs",
+          note: "Git 命令报错时优先看这里。"
+        }
+      ],
+      curatedLinks: [
+        "正文可固定成一套模板：现象、原因、排查顺序、解决方法、参考链接。",
+        "如果侧边栏放工具推荐，最好优先推荐调试、日志和版本管理相关工具。",
+        "后续可以补“新手最常见 20 个报错”的专题页。"
+      ],
+      downloadIdeas: [
+        "可以做错误排查流程图",
+        "可以补一个报错记录模板或调试清单"
+      ],
+      monetization: "侧边栏适合放调试工具、学习书籍和开发插件类资源。",
+      extraSections: [
+        {
+          title: "建议固定成的排查模板",
+          items: [
+            "先写清楚报错现象和触发步骤。",
+            "再贴关键报错信息，不要只贴一句“运行失败”。",
+            "然后给出最短排查顺序：语法、路径、版本、依赖、权限。",
+            "最后再给参考文档和类似问题入口。"
+          ]
+        },
+        {
+          title: "更适合查错的官方入口",
+          links: [
+            {
+              label: "MDN JavaScript debugging",
+              url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Debugging_JavaScript",
+              note: "适合前端报错排查。"
+            },
+            {
+              label: "MDN How to solve common problems",
+              url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto",
+              note: "适合前端常见问题。"
+            },
+            {
+              label: "Python Docs",
+              url: "https://docs.python.org/3/",
+              note: "适合查标准报错和模块说明。"
+            }
+          ]
+        }
+      ]
     },
     {
       id: "ai-tools-practical-tutorials",
-      title: "AI 工具实用教程合集：ChatGPT、MidJourney 与常见 AI 应用场景",
-      date: "2026-05-12",
+      title: "AI 工具实用教程合集：ChatGPT、Midjourney 与常见 AI 工作流入口",
+      date: "2026-05-27",
       category: "AI 工具",
-      readTime: "9 分钟",
-      excerpt: "把新手最常用的 AI 工具按用途做成教程合集，适合做持续更新和资源整合。",
-      tags: ["ChatGPT", "MidJourney", "AI 教程"],
+      readTime: "10 分钟",
+      excerpt: "适合新手 AI 用户的资源导航页，优先整理官方入口、基础用法和适合快速见效的应用场景。",
+      tags: ["ChatGPT", "Midjourney", "AI 教程"],
       featured: false,
-      body: `
-        <p>AI 工具类内容特别适合做合集，因为工具更新快、用户需求广。你可以按写作、图片生成、编程辅助、办公效率四个方向来整理，这样更容易持续扩充。</p>
-        <p>教程内容里最好多用场景举例，比如“写简历”“做 PPT”“写代码注释”，让新手知道自己能马上拿它做什么。</p>
-        <h2>广告与联盟位</h2>
-        <p>这类文章适合推荐工具官网、付费套餐、插件市场和系统化课程，联盟相关性通常很强。</p>
-      `
+      intro: [
+        "AI 工具变化快，所以很适合做“入口型内容”。只要你优先整理官方文档和新手最容易用起来的场景，这类页面就有持续更新价值。",
+        "与其一开始铺太多工具，不如先把最常见的写作、图像、办公和编程场景整理清楚。"
+      ],
+      audience: [
+        "刚开始接触 AI 工具的新手用户",
+        "想把 AI 用到写作、图像和工作流里的人"
+      ],
+      format: [
+        "适合图文教程 + 演示视频",
+        "后续可按写作、办公、图片、编程分专题补充"
+      ],
+      roadmap: [
+        "先从一个最容易见效的场景开始，比如写邮件、列提纲、做总结",
+        "再扩到图片生成、办公整理和代码辅助等方向",
+        "每个工具都尽量讲清楚适合什么人、解决什么问题"
+      ],
+      officialLinks: [
+        {
+          label: "OpenAI 平台文档",
+          url: "https://platform.openai.com/docs",
+          note: "开发者与 API 工作流的官方入口。"
+        },
+        {
+          label: "OpenAI Academy",
+          url: "https://academy.openai.com/",
+          note: "适合学习 AI 使用场景与实践。"
+        },
+        {
+          label: "ChatGPT 帮助中心",
+          url: "https://help.openai.com/",
+          note: "查功能说明和常见问题。"
+        },
+        {
+          label: "Midjourney 文档",
+          url: "https://docs.midjourney.com/",
+          note: "适合图像生成基础入门。"
+        }
+      ],
+      curatedLinks: [
+        "新手内容最好少讲术语，多讲“我现在就能拿它做什么”。",
+        "如果后续录视频，优先录从提问到结果的短链路演示。",
+        "这类页面很适合承接工具官网、付费套餐和系统课程类资源。"
+      ],
+      downloadIdeas: [
+        "可以提供常用提示词模板清单",
+        "可以整理不同场景的 AI 工具速查表"
+      ],
+      monetization: "适合放工具官网、插件市场、会员套餐和课程类联盟推荐。",
+      extraSections: [
+        {
+          title: "建议按场景组织 AI 内容",
+          items: [
+            "写作与总结：邮件、提纲、润色、总结。",
+            "图像与视觉：图片生成、灵感草图、素材变体。",
+            "编程与效率：代码解释、重构、自动化脚本。",
+            "办公与学习：整理表格、汇报结构、学习辅导。"
+          ]
+        },
+        {
+          title: "更适合新手的官方入口",
+          links: [
+            {
+              label: "OpenAI Academy",
+              url: "https://academy.openai.com/",
+              note: "适合做入门和应用场景说明。"
+            },
+            {
+              label: "ChatGPT Help Center",
+              url: "https://help.openai.com/",
+              note: "查功能与常见问题。"
+            },
+            {
+              label: "OpenAI Docs",
+              url: "https://platform.openai.com/docs",
+              note: "适合开发者和 API 相关内容。"
+            },
+            {
+              label: "Midjourney Docs",
+              url: "https://docs.midjourney.com/",
+              note: "适合图像生成方向。"
+            }
+          ]
+        }
+      ]
     },
     {
       id: "office-templates-share",
-      title: "高效办公资料模板分享：Word、Excel、PowerPoint 常用模板与使用指南",
-      date: "2026-05-11",
+      title: "高效办公资料模板分享：Word、Excel、PowerPoint 官方模板与使用建议",
+      date: "2026-05-27",
       category: "办公模板",
       readTime: "8 分钟",
-      excerpt: "适合学生和职场人的模板资源整合内容，既能带下载，也能带使用教程和场景说明。",
+      excerpt: "给学生和职场人准备的模板资源页，优先整理长期可用的官方模板入口，再补适合不同场景的使用建议。",
       tags: ["Word 模板", "Excel 模板", "PPT 模板"],
       featured: false,
-      body: `
-        <p>办公模板类内容有很强的分享属性，尤其适合学生、实习生和职场新人。文章里不要只给下载链接，最好补一句每种模板适合什么场景，比如汇报、简历、排班、数据整理等。</p>
-        <p>如果你能把模板分成“学习场景”和“办公场景”两大类，读者会更容易找到需要的东西。</p>
-        <h2>变现建议</h2>
-        <p>模板下载区旁边可以放办公软件、教育平台或云盘会员的联盟推荐，这会比单独放广告更自然。</p>
-      `
+      intro: [
+        "办公模板类内容很容易获得分享和收藏，但前提是入口清晰、场景明确。最好不是只给一个下载链接，而是让读者知道“这个模板适合做什么”。",
+        "第一阶段先从官方模板库和高频场景出发。"
+      ],
+      audience: [
+        "需要做作业、汇报和求职材料的学生",
+        "经常做表格、汇报和文档的职场人"
+      ],
+      format: [
+        "适合模板下载 + 使用指南",
+        "后续可以补分类模板页和场景案例"
+      ],
+      roadmap: [
+        "先按场景分组：简历、汇报、计划表、数据整理、课堂作业",
+        "再给每类模板补一句用途说明和使用建议",
+        "最后逐步增加自己的模板资源或精选第三方模板"
+      ],
+      officialLinks: [
+        {
+          label: "Microsoft Create 模板库",
+          url: "https://create.microsoft.com/templates",
+          note: "Word、Excel、PowerPoint 官方模板入口。"
+        },
+        {
+          label: "Microsoft 支持：模板相关帮助",
+          url: "https://support.microsoft.com/",
+          note: "查模板使用、编辑和导出问题。"
+        },
+        {
+          label: "LibreOffice Templates",
+          url: "https://templates.libreoffice.org/",
+          note: "适合需要免费办公套件模板的人。"
+        }
+      ],
+      curatedLinks: [
+        "模板页最好按学生场景和办公场景分开，读者找起来更快。",
+        "下载区旁边可以放办公工具、教育平台或云盘类资源，但文案要自然。",
+        "如果后面自制模板，优先从简历、汇报和数据表开始。"
+      ],
+      downloadIdeas: [
+        "可以整理模板索引 PDF",
+        "可以补模板使用前检查清单"
+      ],
+      monetization: "模板下载旁边适合放办公工具、教育服务和存储类联盟资源。",
+      extraSections: [
+        {
+          title: "建议按场景整理模板",
+          items: [
+            "学习场景：作业封面、汇报演示、笔记整理、课程计划表。",
+            "求职场景：简历、作品集、面试记录、技能清单。",
+            "办公场景：周报、项目计划、数据表、会议纪要。"
+          ]
+        },
+        {
+          title: "优先收录的官方模板入口",
+          links: [
+            {
+              label: "Microsoft Create Templates",
+              url: "https://create.microsoft.com/templates",
+              note: "Word、Excel、PowerPoint 官方模板。"
+            },
+            {
+              label: "Microsoft Support",
+              url: "https://support.microsoft.com/",
+              note: "模板使用和导出问题说明。"
+            },
+            {
+              label: "LibreOffice Templates",
+              url: "https://templates.libreoffice.org/",
+              note: "适合免费办公套件用户。"
+            }
+          ]
+        }
+      ]
     }
   ],
   resources: [
     {
-      name: "GitHub Pages",
-      category: "建站工具",
-      badge: "免费起步",
-      description: "适合个人博客和项目展示，部署简单，和 GitHub 工作流结合顺手。",
-      pitch: "如果你想先低成本开始，GitHub Pages 是最轻松的入口之一。",
-      cta: "查看官方文档",
+      name: "GitHub Pages 官方入口",
+      category: "建站资源",
+      badge: "官方",
+      description: "免费静态站点托管入口，适合博客、作品集和个人主页。",
+      pitch: "如果你想先把网站发出去，再逐步优化结构和内容，这是最轻量的起点之一。",
+      cta: "打开官方站点",
       link: "https://pages.github.com/"
     },
     {
-      name: "Cloudflare",
-      category: "域名与加速",
-      badge: "推荐",
-      description: "适合托管 DNS、基础加速和网站安全配置，个人站很够用。",
-      pitch: "当你开始重视访问速度和稳定性时，它会是很稳的一层基础设施。",
-      cta: "了解服务",
-      link: "https://www.cloudflare.com/"
+      name: "Hexo 官方文档",
+      category: "博客系统",
+      badge: "官方",
+      description: "Hexo 的安装、配置、写作和部署入口。",
+      pitch: "适合已经准备好用静态博客系统长期写内容的人。",
+      cta: "查看文档",
+      link: "https://hexo.io/docs/"
     },
     {
-      name: "Plausible Analytics",
-      category: "网站分析",
-      badge: "轻量分析",
-      description: "隐私友好的访问统计工具，界面干净，适合不想把站点做得太重的人。",
-      pitch: "如果你只想知道哪些内容被看见，而不是追求复杂报表，它很合适。",
-      cta: "查看产品",
-      link: "https://plausible.io/"
+      name: "Python 官方教程",
+      category: "编程入门",
+      badge: "官方",
+      description: "Python 最核心的官方入门教程，适合打基础和后续查阅。",
+      pitch: "如果你想认真学 Python，这一份文档值得长期收藏。",
+      cta: "开始学习",
+      link: "https://docs.python.org/3/tutorial/"
     },
     {
-      name: "Notion",
-      category: "写作工作流",
-      badge: "效率工具",
-      description: "适合管理选题池、写作大纲和内容排期，让博客更新更稳定。",
-      pitch: "对个人创作者来说，先把写作系统搭起来，比换主题更重要。",
-      cta: "访问官网",
-      link: "https://www.notion.so/"
+      name: "VS Code 文档与扩展市场",
+      category: "开发工具",
+      badge: "官方",
+      description: "VS Code 的使用说明、扩展管理和插件市场入口。",
+      pitch: "先理解编辑器，再挑插件，效率会高很多。",
+      cta: "浏览资源",
+      link: "https://code.visualstudio.com/docs"
+    },
+    {
+      name: "MIT OpenCourseWare",
+      category: "学习资料",
+      badge: "免费课程",
+      description: "长期可访问的公开课程资源库，覆盖计算机、数学和更多学科。",
+      pitch: "适合做高质量学习资料整理的长期入口。",
+      cta: "进入课程库",
+      link: "https://ocw.mit.edu/"
+    },
+    {
+      name: "Git 官方文档",
+      category: "版本控制",
+      badge: "官方",
+      description: "Git 命令、概念和在线书资源入口。",
+      pitch: "命令不会背没关系，先知道最权威的查找入口更重要。",
+      cta: "查看文档",
+      link: "https://git-scm.com/docs"
+    },
+    {
+      name: "MDN Learn Web Development",
+      category: "前端学习",
+      badge: "官方",
+      description: "适合前端新手的学习路径、语法说明和实战内容入口。",
+      pitch: "如果你不确定 HTML、CSS、JavaScript 的学习顺序，从这里开始最稳。",
+      cta: "开始学习",
+      link: "https://developer.mozilla.org/en-US/docs/Learn_web_development"
+    },
+    {
+      name: "OpenAI Academy",
+      category: "AI 工具",
+      badge: "官方",
+      description: "适合学习 AI 基础使用场景、教学内容和实践案例。",
+      pitch: "做 AI 新手内容时，优先引用官方解释会更稳。",
+      cta: "查看资源",
+      link: "https://academy.openai.com/"
+    },
+    {
+      name: "Midjourney 文档",
+      category: "AI 工具",
+      badge: "官方",
+      description: "适合图像生成工具新手查基础说明和使用方法。",
+      pitch: "如果要做 AI 图像方向的资源整理，这个入口值得保留。",
+      cta: "查看文档",
+      link: "https://docs.midjourney.com/"
+    },
+    {
+      name: "Microsoft Create 模板库",
+      category: "办公模板",
+      badge: "官方",
+      description: "Word、Excel、PowerPoint 模板的官方入口。",
+      pitch: "做办公资料分享时，先用官方模板库建立基础信任感。",
+      cta: "浏览模板",
+      link: "https://create.microsoft.com/templates"
     }
   ],
   projects: [
@@ -238,29 +1159,29 @@ const siteData = {
       status: "可演示",
       link: "#",
       body: `
-        <p>这个项目聚焦于“快速开始又能长期扩展”的个人博客骨架。它把首页、文章页、资源推荐和项目展示统一到一套品牌系统里，方便未来增加广告、联盟推荐和订阅模块。</p>
+        <p>这个项目聚焦于“先上线，再持续扩展”的个人站点思路。文章、资源页、项目页和联系页都在一套轻量结构里，方便后续持续加内容。</p>
       `
     },
     {
       id: "tool-library",
       title: "Tool Library",
-      summary: "一个按场景整理的效率工具清单，强调使用建议而不是单纯罗列。",
-      stack: "静态页面 / 内容策划",
+      summary: "按场景整理的工具库与资源页原型，强调为什么值得用，而不是只做列表。",
+      stack: "静态内容 / 内容策划",
       status: "持续更新",
       link: "#",
       body: `
-        <p>我把自己常用的工具按用途做了分类，既能做内容推荐页，也能作为联盟转化页面。重点不是数量，而是每个工具适合什么场景。</p>
+        <p>这类项目很适合承接联盟资源、官方入口和整理型内容，尤其适合与教程文章互相导流。</p>
       `
     },
     {
       id: "creator-dashboard",
       title: "Creator Dashboard",
-      summary: "把文章进度、资源库和发布节奏整理成一个轻量创作者面板。",
+      summary: "把内容进度、资源库和发布节奏整理成一个轻量创作者面板。",
       stack: "前端原型",
       status: "概念项目",
       link: "#",
       body: `
-        <p>这是一个内部使用的内容管理原型，帮助追踪哪些主题值得持续写、哪些资源更适合推荐，以及哪些页面需要优化。</p>
+        <p>如果未来内容量继续变大，可以把文章状态、资源分类和广告位规划集中管理，减少手工维护成本。</p>
       `
     }
   ]
@@ -306,8 +1227,34 @@ function buildResourceCard(item) {
       <h3>${item.name}</h3>
       <p>${item.description}</p>
       <p class="resource-card__pitch">${item.pitch}</p>
-      <a class="button button--secondary" href="${item.link}" target="_blank" rel="noreferrer"> ${item.cta} </a>
+      <a class="button button--secondary" href="${item.link}" target="_blank" rel="noreferrer">${item.cta}</a>
     </article>
+  `;
+}
+
+function buildTopicResourceSection(post) {
+  return `
+    <section class="topic-section reveal">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">${post.category}</p>
+          <h2>${post.title}</h2>
+        </div>
+        <a class="text-link" href="post.html?id=${post.id}">查看对应文章</a>
+      </div>
+      <div class="topic-grid">
+        <article class="topic-panel">
+          <p class="label">适合谁</p>
+          <p>${post.audience.join(" / ")}</p>
+          <p class="label">推荐顺序</p>
+          ${buildBulletList(post.roadmap)}
+        </article>
+        <article class="topic-panel">
+          <p class="label">官方入口</p>
+          ${buildLinkList(post.officialLinks)}
+        </article>
+      </div>
+    </section>
   `;
 }
 
@@ -327,6 +1274,80 @@ function buildProjectCard(project) {
         <a class="text-link" href="project.html?id=${project.id}">查看详情</a>
       </div>
     </article>
+  `;
+}
+
+function buildParagraphs(items) {
+  return items.map((item) => `<p>${item}</p>`).join("");
+}
+
+function buildBulletList(items) {
+  return `<ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
+}
+
+function buildLinkList(items) {
+  return `
+    <ul>
+      ${items
+        .map(
+          (item) => `
+            <li>
+              <a href="${item.url}" target="_blank" rel="noreferrer">${item.label}</a>
+              <span>：${item.note}</span>
+            </li>
+          `
+        )
+        .join("")}
+    </ul>
+  `;
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+function buildExtraSections(sections = []) {
+  return sections
+    .map((section) => {
+      const text = section.text ? `<p>${section.text}</p>` : "";
+      const items = section.items ? buildBulletList(section.items) : "";
+      const links = section.links ? buildLinkList(section.links) : "";
+      const code = section.code
+        ? `<pre><code class="language-${section.language || "text"}">${escapeHtml(section.code)}</code></pre>`
+        : "";
+
+      return `
+        <h2>${section.title}</h2>
+        ${text}
+        ${items}
+        ${links}
+        ${code}
+      `;
+    })
+    .join("");
+}
+
+function buildArticleBody(post) {
+  return `
+    ${buildParagraphs(post.intro)}
+    <h2>这篇内容适合谁</h2>
+    ${buildBulletList(post.audience)}
+    <h2>建议呈现形式</h2>
+    ${buildBulletList(post.format)}
+    <h2>推荐学习顺序</h2>
+    ${buildBulletList(post.roadmap)}
+    <h2>官方资料入口</h2>
+    ${buildLinkList(post.officialLinks)}
+    <h2>整理建议与补充方向</h2>
+    ${buildBulletList(post.curatedLinks)}
+    <h2>后续可补充的下载内容</h2>
+    ${buildBulletList(post.downloadIdeas)}
+    ${buildExtraSections(post.extraSections)}
+    <h2>广告位与资源位建议</h2>
+    <p>${post.monetization}</p>
   `;
 }
 
@@ -387,7 +1408,7 @@ function injectPostsPage() {
 
     container.innerHTML = filtered.length
       ? filtered.map(buildPostCard).join("")
-      : `<div class="empty-state">没有找到匹配内容，换个关键词试试。</div>`;
+      : `<div class="empty-state">没有找到匹配内容，换一个关键词试试。</div>`;
   };
 
   render();
@@ -417,11 +1438,11 @@ function injectPostDetail() {
     </header>
     <div class="article-layout">
       <article class="article-body">
-        ${post.body}
+        ${buildArticleBody(post)}
         <div class="inline-promo">
           <p class="label">延伸资源</p>
-          <h3>把推荐位做成“补充判断”的内容，而不是硬塞广告。</h3>
-          <p>如果这篇文章对你有帮助，可以继续看资源推荐页，我把建站、统计和内容工具按场景整理好了。</p>
+          <h3>如果你想继续顺着这个主题往下学，可以去资源页看按方向整理的官方入口。</h3>
+          <p>当前站内先优先做资源分享型内容，后面会把高需求主题逐步扩成完整图文教程、示例代码和可下载资料。</p>
           <a class="button button--secondary" href="resources.html">查看资源推荐</a>
         </div>
       </article>
@@ -435,13 +1456,13 @@ function injectPostDetail() {
         <div class="sidebar-card">
           <p class="label">热门阅读</p>
           ${siteData.posts
-            .slice(0, 3)
+            .slice(0, 4)
             .map((item) => `<a href="post.html?id=${item.id}">${item.title}</a>`)
             .join("")}
         </div>
         <div class="sidebar-card sidebar-card--accent">
           <p class="label">合作入口</p>
-          <h3>接受轻量站点搭建与内容结构咨询</h3>
+          <h3>接受轻量站点搭建、内容结构整理与资源页策划合作</h3>
           <a class="button button--dark" href="contact.html">联系我</a>
         </div>
       </aside>
@@ -452,7 +1473,35 @@ function injectPostDetail() {
 function injectResourcesPage() {
   const container = document.querySelector("[data-resource-list]");
   if (!container) return;
-  container.innerHTML = siteData.resources.map(buildResourceCard).join("");
+  const featured = `
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">精选入口</p>
+          <h2>适合先收藏的核心官方资源</h2>
+        </div>
+        <p>这一组更像总导航，适合第一次来到站里的读者先快速建立方向感。</p>
+      </div>
+      <div class="resource-grid">
+        ${siteData.resources.map(buildResourceCard).join("")}
+      </div>
+    </section>
+  `;
+
+  const grouped = `
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">按主题浏览</p>
+          <h2>把 10 个内容方向拆成可直接进入的资源分区</h2>
+        </div>
+        <p>每个分区都连到对应文章，适合先看导航，再深入看教程和后续扩展内容。</p>
+      </div>
+      ${siteData.posts.map(buildTopicResourceSection).join("")}
+    </section>
+  `;
+
+  container.innerHTML = `${featured}${grouped}`;
 }
 
 function injectProjectsPage() {
