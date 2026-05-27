@@ -192,6 +192,28 @@ textarea {
 
 .hero__copy {
   padding: 42px;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(246, 250, 247, 0.74)),
+    radial-gradient(circle at 88% 18%, rgba(8, 127, 111, 0.12), transparent 32%);
+}
+
+.hero__copy::after {
+  content: "";
+  position: absolute;
+  right: -72px;
+  bottom: -84px;
+  width: 220px;
+  height: 220px;
+  border-radius: 999px;
+  background: rgba(213, 139, 53, 0.13);
+  pointer-events: none;
+}
+
+.hero__copy > * {
+  position: relative;
+  z-index: 1;
 }
 
 .eyebrow,
@@ -240,6 +262,10 @@ textarea {
   margin-top: 26px;
 }
 
+.hero__actions .button {
+  min-height: 48px;
+}
+
 .hero__stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -250,8 +276,8 @@ textarea {
 .hero__stats div {
   padding: 18px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.66);
-  border: 1px solid rgba(19, 42, 51, 0.08);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(16, 39, 45, 0.08);
 }
 
 .hero__stats strong {
@@ -278,8 +304,8 @@ textarea {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 10% 10%, rgba(15, 124, 115, 0.18), transparent 30%),
-    radial-gradient(circle at 85% 15%, rgba(242, 166, 90, 0.22), transparent 24%);
+    radial-gradient(circle at 10% 10%, rgba(8, 127, 111, 0.16), transparent 30%),
+    radial-gradient(circle at 85% 15%, rgba(213, 139, 53, 0.18), transparent 24%);
   pointer-events: none;
 }
 
@@ -447,6 +473,17 @@ textarea {
   padding: 24px;
 }
 
+.value-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 250, 247, 0.78));
+}
+
+.content-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
 .resource-card {
   display: flex;
   flex-direction: column;
@@ -480,7 +517,8 @@ textarea {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-top: 22px;
+  margin-top: auto;
+  padding-top: 22px;
 }
 
 .text-link {
@@ -494,7 +532,9 @@ textarea {
   grid-template-columns: 1fr auto;
   gap: 18px;
   align-items: center;
-  background: linear-gradient(135deg, rgba(15, 124, 115, 0.12), rgba(242, 166, 90, 0.14));
+  background:
+    linear-gradient(135deg, rgba(8, 127, 111, 0.12), rgba(213, 139, 53, 0.13)),
+    rgba(255, 255, 255, 0.82);
 }
 
 .resource-card__top {
