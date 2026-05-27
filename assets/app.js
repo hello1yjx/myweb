@@ -1152,36 +1152,39 @@ git push origin main`,
   ],
   projects: [
     {
-      id: "starter-blog-kit",
-      title: "Starter Blog Kit",
-      summary: "面向新手创作者的静态博客起步模板，重点放在内容结构和转化布局。",
+      id: "resource-content-hub",
+      title: "资源分享内容库",
+      summary: "围绕 10 个高需求主题整理官方入口、学习路径、下载思路和广告位建议，是当前站点的核心内容项目。",
       stack: "HTML / CSS / JavaScript",
-      status: "可演示",
-      link: "#",
+      status: "已上线",
+      link: "posts.html",
       body: `
-        <p>这个项目聚焦于“先上线，再持续扩展”的个人站点思路。文章、资源页、项目页和联系页都在一套轻量结构里，方便后续持续加内容。</p>
+        <p>这个项目把 GitHub Pages、Hexo/NexT、Python、VS Code、Git/GitHub、前端入门、AI 工具和办公模板等主题集中整理成资源型文章。</p>
+        <p>它的目标是先让读者快速找到可靠入口，再逐步把高需求主题扩成图文教程、示例代码和可下载资料。</p>
       `
     },
     {
-      id: "tool-library",
-      title: "Tool Library",
-      summary: "按场景整理的工具库与资源页原型，强调为什么值得用，而不是只做列表。",
-      stack: "静态内容 / 内容策划",
+      id: "topic-resource-map",
+      title: "主题资源导航页",
+      summary: "把资源推荐页改造成按主题浏览的导航库，每个主题都能回到对应文章，适合长期扩展。",
+      stack: "资源导航 / 内容结构",
       status: "持续更新",
-      link: "#",
+      link: "resources.html",
       body: `
-        <p>这类项目很适合承接联盟资源、官方入口和整理型内容，尤其适合与教程文章互相导流。</p>
+        <p>这个项目负责承接站内所有官方入口和工具推荐，把原来的单一卡片列表升级成“精选入口 + 按主题浏览”的结构。</p>
+        <p>后续如果接联盟链接、赞助位或真实下载包，可以优先从这个页面开始接入。</p>
       `
     },
     {
-      id: "creator-dashboard",
-      title: "Creator Dashboard",
-      summary: "把内容进度、资源库和发布节奏整理成一个轻量创作者面板。",
-      stack: "前端原型",
-      status: "概念项目",
-      link: "#",
+      id: "monetization-layout-kit",
+      title: "广告与联盟位布局",
+      summary: "为每篇资源文章预留中部推荐位、底部广告位和下载区推荐位，方便后续接入真实商业化资源。",
+      stack: "内容变现 / 页面布局",
+      status: "规划中",
+      link: "contact.html",
       body: `
-        <p>如果未来内容量继续变大，可以把文章状态、资源分类和广告位规划集中管理，减少手工维护成本。</p>
+        <p>这个项目用于规划文章里的广告和联盟入口，比如模板推荐、课程推荐、工具下载、PDF 下载旁赞助位和底部 AdSense 区域。</p>
+        <p>当前先保留文案和结构，等真实联盟资源准备好后，可以把占位按钮替换成正式链接。</p>
       `
     }
   ]
@@ -1529,12 +1532,12 @@ function injectProjectDetail() {
     </header>
     <section class="project-detail-grid">
       <div class="project-showcase">
-        <div class="project-showcase__screen">项目预览占位</div>
+        <div class="project-showcase__screen">${project.title}</div>
       </div>
       <div class="sidebar-card">
         <p class="label">项目说明</p>
         ${project.body}
-        <a class="button button--secondary" href="${project.link}">访问项目</a>
+        <a class="button button--secondary" href="${project.link}">打开相关页面</a>
       </div>
     </section>
   `;
