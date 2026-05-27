@@ -2,21 +2,20 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>资源推荐 | Lumen Forge</title>
-  <meta name="description" content="查看建站、编程、学习资料、AI 工具与办公模板相关的精选资源推荐页。">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lumen Forge 每日热点，整理 AI、编程、建站和效率工具相关动态。">
+  <title>每日热点 | Lumen Forge</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
   <header class="site-header">
     <div class="page-shell site-header__inner">
-      <a class="brand" href="index.html" aria-label="返回首页">
-        <span class="brand-mark">LF</span>
-        <span class="brand-copy">
+      <a class="brand" href="index.html" aria-label="Lumen Forge 首页">
+        <span class="brand__mark">LF</span>
+        <span>
           <strong data-site-name></strong>
           <span data-site-tagline></span>
         </span>
@@ -37,24 +36,33 @@
   <main class="page-shell">
     <section class="page-hero">
       <div class="page-hero__panel reveal">
-        <p class="eyebrow">Resources</p>
-        <h1>10 个高需求主题，整理成一张新手能直接用的资源地图。</h1>
-        <p>从建站、编程、AI 到办公模板，先收藏官方入口，再顺着主题进入完整教程、示例代码和后续下载资料。</p>
+        <p class="eyebrow">Daily Hotspots</p>
+        <h1>每天从 AI、编程和工具动态里，筛出真正值得写成内容的热点。</h1>
+        <p>这里先做人工精选版：保留来源、判断价值和可扩写选题。后续自动化会沿着这个结构每天生成 1-2 篇新文章。</p>
       </div>
     </section>
 
     <section class="section">
       <div class="promo-banner reveal">
         <div>
-          <p class="eyebrow">可持续运营</p>
-          <h3>先让读者有方向，再让推荐自然发生。</h3>
-          <p>每个入口都围绕真实学习场景放置，后续接广告位、联盟链接、下载按钮或课程推荐时也不会显得突兀。</p>
+          <p class="eyebrow">更新策略</p>
+          <h3>热点不是追热闹，而是给网站找到每天能持续更新的内容线索。</h3>
+          <p>优先选择和新手建站、AI 编程、效率工具、资源整理有关的动态，避免泛泛而谈的娱乐新闻。</p>
         </div>
-        <a class="button button--secondary" href="contact.html">洽谈合作</a>
+        <a class="button button--primary" href="posts.html">查看文章库</a>
       </div>
     </section>
 
-    <div data-resource-list></div>
+    <section class="section">
+      <div class="section-heading reveal">
+        <div>
+          <p class="eyebrow">最近几天</p>
+          <h2>已整理好的热点线索</h2>
+        </div>
+        <p>每条都可以继续扩写成教程、解读或资源导航文章。</p>
+      </div>
+      <div class="hotspot-grid" data-hotspot-list></div>
+    </section>
   </main>
 
   <footer class="footer">

@@ -1150,6 +1150,58 @@ git push origin main`,
       link: "https://create.microsoft.com/templates"
     }
   ],
+  hotspots: [
+    {
+      date: "2026-05-27",
+      tag: "今日观察",
+      title: "Google I/O 后，开发者工具正在从“写代码”转向“让智能体完成流程”",
+      summary: "Google 在 I/O 2026 开发者重点中强调 Gemini API、AI Studio、Antigravity 和 Chrome DevTools for agents，说明 AI 工具正在更深地进入本地开发、调试和上线流程。",
+      why: "适合写成一篇“AI 编程工具怎么选”的文章，也能自然连接到本站的 VS Code、Codex、GitHub Pages 教程。",
+      sourceLabel: "Google Developers Blog",
+      sourceUrl: "https://developers.googleblog.com/all-the-news-from-the-google-io-2026-developer-keynote/",
+      articleIdea: "选题：AI 编程代理入门：从提示词到真实开发流程"
+    },
+    {
+      date: "2026-05-26",
+      tag: "AI 趋势",
+      title: "DeepMind CEO 称 AI agents 是通往 AGI 的“演练场”",
+      summary: "Demis Hassabis 在 Google I/O 后接受采访时谈到，AI agents 正在成为更强智能系统的实践路径，行业需要提前思考安全、治理和使用边界。",
+      why: "这类话题适合做成“普通人如何理解智能体”的科普文章，帮助新手读者区分聊天机器人、工作流和真正的代理。",
+      sourceLabel: "Axios",
+      sourceUrl: "https://www.axios.com/2026/05/26/deepmind-ceo-demis-hassabis",
+      articleIdea: "选题：AI Agent 到底是什么？新手能用它做哪些真实任务"
+    },
+    {
+      date: "2026-05-22",
+      tag: "AI 编程",
+      title: "OpenAI Codex 被 Gartner 评为企业 AI 编程代理领导者",
+      summary: "OpenAI 表示 Codex 已被企业用于代码审查、测试覆盖、事件响应和大型仓库理解等场景，AI 编程代理正在从个人效率工具走向团队基础设施。",
+      why: "这和本站的建站、代码助手、自动更新文章计划高度相关，后续可以扩成“用 AI 管理个人网站”的教程。",
+      sourceLabel: "OpenAI",
+      sourceUrl: "https://openai.com/index/gartner-2026-agentic-coding-leader/",
+      articleIdea: "选题：个人网站如何用 Codex 做内容维护和代码更新"
+    },
+    {
+      date: "2026-05-21",
+      tag: "工具更新",
+      title: "Codex 更新 Goal Mode、浏览器标注和远程继续工作能力",
+      summary: "OpenAI 帮助中心更新显示，Codex 的 goal mode 已覆盖 App、IDE extension 和 CLI，并加入更适合前端反馈的浏览器标注能力。",
+      why: "这正好对应本站后续自动化方向：把“每日热点更新”拆成目标，让代理持续完成资料整理、文章生成和提交。",
+      sourceLabel: "OpenAI Help Center",
+      sourceUrl: "https://help.openai.com/en/articles/6825453-Chatgpt-reelease-notes",
+      articleIdea: "选题：Goal Mode 可以怎样帮个人站每天更新内容"
+    },
+    {
+      date: "2026-05-14",
+      tag: "GitHub",
+      title: "GitHub Copilot App 技术预览，把 issue、PR 和代理任务放进同一个桌面工作台",
+      summary: "GitHub Copilot App 技术预览主打从 issue、PR、提示词或历史会话启动开发任务，让开发者在一个桌面界面里跟踪、验证并提交变更。",
+      why: "对个人站长来说，这意味着未来“发现问题、写文章、改页面、发 PR”会越来越像一条自动化流水线。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-05-14-github-copilot-app-is-now-available-in-technical-preview/",
+      articleIdea: "选题：GitHub Copilot App 对个人开发者意味着什么"
+    }
+  ],
   projects: [
     {
       id: "resource-content-hub",
@@ -1231,6 +1283,25 @@ function buildResourceCard(item) {
       <p>${item.description}</p>
       <p class="resource-card__pitch">${item.pitch}</p>
       <a class="button button--secondary" href="${item.link}" target="_blank" rel="noreferrer">${item.cta}</a>
+    </article>
+  `;
+}
+
+function buildHotspotCard(item) {
+  return `
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__meta">
+        <span>${item.tag}</span>
+        <time datetime="${item.date}">${formatDate(item.date)}</time>
+      </div>
+      <h3>${item.title}</h3>
+      <p>${item.summary}</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>${item.why}</p>
+      </div>
+      <p class="hotspot-card__idea">${item.articleIdea}</p>
+      <a class="text-link" href="${item.sourceUrl}" target="_blank" rel="noreferrer">查看来源：${item.sourceLabel}</a>
     </article>
   `;
 }
@@ -1357,6 +1428,7 @@ function buildArticleBody(post) {
 function injectHomePage() {
   const stats = document.querySelector("[data-home-stats]");
   const values = document.querySelector("[data-home-values]");
+  const hotspots = document.querySelector("[data-hotspots-preview]");
   const featuredPosts = document.querySelector("[data-featured-posts]");
   const resources = document.querySelector("[data-featured-resources]");
   const projects = document.querySelector("[data-featured-projects]");
@@ -1380,6 +1452,10 @@ function injectHomePage() {
       .join("");
   }
 
+  if (hotspots) {
+    hotspots.innerHTML = siteData.hotspots.slice(0, 3).map(buildHotspotCard).join("");
+  }
+
   if (featuredPosts) {
     featuredPosts.innerHTML = siteData.posts
       .filter((post) => post.featured)
@@ -1394,6 +1470,13 @@ function injectHomePage() {
   if (projects) {
     projects.innerHTML = siteData.projects.slice(0, 2).map(buildProjectCard).join("");
   }
+}
+
+function injectHotspotsPage() {
+  const container = document.querySelector("[data-hotspot-list]");
+  if (!container) return;
+
+  container.innerHTML = siteData.hotspots.map(buildHotspotCard).join("");
 }
 
 function injectPostsPage() {
@@ -1604,6 +1687,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setGlobalContent();
   bindMenu();
   injectHomePage();
+  injectHotspotsPage();
   injectPostsPage();
   injectPostDetail();
   injectResourcesPage();

@@ -108,13 +108,13 @@ textarea {
 
 .site-nav {
   display: flex;
-  gap: 18px;
+  gap: 14px;
   align-items: center;
 }
 
 .site-nav a {
   color: var(--ink-muted);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
 }
 
 .site-nav a:hover,
@@ -176,6 +176,7 @@ textarea {
 .hero__card,
 .section-panel,
 .content-card,
+.hotspot-card,
 .resource-card,
 .project-card,
 .sidebar-card,
@@ -398,6 +399,7 @@ textarea {
 
 .value-grid,
 .content-grid,
+.hotspot-grid,
 .resource-grid,
 .project-grid,
 .contact-grid,
@@ -412,6 +414,14 @@ textarea {
 
 .content-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hotspot-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.hotspot-grid--preview {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .resource-grid {
@@ -468,6 +478,7 @@ textarea {
 
 .value-card,
 .content-card,
+.hotspot-card,
 .resource-card,
 .project-card {
   padding: 24px;
@@ -484,6 +495,15 @@ textarea {
   min-height: 100%;
 }
 
+.hotspot-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(238, 244, 241, 0.82)),
+    radial-gradient(circle at top right, rgba(213, 139, 53, 0.12), transparent 34%);
+}
+
 .resource-card {
   display: flex;
   flex-direction: column;
@@ -492,6 +512,7 @@ textarea {
 
 .value-card h3,
 .content-card h3,
+.hotspot-card h3,
 .resource-card h3,
 .project-card h3,
 .sidebar-card h3,
@@ -504,12 +525,42 @@ textarea {
 }
 
 .content-card__meta,
+.hotspot-card__meta,
 .detail-hero__meta {
   display: flex;
   flex-wrap: wrap;
   gap: 10px 16px;
   color: var(--ink-muted);
   font-size: 0.9rem;
+}
+
+.hotspot-card__meta {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hotspot-card__meta span {
+  color: var(--brand-deep);
+  font-weight: 700;
+}
+
+.hotspot-card__why {
+  margin: 14px 0;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(8, 127, 111, 0.07);
+  border: 1px solid rgba(8, 127, 111, 0.1);
+}
+
+.hotspot-card__why p {
+  margin: 6px 0 0;
+}
+
+.hotspot-card__idea {
+  margin-top: auto;
+  padding-top: 8px;
+  font-weight: 700;
+  color: var(--ink);
 }
 
 .content-card__footer {
@@ -791,6 +842,8 @@ textarea {
   .topic-grid,
   .value-grid,
   .content-grid,
+  .hotspot-grid,
+  .hotspot-grid--preview,
   .project-grid,
   .contact-grid,
   .article-layout,
