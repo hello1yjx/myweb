@@ -395,6 +395,16 @@ textarea {
   margin-top: 28px;
 }
 
+.topic-section .section-heading {
+  align-items: start;
+}
+
+.topic-section .section-heading h2 {
+  font-size: clamp(1.45rem, 2vw, 2rem);
+  line-height: 1.2;
+  max-width: 780px;
+}
+
 .topic-panel {
   padding: 24px;
   background: rgba(255, 255, 255, 0.8);
