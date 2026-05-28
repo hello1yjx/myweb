@@ -29,6 +29,136 @@ const siteData = {
   },
   posts: [
     {
+      id: "github-copilot-memory-controls-guide",
+      title: "GitHub Copilot Memory 新手指南：记忆会保存什么，什么时候该关闭",
+      date: "2026-05-28",
+      category: "AI 编程",
+      readTime: "9 分钟",
+      excerpt: "GitHub 在 2026 年 5 月 26 日更新了 Copilot Memory 的删除、仓库级关闭和 CLI 控制能力。本文把它整理成适合个人开发者和小团队阅读的使用边界清单。",
+      tags: ["GitHub Copilot", "AI 编程", "开发效率"],
+      featured: true,
+      intro: [
+        "AI 编程工具越来越像长期协作的队友：它不只回答一次问题，还会记住仓库里的约定、偏好和上下文。这样可以少解释很多重复信息，但也带来一个新问题：哪些内容适合被记住，哪些内容应该明确关闭或删除？",
+        "GitHub 2026 年 5 月 26 日的更新，把 Copilot Memory 的控制入口做得更清楚：包括删除提示、仓库级关闭开关、Copilot CLI 里的 /memory 命令，以及保存记忆时更明确的作用域说明。新手可以把这次更新当成理解 AI 编程记忆边界的入口。"
+      ],
+      audience: [
+        "正在使用 GitHub Copilot、Copilot CLI 或代码代理的新手开发者",
+        "维护个人网站、开源仓库或小团队项目的站长",
+        "担心 AI 工具记住敏感规则、内部约定或过期信息的人"
+      ],
+      format: [
+        "适合做成图文指南 + 设置路径截图",
+        "后续可以补一张“用户级记忆 / 仓库级记忆 / 不应保存内容”的对照表"
+      ],
+      roadmap: [
+        "先确认自己用的是个人 Copilot 还是组织/企业 Copilot，因为控制入口和权限不同。",
+        "再区分用户级偏好和仓库级事实：前者跟着个人走，后者可能影响仓库贡献者。",
+        "最后定期检查 Copilot Memory 设置，把敏感、错误或已经过期的记忆删掉。"
+      ],
+      officialLinks: [
+        {
+          label: "GitHub Changelog：Copilot Memory controls",
+          url: "https://github.blog/changelog/2026-05-26-copilot-memory-has-more-controls-for-deletion-scope-and-the-copilot-cli/",
+          note: "本次更新的原始来源，包含删除、关闭和 CLI 控制说明。"
+        }
+      ],
+      curatedLinks: [
+        "如果只是让 Copilot 记住代码风格、测试命令、目录约定，通常比较适合保存为仓库级事实。",
+        "如果内容涉及密钥、客户信息、内部账号、未公开业务规则，不要保存进记忆。",
+        "当仓库刚经历大重构、框架升级或目录迁移时，建议回头检查旧记忆是否已经失效。"
+      ],
+      downloadIdeas: [
+        "可以补一份“AI 编程记忆检查清单”PDF",
+        "可以整理 Copilot CLI 常用命令速查表"
+      ],
+      monetization: "适合在正文中部放 GitHub、代码托管、AI 编程课程或团队协作工具的资源位；底部可以放“AI 编程工作流”系列文章入口。",
+      extraSections: [
+        {
+          title: "新手先记住这 3 个边界",
+          items: [
+            "能公开写进 README 的项目约定，通常更适合被 AI 记住。",
+            "只属于你个人习惯的偏好，应该尽量留在用户级范围。",
+            "涉及安全、客户、账号、商业策略的信息，不应该交给记忆功能。"
+          ]
+        },
+        {
+          title: "Copilot CLI 里可以先看的命令",
+          text: "GitHub 这次提到 Copilot CLI 新增了 /memory 控制入口。第一次使用时，建议先查看当前状态，再决定是否开启。",
+          code: `/memory show
+/memory on
+/memory off`,
+          language: "text"
+        }
+      ]
+    },
+    {
+      id: "vercel-sandbox-persistence-agent-workflow",
+      title: "Vercel Sandboxes 持久化后，AI 代理开发环境可以怎样保存进度",
+      date: "2026-05-28",
+      category: "开发工具",
+      readTime: "10 分钟",
+      excerpt: "Vercel 在 2026 年 5 月 26 日宣布 Sandbox persistence 正式可用。对于使用 AI 代理写代码、跑测试和反复调试的人，这意味着临时环境也能更像一个可恢复的工作台。",
+      tags: ["Vercel", "AI Agent", "开发工具"],
+      featured: true,
+      intro: [
+        "很多 AI 编程演示看起来很顺滑，但真实开发里经常会卡在环境状态：依赖装到一半、测试跑完又断开、临时文件丢失、下一次会话还要从头准备。Vercel Sandboxes 的持久化能力，正是为这类“代理持续工作”场景补上基础设施。",
+        "根据 Vercel 2026 年 5 月 26 日的 changelog，Sandboxes 现在会默认保存并恢复会话之间的文件系统状态；开发者可以用稳定名称创建、获取或恢复 sandbox，也可以在不需要持久化时显式关闭。"
+      ],
+      audience: [
+        "想让 AI 代理自动安装依赖、运行测试、验证代码的新手开发者",
+        "正在做前端、全栈或网站自动化维护的个人站长",
+        "需要隔离执行代码但又不想每次重新准备环境的小团队"
+      ],
+      format: [
+        "适合做成流程图 + 最小代码示例",
+        "后续可以补一篇“AI 代理开发环境怎么选”的横向对比"
+      ],
+      roadmap: [
+        "先理解 sandbox 的价值：隔离运行命令，避免污染本机环境。",
+        "再判断任务是否需要持久化：长任务、反复调试、依赖安装较重的任务更适合开启。",
+        "最后关注成本和清理策略，因为自动快照会带来额外存储消耗。"
+      ],
+      officialLinks: [
+        {
+          label: "Vercel Changelog：Sandbox persistence is now GA",
+          url: "https://vercel.com/changelog/sandbox-persistence-is-now-ga",
+          note: "本次持久化能力的官方发布说明。"
+        },
+        {
+          label: "Vercel Changelog：Firecrawl joins the Vercel Marketplace",
+          url: "https://vercel.com/changelog/firecrawl-joins-the-vercel-marketplace",
+          note: "同日发布的 AI 代理网页数据入口，适合扩展资料收集工作流。"
+        }
+      ],
+      curatedLinks: [
+        "持久化适合需要多次恢复的任务，例如安装依赖、跑测试、生成构建产物、保存中间日志。",
+        "临时抓取、一次性脚本和敏感数据实验更适合关闭持久化，减少存储成本和残留风险。",
+        "如果要让 AI 代理长期处理网站维护，最好给每类任务设计稳定命名，例如 content-refresh、preview-build、test-runner。"
+      ],
+      downloadIdeas: [
+        "可以补一份“AI 代理开发环境选择表”",
+        "可以整理 Vercel Sandbox 常用命令和清理策略"
+      ],
+      monetization: "适合承接 Vercel、云开发平台、AI 代码代理和自动化运维工具类资源；也可以放在个人网站自动更新系列文章中作为基础设施章节。",
+      extraSections: [
+        {
+          title: "什么时候适合开持久化",
+          items: [
+            "任务会跨多次会话继续，例如今天安装依赖，明天继续修测试。",
+            "环境准备成本高，例如前端项目依赖很多、构建时间较长。",
+            "需要保留日志、临时文件或中间产物，方便下一轮代理继续判断。"
+          ]
+        },
+        {
+          title: "最小上手命令",
+          text: "官方示例建议升级到最新版 SDK 或 CLI 后再使用持久化能力。",
+          code: `pnpm install @vercel/sandbox@latest
+pnpm install -g sandbox@latest`,
+          language: "bash"
+        }
+      ]
+    },
+    {
       id: "github-pages-blog-tutorial",
       title: "零基础 GitHub Pages 搭建博客教程：资源入口、上线流程与避坑清单",
       date: "2026-05-27",
@@ -1151,6 +1281,56 @@ git push origin main`,
     }
   ],
   hotspots: [
+    {
+      date: "2026-05-27",
+      tag: "AI 基建",
+      title: "Arm 强调 agentic AI 时代的开发者软件栈：从云到边缘都要能优化和迁移",
+      summary: "Arm Newsroom 文章提出，AI 工作负载正在变得更分布式、更具代理化特征，开发者需要从硬件、运行时、AI 框架到部署工具都更稳定的基础设施。",
+      why: "这类趋势适合写成“AI 应用为什么不只看模型，也要看运行环境”的入门文章，帮助新手理解云端、边缘端和本地设备的差异。",
+      sourceLabel: "Arm Newsroom",
+      sourceUrl: "https://newsroom.arm.com/blog/arm-empowers-developers-for-agentic-ai",
+      articleIdea: "选题：AI Agent 应用为什么也要关心运行环境和硬件生态"
+    },
+    {
+      date: "2026-05-26",
+      tag: "AI 编程",
+      title: "GitHub Copilot Memory 增加删除、仓库级关闭和 CLI 控制能力",
+      summary: "GitHub Changelog 显示，Copilot Memory 现在提供更清晰的删除指引、仓库级关闭开关、Copilot CLI 的 /memory 控制命令，并在保存前提示记忆作用域。",
+      why: "记忆功能会影响 AI 编程工具长期理解项目的方式，很适合扩成“AI 工具会记住什么、怎么管理”的新手指南。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-05-26-copilot-memory-has-more-controls-for-deletion-scope-and-the-copilot-cli/",
+      articleIdea: "选题：GitHub Copilot Memory 新手指南：记忆会保存什么，什么时候该关闭"
+    },
+    {
+      date: "2026-05-26",
+      tag: "代码质量",
+      title: "GitHub Code Quality 在 PR 中展示代码覆盖率，测试完整性更容易被看到",
+      summary: "GitHub 宣布 Code Quality 用户可以在 Pull Request 中看到聚合代码覆盖率，并通过现有 CI 上传 Cobertura 报告；相关 Actions 需要 code-quality:write 权限。",
+      why: "适合写成面向新手的“为什么 PR 里要看测试覆盖率”教程，把 CI、测试报告和代码审查串起来。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-05-26-code-coverage-in-pull-requests-is-now-in-public-preview/",
+      articleIdea: "选题：新手如何理解 PR 代码覆盖率：从测试报告到合并前检查"
+    },
+    {
+      date: "2026-05-26",
+      tag: "开发环境",
+      title: "Vercel Sandboxes 持久化正式可用，代理任务可以恢复文件系统状态",
+      summary: "Vercel 表示 Sandboxes 现在默认保存并恢复会话之间的文件系统状态，支持用稳定名称创建、获取或恢复 sandbox，也能按需关闭持久化。",
+      why: "这对 AI 代理写代码、安装依赖、跑测试和继续长任务很关键，适合扩成“AI 代理开发环境怎么保存进度”的资源型文章。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/sandbox-persistence-is-now-ga",
+      articleIdea: "选题：Vercel Sandboxes 持久化后，AI 代理开发环境可以怎样保存进度"
+    },
+    {
+      date: "2026-05-26",
+      tag: "AI 数据",
+      title: "Firecrawl 加入 Vercel Marketplace，给 AI 代理提供结构化网页数据入口",
+      summary: "Vercel Changelog 显示，Firecrawl 现在可在 Vercel Marketplace 使用，支持把网页抓取成 markdown、HTML、结构化数据或截图，并为检索和代理工作流提供网页搜索与动态页面交互能力。",
+      why: "资源站后续做每日热点和资料整理时，网页抓取、检索和结构化整理会变成重要基础能力。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/firecrawl-joins-the-vercel-marketplace",
+      articleIdea: "选题：AI 资料整理为什么需要网页抓取工具：从搜索到结构化数据"
+    },
     {
       date: "2026-05-27",
       tag: "今日观察",
