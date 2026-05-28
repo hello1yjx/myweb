@@ -519,12 +519,19 @@ textarea {
   font-size: 14px;
 }
 
-.meta-row {
+.meta-row,
+.content-card__meta,
+.detail-hero__meta,
+.hotspot-card__meta {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   color: #7a879d;
   font-size: 12px;
+}
+
+.detail-hero__meta {
+  margin: 12px 0;
 }
 
 .latest-list {
@@ -813,6 +820,68 @@ textarea {
   margin-bottom: 10px;
 }
 
+.resource-card__badge {
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.resource-card__pitch,
+.hotspot-card__why,
+.hotspot-card__idea {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: var(--radius);
+  background: #f8fbff;
+  border: 1px solid var(--line);
+}
+
+.hotspot-card__why strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.hotspot-card__idea {
+  color: var(--primary-deep);
+  font-weight: 700;
+}
+
+.topic-section {
+  margin-top: 20px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.topic-panel {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #f8fbff;
+}
+
+.topic-panel ul,
+.article-body ul {
+  padding-left: 20px;
+  color: #3f4b61;
+}
+
+.topic-panel a,
+.article-body a {
+  color: var(--primary);
+  font-weight: 800;
+}
+
 .donation-card img {
   width: 100%;
   margin-top: 16px;
@@ -1012,6 +1081,7 @@ textarea {
   .project-grid,
   .hotspot-grid,
   .donation-grid,
+  .topic-grid,
   .quick-links,
   .footer__grid,
   .footer__inner {
