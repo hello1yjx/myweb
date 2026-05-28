@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lumen Forge | 新手友好的资源型博客</title>
-  <meta name="description" content="围绕建站、编程入门、AI 工具与效率资料整理的资源型网站，优先提供官方入口、学习路径和长期可用的参考资源。">
+  <title>学习资源库 | 新手友好的教程、资料与工具导航</title>
+  <meta name="description" content="学习资源库整理 GitHub Pages、Python、前端、AI 工具、办公模板等新手友好的教程与资料入口。">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260528-hotspots">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=20260528-resourcehub">
 </head>
 <body>
   <header class="site-header">
     <div class="page-shell site-header__inner">
-      <a class="brand" href="index.html" aria-label="返回首页">
-        <span class="brand-mark">LF</span>
+      <a class="brand" href="index.html" aria-label="学习资源库首页">
+        <span class="brand-mark">LR</span>
         <span class="brand-copy">
           <strong data-site-name></strong>
           <span data-site-tagline></span>
@@ -24,131 +24,145 @@
       <button class="menu-button" data-menu-button aria-expanded="false" aria-label="切换导航菜单">☰</button>
       <nav class="site-nav" data-mobile-nav>
         <a href="index.html">首页</a>
-        <a href="posts.html">文章</a>
-        <a href="hotspots.html">每日热点</a>
-        <a href="resources.html">资源推荐</a>
-        <a href="projects.html">项目展示</a>
-        <a href="about.html">关于</a>
-        <a href="contact.html">联系</a>
+        <a href="posts.html">教程</a>
+        <a href="resources.html">资源下载</a>
+        <a href="projects.html">项目实战</a>
+        <a href="hotspots.html">AI 专区</a>
+        <a href="contact.html">打赏联系</a>
       </nav>
+      <form class="header-search" data-site-search>
+        <input type="search" name="q" placeholder="搜索教程 / 资源 / 工具...">
+        <button type="submit" aria-label="搜索">⌕</button>
+      </form>
     </div>
   </header>
 
-  <main class="page-shell">
-    <section class="hero">
-      <div class="hero__copy reveal">
-        <p class="eyebrow">Resource-First Content Hub</p>
-        <h1>把建站、编程、AI 工具的靠谱入口，整理成新手一看就会走的路线。</h1>
-        <p data-site-bio></p>
-        <div class="hero__actions">
-          <a class="button button--primary" href="resources.html">从资源地图开始</a>
-          <a class="button button--secondary" href="posts.html">看最新文章</a>
+  <main>
+    <section class="portal-hero">
+      <div class="page-shell portal-hero__inner">
+        <div class="portal-hero__content reveal">
+          <p class="hero-kicker">新手友好的资源型网站</p>
+          <h1>学习资源库</h1>
+          <p>整理 GitHub Pages、Python、前端、AI 工具和办公模板，让你从搜索资料到动手实践，都能更快找到下一步。</p>
+          <div class="hero-actions">
+            <a class="button button--primary" href="posts.html">开始学习</a>
+            <a class="button button--light" href="resources.html">资源下载</a>
+          </div>
+          <div class="hero-stats" data-home-stats></div>
         </div>
-        <div class="hero__stats" data-home-stats></div>
+      </div>
+    </section>
+
+    <section class="page-shell category-strip" data-home-categories></section>
+
+    <section class="page-shell section-main">
+      <div class="main-column">
+        <section class="content-section">
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">精选推荐</p>
+              <h2>适合先看的高点击教程</h2>
+            </div>
+            <a class="text-link" href="posts.html">查看更多</a>
+          </div>
+          <div class="recommend-grid" data-recommendations></div>
+        </section>
+
+        <section class="content-section">
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">最新文章</p>
+              <h2>持续整理的学习路线与资料入口</h2>
+            </div>
+            <a class="text-link" href="posts.html">全部文章</a>
+          </div>
+          <div class="latest-list" data-home-latest></div>
+        </section>
       </div>
 
-      <aside class="hero__card reveal">
-        <div class="mini-profile">
-          <div class="mini-profile__avatar">AL</div>
-          <div>
-            <strong>Lumen Forge</strong>
-            <p>新手资源地图、教程路线与项目展示</p>
+      <aside class="side-column">
+        <section class="side-panel">
+          <div class="side-panel__head">
+            <h3>热门标签</h3>
+            <a href="posts.html">更多</a>
           </div>
-        </div>
-        <div class="editorial-card">
-          <p class="label">第一次来先看这里</p>
-          <h3>不用先懂很多术语，也能在 30 秒内找到下一步。</h3>
-          <p>首页先帮你判断方向：想建站、学编程、找 AI 工具或拿模板，都可以顺着资源地图进入对应文章。</p>
-        </div>
-        <div class="feature-stack">
-          <span>官方资料优先</span>
-          <span>新手上手友好</span>
-          <span>广告位可扩展</span>
-          <span>项目展示可承接</span>
-        </div>
+          <div class="tag-cloud" data-home-tags></div>
+        </section>
+
+        <section class="side-panel">
+          <div class="side-panel__head">
+            <h3>资源下载榜</h3>
+            <a href="resources.html">更多</a>
+          </div>
+          <div class="rank-list" data-download-rank></div>
+        </section>
+
+        <section class="side-panel side-panel--community">
+          <h3>支持本站更新</h3>
+          <p>如果教程和资料整理对你有帮助，可以在联系页扫码打赏，支持继续更新。</p>
+          <a class="button button--primary" href="contact.html">查看打赏码</a>
+        </section>
       </aside>
     </section>
 
-    <section class="section">
-      <div class="section-heading reveal">
-        <div>
-          <p class="eyebrow">每日热点</p>
-          <h2>把这几天最值得跟进的 AI、编程和工具动态先整理好。</h2>
-        </div>
-        <a class="text-link" href="hotspots.html">查看全部热点</a>
-      </div>
-      <div class="hotspot-grid hotspot-grid--preview" data-hotspots-preview></div>
-    </section>
-
-    <section class="section">
-      <div class="section-heading reveal">
-        <div>
-          <p class="eyebrow">你能在这里拿到什么</p>
-          <h2>帮你从“想学”走到“能做出来”的三类内容。</h2>
-        </div>
-        <p>资源负责找入口，文章负责讲路径，项目负责展示这些内容最后能落成什么样。</p>
-      </div>
-      <div class="value-grid" data-home-values></div>
-    </section>
-
-    <section class="section">
-      <div class="section-heading reveal">
-        <div>
-          <p class="eyebrow">正在变厚的教程库</p>
-          <h2>先从高需求主题开始，把每篇文章都做成可继续深入的入口。</h2>
-        </div>
-        <a class="text-link" href="posts.html">查看全部文章</a>
-      </div>
-      <div class="content-grid" data-featured-posts></div>
-    </section>
-
-    <section class="section">
-      <div class="promo-banner reveal">
-        <div>
-          <p class="eyebrow">合作与推荐位</p>
-          <h3>推荐不是硬塞按钮，而是出现在读者真正需要下一步的时候。</h3>
-          <p>后续适合承接 AdSense、工具联盟、模板推荐或赞助合作。当前先把位置和语境打好，方便替换成真实入口。</p>
-        </div>
-        <a class="button button--primary" href="resources.html">进入资源推荐页</a>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-heading reveal">
-        <div>
-          <p class="eyebrow">精选资源</p>
-          <h2>把最容易迷路的资料入口，放到更容易开始的位置。</h2>
-        </div>
-        <a class="text-link" href="resources.html">进入完整资源页</a>
-      </div>
-      <div class="resource-grid" data-featured-resources></div>
-    </section>
-
-    <section class="section">
-      <div class="section-heading reveal">
-        <div>
-          <p class="eyebrow">项目展示</p>
-          <h2>不只写内容，也把内容结构真正落到页面里。</h2>
-        </div>
-        <a class="text-link" href="projects.html">查看全部项目</a>
-      </div>
-      <div class="project-grid" data-featured-projects></div>
+    <section class="page-shell quick-links">
+      <a class="quick-card" href="posts.html">
+        <span>路线</span>
+        <strong>学习路线</strong>
+        <p>系统化学习路径</p>
+      </a>
+      <a class="quick-card" href="resources.html">
+        <span>资源</span>
+        <strong>资源导航</strong>
+        <p>精选优质资料</p>
+      </a>
+      <a class="quick-card" href="projects.html">
+        <span>项目</span>
+        <strong>项目实战</strong>
+        <p>从教程到作品</p>
+      </a>
+      <a class="quick-card" href="contact.html">
+        <span>收藏</span>
+        <strong>网站收藏</strong>
+        <p>联系与打赏支持</p>
+      </a>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="page-shell footer__inner">
-      <div>
-        <strong data-site-name></strong>
-        <p data-site-tagline></p>
+    <div class="page-shell footer__grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">LR</span>
+          <span class="brand-copy">
+            <strong data-site-name></strong>
+            <span data-site-tagline></span>
+          </span>
+        </a>
+        <p data-site-bio></p>
       </div>
       <div>
-        <a data-site-email href="#"></a><br>
-        <a data-site-github href="#" target="_blank" rel="noreferrer">GitHub</a>
+        <h4>快速导航</h4>
+        <a href="index.html">首页</a>
+        <a href="posts.html">教程</a>
+        <a href="resources.html">资源下载</a>
+        <a href="projects.html">项目实战</a>
+      </div>
+      <div>
+        <h4>热门分类</h4>
+        <a href="posts.html">编程开发</a>
+        <a href="resources.html">学习资料</a>
+        <a href="hotspots.html">AI 工具</a>
+        <a href="contact.html">打赏联系</a>
+      </div>
+      <div>
+        <h4>订阅更新</h4>
+        <p>持续整理新手教程、资料合集和实用工具。</p>
+        <a data-site-email href="#"></a>
       </div>
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260528-hotspots"></script>
+  <script src="assets/app.js?v=20260528-resourcehub"></script>
 </body>
 </html>
