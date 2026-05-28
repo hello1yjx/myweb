@@ -1435,11 +1435,86 @@ function byId(list, id) {
   return list.find((item) => item.id === id);
 }
 
+const iconBaseUrl = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
+
+const visualIcons = {
+  ai: `${iconBaseUrl}/python/python-original.svg`,
+  css: `${iconBaseUrl}/css3/css3-original.svg`,
+  docker: `${iconBaseUrl}/docker/docker-original.svg`,
+  figma: `${iconBaseUrl}/figma/figma-original.svg`,
+  git: `${iconBaseUrl}/git/git-original.svg`,
+  github: `${iconBaseUrl}/github/github-original.svg`,
+  html: `${iconBaseUrl}/html5/html5-original.svg`,
+  javascript: `${iconBaseUrl}/javascript/javascript-original.svg`,
+  markdown: `${iconBaseUrl}/markdown/markdown-original.svg`,
+  node: `${iconBaseUrl}/nodejs/nodejs-original.svg`,
+  python: `${iconBaseUrl}/python/python-original.svg`,
+  react: `${iconBaseUrl}/react/react-original.svg`,
+  vscode: `${iconBaseUrl}/vscode/vscode-original.svg`
+};
+
+const categoryIcons = {
+  ai: visualIcons.ai,
+  books: visualIcons.markdown,
+  debug: visualIcons.git,
+  frontend: visualIcons.javascript,
+  git: visualIcons.git,
+  github: visualIcons.github,
+  hexo: visualIcons.github,
+  office: visualIcons.figma,
+  python: visualIcons.python,
+  vscode: visualIcons.vscode
+};
+
+const iconRules = [
+  { icon: visualIcons.github, keywords: ["GitHub", "GitHub Pages", "Pages", "仓库"] },
+  { icon: visualIcons.python, keywords: ["Python", "编程入门", "AI"] },
+  { icon: visualIcons.vscode, keywords: ["VS Code", "Codex", "开发工具", "效率工具"] },
+  { icon: visualIcons.javascript, keywords: ["JavaScript", "前端", "HTML", "CSS"] },
+  { icon: visualIcons.git, keywords: ["Git", "报错", "问题排查", "代码质量"] },
+  { icon: visualIcons.figma, keywords: ["办公", "模板", "设计", "资料"] },
+  { icon: visualIcons.docker, keywords: ["Docker", "部署", "项目"] }
+];
+
+function escapeAttribute(value) {
+  return String(value).replace(/"/g, "&quot;");
+}
+
+function buildVisualIcon(src, label, className = "visual-icon") {
+  return `<img class="${className}" src="${src}" alt="${escapeAttribute(label)}" width="48" height="48" loading="lazy">`;
+}
+
+function pickVisualIcon(text, fallback = visualIcons.github) {
+  const haystack = String(text || "");
+  const rule = iconRules.find((item) => item.keywords.some((keyword) => haystack.includes(keyword)));
+  return rule ? rule.icon : fallback;
+}
+
+function getPostIcon(post) {
+  const fallback = categoryIcons[slugify(post.category)] || visualIcons.github;
+  return pickVisualIcon([post.title, post.category, post.tags.join(" ")].join(" "), fallback);
+}
+
+function getResourceIcon(item) {
+  return pickVisualIcon([item.name, item.category, item.description].join(" "), visualIcons.markdown);
+}
+
+function getHotspotIcon(item) {
+  return pickVisualIcon([item.title, item.tag, item.summary].join(" "), visualIcons.ai);
+}
+
+function getProjectIcon(project) {
+  return pickVisualIcon([project.title, project.stack, project.summary].join(" "), visualIcons.github);
+}
+
 function buildPostCard(post) {
+  const icon = getPostIcon(post);
+
   return `
     <article class="article-card reveal">
       <a class="article-card__media article-card__media--${slugify(post.category)}" href="post.html?id=${post.id}">
         <span class="article-card__badge">${post.featured ? "推荐" : post.category}</span>
+        <span class="article-card__icon">${buildVisualIcon(icon, `${post.category} 图标`, "visual-icon visual-icon--card")}</span>
         <strong>${post.category}</strong>
       </a>
       <div class="article-card__body">
@@ -1456,9 +1531,12 @@ function buildPostCard(post) {
 }
 
 function buildLatestItem(post) {
+  const icon = getPostIcon(post);
+
   return `
     <article class="latest-item reveal">
       <a class="latest-thumb latest-thumb--${slugify(post.category)}" href="post.html?id=${post.id}">
+        ${buildVisualIcon(icon, `${post.category} 图标`, "visual-icon visual-icon--thumb")}
         <span>${post.category}</span>
       </a>
       <div>
@@ -1475,11 +1553,16 @@ function buildLatestItem(post) {
 }
 
 function buildResourceCard(item) {
+  const icon = getResourceIcon(item);
+
   return `
     <article class="resource-card reveal">
-      <div class="resource-card__top">
-        <span class="pill">${item.category}</span>
-        <span class="resource-card__badge">${item.badge}</span>
+      <div class="resource-card__head">
+        <span class="resource-card__icon">${buildVisualIcon(icon, `${item.category} 图标`, "visual-icon")}</span>
+        <div class="resource-card__top">
+          <span class="pill">${item.category}</span>
+          <span class="resource-card__badge">${item.badge}</span>
+        </div>
       </div>
       <h3>${item.name}</h3>
       <p>${item.description}</p>
@@ -1490,13 +1573,20 @@ function buildResourceCard(item) {
 }
 
 function buildHotspotCard(item) {
+  const icon = getHotspotIcon(item);
+
   return `
     <article class="hotspot-card reveal">
-      <div class="hotspot-card__meta">
-        <span>${item.tag}</span>
-        <time datetime="${item.date}">${formatDate(item.date)}</time>
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon">${buildVisualIcon(icon, `${item.tag} 图标`, "visual-icon")}</span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>${item.tag}</span>
+            <time datetime="${item.date}">${formatDate(item.date)}</time>
+          </div>
+          <h3>${item.title}</h3>
+        </div>
       </div>
-      <h3>${item.title}</h3>
       <p>${item.summary}</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
@@ -1529,12 +1619,22 @@ function slugify(value) {
 
 function getHomeCategories() {
   return [
-    { code: "</>", title: "编程开发", meta: "Python / 前端 / Git", count: "120+ 教程", tone: "blue", query: "编程" },
-    { code: "BK", title: "学习资料", meta: "PDF / 电子书 / 文档", count: "2000+ 资源", tone: "green", query: "资料" },
-    { code: "TL", title: "实用工具", meta: "开发 / 设计 / 效率", count: "300+ 工具", tone: "violet", query: "工具" },
-    { code: "PR", title: "项目实战", meta: "源码 / 案例 / 部署", count: "50+ 项目", tone: "orange", query: "项目" },
-    { code: "AI", title: "AI 专区", meta: "AI 编程 / 提示词 / 工具", count: "100+ 热点", tone: "rose", query: "AI" },
-    { code: "DS", title: "设计资源", meta: "模板 / 素材 / 图标", count: "1000+ 资源", tone: "cyan", query: "模板" }
+    { icon: visualIcons.javascript, title: "编程开发", meta: "Python / 前端 / Git", count: "120+ 教程", tone: "blue", query: "编程" },
+    { icon: visualIcons.markdown, title: "学习资料", meta: "PDF / 电子书 / 文档", count: "2000+ 资源", tone: "green", query: "资料" },
+    { icon: visualIcons.vscode, title: "实用工具", meta: "开发 / 设计 / 效率", count: "300+ 工具", tone: "violet", query: "工具" },
+    { icon: visualIcons.github, title: "项目实战", meta: "源码 / 案例 / 部署", count: "50+ 项目", tone: "orange", query: "项目" },
+    { icon: visualIcons.python, title: "AI 专区", meta: "AI 编程 / 提示词 / 工具", count: "100+ 热点", tone: "rose", query: "AI" },
+    { icon: visualIcons.figma, title: "设计资源", meta: "模板 / 素材 / 图标", count: "1000+ 资源", tone: "cyan", query: "模板" }
+  ];
+}
+
+function getHeroIcons() {
+  return [
+    { icon: visualIcons.python, label: "Python" },
+    { icon: visualIcons.github, label: "GitHub Pages" },
+    { icon: visualIcons.javascript, label: "JavaScript" },
+    { icon: visualIcons.vscode, label: "VS Code" },
+    { icon: visualIcons.figma, label: "模板资料" }
   ];
 }
 
@@ -1565,10 +1665,13 @@ function buildTopicResourceSection(post) {
 }
 
 function buildProjectCard(project) {
+  const icon = getProjectIcon(project);
+
   return `
     <article class="project-card reveal">
       <div class="project-card__visual">
         <span>${project.status}</span>
+        ${buildVisualIcon(icon, `${project.title} 图标`, "visual-icon visual-icon--project")}
       </div>
       <div class="project-card__body">
         <div class="content-card__meta">
@@ -1669,6 +1772,7 @@ function injectHomePage() {
   const latest = document.querySelector("[data-home-latest]");
   const tags = document.querySelector("[data-home-tags]");
   const rank = document.querySelector("[data-download-rank]");
+  const heroIcons = document.querySelector("[data-hero-icons]");
 
   if (stats) {
     stats.innerHTML = siteData.site.heroStats
@@ -1713,11 +1817,24 @@ function injectHomePage() {
       .map(
         (item) => `
           <a class="category-card category-card--${item.tone} reveal" href="posts.html?q=${encodeURIComponent(item.query)}">
-            <span>${item.code}</span>
+            <span>${buildVisualIcon(item.icon, `${item.title} 图标`, "visual-icon visual-icon--category")}</span>
             <strong>${item.title}</strong>
             <em>${item.meta}</em>
             <small>${item.count}</small>
           </a>
+        `
+      )
+      .join("");
+  }
+
+  if (heroIcons) {
+    heroIcons.innerHTML = getHeroIcons()
+      .map(
+        (item) => `
+          <span>
+            ${buildVisualIcon(item.icon, `${item.label} 图标`, "visual-icon")}
+            <strong>${item.label}</strong>
+          </span>
         `
       )
       .join("");
