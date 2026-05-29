@@ -29,6 +29,148 @@ const siteData = {
   },
   posts: [
     {
+      id: "vscode-122-agent-byok-responsive-guide",
+      title: "VS Code 1.122 新手指南：Agents 窗口、离线 BYOK 和设备模拟怎么用",
+      date: "2026-05-29",
+      category: "开发工具",
+      readTime: "10 分钟",
+      excerpt: "VS Code 1.122 在 2026 年 5 月 28 日发布，带来更集中化的 Agents 体验、无需 GitHub 登录的离线 BYOK 模式，以及浏览器工具里的设备模拟能力。本文把它整理成适合新手判断是否升级和怎么试用的路线。",
+      tags: ["VS Code", "AI 编程", "开发效率"],
+      featured: true,
+      intro: [
+        "如果你平时用 VS Code 写代码，AI 功能的变化已经不只是“补全一行代码”。从 1.122 版本开始，VS Code 把代理式体验、模型选择和浏览器调试进一步放到同一个开发环境里，适合新手把它理解成“编辑器正在变成一个能执行任务的工作台”。",
+        "这次值得关注的三件事是：专门的 Agents 窗口继续强化多任务协作；BYOK 模式可以在离线场景下使用，不再要求 GitHub 登录；浏览器工具新增设备模拟，方便检查移动端布局。对个人站长来说，这些功能都能直接服务建站、调试和内容维护。"
+      ],
+      audience: [
+        "正在用 VS Code 写网页、Python 或个人项目的新手开发者",
+        "想尝试 AI 编程，但又不想一开始绑定完整云端账号流程的人",
+        "需要反复检查移动端页面效果的个人站长和前端学习者"
+      ],
+      format: [
+        "适合做成图文指南 + 设置路径截图",
+        "后续可以补一段“用 Agents 修一个静态站页面”的实战演示"
+      ],
+      roadmap: [
+        "先升级或查看 VS Code 1.122 发布说明，确认自己关心的功能是否已经可用。",
+        "再从 Agents 窗口开始试一个小任务，例如解释报错、整理文件或生成测试清单。",
+        "最后用浏览器工具的设备模拟检查页面，尤其是首页、文章页和导航在手机视口下是否正常。"
+      ],
+      officialLinks: [
+        {
+          label: "VS Code 1.122 Release Notes",
+          url: "https://code.visualstudio.com/updates/v1_122",
+          note: "本次更新的官方发布说明，包含 Agents、BYOK 与浏览器工具更新。"
+        },
+        {
+          label: "VS Code Copilot 文档入口",
+          url: "https://code.visualstudio.com/docs/copilot/overview",
+          note: "适合继续理解编辑器里的 AI 编程工作流。"
+        }
+      ],
+      curatedLinks: [
+        "新手不要一上来把所有任务都交给 Agent，先选一个低风险任务，例如生成检查清单或解释配置。",
+        "BYOK 更适合已经知道自己要用哪个模型的人；完全新手可以先用默认体验熟悉流程。",
+        "设备模拟适合配合静态站维护使用：每次改首页、导航和文章卡片后，都应该看一眼移动端。"
+      ],
+      downloadIdeas: [
+        "可以补一份 VS Code AI 功能试用清单",
+        "可以整理个人网站移动端检查表"
+      ],
+      monetization: "适合承接 VS Code 插件、AI 编程课程、前端调试工具和静态站模板类资源位；也可以放到本站“开发工具”系列入口里继续扩展。",
+      extraSections: [
+        {
+          title: "新手建议先试的 3 个场景",
+          items: [
+            "让 Agent 解释一个已有项目的目录结构，而不是直接改代码。",
+            "让它根据当前页面列出移动端检查项，再由你手动确认。",
+            "用 BYOK 或模型选择功能前，先记录任务类型、模型成本和结果质量。"
+          ]
+        },
+        {
+          title: "适合加入正文的检查顺序",
+          items: [
+            "先看更新说明，确认功能入口和限制。",
+            "再用一个小项目测试 Agents 窗口是否适合自己的工作流。",
+            "最后用设备模拟检查页面，不要只看桌面端。"
+          ]
+        }
+      ]
+    },
+    {
+      id: "microsoft-learn-mcp-agent-grounding-guide",
+      title: "让 AI 编程代理先查官方文档：Microsoft Learn MCP Server 新手入门",
+      date: "2026-05-29",
+      category: "AI 编程",
+      readTime: "9 分钟",
+      excerpt: "Microsoft ISE 在 2026 年 5 月 28 日介绍了 Microsoft Learn MCP Server：它把代理工具直接连到最新官方文档，减少模型凭旧知识写出过时代码的风险。",
+      tags: ["MCP", "Microsoft Learn", "AI Agent"],
+      featured: true,
+      intro: [
+        "AI 编程代理最容易出问题的地方，不一定是不会写代码，而是它把旧版本 API、过期参数或博客里的片段当成当前答案。对新手来说，最稳的办法不是盲目换模型，而是先让工具查到权威、最新、可追溯的文档。",
+        "Microsoft ISE 2026 年 5 月 28 日的文章介绍了 Microsoft Learn MCP Server：开发者工具可以通过 MCP 协议直接检索 Microsoft Learn、Azure 文档和 Microsoft 365 文档，而且官方强调它不需要安装和认证。这个方向很适合扩展成“给 AI 工具接官方资料源”的入门教程。"
+      ],
+      audience: [
+        "正在尝试 Cursor、VS Code、Codex 或其他 AI 编程代理的新手",
+        "需要查 Azure、Microsoft 365 或 Microsoft Learn 官方文档的开发者",
+        "担心 AI 生成过时代码、错误参数或不可靠链接的个人站长"
+      ],
+      format: [
+        "适合做成概念解释 + 工具配置清单",
+        "后续可以补一篇“常见 MCP Server 怎么选”的横向对比"
+      ],
+      roadmap: [
+        "先理解 MCP 的角色：它不是模型，而是让模型能使用外部资料和工具的协议。",
+        "再把官方文档源接入到自己的开发工具里，让代理回答前先检索。",
+        "最后保留来源链接和版本信息，避免把一次生成结果当成永久正确答案。"
+      ],
+      officialLinks: [
+        {
+          label: "Microsoft ISE：Grounding agentic developer tools in Microsoft Learn",
+          url: "https://devblogs.microsoft.com/ise/improve-your-agentic-developer-tools-by-grounding-in-microsoft-learn/",
+          note: "本次 Microsoft Learn MCP Server 的官方说明。"
+        },
+        {
+          label: "Microsoft Learn",
+          url: "https://learn.microsoft.com/",
+          note: "微软官方技术文档入口。"
+        },
+        {
+          label: "Model Context Protocol",
+          url: "https://modelcontextprotocol.io/",
+          note: "理解 MCP 概念和生态的官方入口。"
+        }
+      ],
+      curatedLinks: [
+        "凡是涉及云服务、SDK、权限和计费的内容，优先让 AI 工具引用官方文档。",
+        "如果生成结果没有来源链接，不要直接复制到生产项目里。",
+        "MCP 适合做成长期资源页：按官方文档、搜索、数据库、浏览器和文件系统分组。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 AI 编程资料源检查清单",
+        "可以补 MCP Server 分类表和适用场景 PDF"
+      ],
+      monetization: "适合承接 AI 编程工具、云开发课程、开发者文档整理服务和团队知识库工具类推荐。",
+      extraSections: [
+        {
+          title: "什么时候最需要官方文档 grounding",
+          items: [
+            "使用 Azure、Microsoft 365、GitHub、Vercel 这类频繁更新的平台能力时。",
+            "代码里涉及权限、认证、计费、部署和安全设置时。",
+            "你看到 AI 回答里出现旧参数、旧截图或说法互相矛盾时。"
+          ]
+        },
+        {
+          title: "可以放在教程里的判断清单",
+          items: [
+            "回答里有没有原始来源链接。",
+            "来源是不是官方文档、官方博客或权威 changelog。",
+            "文档日期和功能状态是否匹配当前项目。",
+            "生成结果是否还能被本地测试或静态检查验证。"
+          ]
+        }
+      ]
+    },
+    {
       id: "github-copilot-memory-controls-guide",
       title: "GitHub Copilot Memory 新手指南：记忆会保存什么，什么时候该关闭",
       date: "2026-05-28",
@@ -1281,6 +1423,56 @@ git push origin main`,
     }
   ],
   hotspots: [
+    {
+      date: "2026-05-28",
+      tag: "开发工具",
+      title: "VS Code 1.122 发布：Agents、离线 BYOK 和浏览器设备模拟继续增强",
+      summary: "VS Code 1.122 发布说明显示，本次更新强化了 Agents 窗口，BYOK 模式可在离线场景使用且不要求 GitHub 登录，并在浏览器工具中加入设备模拟能力。",
+      why: "这直接影响新手写代码、调试网页和尝试 AI 编程工具的入口，适合扩成“VS Code AI 功能怎么逐步上手”的资源文章。",
+      sourceLabel: "Visual Studio Code Release Notes",
+      sourceUrl: "https://code.visualstudio.com/updates/v1_122",
+      articleIdea: "选题：VS Code 1.122 新手指南：Agents 窗口、离线 BYOK 和设备模拟怎么用"
+    },
+    {
+      date: "2026-05-28",
+      tag: "AI 编程",
+      title: "Microsoft Learn MCP Server 让代理工具直接检索官方文档",
+      summary: "Microsoft ISE 介绍 Microsoft Learn MCP Server，可让 AI 开发工具检索 Microsoft Learn、Azure 和 Microsoft 365 官方文档，并强调不需要安装和认证。",
+      why: "这类 grounding 能减少 AI 代理凭旧知识写过时代码的风险，很适合写成“让 AI 先查官方资料再回答”的新手教程。",
+      sourceLabel: "Microsoft ISE Dev Blog",
+      sourceUrl: "https://devblogs.microsoft.com/ise/improve-your-agentic-developer-tools-by-grounding-in-microsoft-learn/",
+      articleIdea: "选题：让 AI 编程代理先查官方文档：Microsoft Learn MCP Server 新手入门"
+    },
+    {
+      date: "2026-05-28",
+      tag: "AI 编程",
+      title: "Claude Opus 4.8 在 GitHub Copilot 和 Vercel AI Gateway 中开放",
+      summary: "GitHub Changelog 宣布 Claude Opus 4.8 面向 Copilot Pro+、Business 和 Enterprise 用户逐步开放；Vercel 同日宣布可通过 AI Gateway 使用 anthropic/claude-opus-4.8。",
+      why: "模型选择正在成为 AI 编程工具的日常配置项，新手需要理解入口、权限、计费倍数和 API 网关之间的关系。",
+      sourceLabel: "GitHub Changelog / Vercel Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-05-28-claude-opus-4-8-is-generally-available-for-github-copilot/",
+      articleIdea: "选题：GitHub Copilot 和 AI Gateway 里怎么选择高阶编程模型"
+    },
+    {
+      date: "2026-05-29",
+      tag: "国内开源",
+      title: "Qwen Code 连续发布 5 月 28-29 日 nightly，继续打磨终端 AI 编程代理",
+      summary: "QwenLM/qwen-code 的 GitHub Releases 显示，项目在 5 月 28 日和 5 月 29 日连续发布 nightly 版本，包含 TUI、遥测、飞书通道、技能优化等改动。",
+      why: "这是国内开源 AI 编程代理持续迭代的信号，适合后续观察它如何从命令行工具扩展到团队协作和多通道工作流。",
+      sourceLabel: "Qwen Code GitHub Releases",
+      sourceUrl: "https://github.com/QwenLM/qwen-code/releases",
+      articleIdea: "选题：Qwen Code 新手观察：终端里的 AI 编程代理正在补哪些能力"
+    },
+    {
+      date: "2026-05-28",
+      tag: "代码质量",
+      title: "CodeQL 2.25.5 改进 GitHub Actions 查询准确性",
+      summary: "GitHub 发布 CodeQL 2.25.5，提到 C/C++、Java/Kotlin 和 GitHub Actions 查询准确性改进，并扩展了 poisonable_steps 查询对复合 action metadata 的覆盖。",
+      why: "供应链和 CI 配置正在成为代码安全的一部分，适合给新手解释为什么 workflow、action 和依赖也需要被扫描。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-05-28-codeql-2-25-5-improves-accuracy-for-github-actions-and-more/",
+      articleIdea: "选题：为什么 GitHub Actions 也要做代码扫描：从 CodeQL 查询说起"
+    },
     {
       date: "2026-05-27",
       tag: "AI 基建",
