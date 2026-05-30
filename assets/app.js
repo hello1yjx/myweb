@@ -29,6 +29,147 @@ const siteData = {
   },
   posts: [
     {
+      id: "github-copilot-ai-adoption-metrics-guide",
+      title: "GitHub Copilot 指标新增 AI 采用阶段：新手怎么看团队从补全走向多智能体",
+      date: "2026-05-30",
+      category: "AI 编程",
+      readTime: "9 分钟",
+      excerpt: "GitHub 在 2026 年 5 月 29 日更新 Copilot usage metrics API，新增 ai_adoption_phase 字段，把用户使用情况分成 Code first、Agent first 和 Multi-agent 等阶段。本文把它整理成适合新手理解 AI 编程采用度的资源型指南。",
+      tags: ["GitHub Copilot", "AI 指标", "团队效率"],
+      featured: true,
+      intro: [
+        "很多人判断 AI 编程工具有没有用，只看“有多少人打开过 Copilot”。但真正影响团队效率的，不只是活跃人数，而是大家到底停留在代码补全、单个代理任务，还是已经开始同时使用代码审查、云端代理、CLI 和桌面应用。",
+        "GitHub 2026 年 5 月 29 日的 Changelog 给 Copilot usage metrics API 增加了 AI 采用阶段。对新手来说，这不是一个复杂的企业报表名词，而是一个很实用的观察框架：先看团队有没有把 AI 用在基础编码，再看有没有进入代理式开发，最后再看是否具备多智能体协作的习惯。"
+      ],
+      audience: [
+        "正在学习 GitHub Copilot、代码补全和 AI 编程代理的新手开发者",
+        "想给团队整理 AI 工具使用情况，但不知道看哪些指标的小团队负责人",
+        "维护个人站点或开源项目，想理解 AI 编程工具演进方向的站长"
+      ],
+      format: [
+        "适合做成概念解释 + 指标字段速查表",
+        "后续可以补一张“Code first / Agent first / Multi-agent”对照图"
+      ],
+      roadmap: [
+        "先理解活跃用户数只是起点，不能代表 AI 已经真正进入开发流程。",
+        "再区分代码补全、IDE agent mode、Copilot cloud agent、Copilot code review、Copilot CLI 和 Copilot app 各自代表的使用层级。",
+        "最后把指标和培训动作连起来：补全用得多就加强代码审查，代理用得多就加强任务拆分、验证和回滚流程。"
+      ],
+      officialLinks: [
+        {
+          label: "GitHub Changelog：Copilot usage metrics API adds cohorts for AI adoption",
+          url: "https://github.blog/changelog/2026-05-29-copilot-usage-metrics-api-adds-cohorts-for-ai-adoption/",
+          note: "本次更新的原始来源，说明 ai_adoption_phase 和 totals_by_ai_adoption_phase。"
+        },
+        {
+          label: "GitHub Docs：Copilot usage metrics",
+          url: "https://docs.github.com/en/rest/copilot/copilot-usage",
+          note: "适合继续查看 Copilot 用量指标 API 的权限和字段说明。"
+        }
+      ],
+      curatedLinks: [
+        "新手可以把 Phase 1 理解成“AI 帮我写代码”，把 Phase 2 理解成“AI 帮我完成一个开发任务”，把 Phase 3 理解成“多个 AI 工作入口一起进入开发流程”。",
+        "不要只追求阶段越高越好。多智能体使用越多，对任务边界、测试、代码审查和权限控制的要求也越高。",
+        "个人开发者也能借这个框架自查：我只是用补全，还是已经让 AI 帮我开 issue、改代码、跑测试、整理 PR？"
+      ],
+      downloadIdeas: [
+        "可以整理一份 AI 编程采用阶段自查表",
+        "可以补一个 Copilot 指标字段中文速查表"
+      ],
+      monetization: "适合承接 GitHub Copilot、团队研发效率工具、AI 编程课程和代码审查工具类资源位；也适合放到本站 AI 编程专题里长期更新。",
+      extraSections: [
+        {
+          title: "三个阶段可以怎么理解",
+          items: [
+            "Code first：主要用代码补全或 IDE agent mode，重点还是写代码本身。",
+            "Agent first：开始使用一个 GitHub 侧代理入口，比如云端代理、代码审查或 CLI。",
+            "Multi-agent：同时使用两个以上 GitHub 代理入口，或已经使用 GitHub Copilot app。"
+          ]
+        },
+        {
+          title: "团队看这个指标时别忽略的事",
+          items: [
+            "阶段只是采用度，不直接等于代码质量。",
+            "代理任务越多，越需要保留来源、测试结果和人工审查。",
+            "培训计划应该按阶段拆，不要让刚接触补全的人直接处理高风险自动化任务。"
+          ]
+        }
+      ]
+    },
+    {
+      id: "vercel-sandbox-docker-agent-testing-guide",
+      title: "Vercel Sandbox 支持运行 Docker：AI 代理开发环境怎么跑 Redis、Postgres 和容器测试",
+      date: "2026-05-30",
+      category: "开发环境",
+      readTime: "10 分钟",
+      excerpt: "Vercel 在 2026 年 5 月 29 日宣布 Sandbox 支持安装和运行 Docker。对使用 AI 代理写代码、跑测试和预览应用的新手来说，这意味着隔离环境里可以启动 Redis、Postgres 等容器化依赖，而不必污染本机。",
+      tags: ["Vercel", "Docker", "AI Agent"],
+      featured: true,
+      intro: [
+        "AI 代理真正参与开发后，最容易卡住的地方往往不是写代码，而是环境：项目需要 Redis、Postgres、队列、浏览器或系统包，本机装起来麻烦，临时环境又经常丢状态。Vercel Sandbox 之前已经强调持久化，现在继续把 Docker 放进沙箱，意味着代理可以在更接近真实项目的隔离环境里验证代码。",
+        "根据 Vercel 2026 年 5 月 29 日的 Changelog，Sandbox 现在支持安装并运行 Docker。代理可以构建容器、安装系统包、修改文件，同时不直接碰宿主机环境。对个人站长和新手开发者来说，这类能力适合理解成“给 AI 一个可丢弃、可恢复、能跑依赖的工作台”。"
+      ],
+      audience: [
+        "正在用 AI 编程代理跑测试、改后端或调试全栈项目的新手",
+        "想预览带数据库、缓存或后台服务的应用，但不想污染本机环境的开发者",
+        "维护静态站、全栈小项目或自动化脚本的个人站长"
+      ],
+      format: [
+        "适合做成流程图 + 最小示例代码",
+        "后续可以补“AI 代理安全运行命令的检查清单”"
+      ],
+      roadmap: [
+        "先把 Sandbox 理解成隔离执行环境，不要把它当成本机的永久替代品。",
+        "再从最小依赖开始，例如启动一个 Redis 容器并让测试连接它。",
+        "最后把 Docker 和持久化结合起来：长期任务可以复用安装结果，高风险任务仍然单独开新环境。"
+      ],
+      officialLinks: [
+        {
+          label: "Vercel Changelog：Run Docker containers inside Vercel Sandbox",
+          url: "https://vercel.com/changelog/run-docker-containers-inside-vercel-sandbox",
+          note: "本次 Docker 支持的原始来源，包含安装 Docker 和运行 Redis 的示例。"
+        },
+        {
+          label: "Vercel Sandbox 文档",
+          url: "https://vercel.com/docs/vercel-sandbox",
+          note: "适合继续查看 Sandbox 的创建、端口、持久化和系统规格说明。"
+        },
+        {
+          label: "Docker Docs",
+          url: "https://docs.docker.com/",
+          note: "适合补充容器基础概念和常用命令。"
+        }
+      ],
+      curatedLinks: [
+        "不要让 AI 代理在本机直接随意安装服务。能放进沙箱的依赖，优先放进隔离环境里试。",
+        "Docker 很适合跑临时依赖，比如 Redis、Postgres、Elasticsearch 或本地预览服务。",
+        "每次让代理跑容器前，都应该明确任务边界：需要哪些端口、哪些数据可以丢弃、哪些命令不允许执行。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 AI 代理沙箱执行检查表",
+        "可以补一份 Docker 测试依赖最小命令清单"
+      ],
+      monetization: "适合承接云开发平台、Docker 入门课程、AI 编程代理、数据库托管和开发环境管理工具类资源位；也可以和本站建站、部署、代码质量专题交叉推荐。",
+      extraSections: [
+        {
+          title: "新手最适合先试的 3 个场景",
+          items: [
+            "跑一个需要 Redis 的测试套件，验证代码逻辑是否依赖缓存服务。",
+            "启动一个临时 Postgres 容器，检查迁移脚本和种子数据能否正常执行。",
+            "构建并预览一个容器化应用，确认 Dockerfile 在部署前没有明显问题。"
+          ]
+        },
+        {
+          title: "给 AI 代理的安全提示可以这样写",
+          items: [
+            "只在 sandbox 内安装 Docker 和系统包，不要修改宿主机环境。",
+            "容器只使用测试数据，不连接真实生产数据库。",
+            "运行完成后输出命令、端口、测试结果和仍需人工确认的风险。"
+          ]
+        }
+      ]
+    },
+    {
       id: "vscode-122-agent-byok-responsive-guide",
       title: "VS Code 1.122 新手指南：Agents 窗口、离线 BYOK 和设备模拟怎么用",
       date: "2026-05-29",
@@ -1423,6 +1564,56 @@ git push origin main`,
     }
   ],
   hotspots: [
+    {
+      date: "2026-05-29",
+      tag: "AI 编程",
+      title: "GitHub Copilot usage metrics API 新增 AI 采用阶段",
+      summary: "GitHub Changelog 显示，Copilot usage metrics API 现在会按 28 天滚动窗口把用户划分到 Code first、Agent first、Multi-agent 等 AI 采用阶段，并提供企业和组织级汇总。",
+      why: "这让团队不只看 Copilot 活跃人数，还能判断开发者是否从代码补全进入代理式开发和多智能体协作，适合扩成 AI 编程采用度入门文章。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-05-29-copilot-usage-metrics-api-adds-cohorts-for-ai-adoption/",
+      articleIdea: "选题：GitHub Copilot 指标新增 AI 采用阶段：新手怎么看团队从补全走向多智能体"
+    },
+    {
+      date: "2026-05-29",
+      tag: "AI 平台",
+      title: "Claude Managed Agents 的 webhooks、多智能体编排和自托管沙箱登陆 AWS",
+      summary: "Anthropic 的 Claude Platform release notes 显示，Claude Managed Agents 的 webhooks、多智能体编排和 self-hosted sandboxes 现已可在 Claude Platform on AWS 使用，并配套新增 IAM actions 和托管策略。",
+      why: "托管代理正在进入更标准的云权限体系，新手可以借此理解 AI Agent 不只是聊天入口，还涉及 webhooks、沙箱、IAM 和团队治理。",
+      sourceLabel: "Claude Platform Release Notes",
+      sourceUrl: "https://platform.claude.com/docs/en/release-notes/overview",
+      articleIdea: "选题：Claude Managed Agents on AWS：为什么 AI 代理也需要 IAM 和沙箱"
+    },
+    {
+      date: "2026-05-29",
+      tag: "开发环境",
+      title: "Vercel Sandbox 支持运行 Docker，代理可在隔离环境里启动容器依赖",
+      summary: "Vercel 宣布 Sandbox 支持安装和运行 Docker，代理可以在不触碰宿主机的情况下构建容器、安装系统包、启动 Redis 或 Postgres 等测试依赖。",
+      why: "AI 代理写代码后还需要跑测试和预览，Docker in Sandbox 能把依赖验证放进隔离工作台，很适合新手理解代理开发环境。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/run-docker-containers-inside-vercel-sandbox",
+      articleIdea: "选题：Vercel Sandbox 支持运行 Docker：AI 代理开发环境怎么跑 Redis、Postgres 和容器测试"
+    },
+    {
+      date: "2026-05-29",
+      tag: "开发环境",
+      title: "Vercel Sandboxes 开放 8080 端口作为 ingress domain",
+      summary: "Vercel Changelog 显示，Sandboxes 现在允许打开并绑定 8080 端口作为 ingress domain，原控制端口已迁移到 23456。",
+      why: "很多新手预览本地 Web 服务默认就会用 8080，沙箱支持该端口后，代理启动临时预览、HTTP 服务和演示应用会更顺手。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/port-8080-is-now-available-in-vercel-sandboxes",
+      articleIdea: "选题：AI 代理预览 Web 服务时，为什么 8080 端口很重要"
+    },
+    {
+      date: "2026-05-29",
+      tag: "建站工具",
+      title: "Vercel Functions invocation 计费改为按 unit，更适合按实际调用量理解成本",
+      summary: "Vercel 宣布 Pro 和新 Enterprise 客户的 Function invocations 从套餐式计费转向 per-unit pricing，Pro 价格为每次调用 0.0000006 美元，并在当前账期结束后生效。",
+      why: "个人站长和小团队使用 serverless functions 时，调用次数会直接影响成本。把计费单位讲清楚，适合扩成建站成本入门内容。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog",
+      articleIdea: "选题：建站新手怎么看 serverless 调用计费：从 Vercel Functions per-unit pricing 说起"
+    },
     {
       date: "2026-05-28",
       tag: "开发工具",
