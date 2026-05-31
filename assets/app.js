@@ -29,6 +29,152 @@ const siteData = {
   },
   posts: [
     {
+      id: "openai-codex-windows-remote-control-guide",
+      title: "OpenAI Codex 支持 Windows Computer Use 和远程控制：新手怎么把本机代理用稳",
+      date: "2026-05-31",
+      category: "AI 工具",
+      readTime: "9 分钟",
+      excerpt: "OpenAI 在 2026 年 5 月 29 日的 ChatGPT Release Notes 中更新 Codex：Codex app 支持 Windows Computer Use，用户还可以从手机或 Mac 远程查看进度、继续线程并处理提示。本文把它整理成适合新手理解本机 AI 代理的入门指南。",
+      tags: ["OpenAI Codex", "Computer Use", "远程控制"],
+      featured: true,
+      intro: [
+        "AI 编程代理正在从“帮我改代码”变成“看见我的开发环境、点击应用、运行服务并等待我远程接管”的工作流。OpenAI 2026 年 5 月 29 日的发布说明把这个变化讲得很清楚：Codex app 现在支持 Windows Computer Use，并且可以让用户从 iOS、Android、Mac 继续查看和控制同一条 Codex 线程。",
+        "对新手来说，这个热点不只是多了一个按钮，而是提醒我们重新整理本机代理的使用边界：项目文件、shell、应用服务器和本地上下文仍然在 Windows 主机上；远程端更适合看进度、回复提示和做方向调整。把这个边界想清楚，才能既提高效率，又避免把账号、文件和系统权限交给不清楚的任务。"
+      ],
+      audience: [
+        "第一次尝试让 AI 代理操作本机应用、浏览器或桌面工具的新手",
+        "想在外出时继续查看 Codex 任务进度、回复确认提示的开发者",
+        "维护个人站点、脚本或小型项目，希望让 AI 帮忙测试和调试的站长"
+      ],
+      format: [
+        "适合做成“能做什么 / 不能做什么 / 先确认什么”的清单",
+        "后续可以补一张本机代理、远程控制和代码托管平台的角色关系图"
+      ],
+      roadmap: [
+        "先把 Windows 机器看作真正的工作主机，项目文件、终端、应用服务器和本地上下文都在这里。",
+        "再把手机、Mac 或 ChatGPT 端看作远程驾驶位，用来查看进度、继续线程、回复提示和调整方向。",
+        "最后给每类任务设边界：测试和调试可以开放更多操作，涉及账号、支付、生产数据时必须停下来人工确认。"
+      ],
+      officialLinks: [
+        {
+          label: "OpenAI Help：ChatGPT Release Notes",
+          url: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
+          note: "本次 Codex Windows Computer Use、远程控制和 Profiles 更新的原始来源。"
+        },
+        {
+          label: "OpenAI Developers：Computer Use",
+          url: "https://developers.openai.com/codex/app/computer-use",
+          note: "适合继续了解 Codex app 里 Computer Use 的入口和使用方式。"
+        },
+        {
+          label: "OpenAI Developers：Remote connections",
+          url: "https://developers.openai.com/codex/remote-connections",
+          note: "适合查看远程连接、接管和跨设备继续工作的官方说明。"
+        }
+      ],
+      curatedLinks: [
+        "不要把远程控制理解成“手机在跑代码”。真正执行项目的仍然是 Windows 主机，远程端只是继续同一条工作线程。",
+        "第一次使用时，优先选择低风险任务，例如打开本地预览、跑测试、复现界面问题、整理错误日志。",
+        "把高风险动作写进提示里的禁止清单：不要操作真实支付、不要改生产配置、不要访问无关私人文件。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Codex 本机代理安全确认表",
+        "可以补一个“适合远程接管 / 必须回到电脑前处理”的任务对照表"
+      ],
+      monetization: "适合承接 AI 编程工具、远程开发、桌面自动化、代码测试和开发效率课程类资源位；也可以和本站 AI 编程、开发工具专题交叉推荐。",
+      extraSections: [
+        {
+          title: "新手最适合先试的三个任务",
+          items: [
+            "让 Codex 打开本地预览页面，复现一个样式或交互问题。",
+            "让 Codex 在终端运行静态检查，把失败命令、错误位置和建议修复列出来。",
+            "外出时从手机查看任务是否卡在确认提示，再决定继续、暂停或要求它总结当前状态。"
+          ]
+        },
+        {
+          title: "使用前先写清楚的边界",
+          items: [
+            "哪些目录可以读取和修改，哪些目录绝对不要碰。",
+            "哪些命令可以自动运行，哪些命令必须先征得人工确认。",
+            "遇到登录页、支付页、真实用户数据或生产密钥时，必须停止并汇报。"
+          ]
+        }
+      ]
+    },
+    {
+      id: "claude-code-local-skills-plugins-guide",
+      title: "Claude Code 本地 skills 和插件自动加载：新手怎么把重复工作流沉淀成工具",
+      date: "2026-05-31",
+      category: "开发工具",
+      readTime: "10 分钟",
+      excerpt: "Anthropic 在 Claude Code v2.1.157 中加入本地 .claude/skills 插件自动加载，并提供 claude plugin init <name> 脚手架。对新手来说，这是把常用提示、检查清单和团队流程从聊天记录整理成可复用工具的好入口。",
+      tags: ["Claude Code", "Plugins", "Skills"],
+      featured: true,
+      intro: [
+        "很多人用 AI 编程工具时，会反复粘贴同一段要求：怎么提交、怎么跑检查、怎么写报告、怎么处理安全边界。Claude Code 2026 年 5 月 29 日的 v2.1.157 发布说明把这个习惯往工具化推进了一步：.claude/skills 目录中的插件可以自动加载，不再必须依赖 marketplace；同时新增了 claude plugin init <name> 来脚手架化创建插件。",
+        "这对新手很重要，因为它说明 AI 工具的效率提升不只来自更强模型，还来自把稳定流程变成可复用、可版本化、可审查的本地能力。你可以先从一个很小的技能开始，例如“发布前检查静态站”“整理今日热点来源”“提交前列出风险”，再逐步把它变成团队共享的插件。"
+      ],
+      audience: [
+        "每天重复执行同一套检查、提交或写作流程的新手开发者",
+        "想把团队规范沉淀到 AI 编程工具里的站长、学生和小团队负责人",
+        "正在了解 Claude Code plugins、skills、agents 和 marketplace 区别的用户"
+      ],
+      format: [
+        "适合做成目录结构示例 + 适用场景清单",
+        "后续可以补一个最小 SKILL.md 模板"
+      ],
+      roadmap: [
+        "先从重复出现的提示里挑一个稳定流程，例如每日内容更新、提交前检查或文档生成。",
+        "再把流程拆成输入、步骤、验证和失败处理，写进一个小的 SKILL.md。",
+        "最后再考虑是否需要插件化：个人自用可以放在本地 skills，团队共享再进入 marketplace 或项目配置。"
+      ],
+      officialLinks: [
+        {
+          label: "Claude Code GitHub Releases：v2.1.157",
+          url: "https://github.com/anthropics/claude-code/releases",
+          note: "本次本地 .claude/skills 自动加载、plugin init 和 /plugin 自动补全更新的原始来源。"
+        },
+        {
+          label: "Claude Code Docs：Extend Claude with skills",
+          url: "https://code.claude.com/docs/en/skills",
+          note: "适合继续理解 SKILL.md、技能目录、触发方式和支持文件。"
+        },
+        {
+          label: "Claude Code Docs：Discover and install plugins",
+          url: "https://code.claude.com/docs/en/discover-plugins",
+          note: "适合查看 marketplace、安装范围、自动更新和插件安全提示。"
+        }
+      ],
+      curatedLinks: [
+        "如果一段提示只是偶尔用一次，先不要做成 skill。真正值得沉淀的是稳定、重复、有明确验收标准的流程。",
+        "个人目录适合放自己的写作和检查习惯；项目目录适合放团队共同遵守的构建、测试、发布流程。",
+        "插件能力更强，也更需要信任边界。安装第三方插件前，要看它包含哪些 skills、agents、hooks 或 MCP server。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Claude Code skill 选题清单",
+        "可以补一个本地插件安全审查表"
+      ],
+      monetization: "适合承接 AI 编程培训、团队研发规范、自动化工作流、插件开发和效率工具类资源位；也适合放进本站开发工具专题长期更新。",
+      extraSections: [
+        {
+          title: "哪些流程最适合先做成 skill",
+          items: [
+            "每天都要做，并且步骤稳定的内容更新、检查或汇总任务。",
+            "需要固定输出格式的报告、文章、PR 描述或学习笔记。",
+            "容易遗漏边界的流程，例如安全检查、部署前验证和来源核对。"
+          ]
+        },
+        {
+          title: "本地 skill 和 marketplace 插件怎么区分",
+          items: [
+            "本地 skill 更像个人或项目里的工作手册，适合先快速试错。",
+            "插件可以打包 skills、agents、hooks 和 MCP server，适合更完整的能力分发。",
+            "marketplace 方便发现和安装，但安装前必须检查来源、范围和可能执行的本地能力。"
+          ]
+        }
+      ]
+    },
+    {
       id: "github-copilot-ai-adoption-metrics-guide",
       title: "GitHub Copilot 指标新增 AI 采用阶段：新手怎么看团队从补全走向多智能体",
       date: "2026-05-30",
@@ -1564,6 +1710,46 @@ git push origin main`,
     }
   ],
   hotspots: [
+    {
+      date: "2026-05-31",
+      tag: "国内开源",
+      title: "Qwen Code v0.17.0 与 5 月 31 日 nightly 继续补齐终端代理能力",
+      summary: "QwenLM/qwen-code 的 GitHub Releases 显示，v0.17.0 增加飞书 Channel、遥测基础能力、内置 computer-use MCP 的零配置支持，并在 5 月 30-31 日 nightly 中继续修复 compaction、rewind 和交互细节。",
+      why: "国内开源 AI 编程代理正在从命令行工具走向更完整的团队工作流，新手可以持续观察它如何处理多通道协作、上下文压缩和桌面操作能力。",
+      sourceLabel: "Qwen Code GitHub Releases",
+      sourceUrl: "https://github.com/QwenLM/qwen-code/releases",
+      articleIdea: "选题：Qwen Code 新手观察：终端 AI 编程代理如何补齐协作、压缩和桌面能力"
+    },
+    {
+      date: "2026-05-30",
+      tag: "AI 编程",
+      title: "Claude Code Auto mode 扩展到 Bedrock、Vertex AI 和 Foundry",
+      summary: "Claude Code v2.1.158 的发布说明显示，Auto mode 现在支持 Bedrock、Vertex AI 和 Foundry 上的 Opus 4.7 与 4.8 模型，同时包含多项 session、shell tool 和权限相关修复。",
+      why: "企业和团队越来越希望在自己的云平台里使用 AI 编程代理。Auto mode 扩展到主流托管环境，适合给新手解释模型路由、云权限和本地工具调用之间的关系。",
+      sourceLabel: "Claude Code GitHub Releases",
+      sourceUrl: "https://github.com/anthropics/claude-code/releases",
+      articleIdea: "选题：Claude Code Auto mode 上云后，新手该怎样理解模型、权限和工具调用"
+    },
+    {
+      date: "2026-05-29",
+      tag: "AI 工具",
+      title: "OpenAI Codex app 支持 Windows Computer Use 与跨设备远程控制",
+      summary: "OpenAI 在 ChatGPT Release Notes 中更新 Codex：Windows 用户现在可以使用 Codex app 的 Computer Use，也可以从手机或 Mac 远程查看进度、继续线程、接管工作，并用 Profiles 区分不同账户和配置。",
+      why: "AI 编程代理正在从云端任务扩展到本机桌面和跨设备协作，新手需要理解本机权限、远程接管和任务边界，而不是把它当成普通聊天工具。",
+      sourceLabel: "OpenAI Help",
+      sourceUrl: "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
+      articleIdea: "选题：OpenAI Codex 支持 Windows Computer Use 和远程控制：新手怎么把本机代理用稳"
+    },
+    {
+      date: "2026-05-29",
+      tag: "开发工具",
+      title: "Claude Code 本地 .claude/skills 插件可自动加载",
+      summary: "Claude Code v2.1.157 的发布说明显示，本地 .claude/skills 中的插件现在可自动加载，新增 claude plugin init <name> 脚手架，并改进 /plugin 自动补全、agents 设置和 worktree 切换体验。",
+      why: "这让重复提示、检查清单和团队流程更容易从聊天记录沉淀成可复用工具，适合扩成 Claude Code skills 与 plugins 的新手入门文章。",
+      sourceLabel: "Claude Code GitHub Releases",
+      sourceUrl: "https://github.com/anthropics/claude-code/releases",
+      articleIdea: "选题：Claude Code 本地 skills 和插件自动加载：新手怎么把重复工作流沉淀成工具"
+    },
     {
       date: "2026-05-29",
       tag: "AI 编程",
