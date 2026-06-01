@@ -29,6 +29,143 @@ const siteData = {
   },
   posts: [
     {
+      id: "github-copilot-code-review-actions-minutes-guide",
+      title: "GitHub Copilot Code Review 开始消耗 Actions minutes：新手怎么读懂 AI 代码审查成本",
+      date: "2026-06-01",
+      category: "AI 编程",
+      readTime: "9 分钟",
+      excerpt: "GitHub 早前在 Changelog 中说明，从 2026 年 6 月 1 日起，每次 Copilot code review 会同时按 AI Credits 计入 Copilot 用量；私有仓库使用 GitHub-hosted runners 时，还会消耗 GitHub Actions minutes。本文把它整理成新手能看懂的成本和权限清单。",
+      tags: ["GitHub Copilot", "Code Review", "Actions"],
+      featured: true,
+      intro: [
+        "AI 代码审查正在从“多一个智能评论入口”变成真正会进入账单和 CI 资源的开发流程。GitHub 在 2026 年 4 月 27 日提前公告，从 2026 年 6 月 1 日起，Copilot code review 的计费方式会发生变化：Copilot 本身的使用会计入 AI Credits；如果审查运行在私有仓库并使用 GitHub-hosted runners，还会消耗 GitHub Actions minutes。",
+        "对新手来说，重点不是记住复杂账单名词，而是理解 AI 代码审查背后的运行方式。它不是凭空在网页上发表评论，而是一个会读取仓库上下文、运行在 runner 上、再把结果反馈到 Pull Request 的自动化流程。只要它进入自动化流程，就需要看预算、权限、触发条件和仓库类型。"
+      ],
+      audience: [
+        "刚开始在 Pull Request 中使用 GitHub Copilot code review 的开发者",
+        "维护私有仓库、个人网站或小团队项目，担心 AI 工具产生额外成本的站长",
+        "想理解 AI Credits、GitHub Actions minutes 和 runner 设置关系的新手"
+      ],
+      format: [
+        "适合做成“会产生什么成本 / 在哪里检查 / 先怎么限流”的清单",
+        "后续可以补一张从 PR 触发到 runner 执行再到账单记录的流程图"
+      ],
+      roadmap: [
+        "先区分仓库类型：公共仓库和私有仓库在 Actions minutes 上的影响不同。",
+        "再区分两类用量：Copilot 的 AI Credits 是模型与代理能力用量，Actions minutes 是 runner 执行资源用量。",
+        "最后检查组织或个人账号的预算、runner 设置和 code review 触发范围，避免把所有 PR 都无差别交给代理审查。"
+      ],
+      officialLinks: [
+        {
+          label: "GitHub Changelog：Copilot code review billing change",
+          url: "https://github.blog/changelog/2026-04-27-github-copilot-code-review-will-start-consuming-github-actions-minutes-on-june-1-2026/",
+          note: "说明 2026 年 6 月 1 日起 Copilot code review 如何计入 AI Credits 和 GitHub Actions minutes。"
+        },
+        {
+          label: "GitHub Blog：Copilot individual plans and flex allotments",
+          url: "https://github.blog/news-insights/company-news/github-copilot-individual-plans-introducing-flex-allotments-in-pro-and-pro-and-a-new-max-plan/",
+          note: "适合继续理解 2026 年 6 月 1 日后个人套餐、base credits、flex allotment 和 Max 计划。"
+        }
+      ],
+      curatedLinks: [
+        "把 AI code review 看成一次自动化工作流：触发、读取上下文、运行 runner、返回评论都可能对应到用量或权限。",
+        "私有仓库更需要先做预算和触发范围控制；公共仓库虽然 Actions minutes 仍免费，但 Copilot 用量本身也要关注。",
+        "如果团队刚开始试用，建议先在低风险仓库或少量 PR 上观察评论质量、耗时和用量，再扩大到关键项目。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Copilot code review 成本检查表",
+        "可以补一个 PR 审查触发策略模板：哪些分支、哪些标签、哪些作者需要自动审查"
+      ],
+      monetization: "适合承接 GitHub Copilot、CI/CD、代码审查、团队研发规范和 AI 编程培训类资源位；也可以和本站 GitHub Pages、自动化发布、AI 编程专题互相推荐。",
+      extraSections: [
+        {
+          title: "先记住三个判断问题",
+          items: [
+            "这个 PR 在公共仓库还是私有仓库？",
+            "审查使用的是 GitHub-hosted runner、larger runner，还是 self-hosted runner？",
+            "账号或组织有没有设置 Copilot 与 Actions 的预算提醒？"
+          ]
+        },
+        {
+          title: "不建议一开始就自动化的场景",
+          items: [
+            "涉及生产密钥、客户数据或合规材料的私有仓库。",
+            "没有测试、没有分支保护、也没有人工复核习惯的仓库。",
+            "PR 数量很高但评论质量还没有经过抽样验证的团队工作流。"
+          ]
+        }
+      ]
+    },
+    {
+      id: "qwen-code-017-terminal-agent-workflow-guide",
+      title: "Qwen Code v0.17.0：新手怎么看终端 AI 编程代理的协作、桌面能力和上下文压缩",
+      date: "2026-06-01",
+      category: "开发工具",
+      readTime: "10 分钟",
+      excerpt: "QwenLM/qwen-code 在 v0.17.0 中加入飞书 Channel adapter、open-computer-use MCP 零配置内置、遥测基础能力和上下文压缩重构，并在 5 月 31 日 nightly 继续修复 rewind 场景。本文把它整理成适合新手观察终端 AI 代理演进的资源指南。",
+      tags: ["Qwen Code", "AI Agent", "终端工具"],
+      featured: true,
+      intro: [
+        "国内开源 AI 编程代理正在快速补齐工程化能力。QwenLM/qwen-code 的 GitHub Releases 显示，v0.17.0 包含飞书 Channel adapter、skill-based RT 优化的遥测基础、open-computer-use MCP 零配置内置、上下文压缩重构等变化；随后 2026 年 5 月 31 日的 nightly 继续修复 rewind 场景下“compressed turn”误报。",
+        "这些更新对新手的价值不在于立刻追每个版本，而在于看清终端 AI 代理正在往哪里走：它不仅要会写代码，还要能接入团队协作渠道、处理桌面操作、记录必要的运行信号，并在长会话里安全压缩上下文。理解这些方向，后面选择 Codex、Claude Code、Qwen Code 或其他代理工具时就不会只看模型名字。"
+      ],
+      audience: [
+        "想了解国内开源 AI 编程代理的新手开发者",
+        "经常在终端、Git、VS Code 和聊天工具之间切换的小团队成员",
+        "维护个人站点或自动化脚本，希望观察 AI 代理长期任务能力的站长"
+      ],
+      format: [
+        "适合做成“版本更新点 + 新手理解方式 + 适用场景”的资源文章",
+        "后续可以补一张终端代理、协作渠道、MCP、桌面操作和上下文管理的关系图"
+      ],
+      roadmap: [
+        "先把 Qwen Code 理解成终端里的 AI 编程代理，而不是只会问答的聊天窗口。",
+        "再把 v0.17.0 的能力分成四类：协作渠道、桌面操作、运行观测和长会话上下文。",
+        "最后用一个低风险项目试用：让代理读项目、改一个小问题、跑检查、总结失败原因，而不是一开始就交给它复杂生产任务。"
+      ],
+      officialLinks: [
+        {
+          label: "Qwen Code GitHub Releases",
+          url: "https://github.com/QwenLM/qwen-code/releases",
+          note: "v0.17.0、5 月 30 日和 5 月 31 日 nightly 的原始发布记录。"
+        },
+        {
+          label: "Qwen Code Docs：Overview",
+          url: "https://qwenlm.github.io/qwen-code-docs/en/users/overview",
+          note: "适合继续了解 Qwen Code 的定位、认证方式和基础使用入口。"
+        }
+      ],
+      curatedLinks: [
+        "飞书 Channel adapter 说明终端代理正在尝试进入团队协作渠道，后续不一定只停留在本机命令行。",
+        "open-computer-use MCP 零配置内置说明桌面操作会成为代理能力的一部分，但这也意味着权限和安全边界更重要。",
+        "上下文压缩和 rewind 修复看起来不像炫酷功能，却直接影响长任务能不能稳定继续。新手应该把稳定性当成选择代理工具的核心指标。"
+      ],
+      downloadIdeas: [
+        "可以整理一份终端 AI 代理试用清单",
+        "可以补一个“适合交给代理 / 需要人工确认”的任务边界表"
+      ],
+      monetization: "适合承接 AI 编程工具、终端效率、团队协作、自动化脚本和开源项目教程类资源位；也适合与本站每日热点自动更新流程形成案例联动。",
+      extraSections: [
+        {
+          title: "v0.17.0 值得新手观察的四类变化",
+          items: [
+            "协作入口：飞书 Channel adapter 让代理有机会进入团队消息流。",
+            "桌面能力：open-computer-use MCP 内置降低了试用桌面操作的门槛。",
+            "运行观测：遥测基础能力有助于后续分析代理是否真的提升效率。",
+            "长会话稳定性：上下文压缩和 rewind 修复决定长任务能否可靠接续。"
+          ]
+        },
+        {
+          title: "第一次试用建议",
+          items: [
+            "只在测试仓库或个人项目里运行，不要直接操作生产仓库。",
+            "把允许修改的目录、可以运行的命令和需要停止汇报的边界写清楚。",
+            "要求代理在结束时列出改了什么、跑了哪些检查、哪些地方仍需人工判断。"
+          ]
+        }
+      ]
+    },
+    {
       id: "openai-codex-windows-remote-control-guide",
       title: "OpenAI Codex 支持 Windows Computer Use 和远程控制：新手怎么把本机代理用稳",
       date: "2026-05-31",
@@ -1711,21 +1848,41 @@ git push origin main`,
   ],
   hotspots: [
     {
-      date: "2026-05-31",
-      tag: "国内开源",
-      title: "Qwen Code v0.17.0 与 5 月 31 日 nightly 继续补齐终端代理能力",
-      summary: "QwenLM/qwen-code 的 GitHub Releases 显示，v0.17.0 增加飞书 Channel、遥测基础能力、内置 computer-use MCP 的零配置支持，并在 5 月 30-31 日 nightly 中继续修复 compaction、rewind 和交互细节。",
-      why: "国内开源 AI 编程代理正在从命令行工具走向更完整的团队工作流，新手可以持续观察它如何处理多通道协作、上下文压缩和桌面操作能力。",
-      sourceLabel: "Qwen Code GitHub Releases",
-      sourceUrl: "https://github.com/QwenLM/qwen-code/releases",
-      articleIdea: "选题：Qwen Code 新手观察：终端 AI 编程代理如何补齐协作、压缩和桌面能力"
+      date: "2026-06-01",
+      tag: "AI 编程",
+      title: "GitHub Copilot Code Review 今日起同时计入 AI Credits 和 Actions minutes",
+      summary: "GitHub 4 月 27 日提前公告的计费变化在 2026 年 6 月 1 日生效：每次 Copilot code review 都会计入 Copilot AI Credits；私有仓库使用 GitHub-hosted runners 运行审查时，还会消耗 GitHub Actions minutes。公共仓库 Actions minutes 仍免费。",
+      why: "AI 代码审查从功能尝鲜进入真实成本管理，新手和团队需要把 agentic review 当成有 runner、预算和权限的自动化流程。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-04-27-github-copilot-code-review-will-start-consuming-github-actions-minutes-on-june-1-2026/",
+      articleIdea: "选题：GitHub Copilot Code Review 开始消耗 Actions minutes：新手怎么读懂 AI 代码审查成本"
     },
     {
-      date: "2026-05-30",
+      date: "2026-06-01",
+      tag: "开发大会",
+      title: "Microsoft Build 2026 将在 6 月 2 日开场，官方直播聚焦 AI 开发工具和平台",
+      summary: "Microsoft News 的 Build 2026 页面显示，微软将在太平洋时间 6 月 2 日 9:30 开始官方 live blog，介绍面向开发者及更广泛用户的 AI-powered tools and platforms 更新。",
+      why: "接下来 24 小时内，Microsoft、GitHub、Azure、Windows 相关 AI 开发工具可能集中发布，适合作为本周建站、AI 编程和开发工具专题的重点观察入口。",
+      sourceLabel: "Microsoft News",
+      sourceUrl: "https://news.microsoft.com/build-2026/",
+      articleIdea: "选题：Microsoft Build 2026 新手关注清单：AI 开发工具更新应该先看什么"
+    },
+    {
+      date: "2026-05-31",
+      tag: "国内开源",
+      title: "Qwen Code v0.17.0 与 5 月 31 日 nightly 继续补齐终端代理工作流",
+      summary: "QwenLM/qwen-code 的 GitHub Releases 显示，v0.17.0 包含飞书 Channel adapter、遥测基础能力、open-computer-use MCP 零配置内置、上下文压缩重构等更新；5 月 31 日 nightly 继续修复 rewind 场景下的 compressed turn 误报。",
+      why: "国内开源 AI 编程代理正在把终端、协作渠道、桌面操作和长会话上下文管理串起来，新手可以借它理解代理不是单一聊天窗口，而是一套持续迭代的开发工作流。",
+      sourceLabel: "Qwen Code GitHub Releases",
+      sourceUrl: "https://github.com/QwenLM/qwen-code/releases",
+      articleIdea: "选题：Qwen Code v0.17.0 新手观察：终端 AI 编程代理如何补齐协作、桌面能力和上下文压缩"
+    },
+    {
+      date: "2026-05-31",
       tag: "AI 编程",
-      title: "Claude Code Auto mode 扩展到 Bedrock、Vertex AI 和 Foundry",
-      summary: "Claude Code v2.1.158 的发布说明显示，Auto mode 现在支持 Bedrock、Vertex AI 和 Foundry 上的 Opus 4.7 与 4.8 模型，同时包含多项 session、shell tool 和权限相关修复。",
-      why: "企业和团队越来越希望在自己的云平台里使用 AI 编程代理。Auto mode 扩展到主流托管环境，适合给新手解释模型路由、云权限和本地工具调用之间的关系。",
+      title: "Claude Code v2.1.159 确认无用户侧变化，v2.1.158 的 Auto mode 上云仍是重点",
+      summary: "Claude Code 5 月 31 日 v2.1.159 只写明是内部基础设施改进、没有用户侧变化；前一版 v2.1.158 则把 Auto mode 扩展到 Bedrock、Vertex 和 Foundry 上的 Opus 4.7/4.8，需要通过 CLAUDE_CODE_ENABLE_AUTO_MODE=1 启用。",
+      why: "这类更新提醒新手区分“最新版本”和“值得学习的用户侧能力”：真正要理解的是 Auto mode、托管模型平台和本地工具调用之间的权限边界。",
       sourceLabel: "Claude Code GitHub Releases",
       sourceUrl: "https://github.com/anthropics/claude-code/releases",
       articleIdea: "选题：Claude Code Auto mode 上云后，新手该怎样理解模型、权限和工具调用"
