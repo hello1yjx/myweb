@@ -29,6 +29,142 @@ const siteData = {
   },
   posts: [
     {
+      id: "vercel-ai-gateway-qwen37-plus-agent-guide",
+      title: "Vercel AI Gateway 接入 Qwen 3.7 Plus：新手怎么看多模态代理模型进入建站工作流",
+      date: "2026-06-02",
+      category: "AI 工具",
+      readTime: "9 分钟",
+      excerpt: "Vercel 在 2026 年 6 月 1 日的 Changelog 中宣布，来自 Alibaba 的 Qwen 3.7 Plus 已可通过 Vercel AI Gateway 使用。官方描述它面向 GUI、CLI、编码、效率工作流和视觉代理任务，适合新手理解“模型能力”和“统一网关”怎样一起进入实际项目。",
+      tags: ["Vercel AI Gateway", "Qwen", "AI Agent"],
+      featured: true,
+      intro: [
+        "最近 AI 建站和 AI 编程工具的一个明显趋势是：开发者不只是在聊天窗口里调用模型，而是把模型放进自己的应用、脚本、自动化测试和代理工作流里。Vercel 2026 年 6 月 1 日的更新把 Qwen 3.7 Plus 加入 AI Gateway，正好可以作为新手理解这个趋势的一个入口。",
+        "这条更新的重点不是“又多了一个模型名字”，而是模型和调用入口的组合。Vercel 表示 Qwen 3.7 Plus 统一视觉和语言能力，并覆盖 GUI、CLI、编码、效率工作流、全模态输入和视觉代理任务。对做网站或小工具的人来说，更实用的理解是：以后同一个应用里可能需要根据任务选择不同模型，并通过统一网关观察成本、失败重试、延迟和可用性。"
+      ],
+      audience: [
+        "想把 AI 模型接入个人网站、后台工具或自动化脚本的新手",
+        "正在学习 Vercel、AI SDK、模型网关和多模型调用方式的前端开发者",
+        "关注国内模型进入海外开发平台、希望比较 Qwen、MiniMax、OpenAI 等模型入口的站长"
+      ],
+      format: [
+        "适合整理成“模型能力 / 调用入口 / 新手试用边界”的资源文章",
+        "后续可以补一张 AI 应用调用链图：前端请求、服务端 SDK、AI Gateway、模型提供商、日志与成本看板"
+      ],
+      roadmap: [
+        "先把 AI Gateway 理解成统一模型入口：应用代码不直接分散绑定很多供应商，而是通过一个网关调用、记录和切换。",
+        "再看 Qwen 3.7 Plus 的定位：它不是只做文本补全，而是更强调多模态输入、GUI/CLI 操作、编码和代理任务。",
+        "最后从低风险场景试起：例如让模型解释截图、辅助复现一个 UI 问题、生成小段代码或整理网页内容，不要一开始就让它直接处理敏感业务数据。"
+      ],
+      officialLinks: [
+        {
+          label: "Vercel Changelog：Qwen 3.7 Plus now available on AI Gateway",
+          url: "https://vercel.com/changelog/qwen-3-7-plus-now-available-on-ai-gateway",
+          note: "说明 Qwen 3.7 Plus 已加入 Vercel AI Gateway，并给出 AI SDK 调用入口。"
+        },
+        {
+          label: "Vercel AI Gateway",
+          url: "https://vercel.com/ai-gateway",
+          note: "适合继续了解统一模型 API、用量跟踪、成本、重试和故障转移能力。"
+        }
+      ],
+      curatedLinks: [
+        "不要只看模型参数，先看它能不能进入你的实际开发链路：SDK 是否容易接入、失败时能否重试、用量和成本能否看清楚。",
+        "多模态代理模型更适合有“看图、读界面、写代码、调用工具”组合需求的任务，例如 UI 检查、表单流程测试和截图问题分析。",
+        "新手试用时建议保留人工复核：模型可以帮你找问题、写初稿、生成测试想法，但最终发布、删除数据和改生产配置仍要人工确认。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 AI Gateway 模型试用记录表",
+        "可以补一个“哪些任务适合交给多模态代理模型”的清单"
+      ],
+      monetization: "适合承接 AI SDK、Vercel、模型网关、国内大模型、AI 建站和自动化测试类资源位；也可以和本站的建站教程、开发工具、效率工具专题互相推荐。",
+      extraSections: [
+        {
+          title: "第一次试用先看三件事",
+          items: [
+            "调用方式是否清楚：官方页面是否给出了 SDK 示例和模型入口。",
+            "成本是否可观察：你能不能看到请求量、失败重试和模型用量。",
+            "任务边界是否明确：是否只让模型处理低风险输入，并保留人工确认。"
+          ]
+        },
+        {
+          title: "适合新手做的小实验",
+          items: [
+            "把一张网页截图交给模型，让它指出可能的布局问题。",
+            "给一个简单 bug 描述，让模型生成复现步骤和测试思路。",
+            "让模型比较两段提示词输出，记录哪一种更稳定、更容易复核。"
+          ]
+        }
+      ]
+    },
+    {
+      id: "vercel-blob-oidc-agent-security-guide",
+      title: "Vercel Blob 支持 OIDC：新手为什么要少用长期 Token，让函数和代理更安全",
+      date: "2026-06-02",
+      category: "建站工具",
+      readTime: "8 分钟",
+      excerpt: "Vercel 2026 年 6 月 1 日宣布 Blob 支持 OIDC authentication，新项目默认使用短期、自动轮换的 Vercel-issued OIDC token，不再需要长期保存 BLOB_READ_WRITE_TOKEN。对新手建站和 AI 代理工作流来说，这是一次很实用的凭据安全提醒。",
+      tags: ["Vercel Blob", "OIDC", "建站安全"],
+      featured: true,
+      intro: [
+        "很多新手第一次做网站上传功能、资源库或后台管理时，会把存储服务的长期 Token 放进环境变量，然后长期不再检查。这个做法简单，但风险也很直接：一旦 Token 泄露，别人可能在很长时间内继续访问或修改你的存储内容。",
+        "Vercel 在 2026 年 6 月 1 日的 Changelog 中宣布，Vercel Blob 支持 OIDC authentication，并且新连接项目默认使用这种方式。官方说明里最关键的一点是：Vercel-issued OIDC tokens 是短期的，并会自动轮换，因此不再需要长期的 BLOB_READ_WRITE_TOKEN。对正在接入 AI 代理、CLI 自动化或上传功能的新手来说，这条更新值得认真看。"
+      ],
+      audience: [
+        "正在用 Vercel Blob 做图片、附件、静态资源或上传功能的新手站长",
+        "希望让 CLI、脚本或 AI 代理访问私有存储，但又不想长期暴露 Token 的开发者",
+        "正在学习环境变量、OIDC、短期凭据和最小权限原则的前端或全栈新手"
+      ],
+      format: [
+        "适合整理成“长期 Token 的问题 / OIDC 的好处 / 升级检查清单”的教程",
+        "后续可以补一张凭据流转图：Vercel Function、OIDC token、Blob 操作、CLI 和代理任务"
+      ],
+      roadmap: [
+        "先理解风险：长期 Token 像一把长期有效的钥匙，泄露后需要手动轮换，否则风险会持续存在。",
+        "再理解 OIDC：让平台按需要发放短期、自动轮换的凭据，减少你手动保存和分发密钥的机会。",
+        "最后检查工作流：函数、CLI 和代理都应该只拿到当前任务需要的权限，尤其不要把生产存储 Token 粘贴进聊天窗口或日志里。"
+      ],
+      officialLinks: [
+        {
+          label: "Vercel Changelog：Vercel Blob now supports OIDC authentication",
+          url: "https://vercel.com/changelog/vercel-blob-now-supports-oidc-authentication",
+          note: "说明 Blob OIDC 默认设置、短期 token、升级方式，以及 CLI 如何读取同一组环境变量。"
+        },
+        {
+          label: "Vercel Blob",
+          url: "https://vercel.com/blob",
+          note: "适合继续了解 Vercel Blob 的定位、存储场景和产品入口。"
+        }
+      ],
+      curatedLinks: [
+        "如果你的项目还在长期保存 BLOB_READ_WRITE_TOKEN，先确认是否能升级到 OIDC，并记录升级前后的环境变量变化。",
+        "AI 代理可以帮你运行 CLI、列文件或上传测试文件，但它不应该看到与任务无关的生产密钥。",
+        "短期凭据不是万能安全方案，仍然需要配合最小权限、日志脱敏、分环境管理和人工审批。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Vercel Blob OIDC 升级检查表",
+        "可以补一个“AI 代理访问存储服务前要确认什么”的安全清单"
+      ],
+      monetization: "适合承接 Vercel、对象存储、网站上传、AI 代理安全、环境变量管理和全栈部署类资源位；也可以和本站的建站、自动化发布、开发工具专题形成连载。",
+      extraSections: [
+        {
+          title: "升级前先确认",
+          items: [
+            "项目是否已经使用最新版 @vercel/blob。",
+            "Blob store 是否已经在 Vercel 控制台里切换到 OIDC。",
+            "本地 CLI、部署函数和代理任务是否还依赖旧的长期 Token。"
+          ]
+        },
+        {
+          title: "给 AI 代理的边界",
+          items: [
+            "只允许它在测试项目或低风险目录里操作存储。",
+            "让它执行前先列出计划使用的命令和目标资源。",
+            "涉及删除、覆盖和生产数据读取时，必须停下来等人工确认。"
+          ]
+        }
+      ]
+    },
+    {
       id: "github-copilot-code-review-actions-minutes-guide",
       title: "GitHub Copilot Code Review 开始消耗 Actions minutes：新手怎么读懂 AI 代码审查成本",
       date: "2026-06-01",
@@ -1847,6 +1983,56 @@ git push origin main`,
     }
   ],
   hotspots: [
+    {
+      date: "2026-06-01",
+      tag: "AI 编程",
+      title: "GitHub Copilot 用量计费全面生效，并加入用户级预算控制",
+      summary: "GitHub 6 月 1 日 Changelog 说明，Copilot 各计划开始按 GitHub AI Credits 计量；Copilot code review 也会消耗 Actions minutes。组织和企业现在可以设置用户级预算，现有 Student、Pro、Pro+ 用户也可以升级到 Copilot Max。",
+      why: "AI 编程工具正在从“功能更新”进入“成本和权限治理”阶段，新手需要同时理解模型用量、runner 资源、预算提醒和计划差异。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-01-updates-to-github-copilot-billing-and-plans/",
+      articleIdea: "候选：GitHub Copilot usage-based billing 新手检查清单：预算、AI Credits 和 runner 怎么看"
+    },
+    {
+      date: "2026-06-01",
+      tag: "AI 编程",
+      title: "GitHub Copilot auto 会向个人非企业用户提供 evaluation models",
+      summary: "GitHub 6 月 1 日 Changelog 表示，个人非企业用户可以访问 evaluation models，并且这些模型可能被 Copilot auto model selection 选中；如果不想在 auto 中使用 evaluation models，可以到 Copilot settings 关闭。",
+      why: "模型自动选择越来越常见，新手不能只看“auto”两个字，还要知道模型来源、实验性质、设置入口和关闭方式。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-01-evaluation-models-in-auto-for-individual-plans/",
+      articleIdea: "候选：Copilot auto model selection 新手指南：什么时候信任自动选择，什么时候手动指定模型"
+    },
+    {
+      date: "2026-06-01",
+      tag: "AI 工具",
+      title: "Vercel AI Gateway 接入 Alibaba Qwen 3.7 Plus",
+      summary: "Vercel 6 月 1 日 Changelog 宣布，Qwen 3.7 Plus 已可通过 AI Gateway 使用。官方描述它统一视觉和语言能力，覆盖 GUI、CLI、编码、效率工作流、全模态输入和视觉代理任务，并可在 AI SDK 中调用。",
+      why: "国内模型继续进入海外开发平台的统一网关，新手可以借这条更新理解多模型调用、成本观察、重试和代理任务编排。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/qwen-3-7-plus-now-available-on-ai-gateway",
+      articleIdea: "选题：Vercel AI Gateway 接入 Qwen 3.7 Plus：新手怎么看多模态代理模型进入建站工作流"
+    },
+    {
+      date: "2026-06-01",
+      tag: "建站工具",
+      title: "Vercel Blob 支持 OIDC authentication，新项目默认减少长期 Token 依赖",
+      summary: "Vercel 6 月 1 日 Changelog 宣布 Blob 支持 OIDC authentication，新连接项目默认使用短期、自动轮换的 Vercel-issued OIDC token；升级后，Vercel CLI 也能读取相同环境变量来访问私有 store。",
+      why: "AI 代理、CLI 和函数都可能接触存储服务，短期凭据与自动轮换能降低长期 Token 泄露风险，是新手建站安全的实用更新。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/vercel-blob-now-supports-oidc-authentication",
+      articleIdea: "选题：Vercel Blob 支持 OIDC：新手为什么要少用长期 Token，让函数和代理更安全"
+    },
+    {
+      date: "2026-06-01",
+      tag: "部署工具",
+      title: "Vercel Elastic Build Machines 会自动保护接近 OOM 的构建",
+      summary: "Vercel 6 月 1 日 Changelog 表示，Elastic Build Machines 会监控构建内存使用：内存密集但速度快的构建不会被降级，接近 OOM 时可自动升级到更高 tier，OOM 失败后的下一次部署也会自动使用更高 tier。",
+      why: "现代前端项目、AI 生成页面和大依赖构建很容易碰到内存瓶颈，新手要把部署失败看成资源配置和构建画像问题，而不只是代码错了。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/elastic-build-machines-now-protect-against-out-of-memory-builds",
+      articleIdea: "候选：Vercel 构建 OOM 排查清单：怎么判断是代码、依赖还是机器规格问题"
+    },
     {
       date: "2026-06-01",
       tag: "AI 编程",
