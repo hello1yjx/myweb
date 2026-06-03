@@ -29,6 +29,142 @@ const siteData = {
   },
   posts: [
     {
+      id: "openai-codex-role-plugins-sites-guide",
+      title: "OpenAI Codex 新增角色插件、Sites 和注释：新手怎么看 AI 从写代码走向做完整工作",
+      date: "2026-06-03",
+      category: "AI 工具",
+      readTime: "9 分钟",
+      excerpt: "OpenAI 2026 年 6 月 2 日发布 Codex 更新，重点包括面向不同角色的插件、可分享的 Sites 预览，以及能直接在结果上修改和反馈的 annotations。对新手来说，这条更新适合用来理解 Codex 不只是写代码，而是在把报告、仪表盘、原型和轻量应用放进同一套工作流。",
+      tags: ["OpenAI Codex", "效率工具", "AI Agent"],
+      featured: true,
+      intro: [
+        "很多人第一次接触 AI 编程代理时，会把它理解成“帮我写几段代码”。OpenAI 2026 年 6 月 2 日的 Codex 更新把方向讲得更清楚：Codex 正在从纯开发工具扩展成面向不同岗位的工作工具。官方提到的新能力包括角色插件、Sites 预览和 annotations，分别对应“接上工具和流程”“把结果变成可分享页面”“直接在结果上指出要改哪里”。",
+        "对个人站长和新手开发者来说，这条更新不只是产品新闻。它提醒我们以后整理资料、写文章、做小工具、生成仪表盘、准备演示材料，都可能进入同一条 AI 协作链路。真正要学的不是某个按钮，而是如何把输入、资料来源、修改意见、发布结果和人工复核串起来。"
+      ],
+      audience: [
+        "想用 AI 辅助整理资料、写报告、做页面或做轻量应用的新手",
+        "正在学习 Codex、插件、自动化工作流和知识型工具的开发者",
+        "希望把个人站点内容、数据分析、原型设计和效率工具串起来的站长"
+      ],
+      format: [
+        "适合整理成“插件 / Sites / annotations 三类能力怎么理解”的入门文章",
+        "后续可以补一张 Codex 工作流图：资料输入、插件调用、结果生成、注释反馈、分享验证"
+      ],
+      roadmap: [
+        "先把角色插件理解成预置工作流：它把某类岗位常用的应用、技能、说明和流程放在一起，减少从零写提示词的成本。",
+        "再把 Sites 理解成可分享结果：不是只把代码放在本机，而是把交互页面或轻量应用交给团队查看。",
+        "最后理解 annotations：当结果不准确、样式不合适或逻辑需要调整时，最好直接在结果上标注问题，让代理围绕具体位置修改。"
+      ],
+      officialLinks: [
+        {
+          label: "OpenAI：Codex for every role, tool, and workflow",
+          url: "https://openai.com/index/codex-for-every-role-tool-workflow/",
+          note: "本次角色插件、Sites 和 annotations 更新的原始来源。"
+        },
+        {
+          label: "OpenAI：Codex is becoming a productivity tool for everyone",
+          url: "https://openai.com/index/codex-for-knowledge-work/",
+          note: "配套说明 Codex 如何从开发者工具扩展到知识工作和自动化场景。"
+        }
+      ],
+      curatedLinks: [
+        "不要把插件看成万能模板。它更像一套起步配置，仍然需要你提供真实资料、约束和验收标准。",
+        "Sites 适合分享低风险原型、内部工具和演示页面；涉及账号、支付、客户数据的内容仍要谨慎处理。",
+        "annotations 的价值在于减少“重新描述一遍”的成本。新手可以先练习在具体段落、表格、按钮或图表上给修改意见。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Codex 任务拆分检查表",
+        "可以补一个“什么时候用插件，什么时候直接写提示词”的对照表"
+      ],
+      monetization: "适合承接 AI 办公、自动化工作流、轻量应用搭建、数据分析和内容生产类资源位；也可以和本站的建站教程、AI 编程、效率工具专题互相推荐。",
+      extraSections: [
+        {
+          title: "新手先试的三个低风险任务",
+          items: [
+            "把一篇资料整理成文章提纲，并要求 Codex 保留来源链接。",
+            "把一个 Excel 或表格需求整理成仪表盘草稿，先在本地或测试环境验证。",
+            "把个人站点的一个资源页做成交互原型，再用 annotations 标注需要修改的地方。"
+          ]
+        },
+        {
+          title: "开始前要写清楚的边界",
+          items: [
+            "哪些资料可以使用，哪些资料不能进入模型或插件。",
+            "结果要给谁看，是内部草稿、公开页面，还是只做个人备忘。",
+            "哪些动作需要人工确认，例如发布、删除、访问付费数据源和改生产配置。"
+          ]
+        }
+      ]
+    },
+    {
+      id: "github-copilot-sandboxes-agent-safety-guide",
+      title: "GitHub Copilot 沙箱公测：新手怎么让 AI 代理在更可控的环境里运行命令",
+      date: "2026-06-03",
+      category: "AI 编程",
+      readTime: "9 分钟",
+      excerpt: "GitHub 2026 年 6 月 2 日 Changelog 宣布，GitHub Copilot 的本地和云端 sandboxes 进入 public preview。Copilot 可以在受隔离的本机环境或 GitHub 托管的临时 Linux 云环境中运行工具和命令，这让新手更容易理解 AI 代理为什么需要权限边界。",
+      tags: ["GitHub Copilot", "沙箱", "AI Agent"],
+      featured: true,
+      intro: [
+        "AI 编程代理越来越常见，但很多新手最容易忽略的问题是：当代理开始运行命令、改文件、访问网络时，它已经不只是“给建议”的聊天工具了。GitHub 2026 年 6 月 2 日宣布 Copilot 的本地和云端 sandboxes 进入 public preview，正好把这个问题摆到台面上。",
+        "GitHub 的说明里有两个重点：本地沙箱可以限制 Copilot 发起的 shell 命令对文件系统、网络和系统能力的访问；云端沙箱则通过 `copilot --cloud` 启动一个 GitHub 托管的、临时的 Linux 环境。对新手来说，最实用的理解是：把 AI 代理放进受控环境，不等于完全没有风险，但能让试错、并行任务和命令执行更容易管理。"
+      ],
+      audience: [
+        "正在尝试 GitHub Copilot CLI、云端代理或桌面代理的新手开发者",
+        "希望让 AI 代理帮忙跑测试、执行脚本、修改项目，但担心权限过大的站长",
+        "维护团队仓库、需要给代理执行命令设边界的开发者和管理员"
+      ],
+      format: [
+        "适合整理成“本地沙箱 / 云端沙箱 / 适合交给代理的任务边界”的资源文章",
+        "后续可以补一张代理执行路径图：提示词、工具调用、沙箱策略、命令输出、人工确认"
+      ],
+      roadmap: [
+        "先理解本地沙箱：它限制的是 Copilot 在当前会话里发起的命令执行，让代理不能随意触碰无关文件、网络或系统能力。",
+        "再理解云端沙箱：它把任务放到 GitHub 托管的临时 Linux 环境中，适合并行运行、跨设备继续和减少本机资源占用。",
+        "最后建立任务分级：文档整理、测试运行、低风险脚本可以更自动；删除、覆盖、密钥、生产配置和付费资源必须人工确认。"
+      ],
+      officialLinks: [
+        {
+          label: "GitHub Changelog：Cloud and local sandboxes for GitHub Copilot",
+          url: "https://github.blog/changelog/2026-06-02-cloud-and-local-sandboxes-for-github-copilot-now-in-public-preview/",
+          note: "本次本地和云端 Copilot sandboxes public preview 的原始来源。"
+        },
+        {
+          label: "Microsoft Build 2026",
+          url: "https://news.microsoft.com/build-2026/",
+          note: "Build 2026 官方汇总页，包含 GitHub Copilot、代理和开发平台相关发布入口。"
+        }
+      ],
+      curatedLinks: [
+        "沙箱不是让代理完全可信，而是给代理执行命令时增加隔离层和策略边界。",
+        "第一次试用时，建议选择没有生产数据的小仓库，让代理只跑测试、读错误日志或改一个小问题。",
+        "团队使用时要同步关注策略、身份、日志和成本：代理能做什么、谁批准、执行结果在哪里看，都要提前约定。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 AI 代理沙箱执行检查表",
+        "可以补一个“适合云端沙箱 / 适合本地沙箱 / 必须人工处理”的任务分类表"
+      ],
+      monetization: "适合承接 GitHub Copilot、AI 编程代理、云开发环境、代码安全、DevOps 和团队研发规范类资源位；也适合和本站的 GitHub Pages、开发工具、问题排查专题联动。",
+      extraSections: [
+        {
+          title: "适合先放进沙箱的任务",
+          items: [
+            "运行测试、lint 或构建命令，并把失败原因整理成清单。",
+            "在临时环境里复现一个 bug，记录命令、日志和最小复现步骤。",
+            "让代理尝试一个小修复，再由人工检查 diff 和运行结果。"
+          ]
+        },
+        {
+          title: "仍然不建议直接自动化的动作",
+          items: [
+            "删除大量文件、覆盖数据库、改生产环境变量或操作真实支付配置。",
+            "把长期有效的密钥、Token、客户数据或私人文件交给代理处理。",
+            "在没有日志、没有回滚方案、没有人工复核的仓库里运行复杂自动化。"
+          ]
+        }
+      ]
+    },
+    {
       id: "vercel-ai-gateway-qwen37-plus-agent-guide",
       title: "Vercel AI Gateway 接入 Qwen 3.7 Plus：新手怎么看多模态代理模型进入建站工作流",
       date: "2026-06-02",
@@ -1983,6 +2119,56 @@ git push origin main`,
     }
   ],
   hotspots: [
+    {
+      date: "2026-06-02",
+      tag: "AI 工具",
+      title: "OpenAI Codex 发布角色插件、Sites 预览和 annotations",
+      summary: "OpenAI 6 月 2 日发布 Codex 更新，宣布面向数据分析、创意生产、产品设计、销售、公开股票投资和投行等场景的角色插件，并介绍可分享互动网站和应用的 Sites 预览，以及可在结果上直接给反馈的 annotations。",
+      why: "Codex 正在从写代码工具扩展到知识工作和轻量应用生产，新手需要理解插件、可分享结果和人工反馈如何组成一条完整工作流。",
+      sourceLabel: "OpenAI",
+      sourceUrl: "https://openai.com/index/codex-for-every-role-tool-workflow/",
+      articleIdea: "选题：OpenAI Codex 新增角色插件、Sites 和注释：新手怎么看 AI 从写代码走向做完整工作"
+    },
+    {
+      date: "2026-06-02",
+      tag: "AI 编程",
+      title: "GitHub Copilot 本地和云端 sandboxes 进入 public preview",
+      summary: "GitHub 6 月 2 日 Changelog 宣布，Copilot 可在本地受限沙箱和 GitHub 托管的临时 Linux 云端沙箱中执行工具和命令。本地会话可用 `/sandbox enable`，云端任务可通过 `copilot --cloud` 启动。",
+      why: "AI 代理开始运行命令、改文件和访问网络后，隔离、策略、身份和日志会变成基础设施问题；新手试用代理前应先理解权限边界。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-02-cloud-and-local-sandboxes-for-github-copilot-now-in-public-preview/",
+      articleIdea: "选题：GitHub Copilot 沙箱公测：新手怎么让 AI 代理在更可控的环境里运行命令"
+    },
+    {
+      date: "2026-06-02",
+      tag: "开发工具",
+      title: "GitHub Copilot SDK 正式 GA，可把代理运行时嵌入自己的工具",
+      summary: "GitHub 6 月 2 日 Changelog 宣布 Copilot SDK general availability，支持 Node.js/TypeScript、Python、Go、.NET、Rust 和 Java，可通过稳定 API 调用 Copilot 的规划、工具调用、文件编辑、流式输出和多轮会话能力。",
+      why: "开发者工具正在从“接一个模型 API”转向“嵌入完整代理运行时”，做内部工具、CI/CD 助手和客户侧 AI 功能时，需要关注认证、MCP、OpenTelemetry 和自定义工具。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-02-copilot-sdk-is-now-generally-available/",
+      articleIdea: "候选：GitHub Copilot SDK GA 新手指南：什么时候需要代理运行时，而不是普通模型调用"
+    },
+    {
+      date: "2026-06-02",
+      tag: "AI 编程",
+      title: "GitHub Copilot CLI 刷新终端体验，加入 rubber duck、定时提示和语音输入",
+      summary: "GitHub 6 月 2 日 Changelog 介绍 Copilot CLI 在 Build 2026 的更新：rubber duck、prompt scheduling 和 voice input 已可用，新的实验性终端界面支持 issue、pull request 和 gist 标签页，并改进可访问性。",
+      why: "AI 编程工具正在靠近真实终端工作流：不只是回答问题，还会复查方案、安排重复任务、接受语音输入，并在同一界面查看仓库上下文。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-02-copilot-cli-improved-ui-rubber-duck-prompt-scheduling-and-voice-input/",
+      articleIdea: "候选：Copilot CLI 新终端体验怎么用：从 rubber duck 到定时提示的入门清单"
+    },
+    {
+      date: "2026-06-02",
+      tag: "代码安全",
+      title: "Anthropic 扩大 Project Glasswing，让更多关键基础设施组织试用 Claude Mythos Preview",
+      summary: "Anthropic 6 月 2 日宣布扩大 Project Glasswing，约 150 个新组织将在满足安全要求后获得 Claude Mythos Preview 访问权限。官方称早期约 50 个伙伴已用该模型扫描代码库，并发现超过 10,000 个高危或严重安全缺陷。",
+      why: "AI 代码安全正在进入“发现漏洞更快，验证和修复更难”的阶段。对开发者和站长来说，自动扫描结果必须配合披露、复现、修复和人工安全流程。",
+      sourceLabel: "Anthropic",
+      sourceUrl: "https://www.anthropic.com/news/expanding-project-glasswing",
+      articleIdea: "候选：AI 漏洞扫描新手观察：为什么发现问题后，验证和修复才是关键"
+    },
     {
       date: "2026-06-01",
       tag: "AI 编程",
