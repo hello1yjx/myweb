@@ -29,6 +29,142 @@ const siteData = {
   },
   posts: [
     {
+      id: "github-copilot-vscode-agent-window-byok-guide",
+      title: "GitHub Copilot in VS Code 5 月更新：新手怎么理解 Agents window、BYOK 和终端安全",
+      date: "2026-06-04",
+      category: "AI 编程",
+      readTime: "9 分钟",
+      excerpt: "GitHub 2026 年 6 月 3 日发布 Copilot in Visual Studio Code 5 月更新汇总，覆盖 v1.120 到 v1.123：Agents window 进入 Stable 预览，远程代理、BYOK、终端风险提示、敏感输入保护和集成浏览器能力继续增强。对新手来说，这是一条理解 AI 编程工具从聊天框走向完整开发环境的好入口。",
+      tags: ["VS Code", "GitHub Copilot", "AI Agent"],
+      featured: true,
+      intro: [
+        "以前很多人把 VS Code 里的 AI 功能理解成“问一句、补一段代码”。GitHub 2026 年 6 月 3 日的 Changelog 汇总了 Copilot in Visual Studio Code 在 5 月和 6 月初的更新，方向已经明显不只是补全代码，而是让代理在更完整的开发环境里接任务、改文件、跑命令、查看浏览器结果，并把过程留给人复核。",
+        "这条更新最适合新手看的地方，是它把三个问题放在一起：代理工作区怎么组织、模型和密钥怎么管理、终端命令怎么更安全。理解这三件事，比单纯追某个新模型更实用。因为当 AI 开始真正跑测试、读日志、开浏览器和改多个项目时，你需要知道它在哪里工作、用什么模型、能看到什么输出，以及哪些输入不会被交给模型。"
+      ],
+      audience: [
+        "刚开始用 VS Code、GitHub Copilot Chat 或 Agents window 的新手开发者",
+        "想把 AI 编程从简单问答升级到任务执行、网页调试和多项目协作的站长",
+        "需要在公司或受限环境里使用 BYOK、远程机器和终端命令的开发者"
+      ],
+      format: [
+        "适合整理成“代理窗口 / BYOK / 终端安全 / 浏览器验证”的入门清单",
+        "后续可以补一张 VS Code 代理工作流图：任务输入、代理会话、终端命令、浏览器检查、人工复核"
+      ],
+      roadmap: [
+        "先理解 Agents window：它是一个更偏代理任务的工作区，适合跨项目、并行会话、远程机器和变更复核，而不只是普通聊天侧栏。",
+        "再理解 BYOK 和模型控制：自带密钥、Custom Endpoint、按 provider 选模型、token 可见性和 reasoning effort，都是为了让不同环境能更清楚地管理成本、权限和可用性。",
+        "最后看终端安全：输出压缩、实验性的命令风险提示、敏感输入留在终端、后台命令状态提示，说明 AI 代理跑命令时必须有边界和可观察性。"
+      ],
+      officialLinks: [
+        {
+          label: "GitHub Changelog：GitHub Copilot in Visual Studio Code, May releases",
+          url: "https://github.blog/changelog/2026-06-03-github-copilot-in-visual-studio-code-may-releases/",
+          note: "本次 VS Code Copilot 5 月更新汇总的原始来源，覆盖 Agents window、BYOK、终端和浏览器能力。"
+        },
+        {
+          label: "Visual Studio Code 1.123 Release Notes",
+          url: "https://code.visualstudio.com/updates/v1_123",
+          note: "适合继续查看 VS Code 最新稳定版本的具体发布说明。"
+        }
+      ],
+      curatedLinks: [
+        "不要一开始就让代理处理生产仓库。先选一个小项目，让它跑测试、解释失败原因或修一个很小的问题。",
+        "BYOK 不只是填 API Key。你还要确认模型来源、token 用量、推理强度、是否能在受限网络里工作，以及哪些任务交给哪个模型。",
+        "终端风险提示只是辅助判断。涉及删除、覆盖、密钥、生产数据库和发布动作时，仍然要人工确认命令和目标路径。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 VS Code AI 代理首次配置检查表",
+        "可以补一个“普通聊天 / Agents window / 远程代理”使用场景对照表"
+      ],
+      monetization: "适合承接 VS Code、GitHub Copilot、AI 编程代理、远程开发、BYOK 模型配置和前端调试类资源位；也可以和本站的建站教程、开发工具、效率工具专题互相推荐。",
+      extraSections: [
+        {
+          title: "新手可以先试的三个场景",
+          items: [
+            "让代理在一个示例项目里跑测试，并把失败原因整理成中文清单。",
+            "用集成浏览器打开本地页面，让代理截图并说明移动端布局问题。",
+            "把一个小需求拆成计划、修改、diff 检查和人工确认四步，而不是直接要求它全自动完成。"
+          ]
+        },
+        {
+          title: "配置前先问自己",
+          items: [
+            "这个项目是否可以被 AI 代理读取和修改？",
+            "使用的是 Copilot 默认模型、BYOK 模型，还是自定义兼容端点？",
+            "代理运行命令时，网络、文件系统和敏感输入边界是否清楚？"
+          ]
+        }
+      ]
+    },
+    {
+      id: "vercel-blob-signed-urls-upload-security-guide",
+      title: "Vercel Blob signed URLs：新手怎么给上传、下载和删除操作收窄权限",
+      date: "2026-06-04",
+      category: "建站工具",
+      readTime: "8 分钟",
+      excerpt: "Vercel 2026 年 6 月 2 日宣布 Blob 支持 signed URLs。开发者可以生成有时限、按操作和路径收窄范围的 URL，让浏览器直接上传、下载、检查或删除特定对象，而不需要把整个 Blob store 的长期 Token 暴露出去。",
+      tags: ["Vercel Blob", "Signed URL", "建站安全"],
+      featured: true,
+      intro: [
+        "做个人网站、资源库或后台上传功能时，很多新手会遇到一个矛盾：前端浏览器需要上传图片或下载附件，但你又不想把存储服务的完整权限交给浏览器。Vercel 2026 年 6 月 2 日发布的 Blob signed URLs，正好解决的是这个边界问题。",
+        "signed URL 可以理解成一张临时通行证。它只允许某个操作，例如上传、下载、检查或删除；只对应一个 pathname；并且有过期时间，最长可以设到 7 天。这样浏览器可以直接把文件传到 Blob，或者读取一个指定文件，但拿不到整个 store 的长期读写 Token。"
+      ],
+      audience: [
+        "正在给个人网站、作品集、资料库或管理后台做文件上传的新手",
+        "想把图片、发票、头像、下载资源等放到 Vercel Blob，但担心前端权限过大的站长",
+        "正在学习 OIDC、短期凭据、对象存储和上传安全边界的前端或全栈开发者"
+      ],
+      format: [
+        "适合整理成“服务端签名 / 浏览器直传 / 条件删除 / OIDC 配合”的安全清单",
+        "后续可以补一张上传流程图：用户选择文件、服务端签名、浏览器上传、回写资源地址、过期失效"
+      ],
+      roadmap: [
+        "先理解作用域：signed URL 应该绑定具体操作、具体 pathname 和具体过期时间，不要把完整存储权限交给浏览器。",
+        "再理解前后端分工：服务端通过 OIDC 或安全凭据生成签名，浏览器只拿到临时 URL 去完成这一次上传、下载或删除。",
+        "最后关注并发和误删：删除 URL 可以配合 ifMatch，只有对象版本没有变化时才执行，避免签名后文件已被覆盖还继续删除。"
+      ],
+      officialLinks: [
+        {
+          label: "Vercel Changelog：Signed URLs are now available for Vercel Blob",
+          url: "https://vercel.com/changelog/signed-urls-are-now-available-for-vercel-blob",
+          note: "本次 signed URLs 功能发布的原始来源，说明 put、get、head、delete、过期时间和 OIDC 配合。"
+        },
+        {
+          label: "Vercel Docs：Vercel Blob signed URLs",
+          url: "https://vercel.com/docs/vercel-blob/vercel-signed-urls",
+          note: "适合继续查看签名 URL 的具体用法和代码入口。"
+        }
+      ],
+      curatedLinks: [
+        "不要让浏览器持有长期 BLOB_READ_WRITE_TOKEN。浏览器只应该拿到短期、受限、任务相关的 URL。",
+        "上传 URL 适合头像、图片、附件这类单次任务；真正的权限判断和路径生成仍应放在服务端。",
+        "删除操作要更谨慎。建议配合 ifMatch、日志和人工确认，避免用户或代理误删已经变化的对象。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Vercel Blob 上传安全检查表",
+        "可以补一个“普通公开 URL / signed URL / 服务端代理上传”的选择对照表"
+      ],
+      monetization: "适合承接 Vercel、对象存储、文件上传、个人站资源下载、全栈安全和 AI 代理权限控制类资源位；也可以和本站的建站、部署、环境变量和存储专题形成连载。",
+      extraSections: [
+        {
+          title: "第一次接入先做这几步",
+          items: [
+            "把 @vercel/blob 升级到支持 signed URLs 的版本。",
+            "在服务端生成只允许单个操作和单个 pathname 的签名 URL。",
+            "让浏览器用这个临时 URL 上传或读取文件，然后在过期后重新申请。"
+          ]
+        },
+        {
+          title: "哪些场景特别适合",
+          items: [
+            "用户上传头像、封面图、作业附件或报名材料。",
+            "给登录用户提供短期下载链接，而不是长期公开文件地址。",
+            "让 AI 代理或自动化脚本只处理一个低风险对象，不接触整个存储空间。"
+          ]
+        }
+      ]
+    },
+    {
       id: "openai-codex-role-plugins-sites-guide",
       title: "OpenAI Codex 新增角色插件、Sites 和注释：新手怎么看 AI 从写代码走向做完整工作",
       date: "2026-06-03",
@@ -2119,6 +2255,56 @@ git push origin main`,
     }
   ],
   hotspots: [
+    {
+      date: "2026-06-03",
+      tag: "AI 编程",
+      title: "GitHub Copilot in VS Code 汇总 5 月更新：Agents window、BYOK 和终端安全继续增强",
+      summary: "GitHub 6 月 3 日 Changelog 汇总 VS Code v1.120 到 v1.123 的 Copilot 更新：Agents window 进入 Stable 预览，远程代理、AHP、会话同步、/chronicle、BYOK、终端风险提示和集成浏览器截图等能力继续完善。",
+      why: "VS Code 正在从编辑器里的 AI 聊天，走向能组织代理会话、控制模型、运行命令和验证网页的完整工作台。新手学习 AI 编程时，需要同时看工作区、模型和安全边界。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-03-github-copilot-in-visual-studio-code-may-releases/",
+      articleIdea: "选题：GitHub Copilot in VS Code 5 月更新：新手怎么理解 Agents window、BYOK 和终端安全"
+    },
+    {
+      date: "2026-06-03",
+      tag: "AI 工具",
+      title: "Vercel AI Gateway 接入 Grok Imagine Video 1.5，可用 AI SDK 串联图像到视频生成",
+      summary: "Vercel 6 月 3 日 Changelog 宣布 Grok Imagine Video 1.5 已可通过 AI Gateway 使用。该模型可从输入图片生成带同步音频的视频，并通过 AI SDK 与图像生成流程串联。",
+      why: "AI Gateway 正在从文本和代码模型扩展到多媒体生成模型。对站长和内容型网站来说，未来的视频素材生成、成本观察、失败重试和 BYOK 管理可能会进入同一套建站工具链。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/grok-imagine-video-1-5-on-ai-gateway",
+      articleIdea: "候选：Vercel AI Gateway 视频模型入门：图片到视频生成怎样进入网站内容工作流"
+    },
+    {
+      date: "2026-06-02",
+      tag: "建站工具",
+      title: "Vercel Blob 推出 signed URLs，上传下载删除都能按路径和时限收窄权限",
+      summary: "Vercel 6 月 2 日 Changelog 宣布 Blob signed URLs 可用。开发者可以生成有时限的 URL，用于 put、get、head 或 delete 单个 pathname；上传支持浏览器直传，删除还可配合 ifMatch 条件。",
+      why: "文件上传和资源下载是个人站常见功能，signed URLs 能减少长期 Token 暴露，让浏览器、函数和 AI 代理只拿到当前任务需要的临时权限。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/signed-urls-are-now-available-for-vercel-blob",
+      articleIdea: "选题：Vercel Blob signed URLs：新手怎么给上传、下载和删除操作收窄权限"
+    },
+    {
+      date: "2026-06-02",
+      tag: "AI Agent",
+      title: "GitHub Copilot cloud agent 支持按计划或仓库事件自动跑任务",
+      summary: "GitHub 6 月 2 日 Changelog 宣布 Copilot cloud agent 的 automations 功能，可按 hourly、daily、weekly 间隔，或在 issue、pull request 事件触发时运行，并能限制可用工具、模型和仓库作用域。",
+      why: "AI 代理正在从人工点击执行，走向定时检查、问题分流、夜间修测试和自动草拟 release notes。新手要把它当成有权限、账单和审查边界的自动化流程，而不是普通提醒。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-02-schedule-and-automate-tasks-with-copilot-cloud-agent/",
+      articleIdea: "候选：Copilot cloud agent automations 新手指南：哪些任务适合每天交给代理跑"
+    },
+    {
+      date: "2026-06-02",
+      tag: "代码审查",
+      title: "Copilot code review 支持 team skills、MCP 和 Medium 分析层级",
+      summary: "GitHub 6 月 2 日 Changelog 宣布 Copilot code review 新增两项 public preview：可用 agent skills 与 MCP 引入团队上下文，并提供 Medium analysis tier，让复杂 PR 使用更高推理能力的模型。",
+      why: "AI 代码审查正在从通用建议走向团队标准、内部系统和成本分层。新手和团队要理解：更深的审查可能更有价值，但也会消耗更多 AI Credits，需要按仓库和变更风险配置。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-02-shape-copilot-code-review-around-your-team/",
+      articleIdea: "候选：Copilot code review 如何接入团队标准：skills、MCP 和审查深度怎么选"
+    },
     {
       date: "2026-06-02",
       tag: "AI 工具",
