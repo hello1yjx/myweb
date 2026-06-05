@@ -29,6 +29,142 @@ const siteData = {
   },
   posts: [
     {
+      id: "github-copilot-context-reasoning-levels-guide",
+      title: "GitHub Copilot 支持百万 token 上下文和推理等级：新手怎么判断什么时候该开大模型能力",
+      date: "2026-06-05",
+      category: "AI 编程",
+      readTime: "9 分钟",
+      excerpt: "GitHub 2026 年 6 月 4 日宣布 Copilot 支持更大的上下文窗口和可配置推理等级。对新手来说，这不是“越大越好”的模型开关，而是要学会按任务复杂度、代码库规模和 AI Credits 成本来选择。",
+      tags: ["GitHub Copilot", "上下文窗口", "AI Credits"],
+      featured: true,
+      intro: [
+        "GitHub 2026 年 6 月 4 日的 Copilot Changelog 提到两个很适合新手理解的能力：更大的上下文窗口，以及可配置的 reasoning levels。官方说明里最关键的一点是，Copilot 可以在 VS Code、Copilot CLI 和 GitHub Copilot app 里处理更大的代码库、长文档和多文件项目，同时允许用户在速度和深度之间做选择。",
+        "这类更新容易被误解成“每次都开最大上下文、最高推理”。实际更稳的做法是先看任务类型：日常小改动用默认设置，跨模块重构、复杂调试、架构分析和长文档整理才考虑更大的上下文或更高推理等级。因为 GitHub 也提醒，选择更大的上下文窗口或更高推理等级会消耗更多 AI Credits。"
+      ],
+      audience: [
+        "正在用 VS Code、Copilot CLI 或 GitHub Copilot app 的新手开发者",
+        "维护多文件项目、个人网站或自动化脚本，常让 AI 读多个文件的人",
+        "想理解模型上下文、推理深度、速度和成本之间取舍的站长"
+      ],
+      format: [
+        "适合整理成“默认模式 / 大上下文 / 高推理等级”的选择清单",
+        "后续可以补一张任务复杂度和模型设置的对照表"
+      ],
+      roadmap: [
+        "先把上下文窗口理解成模型一次能参考的信息范围。范围越大，越适合跨文件、长文档和复杂项目，但也更需要你提供清晰任务边界。",
+        "再把推理等级理解成模型投入思考深度的开关。简单补全、解释报错不一定需要高推理；架构权衡、疑难调试和多步骤计划才更适合。",
+        "最后把成本放进决策。默认设置适合日常任务，大上下文和高推理等级应该留给确实需要跨项目理解的工作。"
+      ],
+      officialLinks: [
+        {
+          label: "GitHub Changelog：Larger context windows and configurable reasoning levels for GitHub Copilot",
+          url: "https://github.blog/changelog/2026-06-04-larger-context-windows-and-configurable-reasoning-levels-for-github-copilot/",
+          note: "本次 Copilot 大上下文和推理等级更新的原始来源。"
+        },
+        {
+          label: "GitHub Docs：Supported AI models in GitHub Copilot",
+          url: "https://docs.github.com/en/copilot/reference/ai-models/supported-models",
+          note: "适合继续查看 Copilot 支持模型、计划差异和模型选择入口。"
+        }
+      ],
+      curatedLinks: [
+        "不要把大上下文当成万能答案。任务描述模糊时，读再多文件也可能得到不可靠建议。先说明目标、限制、不能改的地方和验收方式。",
+        "高推理等级适合复杂问题，不适合所有日常小任务。简单 CSS 调整、文案修改和单文件修复通常先用默认设置。",
+        "如果团队开始使用这些能力，建议把预算、模型策略和高成本任务示例写进内部说明，避免每个人都凭感觉开最大档。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Copilot 模型设置选择表",
+        "可以补一个“什么时候需要大上下文”的项目检查清单"
+      ],
+      monetization: "适合承接 GitHub Copilot、AI 编程课程、模型成本治理、VS Code 工作流和开发效率工具类资源位；也可以和本站的 AI 编程、开发工具、建站调试专题互相推荐。",
+      extraSections: [
+        {
+          title: "三种任务怎么选",
+          items: [
+            "日常小改：默认上下文和默认推理，先让 Copilot 聚焦当前文件或当前报错。",
+            "跨文件问题：提供相关目录、错误日志和预期行为，再考虑更大的上下文窗口。",
+            "架构或疑难调试：要求先分析方案和风险，再开启更高推理等级做深度判断。"
+          ]
+        },
+        {
+          title: "新手最容易忽略的成本点",
+          items: [
+            "上下文越大，模型处理的信息越多，单次交互可能更贵。",
+            "推理越深，等待时间和 AI Credits 消耗可能增加。",
+            "把任务拆小、先读关键文件、再扩大范围，通常比一开始就全仓分析更稳。"
+          ]
+        }
+      ]
+    },
+    {
+      id: "chatgpt-memory-dreaming-update-guide",
+      title: "ChatGPT memory dreaming 更新：新手怎么理解长期上下文、偏好和隐私边界",
+      date: "2026-06-05",
+      category: "效率工具",
+      readTime: "9 分钟",
+      excerpt: "OpenAI 2026 年 6 月 4 日介绍 ChatGPT memory 的 dreaming 更新，目标是让记忆更及时、连续和相关。对新手来说，重点不是让 AI 记住所有东西，而是学会哪些偏好值得保留、哪些内容要临时聊、哪些记忆需要定期检查。",
+      tags: ["ChatGPT", "Memory", "效率工具"],
+      featured: true,
+      intro: [
+        "很多人用 ChatGPT 做长期项目时，会遇到一个重复问题：每次新开对话都要重新介绍项目、语气、限制和习惯。OpenAI 2026 年 6 月 4 日发布的 memory dreaming 更新，讲的就是如何让 ChatGPT 更好地综合过去对话里的有效信息，让未来对话能从更完整的上下文开始。",
+        "这类能力对学习、写作、编程和内容运营都很有用，但也需要边界。新手不要把 memory 理解成“什么都让 AI 记住”。更合理的做法是：长期偏好可以保留，临时任务用 Temporary Chat，敏感信息不要随意写进对话，并且定期查看、修正或删除不再准确的记忆。"
+      ],
+      audience: [
+        "长期使用 ChatGPT 写文章、整理资料、学编程或做项目的新手",
+        "希望 AI 记住自己写作语气、学习目标和项目限制的内容创作者",
+        "关心个性化、隐私控制和记忆准确性的效率工具用户"
+      ],
+      format: [
+        "适合做成“值得记住 / 不该记住 / 需要复查”的使用清单",
+        "后续可以补一张 memory、custom instructions、Temporary Chat 的区别表"
+      ],
+      roadmap: [
+        "先理解 memory 的价值：它能让 ChatGPT 在后续对话里带上你的偏好、项目背景和约束，减少重复解释。",
+        "再理解 dreaming 的方向：OpenAI 描述它会在后台综合对话历史，让记忆保持更新、连续和相关，而不是只依赖你明确说“记住”。",
+        "最后建立检查习惯：当项目结束、身份变化、偏好变化或某条记忆不准确时，要去设置里管理，或者直接要求 ChatGPT 忘记。"
+      ],
+      officialLinks: [
+        {
+          label: "OpenAI：Dreaming: Better memory for a more helpful ChatGPT",
+          url: "https://openai.com/index/chatgpt-memory-dreaming/",
+          note: "本次 ChatGPT memory dreaming 更新的原始来源，说明新架构、评估目标和推出范围。"
+        },
+        {
+          label: "OpenAI Help：What is Memory?",
+          url: "https://help.openai.com/en/articles/8983136-what-is-memory",
+          note: "适合继续查看 memory 的开启、关闭、删除和 Temporary Chat 控制方式。"
+        }
+      ],
+      curatedLinks: [
+        "适合让 ChatGPT 记住的是长期偏好，例如写作语气、学习方向、常用技术栈和项目约束。",
+        "不适合让 ChatGPT 记住的是一次性安排、临时账号信息、私人敏感资料和已经过期的计划。",
+        "使用 memory 后更要定期复核。旧记忆如果不再准确，可能会让回答偏离当前真实情况。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 ChatGPT memory 复查清单",
+        "可以补一个“Memory / Custom Instructions / Temporary Chat”对照表"
+      ],
+      monetization: "适合承接 ChatGPT 入门、AI 效率工具、内容写作、学习规划和隐私控制类资源位；也可以和本站的自动化写作、AI 编程和资料整理专题形成连载。",
+      extraSections: [
+        {
+          title: "哪些内容适合长期保留",
+          items: [
+            "你的常用写作风格、输出格式和语言偏好。",
+            "长期项目的目标、边界、固定术语和不希望重复踩的坑。",
+            "学习路线、技术栈偏好和你希望 AI 默认采用的解释深度。"
+          ]
+        },
+        {
+          title: "哪些情况建议用 Temporary Chat",
+          items: [
+            "只想临时问一个问题，不希望影响后续个性化回答。",
+            "讨论一次性计划、临时客户资料或不希望长期保留的上下文。",
+            "测试一个新方向，暂时不确定它是否应该进入长期记忆。"
+          ]
+        }
+      ]
+    },
+    {
       id: "github-copilot-vscode-agent-window-byok-guide",
       title: "GitHub Copilot in VS Code 5 月更新：新手怎么理解 Agents window、BYOK 和终端安全",
       date: "2026-06-04",
@@ -2255,6 +2391,56 @@ git push origin main`,
     }
   ],
   hotspots: [
+    {
+      date: "2026-06-04",
+      tag: "AI 编程",
+      title: "GitHub Copilot 支持更大上下文窗口和可配置推理等级",
+      summary: "GitHub 6 月 4 日 Changelog 宣布 Copilot 支持 one-million-token context windows 和 configurable reasoning levels，可在 VS Code、Copilot CLI 和 GitHub Copilot app 中用于更大的代码库、长文档和复杂多文件项目。",
+      why: "AI 编程工具正在从“当前文件补全”进入“跨项目理解和深度推理”阶段。新手需要同时理解上下文、推理深度、速度和 AI Credits 成本，而不是默认把所有任务都开到最高档。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-04-larger-context-windows-and-configurable-reasoning-levels-for-github-copilot/",
+      articleIdea: "选题：GitHub Copilot 支持百万 token 上下文和推理等级：新手怎么判断什么时候该开大模型能力"
+    },
+    {
+      date: "2026-06-04",
+      tag: "效率工具",
+      title: "OpenAI 推出更强的 ChatGPT memory dreaming 架构",
+      summary: "OpenAI 6 月 4 日发布 memory dreaming 更新，称新系统面向 freshness、continuity 和 relevance，帮助 ChatGPT 更好地综合用户偏好、项目背景和长期上下文。Plus 和 Pro 美国用户当天开始推出，后续扩展到更多地区和用户。",
+      why: "个性化 AI 正在变成长期工作流的一部分。对写作、学习、编程和内容运营来说，记忆能减少重复交代背景，但也需要管理、删除、临时聊天和隐私边界。",
+      sourceLabel: "OpenAI",
+      sourceUrl: "https://openai.com/index/chatgpt-memory-dreaming/",
+      articleIdea: "选题：ChatGPT memory dreaming 更新：新手怎么理解长期上下文、偏好和隐私边界"
+    },
+    {
+      date: "2026-06-04",
+      tag: "AI Agent",
+      title: "GitHub Copilot agent tasks REST API 进入 public preview",
+      summary: "GitHub 6 月 4 日 Changelog 宣布，Copilot Pro、Pro+ 和 Max 用户可以通过 Agent tasks REST API 以编程方式启动和跟踪 Copilot cloud agent 任务，用于批量重构、内部开发者门户和每周发布准备等自动化场景。",
+      why: "AI 代理开始进入 API 化和平台化阶段。对开发者来说，关键不只是能发起任务，还要理解令牌权限、仓库范围、PR 产物、进度跟踪和人工审查。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-04-agent-tasks-rest-api-now-available-for-copilot-pro-pro-and-max/",
+      articleIdea: "候选：Copilot agent tasks REST API 新手指南：怎样把云端代理接进自己的自动化"
+    },
+    {
+      date: "2026-06-04",
+      tag: "建站工具",
+      title: "Vercel 更新法律条款，明确 AI Functionality 和 Third-Party Tools 的责任边界",
+      summary: "Vercel 6 月 4 日发布 Terms 更新，说明 agentic workflows 让开发者经常授权 AI 工具访问基础设施，因此新增 AI Functionality 和 Third-Party Tools 概念，并强调设置范围、授权审查、输出评估和成本责任。",
+      why: "AI 代理接入云平台后，权限、账单和责任会变成建站基础问题。新手在给第三方代理 API Key 或让 AI 操作部署平台前，必须先看清账户范围和费用边界。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/updates-to-legal-terms-june-2026",
+      articleIdea: "候选：AI 代理接入云平台前，新手要先写清楚哪些账号和成本边界"
+    },
+    {
+      date: "2026-06-04",
+      tag: "AI 工具",
+      title: "Vercel AI Gateway 接入 Nvidia Nemotron 3 Ultra",
+      summary: "Vercel 6 月 4 日 Changelog 宣布 Nemotron 3 Ultra 已可通过 AI Gateway 使用。官方称它是面向长时间代理工作流的开放 MoE reasoning model，具备 1M token context window，适合规划、工具调用、子代理委派和错误恢复。",
+      why: "AI Gateway 正在承载更多长上下文、代理式模型。对站长和工具开发者来说，统一调用、用量成本、失败重试和 BYOK 管理会成为多模型应用的基础设施。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/nemotron-3-ultra-now-available-on-ai-gateway",
+      articleIdea: "候选：Nemotron 3 Ultra 进入 Vercel AI Gateway：长上下文代理模型怎么服务建站工作流"
+    },
     {
       date: "2026-06-03",
       tag: "AI 编程",
