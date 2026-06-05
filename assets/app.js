@@ -2951,7 +2951,7 @@ function escapeAttribute(value) {
 }
 
 function buildVisualIcon(src, label, className = "visual-icon") {
-  return `<img class="${className}" src="${src}" alt="${escapeAttribute(label)}" width="48" height="48" loading="lazy">`;
+  return `<img class="${className}" src="${src}" alt="${escapeAttribute(label)}" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">`;
 }
 
 function pickVisualIcon(text, fallback = visualIcons.github) {

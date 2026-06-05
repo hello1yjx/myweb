@@ -32,7 +32,10 @@ html {
 body {
   margin: 0;
   color: var(--ink);
-  background: var(--bg);
+  background:
+    radial-gradient(circle at 10% -8%, rgba(47, 99, 255, 0.13), transparent 30%),
+    radial-gradient(circle at 92% 18%, rgba(14, 165, 233, 0.12), transparent 24%),
+    linear-gradient(180deg, #f8fbff 0%, var(--bg) 42%, #eef4ff 100%);
   font-family: "Space Grotesk", "Segoe UI", "Microsoft YaHei", sans-serif;
   line-height: 1.65;
 }
@@ -65,6 +68,7 @@ textarea {
   background: rgba(255, 255, 255, 0.92);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px rgba(22, 39, 73, 0.05);
 }
 
 .site-header__inner {
@@ -221,7 +225,7 @@ textarea {
   overflow: hidden;
   color: #fff;
   background:
-    linear-gradient(90deg, rgba(4, 14, 31, 0.95) 0%, rgba(7, 21, 41, 0.84) 43%, rgba(7, 21, 41, 0.24) 100%),
+    linear-gradient(90deg, rgba(4, 14, 31, 0.96) 0%, rgba(15, 39, 92, 0.84) 50%, rgba(47, 99, 255, 0.18) 100%),
     url("images/learning-hero.png") center right / cover no-repeat;
   box-shadow: 0 24px 70px rgba(7, 21, 41, 0.22);
 }
@@ -438,7 +442,7 @@ textarea {
 .about-panel,
 .promo-banner {
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 16px;
   background: var(--surface);
   box-shadow: var(--shadow);
 }
@@ -446,6 +450,17 @@ textarea {
 .content-section {
   margin-bottom: 24px;
   padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.content-section::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--cyan), transparent);
+  opacity: 0.42;
 }
 
 .section-title,
@@ -499,7 +514,7 @@ textarea {
 .donation-card {
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: 14px;
   background: #fff;
   transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
@@ -574,7 +589,8 @@ textarea {
   padding: 8px;
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.9);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(226, 239, 255, 0.92));
+  color: var(--primary-deep);
   box-shadow: 0 18px 35px rgba(15, 23, 42, 0.16);
   z-index: 1;
 }
@@ -1114,9 +1130,25 @@ textarea {
 }
 
 .reveal {
-  opacity: 0;
-  transform: translateY(14px);
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 280ms ease, transform 280ms ease;
+}
+
+.reveal.is-visible {
+  animation: reveal-lift 280ms ease both;
+}
+
+@keyframes reveal-lift {
+  from {
+    opacity: 0.88;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .reveal.is-visible {
@@ -1293,5 +1325,9 @@ textarea {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .reveal.is-visible {
+    animation: none;
   }
 }
