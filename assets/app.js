@@ -29,6 +29,149 @@ const siteData = {
   },
   posts: [
     {
+      id: "github-copilot-enterprise-managed-plugins-vscode-guide",
+      title: "GitHub Copilot 企业托管插件进入 VS Code：团队怎样统一 agents、skills 和 MCP 配置",
+      date: "2026-06-06",
+      category: "AI 编程",
+      readTime: "9 分钟",
+      excerpt: "GitHub 2026 年 6 月 5 日宣布，企业托管 Copilot 插件能力已从 CLI 扩展到 VS Code public preview。团队可以通过 .github-private 仓库统一发布插件市场、自动安装插件，并集中配置 agents、skills、hooks 和 MCP。",
+      tags: ["GitHub Copilot", "VS Code", "企业插件"],
+      featured: true,
+      intro: [
+        "当团队里的每个人都开始使用 AI 编程代理，问题很快会从“能不能用”变成“怎样让大家用同一套规则”。有人手动安装插件，有人漏掉内部 skill，有人的 MCP 配置已经过期，这些差异会让代理输出、权限边界和新成员上手速度都变得不可控。",
+        "GitHub 2026 年 6 月 5 日宣布，enterprise-managed plugins 已支持 VS Code public preview。企业管理员可以在 `.github-private/.github/copilot/settings.json` 中定义额外插件市场和默认启用的插件；用户通过企业 Copilot 账号在 VS Code 或 Copilot CLI 登录时，客户端会自动拉取并应用这些设置。"
+      ],
+      audience: [
+        "正在给团队统一 GitHub Copilot、VS Code 和 Copilot CLI 配置的管理员",
+        "需要共享 custom agents、skills、hooks 或 MCP 配置的开发团队",
+        "想理解 AI 编程工具为什么需要版本化配置和治理边界的新手"
+      ],
+      format: [
+        "适合整理成“插件市场 / 默认插件 / hooks / MCP / 登录验证”的团队上线清单",
+        "后续可以补一份最小 settings.json 示例和插件变更审查流程"
+      ],
+      roadmap: [
+        "先盘点团队真正需要共享的能力。把通用编码规范、内部文档入口、固定工具和安全检查放进受控插件，不要把每个人的临时偏好都做成企业默认。",
+        "再在企业的 `.github-private` 仓库里维护 `.github/copilot/settings.json`，通过 `extraKnownMarketplaces` 声明可信插件市场，通过 `enabledPlugins` 指定自动安装项。",
+        "最后把插件更新当成代码变更审查。每次新增 agent、skill、hook 或 MCP 配置，都要检查来源、权限、网络访问和失败回滚，再让团队客户端自动同步。"
+      ],
+      officialLinks: [
+        {
+          label: "GitHub Changelog：Enterprise-managed plugins in VS Code in public preview",
+          url: "https://github.blog/changelog/2026-06-05-enterprise-managed-plugins-in-vs-code-in-public-preview/",
+          note: "本次 VS Code 企业托管插件 public preview 的原始公告。"
+        },
+        {
+          label: "GitHub Docs：Configuring enterprise plugin standards for Copilot CLI",
+          url: "https://docs.github.com/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-agents/configure-enterprise-plugin-standards",
+          note: "适合查看 `.github-private` 仓库位置、settings.json 字段和生效条件。"
+        }
+      ],
+      curatedLinks: [
+        "自动安装能减少新成员配置时间，但默认插件越多，代理可用能力和潜在权限也越多。先从少量、可解释、可审计的插件开始。",
+        "插件可以携带 agents、skills、hooks 和 MCP 配置。团队审查时不能只看插件名称，还要查看它实际启用了哪些工具、命令和外部连接。",
+        "这项能力目前仍是 public preview。上线前要准备回滚方式，并验证 VS Code 与 Copilot CLI 客户端版本、企业授权和 Usage billed to 选择是否正确。"
+      ],
+      downloadIdeas: [
+        "可以整理一份企业 Copilot 插件上线检查表",
+        "可以补一个最小 settings.json 模板和插件审查记录模板"
+      ],
+      monetization: "适合承接 GitHub Copilot 企业管理、VS Code 团队配置、AI 编程治理、MCP 安全和开发者入职流程类资源位；也可以与本站的 Copilot skills、沙箱和模型成本文章互相推荐。",
+      extraSections: [
+        {
+          title: "团队首次上线建议",
+          items: [
+            "先选择一个低风险内部插件，在小团队验证自动安装和更新是否正常。",
+            "明确插件维护人、版本来源、权限范围和故障回滚步骤。",
+            "让使用者知道哪些设置由企业统一控制，哪些仍可以个人配置。"
+          ]
+        },
+        {
+          title: "审查插件时要看什么",
+          items: [
+            "插件来源仓库是否可信，更新是否经过代码审查。",
+            "包含的 hooks、MCP 和命令是否会访问网络、文件或敏感系统。",
+            "默认安装是否确实帮助大多数成员，而不是只服务少数场景。"
+          ]
+        }
+      ]
+    },
+    {
+      id: "vercel-skills-sh-api-oidc-security-guide",
+      title: "skills.sh API 开放：新手怎样用 OIDC 搜索、审计和管理 AI skills",
+      date: "2026-06-06",
+      category: "开发工具",
+      readTime: "9 分钟",
+      excerpt: "Vercel 2026 年 6 月 5 日开放 skills.sh API，可查询超过 60 万个开源 skills，并读取详情、官方精选和安全审计结果。部署在 Vercel 的应用可使用项目 OIDC 短期令牌认证，不需要保存长期 API Key。",
+      tags: ["skills.sh", "OIDC", "AI Skills"],
+      featured: true,
+      intro: [
+        "AI agent 的 skill 可以把一套专业流程、规则和脚本打包复用，但数量变多后，单靠网页搜索和手动复制很难管理。你需要知道 skill 来自哪里、包含哪些文件、是否重复、有没有安全审计，以及更新后内容是否发生变化。",
+        "Vercel 2026 年 6 月 5 日宣布 skills.sh API 可用。官方说明可以通过 API 搜索超过 60 万个开源 skills，读取 skill 详情、文件树、安装量、官方精选和多家安全伙伴的审计结果。Vercel 应用还可以使用项目 OIDC token 认证，由平台签发短期凭据，避免在环境变量里长期保存 API Key。"
+      ],
+      audience: [
+        "正在做 AI agent、skill 市场、开发工具目录或内部插件平台的新手",
+        "希望在安装 skill 前检查来源、文件内容和安全审计结果的开发者",
+        "想理解 OIDC 短期令牌为什么比长期 API Key 更适合自动化调用的站长"
+      ],
+      format: [
+        "适合整理成“搜索 / 详情 / 审计 / 安装前复核 / 更新检测”的 skill 管理清单",
+        "后续可以补一个使用 Vercel Function 查询 skills.sh API 的最小示例"
+      ],
+      roadmap: [
+        "先用搜索和官方精选接口缩小候选范围，不要只按安装量判断。记录稳定 id、来源仓库、installUrl 和是否为重复副本。",
+        "再读取详情与审计接口，检查 SKILL.md、支持文件、内容 hash 和安全伙伴结果。审计通过不等于可以跳过人工复核，尤其要关注脚本、网络请求和凭据读取。",
+        "最后配置 OIDC。调用时在请求处理函数内部获取短期 token，按 team 和 project 控制范围，处理 401、429 和 503，并且不要把本地 `.env.local` 提交到仓库。"
+      ],
+      officialLinks: [
+        {
+          label: "Vercel Changelog：The skills.sh API is now available",
+          url: "https://vercel.com/changelog/the-skills-sh-api-is-now-available",
+          note: "本次 skills.sh API 发布的原始公告，包含 OIDC 和速率限制概要。"
+        },
+        {
+          label: "skills.sh Docs：API Reference",
+          url: "https://skills.sh/docs/api",
+          note: "适合查看搜索、详情、官方精选、安全审计、错误处理和缓存规则。"
+        },
+        {
+          label: "Vercel Docs：OpenID Connect Federation",
+          url: "https://vercel.com/docs/oidc",
+          note: "适合继续理解 Vercel OIDC 短期令牌、环境范围和本地开发方式。"
+        }
+      ],
+      curatedLinks: [
+        "安装量和热门排名只能说明使用情况，不能证明 skill 适合你的项目。先看来源、内容、权限和审计结果。",
+        "OIDC 的价值不是“少写一个 API Key”，而是让凭据短期有效并按团队、项目和环境收窄范围。",
+        "skills.sh API 的认证请求按 team 和 project 限制为每分钟 600 次。应用应读取速率限制响应头，对 429 和 503 使用等待与退避，而不是无限重试。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 AI skill 安装前安全检查表",
+        "可以补一个 skills.sh API + Vercel OIDC 的入门示例项目"
+      ],
+      monetization: "适合承接 AI agent、skills、Vercel Functions、OIDC、开发工具目录和供应链安全类资源位；也可以与本站的 Copilot 插件、MCP、沙箱和建站安全文章形成专题。",
+      extraSections: [
+        {
+          title: "安装 skill 前至少检查五项",
+          items: [
+            "来源仓库和作者是否可信，是否存在重复副本。",
+            "SKILL.md 和支持文件是否要求执行脚本、访问网络或读取凭据。",
+            "安全审计结果是否存在 warn、fail 或尚未生成审计的情况。",
+            "内容 hash 是否变化，更新后是否需要重新审查。",
+            "skill 能力是否真的符合当前任务，避免给代理增加不必要的权限。"
+          ]
+        },
+        {
+          title: "OIDC 调用时的三个边界",
+          items: [
+            "在每次请求的处理函数里获取 token，不要长期缓存短期凭据。",
+            "本地开发可以使用 Vercel CLI 拉取环境，但 `.env.local` 仍然不能提交。",
+            "记录错误状态和限流信息，不记录原始 bearer token。"
+          ]
+        }
+      ]
+    },
+    {
       id: "github-copilot-context-reasoning-levels-guide",
       title: "GitHub Copilot 支持百万 token 上下文和推理等级：新手怎么判断什么时候该开大模型能力",
       date: "2026-06-05",
@@ -2391,6 +2534,56 @@ git push origin main`,
     }
   ],
   hotspots: [
+    {
+      date: "2026-06-05",
+      tag: "AI 编程",
+      title: "GitHub Copilot 企业托管插件扩展到 VS Code public preview",
+      summary: "GitHub 6 月 5 日 Changelog 宣布，企业管理员现在可以让 VS Code 和 Copilot CLI 自动拉取统一插件设置，集中分发 custom agents、skills，并配置始终启用的 hooks 与 MCP。",
+      why: "AI 编程代理进入团队使用后，配置一致性、插件来源和权限治理会直接影响上手速度与安全边界。把规则版本化并集中审查，比让每个人手动安装更可靠。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-05-enterprise-managed-plugins-in-vs-code-in-public-preview/",
+      articleIdea: "选题：GitHub Copilot 企业托管插件进入 VS Code：团队怎样统一 agents、skills 和 MCP 配置"
+    },
+    {
+      date: "2026-06-05",
+      tag: "开发工具",
+      title: "skills.sh API 开放，可查询超过 60 万个开源 AI skills",
+      summary: "Vercel 6 月 5 日宣布 skills.sh API 可用，支持搜索 skill、读取详情与文件树、查看官方精选和安全审计；Vercel 项目可通过短期 OIDC token 认证。",
+      why: "AI skills 数量快速增长后，开发者需要可编程的发现、审计和更新检测流程。短期 OIDC 凭据也能减少长期 API Key 泄露风险。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/the-skills-sh-api-is-now-available",
+      articleIdea: "选题：skills.sh API 开放：新手怎样用 OIDC 搜索、审计和管理 AI skills"
+    },
+    {
+      date: "2026-06-05",
+      tag: "AI Agent",
+      title: "Vercel Sandbox Drives 进入 private beta，让代理工作区跨沙箱保留",
+      summary: "Vercel 6 月 5 日宣布 Sandbox Drives private beta。Drive 生命周期独立于 sandbox，可挂载到后续运行中，适合保留代理工作区、克隆仓库、依赖缓存和构建产物。",
+      why: "一次性沙箱更容易隔离任务，但重复下载依赖和重建上下文会浪费时间。Drive 把计算生命周期与数据生命周期分开，同时仍需注意 private beta、单读写挂载和非生产数据限制。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/drives-for-vercel-sandbox-in-private-beta",
+      articleIdea: "候选：Vercel Sandbox Drives 新手指南：持久工作区和一次性沙箱怎样配合"
+    },
+    {
+      date: "2026-06-05",
+      tag: "AI 编程",
+      title: "GitHub Copilot 弃用 GPT-5.2 和 GPT-5.2-Codex",
+      summary: "GitHub 6 月 5 日宣布，GPT-5.2 与 GPT-5.2-Codex 已在多数 Copilot 体验中弃用，建议分别迁移到 GPT-5.5 与 GPT-5.3-Codex；GPT-5.2 仍可用于 Copilot code review。",
+      why: "模型弃用会影响固定模型的提示词、自动化和团队策略。开发者需要检查模型选择器、企业策略与集成配置，并为模型切换准备回归测试。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-05-gpt-5-2-and-gpt-5-2-codex-deprecated/",
+      articleIdea: "候选：Copilot 模型弃用时怎么迁移：提示词、策略和回归测试清单"
+    },
+    {
+      date: "2026-06-05",
+      tag: "代码安全",
+      title: "CodeQL 2.25.6 支持 Swift 6.3.2，并完善 C# 14 与 .NET 10 覆盖",
+      summary: "GitHub 6 月 5 日发布 CodeQL 2.25.6，新增 Swift 6.3.2 支持，完成 C# 14 和 .NET 10 覆盖，并改进 GitHub Actions、敏感数据检测与多语言查询准确性。",
+      why: "静态扫描规则和语言支持会持续变化。升级后既可能发现更多真实问题，也可能让已关闭告警重新出现；团队需要复核新告警，而不是只看数量变化。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-05-codeql-2-25-6-adds-swift-6-3-2-support-and-improves-c-coverage/",
+      articleIdea: "候选：CodeQL 升级后新告警怎么处理：从规则变化到人工复核"
+    },
     {
       date: "2026-06-04",
       tag: "AI 编程",
