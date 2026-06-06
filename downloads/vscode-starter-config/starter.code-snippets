@@ -1,0 +1,38 @@
+{
+  "Accessible HTML button": {
+    "scope": "html",
+    "prefix": "a11y-button",
+    "body": [
+      "<button type=\"button\" class=\"${1:button}\" aria-label=\"${2:操作说明}\">",
+      "  ${3:按钮文字}",
+      "</button>"
+    ],
+    "description": "带类型和可访问名称的 HTML 按钮"
+  },
+  "JavaScript safe event listener": {
+    "scope": "javascript",
+    "prefix": "safe-listener",
+    "body": [
+      "const ${1:element} = document.querySelector(\"${2:selector}\");",
+      "",
+      "if (${1:element}) {",
+      "  ${1:element}.addEventListener(\"${3:click}\", () => {",
+      "    ${4:// Handle the event.}",
+      "  });",
+      "}"
+    ],
+    "description": "确认元素存在后绑定事件"
+  },
+  "Markdown checklist": {
+    "scope": "markdown",
+    "prefix": "checklist",
+    "body": [
+      "## ${1:检查项}",
+      "",
+      "- [ ] ${2:第一项}",
+      "- [ ] ${3:第二项}",
+      "- [ ] ${4:第三项}"
+    ],
+    "description": "Markdown 检查清单"
+  }
+}

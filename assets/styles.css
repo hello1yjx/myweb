@@ -484,6 +484,7 @@ textarea {
 
 .recommend-grid,
 .content-grid,
+.download-grid,
 .resource-grid,
 .project-grid,
 .hotspot-grid,
@@ -502,12 +503,17 @@ textarea {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.download-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .project-grid,
 .donation-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .article-card,
+.download-card,
 .resource-card,
 .project-card,
 .hotspot-card,
@@ -520,6 +526,7 @@ textarea {
 }
 
 .article-card:hover,
+.download-card:hover,
 .resource-card:hover,
 .project-card:hover,
 .hotspot-card:hover,
@@ -611,6 +618,7 @@ textarea {
 .article-card__media--office { background: linear-gradient(135deg, #0ea5e9, #16a34a); }
 
 .article-card__body,
+.download-card__body,
 .resource-card,
 .project-card__body,
 .hotspot-card,
@@ -619,6 +627,7 @@ textarea {
 }
 
 .article-card h3,
+.download-card h3,
 .latest-item h3,
 .resource-card h3,
 .project-card h3,
@@ -631,6 +640,7 @@ textarea {
 }
 
 .article-card p,
+.download-card p,
 .latest-item p,
 .resource-card p,
 .project-card p,
@@ -961,6 +971,107 @@ textarea {
   margin-bottom: 10px;
 }
 
+.download-card {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+}
+
+.download-card__visual {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 20px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.2), transparent 36%),
+    linear-gradient(155deg, #0f172a, #2563eb);
+}
+
+.download-card__visual strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.download-card__icon {
+  display: grid;
+  place-items: center;
+  align-self: flex-start;
+}
+
+.download-card__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.download-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  color: #7a879d;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.download-card__includes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.download-card__includes li {
+  padding: 5px 9px;
+  border: 1px solid #dce7ff;
+  border-radius: 999px;
+  color: var(--primary-deep);
+  background: #f3f7ff;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.download-card__pitch {
+  margin-top: 14px !important;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.download-card__action {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.resource-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.resource-trust-card {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.resource-trust-card strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.resource-trust-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
 .resource-card__head,
 .hotspot-card__head {
   display: flex;
@@ -1184,6 +1295,7 @@ textarea {
   }
 
   .resource-grid,
+  .download-grid,
   .hotspot-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1268,6 +1380,7 @@ textarea {
   .recommend-grid,
   .content-grid,
   .resource-grid,
+  .download-grid,
   .project-grid,
   .hotspot-grid,
   .donation-grid,
@@ -1275,6 +1388,18 @@ textarea {
   .quick-links,
   .footer__grid,
   .footer__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .download-card {
+    grid-template-columns: 1fr;
+  }
+
+  .download-card__visual {
+    min-height: 150px;
+  }
+
+  .resource-trust-grid {
     grid-template-columns: 1fr;
   }
 

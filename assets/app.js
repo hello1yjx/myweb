@@ -8,9 +8,9 @@ const siteData = {
     newsletter: "#newsletter",
     bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
-      { value: "10", label: "主题路线" },
-      { value: "30+", label: "精选入口" },
-      { value: "1", label: "持续更新的资源库" }
+      { value: "6", label: "原创下载包" },
+      { value: "30", label: "新手专题" },
+      { value: "持续", label: "更新与核验" }
     ],
     valueCards: [
       {
@@ -2441,97 +2441,149 @@ git push origin main`,
       ]
     }
   ],
+  downloads: [
+    {
+      id: "website-launch-checklist",
+      name: "静态网站上线检查表",
+      category: "建站资料",
+      badge: "本站原创",
+      description: "覆盖内容、移动端、搜索、性能、安全、部署和上线后维护的完整检查包。",
+      pitch: "适合个人主页、作品集、博客和资料站发布前逐项确认。",
+      format: "ZIP · 4 个文件",
+      includes: ["上线检查表", "页面清单 CSV", "发布记录模板"],
+      updated: "2026-06-06",
+      cta: "下载检查表",
+      link: "downloads/website-launch-checklist.zip"
+    },
+    {
+      id: "git-github-cheatsheet",
+      name: "Git 与 GitHub 中文速查包",
+      category: "开发工具",
+      badge: "本站原创",
+      description: "整理常用 Git 命令、提交说明模板、基础 gitignore 和安全恢复思路。",
+      pitch: "适合刚开始版本控制、经常忘记命令或担心误操作的新手。",
+      format: "ZIP · 4 个文件",
+      includes: ["中文速查表", "提交模板", "gitignore 模板"],
+      updated: "2026-06-06",
+      cta: "下载速查包",
+      link: "downloads/git-github-cheatsheet.zip"
+    },
+    {
+      id: "vscode-starter-config",
+      name: "VS Code 新手配置包",
+      category: "开发工具",
+      badge: "本站原创",
+      description: "提供保守通用的工作区设置、扩展选择建议和常用代码片段。",
+      pitch: "适合建立稳定编辑习惯，不依赖一次安装大量扩展。",
+      format: "ZIP · 3 个文件",
+      includes: ["settings.json", "扩展选择清单", "代码片段"],
+      updated: "2026-06-06",
+      cta: "下载配置包",
+      link: "downloads/vscode-starter-config.zip"
+    },
+    {
+      id: "ai-task-prompt-templates",
+      name: "AI 任务提示词模板包",
+      category: "AI 工具",
+      badge: "本站原创",
+      description: "包含学习解释、代码诊断、功能实现、内容写作、资料整理和方案评审模板。",
+      pitch: "重点不是堆高级词，而是把目标、限制、验收和人工确认写清楚。",
+      format: "ZIP · 3 个文件",
+      includes: ["6 类提示词模板", "结果复核清单", "任务说明模板"],
+      updated: "2026-06-06",
+      cta: "下载模板包",
+      link: "downloads/ai-task-prompt-templates.zip"
+    },
+    {
+      id: "ai-agent-safety-checklist",
+      name: "AI Agent 权限与安全检查包",
+      category: "AI 安全",
+      badge: "本站原创",
+      description: "帮助个人和团队在代理读取文件、运行命令、连接工具前明确权限与审批边界。",
+      pitch: "包含低中高风险操作矩阵，适合自动化和 AI 编程任务开始前使用。",
+      format: "ZIP · 3 个文件",
+      includes: ["安全检查表", "审批矩阵 CSV", "异常记录模板"],
+      updated: "2026-06-06",
+      cta: "下载安全包",
+      link: "downloads/ai-agent-safety-checklist.zip"
+    },
+    {
+      id: "static-site-starter",
+      name: "个人静态网站起步模板",
+      category: "建站模板",
+      badge: "本站原创",
+      description: "不依赖框架的响应式 HTML、CSS、JavaScript 个人主页模板，可直接修改和发布。",
+      pitch: "适合第一次练习个人主页或作品集，并附带发布前修改清单。",
+      format: "ZIP · 4 个文件",
+      includes: ["响应式页面", "移动端菜单", "发布清单"],
+      updated: "2026-06-06",
+      cta: "下载网站模板",
+      link: "downloads/static-site-starter.zip"
+    }
+  ],
   resources: [
     {
-      name: "GitHub Pages 官方入口",
-      category: "建站资源",
-      badge: "官方",
-      description: "免费静态站点托管入口，适合博客、作品集和个人主页。",
-      pitch: "如果你想先把网站发出去，再逐步优化结构和内容，这是最轻量的起点之一。",
-      cta: "打开官方站点",
-      link: "https://pages.github.com/"
-    },
-    {
-      name: "Hexo 官方文档",
-      category: "博客系统",
-      badge: "官方",
-      description: "Hexo 的安装、配置、写作和部署入口。",
-      pitch: "适合已经准备好用静态博客系统长期写内容的人。",
-      cta: "查看文档",
-      link: "https://hexo.io/docs/"
-    },
-    {
-      name: "Python 官方教程",
-      category: "编程入门",
-      badge: "官方",
-      description: "Python 最核心的官方入门教程，适合打基础和后续查阅。",
-      pitch: "如果你想认真学 Python，这一份文档值得长期收藏。",
-      cta: "开始学习",
-      link: "https://docs.python.org/3/tutorial/"
-    },
-    {
-      name: "VS Code 文档与扩展市场",
-      category: "开发工具",
-      badge: "官方",
-      description: "VS Code 的使用说明、扩展管理和插件市场入口。",
-      pitch: "先理解编辑器，再挑插件，效率会高很多。",
-      cta: "浏览资源",
-      link: "https://code.visualstudio.com/docs"
-    },
-    {
-      name: "MIT OpenCourseWare",
-      category: "学习资料",
-      badge: "免费课程",
-      description: "长期可访问的公开课程资源库，覆盖计算机、数学和更多学科。",
-      pitch: "适合做高质量学习资料整理的长期入口。",
-      cta: "进入课程库",
-      link: "https://ocw.mit.edu/"
-    },
-    {
-      name: "Git 官方文档",
+      name: "GitHub Git Cheat Sheet PDF",
       category: "版本控制",
-      badge: "官方",
-      description: "Git 命令、概念和在线书资源入口。",
+      badge: "外部官方",
+      description: "GitHub Training Kit 提供的常用 Git 命令英文速查 PDF。",
+      pitch: "适合和本站中文速查包配合使用，遇到命令时回到官方资料核对。",
+      cta: "打开官方 PDF",
+      link: "https://training.github.com/downloads/github-git-cheat-sheet.pdf"
+    },
+    {
+      name: "MDN 前端开发课程",
+      category: "前端学习",
+      badge: "外部官方",
+      description: "Mozilla MDN 提供的前端核心能力与学习顺序指南。",
+      pitch: "适合不确定 HTML、CSS、JavaScript 和可访问性学习顺序的新手。",
+      cta: "打开官方课程",
+      link: "https://developer.mozilla.org/en-US/curriculum/"
+    },
+    {
+      name: "Microsoft 生成式 AI 入门课程",
+      category: "AI 学习",
+      badge: "外部官方",
+      description: "微软开源的生成式 AI 入门课程，包含提示词、RAG、Agent 和安全主题。",
+      pitch: "适合希望从使用 AI 工具进一步学习开发基础的人。",
+      cta: "打开官方仓库",
+      link: "https://github.com/microsoft/generative-ai-for-beginners"
+    },
+    {
+      name: "OWASP Cheat Sheet Series",
+      category: "建站安全",
+      badge: "外部官方",
+      description: "OWASP 维护的应用安全速查资料，覆盖认证、会话、上传和更多主题。",
+      pitch: "适合开发登录、表单、上传和 API 功能时核对安全实践。",
+      cta: "打开官方资料",
+      link: "https://cheatsheetseries.owasp.org/"
+    },
+    {
+      name: "Git 官方文档与在线书",
+      category: "版本控制",
+      badge: "外部官方",
+      description: "Git 命令参考、概念说明与 Pro Git 在线书入口。",
       pitch: "命令不会背没关系，先知道最权威的查找入口更重要。",
-      cta: "查看文档",
+      cta: "打开官方文档",
       link: "https://git-scm.com/docs"
     },
     {
-      name: "MDN Learn Web Development",
-      category: "前端学习",
-      badge: "官方",
-      description: "适合前端新手的学习路径、语法说明和实战内容入口。",
-      pitch: "如果你不确定 HTML、CSS、JavaScript 的学习顺序，从这里开始最稳。",
-      cta: "开始学习",
-      link: "https://developer.mozilla.org/en-US/docs/Learn_web_development"
-    },
-    {
-      name: "OpenAI Academy",
-      category: "AI 工具",
-      badge: "官方",
-      description: "适合学习 AI 基础使用场景、教学内容和实践案例。",
-      pitch: "做 AI 新手内容时，优先引用官方解释会更稳。",
-      cta: "查看资源",
-      link: "https://academy.openai.com/"
-    },
-    {
-      name: "Midjourney 文档",
-      category: "AI 工具",
-      badge: "官方",
-      description: "适合图像生成工具新手查基础说明和使用方法。",
-      pitch: "如果要做 AI 图像方向的资源整理，这个入口值得保留。",
-      cta: "查看文档",
-      link: "https://docs.midjourney.com/"
-    },
-    {
-      name: "Microsoft Create 模板库",
-      category: "办公模板",
-      badge: "官方",
-      description: "Word、Excel、PowerPoint 模板的官方入口。",
-      pitch: "做办公资料分享时，先用官方模板库建立基础信任感。",
-      cta: "浏览模板",
-      link: "https://create.microsoft.com/templates"
+      name: "VS Code 官方入门文档",
+      category: "开发工具",
+      badge: "外部官方",
+      description: "Visual Studio Code 的基础使用、设置、扩展与工作区说明。",
+      pitch: "使用本站配置包前，建议先理解编辑器自带能力与工作区设置。",
+      cta: "打开官方文档",
+      link: "https://code.visualstudio.com/docs/getstarted/getting-started"
     }
+  ],
+  resourcePathPostIds: [
+    "github-pages-blog-tutorial",
+    "git-github-complete-manual",
+    "frontend-beginner-roadmap",
+    "vscode-ai-plugins-guide",
+    "ai-tools-practical-tutorials",
+    "common-programming-errors-fixes"
   ],
   hotspots: [
     {
@@ -3215,6 +3267,35 @@ function buildLatestItem(post) {
   `;
 }
 
+function buildDownloadCard(item) {
+  const icon = getResourceIcon(item);
+
+  return `
+    <article class="download-card reveal">
+      <div class="download-card__visual">
+        <span class="download-card__icon">${buildVisualIcon(icon, `${item.category} 图标`, "visual-icon visual-icon--card")}</span>
+        <div>
+          <span class="pill">${item.category}</span>
+          <strong>${item.badge}</strong>
+        </div>
+      </div>
+      <div class="download-card__body">
+        <div class="download-card__meta">
+          <span>${item.format}</span>
+          <time datetime="${item.updated}">更新于 ${formatDate(item.updated)}</time>
+        </div>
+        <h3>${item.name}</h3>
+        <p>${item.description}</p>
+        <ul class="download-card__includes">
+          ${item.includes.map((entry) => `<li>${entry}</li>`).join("")}
+        </ul>
+        <p class="download-card__pitch">${item.pitch}</p>
+        <a class="button button--primary download-card__action" href="${item.link}" download>${item.cta}</a>
+      </div>
+    </article>
+  `;
+}
+
 function buildResourceCard(item) {
   const icon = getResourceIcon(item);
 
@@ -3282,12 +3363,20 @@ function slugify(value) {
 
 function getHomeCategories() {
   return [
-    { icon: visualIcons.javascript, title: "编程开发", meta: "Python / 前端 / Git", count: "120+ 教程", tone: "blue", query: "编程" },
-    { icon: visualIcons.markdown, title: "学习资料", meta: "PDF / 电子书 / 文档", count: "2000+ 资源", tone: "green", query: "资料" },
-    { icon: visualIcons.vscode, title: "实用工具", meta: "开发 / 设计 / 效率", count: "300+ 工具", tone: "violet", query: "工具" },
-    { icon: visualIcons.github, title: "项目实战", meta: "源码 / 案例 / 部署", count: "50+ 项目", tone: "orange", query: "项目" },
-    { icon: visualIcons.python, title: "AI 专区", meta: "AI 编程 / 提示词 / 工具", count: "100+ 热点", tone: "rose", query: "AI" },
-    { icon: visualIcons.figma, title: "设计资源", meta: "模板 / 素材 / 图标", count: "1000+ 资源", tone: "cyan", query: "模板" }
+    { icon: visualIcons.javascript, title: "编程开发", meta: "Python / 前端 / Git", count: "新手路线", tone: "blue", query: "编程" },
+    { icon: visualIcons.markdown, title: "学习资料", meta: "清单 / 模板 / 配置", count: `${siteData.downloads.length} 个原创包`, tone: "green", query: "资料" },
+    { icon: visualIcons.vscode, title: "实用工具", meta: "开发 / 设计 / 效率", count: "官方入口", tone: "violet", query: "工具" },
+    { icon: visualIcons.github, title: "项目实战", meta: "源码 / 案例 / 部署", count: `${siteData.projects.length} 个项目`, tone: "orange", query: "项目" },
+    { icon: visualIcons.python, title: "AI 专区", meta: "AI 编程 / 提示词 / 工具", count: `${siteData.hotspots.length} 条热点`, tone: "rose", query: "AI" },
+    { icon: visualIcons.figma, title: "设计资源", meta: "模板 / 清单 / 页面", count: "可直接修改", tone: "cyan", query: "模板" }
+  ];
+}
+
+function getHomeStats() {
+  return [
+    { value: String(siteData.downloads.length), label: "原创下载包" },
+    { value: String(siteData.posts.length), label: "新手专题" },
+    { value: String(siteData.hotspots.length), label: "已核验热点" }
   ];
 }
 
@@ -3325,6 +3414,12 @@ function buildTopicResourceSection(post) {
       </div>
     </section>
   `;
+}
+
+function getResourcePathPosts() {
+  return siteData.resourcePathPostIds
+    .map((id) => byId(siteData.posts, id))
+    .filter(Boolean);
 }
 
 function buildProjectCard(project) {
@@ -3438,7 +3533,7 @@ function injectHomePage() {
   const heroIcons = document.querySelector("[data-hero-icons]");
 
   if (stats) {
-    stats.innerHTML = siteData.site.heroStats
+    stats.innerHTML = getHomeStats()
       .map((item) => `<div><strong>${item.value}</strong><span>${item.label}</span></div>`)
       .join("");
   }
@@ -3468,7 +3563,7 @@ function injectHomePage() {
   }
 
   if (resources) {
-    resources.innerHTML = siteData.resources.slice(0, 3).map(buildResourceCard).join("");
+    resources.innerHTML = siteData.downloads.slice(0, 3).map(buildDownloadCard).join("");
   }
 
   if (projects) {
@@ -3519,13 +3614,13 @@ function injectHomePage() {
   }
 
   if (rank) {
-    rank.innerHTML = siteData.resources.slice(0, 5)
+    rank.innerHTML = siteData.downloads.slice(0, 5)
       .map(
         (item, index) => `
-          <a href="${item.link}" target="_blank" rel="noreferrer">
+          <a href="${item.link}" download>
             <span>${index + 1}</span>
             <strong>${item.name}</strong>
-            <em>${item.badge}</em>
+            <em>${item.format}</em>
           </a>
         `
       )
@@ -3624,14 +3719,29 @@ function injectPostDetail() {
 function injectResourcesPage() {
   const container = document.querySelector("[data-resource-list]");
   if (!container) return;
-  const featured = `
-    <section class="section">
+  const downloads = `
+    <section class="section" id="resource-downloads">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">精选入口</p>
-          <h2>先收藏这几个入口，后面查资料就不用到处翻</h2>
+          <p class="eyebrow">本站原创下载</p>
+          <h2>6 个能直接带走使用的资料包</h2>
         </div>
-        <p>这一组负责快速建立方向感：官方入口、核心工具、长期可用的学习路线先放在最前面。</p>
+        <p>每个 ZIP 都包含说明和可编辑文件。下载后先阅读 README，再按自己的项目调整。</p>
+      </div>
+      <div class="download-grid">
+        ${siteData.downloads.map(buildDownloadCard).join("")}
+      </div>
+    </section>
+  `;
+
+  const official = `
+    <section class="section" id="official-resources">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">官方精选资料</p>
+          <h2>外部资料只保留长期可靠的一手来源</h2>
+        </div>
+        <p>这些按钮会打开第三方官方页面。本站不重新打包、不修改，也不伪装成本站下载。</p>
       </div>
       <div class="resource-grid">
         ${siteData.resources.map(buildResourceCard).join("")}
@@ -3639,20 +3749,20 @@ function injectResourcesPage() {
     </section>
   `;
 
-  const grouped = `
-    <section class="section">
+  const paths = `
+    <section class="section" id="learning-paths">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">按主题浏览</p>
-          <h2>10 个主题分区，从“我想学什么”直接进入</h2>
+          <p class="eyebrow">精选学习路线</p>
+          <h2>下载之后，顺着 6 个专题继续实践</h2>
         </div>
-        <p>每个分区都连到对应文章，适合先看导航，再深入看教程、示例和后续扩展内容。</p>
+        <p>这里只保留适合长期学习的基础专题，不再把全部热点文章重复铺在资源页。</p>
       </div>
-      ${siteData.posts.map(buildTopicResourceSection).join("")}
+      ${getResourcePathPosts().map(buildTopicResourceSection).join("")}
     </section>
   `;
 
-  container.innerHTML = `${featured}${grouped}`;
+  container.innerHTML = `${downloads}${official}${paths}`;
 }
 
 function injectProjectsPage() {
