@@ -9,7 +9,7 @@ const siteData = {
     bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
       { value: "6", label: "原创下载包" },
-      { value: "30", label: "新手专题" },
+      { value: "32", label: "新手专题" },
       { value: "持续", label: "更新与核验" }
     ],
     valueCards: [
@@ -28,6 +28,144 @@ const siteData = {
     ]
   },
   posts: [
+    {
+      id: "google-colab-cli-agent-remote-compute-guide",
+      title: "Google Colab CLI 发布：新手怎样让本地脚本和 AI Agent 使用远程 GPU",
+      date: "2026-06-07",
+      category: "开发工具",
+      readTime: "9 分钟",
+      excerpt: "Google 2026 年 6 月 5 日发布 Colab CLI，可从终端申请 CPU、GPU 或 TPU，远程执行本地 Python 脚本，下载结果并导出运行日志。它也附带 agent skill，但目前只支持 Linux 和 macOS。",
+      tags: ["Google Colab", "CLI", "远程 GPU"],
+      featured: true,
+      intro: [
+        "很多新手第一次需要 GPU 时，会在“本地电脑跑不动”和“云平台配置太复杂”之间卡住。Google 新发布的 Colab CLI 把 Colab 远程运行环境带进终端：你可以在本地写脚本，再通过命令申请 GPU、安装依赖、执行代码、下载产物，最后释放运行环境。",
+        "Google Developers Blog 在 2026 年 6 月 5 日宣布 Colab CLI。官方仓库说明它支持 CPU、T4、L4、G4、H100、A100 和 TPU 等运行环境，也能执行 Python、Notebook 或标准输入代码，并导出 `.ipynb`、Markdown 和 JSONL 日志。需要注意的是，当前版本只支持 Linux 和 macOS，Windows 尚未支持。"
+      ],
+      audience: [
+        "本地电脑缺少 GPU，但想学习模型训练、数据处理或机器学习的新手",
+        "希望从终端或自动化脚本调用 Colab 远程算力的开发者",
+        "想让 Codex、Claude Code 等终端 Agent 执行可回收远程任务的人"
+      ],
+      format: [
+        "适合整理成“申请运行环境 / 安装依赖 / 执行脚本 / 下载结果 / 停止实例”的入门清单",
+        "后续可以补一个在 Linux 或 macOS 上运行小型训练脚本的完整示例"
+      ],
+      roadmap: [
+        "先安装 CLI 并从最小 CPU 会话开始。使用 `uv tool install google-colab-cli` 或 `pip install google-colab-cli`，运行 `colab new` 后，用简单 Python 输出验证认证、连接和会话状态。",
+        "再把耗时脚本交给远程环境。需要加速器时使用 `colab new --gpu T4` 等命令，安装依赖后通过 `colab exec -f script.py` 执行；如果只是一次性任务，可以用 `colab run --gpu T4 script.py` 自动创建和释放环境。",
+        "最后回收产物与证据。使用 `colab download` 下载模型或数据，用 `colab log` 导出可复查日志，并运行 `colab stop` 释放资源。不要把会话令牌、凭据或不需要的敏感数据交给 Agent。"
+      ],
+      officialLinks: [
+        {
+          label: "Google Developers Blog：Introducing the Google Colab CLI",
+          url: "https://developers.googleblog.com/introducing-the-google-colab-cli/",
+          note: "Colab CLI 发布公告，包含远程执行和 Agent 工作流示例。"
+        },
+        {
+          label: "Google Colab CLI GitHub 仓库",
+          url: "https://github.com/googlecolab/google-colab-cli",
+          note: "适合查看安装方式、平台限制、命令列表和完整示例。"
+        }
+      ],
+      curatedLinks: [
+        "Colab CLI 当前只支持 Linux 和 macOS。Windows 用户不要直接照搬安装步骤，可以等待官方支持或在可控的 Linux 环境中测试。",
+        "远程执行不等于自动保存所有内容。重要模型、数据和日志要显式下载或导出，并确认会话停止后哪些文件会消失。",
+        "让 AI Agent 调用 CLI 前，先限制它能使用的命令、算力和数据范围，并保留日志与停止步骤，避免任务失控或资源持续占用。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Colab CLI 远程任务执行检查表",
+        "可以补一个一次性 GPU 脚本与结果下载示例"
+      ],
+      monetization: "适合承接 Google Colab、Python、机器学习入门、远程 GPU、AI Agent 自动化和云端开发环境类资源位；也可以与本站的沙箱、AI 编程代理和开发工具文章互相推荐。",
+      extraSections: [
+        {
+          title: "第一次尝试建议只做五步",
+          items: [
+            "创建一个最小会话并确认状态。",
+            "运行只输出环境信息的 Python 脚本。",
+            "安装一个小型依赖并再次执行。",
+            "导出日志和一个测试文件。",
+            "停止会话并确认资源已释放。"
+          ]
+        },
+        {
+          title: "交给 Agent 前要设的边界",
+          items: [
+            "限定可申请的 GPU 类型、任务时长和下载目录。",
+            "不要把长期凭据、隐私数据和生产数据直接放进远程会话。",
+            "要求 Agent 返回命令、日志、产物路径和停止结果。"
+          ]
+        }
+      ]
+    },
+    {
+      id: "claude-code-fallback-model-permission-safety-guide",
+      title: "Claude Code 2.1.166 增加回退模型：新手怎样兼顾可用性和权限安全",
+      date: "2026-06-07",
+      category: "AI 编程",
+      readTime: "9 分钟",
+      excerpt: "Claude Code 2.1.166 可配置最多三个回退模型，并加强 deny 规则与跨会话消息权限。更新也修复了 Windows PowerShell 命令验证可能长时间挂起的问题。",
+      tags: ["Claude Code", "回退模型", "权限安全"],
+      featured: true,
+      intro: [
+        "AI 编程代理执行长任务时，主模型过载或暂时不可用会让工作中断。直接无限重试不可靠，临时换模型又可能改变输出质量、成本和工具行为。Claude Code 2.1.166 新增 `fallbackModel` 设置，让用户可以按顺序配置最多三个回退模型，并把 `--fallback-model` 扩展到交互会话。",
+        "这次更新同时加强了权限边界：deny 规则的工具名称位置支持 glob，`\"*\"` 可以拒绝全部工具；其他 Claude 会话通过 `SendMessage` 转发的消息不再携带用户权限，接收会话会拒绝被转发的权限请求，自动模式也会阻止这类请求。Windows 用户还获得了 PowerShell 命令验证挂起修复。"
+      ],
+      audience: [
+        "使用 Claude Code 处理长任务、远程会话或后台 Agent 的开发者",
+        "需要在模型可用性、成本、输出质量和权限边界之间做取舍的团队",
+        "想理解回退模型为什么不能替代错误处理和人工复核的新手"
+      ],
+      format: [
+        "适合整理成“主模型 / 回退顺序 / 禁止工具 / 跨会话权限 / 故障复核”的配置清单",
+        "后续可以补一个低风险测试项目，用来比较主模型与回退模型的结果"
+      ],
+      roadmap: [
+        "先把回退模型当作可用性策略，而不是质量保证。选择能力和工具支持相近的模型，记录顺序、成本和适用任务，并用一个可重复的小任务验证模型切换后的输出。",
+        "再收紧工具权限。对不需要工具的会话使用明确 deny 规则；需要工具时按任务最小化开放，尤其要审查 Bash、文件写入、网络访问和 MCP。不要依赖跨会话消息替你批准权限。",
+        "最后处理失败和复核。官方说明意外的非重试错误会在回退模型上重试一次，但认证、限流、请求大小和传输错误仍会直接返回。自动化应识别错误类型，而不是把所有失败都交给回退模型。"
+      ],
+      officialLinks: [
+        {
+          label: "Claude Code GitHub Release：v2.1.166",
+          url: "https://github.com/anthropics/claude-code/releases/tag/v2.1.166",
+          note: "回退模型、deny 规则、跨会话权限和 Windows 修复的官方发布说明。"
+        },
+        {
+          label: "Claude Code Docs：Settings",
+          url: "https://code.claude.com/docs/en/settings",
+          note: "适合继续查看用户、项目和托管设置的作用范围。"
+        }
+      ],
+      curatedLinks: [
+        "回退模型只能处理部分模型不可用问题。认证失败、限流、请求过大和网络传输错误仍需要单独处理。",
+        "模型切换可能改变回答风格、推理深度、工具选择和成本。对关键任务要保留输入、输出和人工复核记录。",
+        "跨会话消息不再携带用户权限是重要安全边界。不要设计成让一个 Agent 替另一个 Agent 自动批准高风险操作。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Claude Code 回退模型与权限审查表",
+        "可以补一个主模型失败后的自动化测试用例模板"
+      ],
+      monetization: "适合承接 Claude Code、AI 编程代理、模型路由、权限治理、Windows 开发环境和自动化可靠性类资源位；也可以与本站的沙箱、MCP、skills 和团队插件文章形成专题。",
+      extraSections: [
+        {
+          title: "回退模型上线前先验证",
+          items: [
+            "主模型不可用时是否按预期切换。",
+            "回退模型是否支持任务需要的工具和上下文。",
+            "输出质量、速度和成本是否仍在可接受范围。",
+            "失败日志是否能说明实际使用了哪个模型。"
+          ]
+        },
+        {
+          title: "权限规则要避免两个误区",
+          items: [
+            "不要因为配置了回退模型，就给所有模型开放相同的高风险工具。",
+            "不要把跨会话消息视为用户确认；高风险操作仍需真实用户或受控策略批准。"
+          ]
+        }
+      ]
+    },
     {
       id: "github-copilot-enterprise-managed-plugins-vscode-guide",
       title: "GitHub Copilot 企业托管插件进入 VS Code：团队怎样统一 agents、skills 和 MCP 配置",
@@ -2586,6 +2724,36 @@ git push origin main`,
     "common-programming-errors-fixes"
   ],
   hotspots: [
+    {
+      date: "2026-06-07",
+      tag: "AI 编程",
+      title: "Qwen Code 最新 nightly 加入 /skills 选择器和独立自动更新",
+      summary: "Qwen Code 6 月 7 日官方 nightly release 新增可浏览、搜索、启停和选择 skill 的 `/skills` 对话框、独立自动更新、用户提示词扩展 hooks，并让 ACP 模式支持 `/remember`、`/forget` 与 `/dream`。",
+      why: "国产开源终端 Agent 正在补齐 skills 发现、自动更新和记忆管理体验。但该版本明确标注为 pre-release，适合观察和测试，不应直接替换稳定生产环境。",
+      sourceLabel: "Qwen Code GitHub Releases",
+      sourceUrl: "https://github.com/QwenLM/qwen-code/releases/tag/v0.17.1-nightly.20260607.cef26a86a",
+      articleIdea: "观察项：Qwen Code nightly 的 skills 选择器和自动更新，稳定版发布后再扩写"
+    },
+    {
+      date: "2026-06-06",
+      tag: "AI 编程",
+      title: "Claude Code 2.1.166 增加最多三个回退模型并加强跨会话权限",
+      summary: "Claude Code 2.1.166 可通过 `fallbackModel` 按顺序配置最多三个回退模型，并加强 deny 规则和跨会话消息权限；更新还修复了 Windows PowerShell 命令验证可能长时间挂起的问题。",
+      why: "模型回退能减少长任务因服务不可用而中断，但模型切换会影响质量、成本和工具行为。跨会话权限收紧也提醒开发者，Agent 之间传递消息不应自动继承用户授权。",
+      sourceLabel: "Claude Code GitHub Releases",
+      sourceUrl: "https://github.com/anthropics/claude-code/releases/tag/v2.1.166",
+      articleIdea: "选题：Claude Code 2.1.166 增加回退模型：新手怎样兼顾可用性和权限安全"
+    },
+    {
+      date: "2026-06-05",
+      tag: "开发工具",
+      title: "Google 发布 Colab CLI，让本地脚本和 AI Agent 调用远程 GPU",
+      summary: "Google 6 月 5 日发布 Colab CLI，可从终端申请 CPU、GPU 或 TPU，远程执行本地 Python 与 Notebook，下载产物并导出日志；官方还附带了供终端 Agent 使用的 Colab skill。",
+      why: "Colab 从浏览器 Notebook 扩展成可编程的远程执行工具，更适合自动化和 Agent 工作流。当前版本只支持 Linux 和 macOS，且仍需管理凭据、资源释放与产物回收。",
+      sourceLabel: "Google Developers Blog",
+      sourceUrl: "https://developers.googleblog.com/introducing-the-google-colab-cli/",
+      articleIdea: "选题：Google Colab CLI 发布：新手怎样让本地脚本和 AI Agent 使用远程 GPU"
+    },
     {
       date: "2026-06-05",
       tag: "AI 编程",
