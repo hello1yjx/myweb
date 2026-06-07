@@ -3838,6 +3838,10 @@ function injectPostDetail() {
 
   const params = new URLSearchParams(window.location.search);
   const post = byId(siteData.posts, params.get("id")) || siteData.posts[0];
+  const description = document.querySelector('meta[name="description"]');
+
+  document.title = `${post.title} | ${siteData.site.name}`;
+  if (description) description.setAttribute("content", post.excerpt);
 
   detail.innerHTML = `
     <header class="detail-hero">
@@ -3945,6 +3949,10 @@ function injectProjectDetail() {
 
   const params = new URLSearchParams(window.location.search);
   const project = byId(siteData.projects, params.get("id")) || siteData.projects[0];
+  const description = document.querySelector('meta[name="description"]');
+
+  document.title = `${project.title} | ${siteData.site.name}`;
+  if (description) description.setAttribute("content", project.summary);
 
   detail.innerHTML = `
     <header class="detail-hero">
@@ -3990,6 +3998,19 @@ function setGlobalContent() {
   document.querySelectorAll("[data-site-github]").forEach((node) => {
     node.setAttribute("href", siteData.site.github);
   });
+}
+
+function setCanonicalUrl() {
+  const canonical = document.querySelector('link[rel="canonical"]');
+  if (!canonical) return;
+
+  const pageName = window.location.pathname.split("/").pop() || "index.html";
+  const params = new URLSearchParams(window.location.search);
+  const detailId = ["post.html", "project.html"].includes(pageName) ? params.get("id") : "";
+  const path = pageName === "index.html" ? "" : pageName;
+  const query = detailId ? `?id=${encodeURIComponent(detailId)}` : "";
+
+  canonical.setAttribute("href", `https://hello1yjx.github.io/${path}${query}`);
 }
 
 function bindMenu() {
@@ -4044,6 +4065,7 @@ function revealOnScroll() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  setCanonicalUrl();
   setGlobalContent();
   bindMenu();
   bindSearch();
