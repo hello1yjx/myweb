@@ -9,7 +9,7 @@ const siteData = {
     bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
       { value: "6", label: "原创下载包" },
-      { value: "32", label: "新手专题" },
+      { value: "33", label: "新手专题" },
       { value: "持续", label: "更新与核验" }
     ],
     valueCards: [
@@ -28,6 +28,80 @@ const siteData = {
     ]
   },
   posts: [
+    {
+      id: "cloudflare-ai-gateway-spend-limits-guide",
+      title: "Cloudflare AI Gateway 增加费用上限：新手怎样给模型、团队和 Agent 控制预算",
+      date: "2026-06-08",
+      category: "AI 工具",
+      readTime: "9 分钟",
+      excerpt: "Cloudflare AI Gateway 现可按模型、提供商和自定义属性设置美元预算，达到上限后阻止请求或切换到备用模型；身份驱动预算与策略仍处于 closed beta。",
+      tags: ["Cloudflare", "AI Gateway", "成本控制"],
+      featured: true,
+      intro: [
+        "AI 应用刚开始测试时，每次调用只花一点钱，很容易忽略成本边界。等到团队、自动化和 Agent 都开始共享模型后，某个循环任务、昂贵模型或失控的 CI 流程就可能快速消耗预算。单靠月末账单很难判断费用来自哪个模型、应用或用户。",
+        "Cloudflare 2026 年 6 月 5 日宣布 AI Gateway spend limits 进入 open beta，所有方案用户都可以按美元设置预算。限制可以组合模型、提供商和管理员定义的自定义属性，并使用固定或滚动的日、周、月窗口；达到上限后默认阻止后续请求，也可以通过 Dynamic Routes 切换到更便宜的备用模型。"
+      ],
+      audience: [
+        "正在搭建 AI 聊天、内容生成、代码审查或 Agent 自动化的新手",
+        "需要把多个模型提供商的日志、调用量和费用集中查看的开发者",
+        "想给团队、应用或自动化任务设置预算边界的站长和管理员"
+      ],
+      format: [
+        "适合整理成“记录现状 / 设置预算 / 选择阻止或回退 / 检查日志 / 调整额度”的上线清单",
+        "后续可以补一个按应用名称区分费用并切换备用模型的最小示例"
+      ],
+      roadmap: [
+        "先只做观察，不要一开始就设置过低的硬上限。把应用请求通过 AI Gateway 转发，确认模型、提供商、token 和费用日志完整，再按真实使用情况估算日、周或月预算。",
+        "再按风险拆分预算。可以用模型和提供商限制昂贵调用，也可以让应用传递自定义属性，分别观察网站聊天、代码审查、内容生成和后台 Agent。自定义属性由应用提供，仍需防止错误或伪造数据。",
+        "最后决定达到上限后的行为。关键任务可以通过 Dynamic Routes 切换到更便宜的备用模型，低优先级任务可以直接阻止；无论选择哪种方式，都要保留错误处理、日志和人工复核，避免静默降级影响结果质量。"
+      ],
+      officialLinks: [
+        {
+          label: "Cloudflare Blog：Your AI bill is out of control. Cloudflare can fix it now.",
+          url: "https://blog.cloudflare.com/ai-gateway-spend-limits/",
+          note: "本次费用上限、身份驱动预算和后续路由计划的原始公告。"
+        },
+        {
+          label: "Cloudflare Docs：AI Gateway spend limits",
+          url: "https://developers.cloudflare.com/ai-gateway/features/spend-limits/",
+          note: "适合查看预算范围、时间窗口和达到上限后的行为配置。"
+        },
+        {
+          label: "Cloudflare Docs：Dynamic Routes",
+          url: "https://developers.cloudflare.com/ai-gateway/features/dynamic-routing/",
+          note: "适合继续了解达到预算后切换备用模型的路由方式。"
+        }
+      ],
+      curatedLinks: [
+        "费用上限按美元统计，不等于普通速率限制。速率限制控制请求频率，预算限制控制累计花费，两者应分别配置。",
+        "达到上限后切换便宜模型可以保持服务可用，但模型能力、输出格式和工具调用行为可能改变，关键流程要做回归测试。",
+        "身份驱动预算和策略目前仍是 closed beta。普通 spend limits 已进入 open beta，但上线前仍应在非关键环境验证。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 AI 应用预算与回退模型检查表",
+        "可以补一个按应用、模型和环境拆分费用的配置模板"
+      ],
+      monetization: "适合承接 Cloudflare、AI Gateway、多模型 API、Agent 成本治理、云平台预算和建站运维类资源位；也可以与本站的模型路由、沙箱、OIDC 和 AI 编程代理文章互相推荐。",
+      extraSections: [
+        {
+          title: "第一次设置预算建议",
+          items: [
+            "先用较高额度观察真实使用模式，再逐步收紧。",
+            "为生产、测试、CI 和 Agent 使用不同的属性或网关。",
+            "明确达到上限时是阻止请求、提醒人工，还是切换备用模型。",
+            "定期检查高费用模型和异常任务，而不是只等月末账单。"
+          ]
+        },
+        {
+          title: "不要把预算控制当成质量控制",
+          items: [
+            "便宜模型不一定适合复杂重构、关键内容或高风险决策。",
+            "模型降级后要验证输出结构、工具支持和失败处理。",
+            "预算、权限、隐私和结果复核仍是四个独立问题。"
+          ]
+        }
+      ]
+    },
     {
       id: "google-colab-cli-agent-remote-compute-guide",
       title: "Google Colab CLI 发布：新手怎样让本地脚本和 AI Agent 使用远程 GPU",
@@ -2725,14 +2799,24 @@ git push origin main`,
   ],
   hotspots: [
     {
-      date: "2026-06-07",
+      date: "2026-06-08",
       tag: "AI 编程",
-      title: "Qwen Code 最新 nightly 加入 /skills 选择器和独立自动更新",
-      summary: "Qwen Code 6 月 7 日官方 nightly release 新增可浏览、搜索、启停和选择 skill 的 `/skills` 对话框、独立自动更新、用户提示词扩展 hooks，并让 ACP 模式支持 `/remember`、`/forget` 与 `/dream`。",
-      why: "国产开源终端 Agent 正在补齐 skills 发现、自动更新和记忆管理体验。但该版本明确标注为 pre-release，适合观察和测试，不应直接替换稳定生产环境。",
+      title: "Qwen Code 6 月 8 日 nightly 加强安装包校验，并回退 ACP 记忆命令",
+      summary: "Qwen Code 6 月 8 日官方 nightly release 延续 `/skills` 选择器、独立自动更新和用户提示词扩展 hooks，并增加 release assets 校验；同时回退了 ACP 模式中的 `/remember`、`/forget` 与 `/dream` 支持。",
+      why: "nightly 版本既能提前看到国产开源终端 Agent 的新能力，也会出现功能回退。安装包校验值得关注，但该版本明确标注为 pre-release，仍适合观察和测试，不应直接替换稳定生产环境。",
       sourceLabel: "Qwen Code GitHub Releases",
-      sourceUrl: "https://github.com/QwenLM/qwen-code/releases/tag/v0.17.1-nightly.20260607.cef26a86a",
-      articleIdea: "观察项：Qwen Code nightly 的 skills 选择器和自动更新，稳定版发布后再扩写"
+      sourceUrl: "https://github.com/QwenLM/qwen-code/releases/tag/v0.17.1-nightly.20260608.aea34fa2c",
+      articleIdea: "观察项：Qwen Code nightly 的安装校验、skills 选择器和功能回退，稳定版发布后再扩写"
+    },
+    {
+      date: "2026-06-07",
+      tag: "开发工具",
+      title: "Anthropic Python SDK 0.107.1 修复 Microsoft Foundry API Key 认证请求",
+      summary: "Anthropic Python SDK 0.107.1 修复了使用 API Key 连接 Microsoft Foundry 时未发送 `x-api-key` 请求头的问题；0.107.0 同期更新了 Managed Agents 相关类型。",
+      why: "SDK 的认证修复看似很小，却会直接决定集成是否能运行。使用 Foundry 的开发者应升级并重新验证认证，同时避免把 API Key 写入代码或日志。",
+      sourceLabel: "Anthropic Python SDK GitHub Releases",
+      sourceUrl: "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.107.1",
+      articleIdea: "候选：AI SDK 小版本升级清单：认证修复、凭据保护和回归测试"
     },
     {
       date: "2026-06-06",
@@ -2743,6 +2827,26 @@ git push origin main`,
       sourceLabel: "Claude Code GitHub Releases",
       sourceUrl: "https://github.com/anthropics/claude-code/releases/tag/v2.1.166",
       articleIdea: "选题：Claude Code 2.1.166 增加回退模型：新手怎样兼顾可用性和权限安全"
+    },
+    {
+      date: "2026-06-05",
+      tag: "AI 工具",
+      title: "Cloudflare AI Gateway 增加按美元计算的费用上限",
+      summary: "Cloudflare AI Gateway spend limits 进入 open beta，可按模型、提供商和自定义属性设置固定或滚动的日、周、月预算；达到上限后可阻止请求或通过 Dynamic Routes 切换备用模型。",
+      why: "AI 应用和 Agent 容易因共享密钥、昂贵模型或循环任务产生意外费用。预算限制能把成本控制前移，但模型降级仍需验证质量、工具支持和失败处理。",
+      sourceLabel: "Cloudflare Blog",
+      sourceUrl: "https://blog.cloudflare.com/ai-gateway-spend-limits/",
+      articleIdea: "选题：Cloudflare AI Gateway 增加费用上限：新手怎样给模型、团队和 Agent 控制预算"
+    },
+    {
+      date: "2026-06-05",
+      tag: "建站工具",
+      title: "Wrangler 4.98 支持用 glob 查找嵌套目录中的 D1 migrations",
+      summary: "Cloudflare Workers SDK 发布 Wrangler 4.98，D1 database binding 新增 `migrations_pattern`，可让 `wrangler d1 migrations apply` 和 `list` 查找 ORM 生成的嵌套 migration 文件。",
+      why: "不少 ORM 会把每次数据库迁移放进独立子目录，旧的单层匹配方式需要手动整理文件。升级后可以直接用相对配置文件的 glob 匹配，但仍要先检查实际命中文件和执行顺序。",
+      sourceLabel: "Cloudflare Workers SDK GitHub Releases",
+      sourceUrl: "https://github.com/cloudflare/workers-sdk/releases/tag/wrangler%404.98.0",
+      articleIdea: "候选：Wrangler D1 migrations_pattern 入门：怎样安全执行 ORM 生成的嵌套迁移"
     },
     {
       date: "2026-06-05",
