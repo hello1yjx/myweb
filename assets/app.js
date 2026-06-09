@@ -9,7 +9,7 @@ const siteData = {
     bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
       { value: "6", label: "原创下载包" },
-      { value: "33", label: "新手专题" },
+      { value: "35", label: "新手专题" },
       { value: "持续", label: "更新与核验" }
     ],
     valueCards: [
@@ -28,6 +28,154 @@ const siteData = {
     ]
   },
   posts: [
+    {
+      id: "xcode-27-agentic-coding-beginner-guide",
+      title: "Xcode 27 把 Agent 放进编辑器：新手怎样先审计划、再验证界面",
+      date: "2026-06-09",
+      category: "开发工具",
+      readTime: "10 分钟",
+      excerpt: "Apple 在 WWDC26 发布 Xcode 27 beta，加入可编辑计划、编辑器内 Agent 会话、模拟器操作、截图验证、插件与 MCP 扩展；新手应先把它当成需要审查和测试的协作工具。",
+      tags: ["Xcode 27", "Coding Agents", "MCP"],
+      featured: true,
+      intro: [
+        "AI 编程工具常见的问题不是“能不能写代码”，而是计划藏在聊天里、改动范围难确认、界面结果还要人工切到模拟器检查。Apple 在 WWDC26 发布的 Xcode 27 beta，把 Agent 的计划、代码改动、预览和验证流程进一步放进编辑器，让开发者可以在同一环境里审查和反馈。",
+        "Apple 的 Xcode 27 beta release notes 显示，规划已成为 Agent 的一等能力，计划会以可编辑 Markdown 工件展示；Agent 还能启动模拟器、安装和运行 App、合成触摸事件并截取屏幕。Xcode 27 也增加 Agent 插件、skills、MCP 与 ACP 配置支持，以及控制 Agent 和子进程文件访问的新安全层。"
+      ],
+      audience: [
+        "准备学习 iOS、macOS 或 Swift 开发，想了解 Xcode Agent 工作流的新手",
+        "希望让 AI 辅助规划、改代码、运行模拟器并验证界面的 Apple 平台开发者",
+        "需要评估 Agent 插件、MCP 工具和文件访问边界的团队"
+      ],
+      format: [
+        "适合整理成“写需求 / 审计划 / 限定范围 / 运行验证 / 人工复核”的 Agent 使用清单",
+        "后续可以补一个从空白 Swift 项目到模拟器截图验证的最小示例"
+      ],
+      roadmap: [
+        "先把 Xcode 27 当作 beta 工具测试。它只会安装和运行在 Apple silicon Mac 上，并要求较新的 macOS；不要直接用它替换唯一的生产开发环境，先备份项目并确认现有构建流程可回退。",
+        "开始任务时先要求 Agent 输出计划。检查要改哪些文件、会调用哪些工具、怎样验证结果，再批准执行；对计划中的模糊步骤直接添加批注，比让 Agent 一次性修改整个项目更容易复核。",
+        "完成后让 Agent 运行构建、启动模拟器并截图，但不要只看它报告成功。开发者仍要检查代码差异、权限、界面状态、测试结果和已知 beta 问题，必要时在稳定版 Xcode 中再次验证。"
+      ],
+      officialLinks: [
+        {
+          label: "Apple Developer：Xcode 27 Beta Release Notes",
+          url: "https://developer.apple.com/documentation/xcode-release-notes/xcode-27-release-notes",
+          note: "包含 Agent 规划、模拟器验证、插件、安全层和系统要求等完整更新。"
+        },
+        {
+          label: "WWDC26：What’s new in Xcode 27",
+          url: "https://developer.apple.com/videos/play/wwdc2026/258/",
+          note: "适合快速了解编辑器内 Agent、Device Hub、Localization、Organizer 和 Instruments。"
+        },
+        {
+          label: "Apple Developer Releases：Xcode 27 beta",
+          url: "https://developer.apple.com/news/releases/?id=06082026a",
+          note: "官方 beta 下载与 release notes 入口。"
+        }
+      ],
+      curatedLinks: [
+        "Xcode 27 是 beta，Agent 功能与新 SDK 都可能存在已知问题，重要项目要保留稳定工具链和可回退分支。",
+        "Agent 能启动模拟器和生成截图，不等于它理解所有交互、无障碍、性能与业务要求；关键路径仍需人工测试。",
+        "插件、skills、MCP 和 ACP 会扩大工具能力，也会扩大权限面。安装前应确认来源、范围和文件访问策略。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Xcode Agent 计划审查与界面验证清单",
+        "可以补一个 Swift 项目 Agent 权限、插件和 MCP 评估模板"
+      ],
+      monetization: "适合承接 Apple 开发、Swift、Xcode、AI 编程助手、移动应用测试、开发者课程和 Mac 工具类资源位；也可以与本站的 Agent 沙箱、插件治理和代码审查文章互相推荐。",
+      extraSections: [
+        {
+          title: "第一次试用建议",
+          items: [
+            "从可删除的示例项目开始，不要直接打开唯一的生产仓库。",
+            "每个任务先审计划，再批准改动，并在提交前检查完整 diff。",
+            "让 Agent 运行构建、模拟器和截图验证，同时保留人工验收。",
+            "为插件和 MCP 设置最小权限，定期移除不用的扩展。"
+          ]
+        },
+        {
+          title: "需要特别注意的 beta 限制",
+          items: [
+            "Xcode 27 只在 Apple silicon Mac 上安装和运行。",
+            "新 SDK、模拟器和测试工具可能影响现有项目兼容性。",
+            "release notes 中的 known issues 应在升级前逐项检查。"
+          ]
+        }
+      ]
+    },
+    {
+      id: "claude-code-safe-mode-troubleshooting-guide",
+      title: "Claude Code 2.1.169 增加安全模式：新手怎样排查插件、skills 和 MCP 冲突",
+      date: "2026-06-09",
+      category: "AI 编程",
+      readTime: "9 分钟",
+      excerpt: "Claude Code 2.1.169 新增 --safe-mode，可临时禁用 CLAUDE.md、插件、skills、hooks 和 MCP server，帮助判断卡顿或异常来自核心程序还是自定义配置。",
+      tags: ["Claude Code", "安全模式", "故障排查"],
+      featured: true,
+      intro: [
+        "终端 Agent 用久以后，项目说明、插件、skills、hooks 和 MCP server 会越来越多。当 Claude Code 启动变慢、工具没有加载、权限策略不生效或行为突然改变时，新手很难判断问题来自 Claude Code 本身，还是某个自定义配置。",
+        "Anthropic 在北京时间 2026 年 6 月 9 日发布 Claude Code 2.1.169，新增 `--safe-mode` 与 `CLAUDE_CODE_SAFE_MODE`，可在排查时禁用 CLAUDE.md、插件、skills、hooks 和 MCP server。版本还新增 `/cd` 命令，并修复 Windows 上 `claude -p` 启动缓慢、Git Credential Manager 弹窗、企业 MCP 策略重连执行等问题。"
+      ],
+      audience: [
+        "安装过多个插件、skills、hooks 或 MCP server，遇到启动和行为异常的 Claude Code 用户",
+        "在 Windows、WSL 或企业托管环境中使用终端 Agent 的开发者",
+        "需要区分核心程序故障与项目自定义配置问题的团队管理员"
+      ],
+      format: [
+        "适合整理成“安全模式复现 / 恢复单项配置 / 定位冲突 / 更新版本 / 记录证据”的排查清单",
+        "后续可以补一个插件、hook 和 MCP server 分组启用的最小诊断示例"
+      ],
+      roadmap: [
+        "先保存当前工作并记录异常现象，包括启动耗时、错误文本、受影响项目和最近更新。不要一开始就删除配置，否则会失去复现问题的证据。",
+        "使用 `claude --safe-mode` 启动并重复最小操作。如果问题消失，说明更可能来自 CLAUDE.md、插件、skills、hooks 或 MCP；如果仍存在，再检查版本、网络、登录状态和官方 troubleshooting 文档。",
+        "最后逐组恢复自定义项，而不是一次全部开启。每恢复一组就重复测试，定位冲突后更新、修复或移除对应配置，并把可靠的最小复现和日志保留下来。"
+      ],
+      officialLinks: [
+        {
+          label: "Claude Code GitHub Release：v2.1.169",
+          url: "https://github.com/anthropics/claude-code/releases/tag/v2.1.169",
+          note: "本次安全模式、/cd、Windows 修复与企业策略改进的原始发布说明。"
+        },
+        {
+          label: "Claude Code Docs：Troubleshooting",
+          url: "https://code.claude.com/docs/en/troubleshooting",
+          note: "适合继续排查卡顿、资源占用、搜索和配置问题。"
+        },
+        {
+          label: "Claude Code Docs：Settings",
+          url: "https://code.claude.com/docs/en/settings",
+          note: "适合核对插件、MCP、权限与托管设置。"
+        }
+      ],
+      curatedLinks: [
+        "安全模式是诊断入口，不是长期绕过配置问题的替代方案。确认冲突后仍应修复或移除有问题的自定义项。",
+        "排查时不要删除包含团队规则的 CLAUDE.md 或托管策略；优先复制日志、记录版本并最小化复现。",
+        "`/cd` 可以在不中断 prompt cache 的情况下移动会话目录，但切换后仍要重新确认当前工作区和权限范围。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Claude Code 插件、skills、hooks 与 MCP 排查表",
+        "可以补一个 Windows 终端 Agent 启动与权限问题记录模板"
+      ],
+      monetization: "适合承接 Claude Code、终端 Agent、MCP、插件治理、Windows 开发环境和 AI 编程课程类资源位；也可以与本站的回退模型、企业托管插件和 Agent 安全文章互相推荐。",
+      extraSections: [
+        {
+          title: "推荐的最小排查顺序",
+          items: [
+            "记录版本、项目目录、错误信息和最近配置变化。",
+            "用安全模式复现，判断问题是否来自自定义项。",
+            "逐组恢复 CLAUDE.md、插件、skills、hooks 和 MCP。",
+            "运行 `/doctor` 并对照官方 troubleshooting 文档。"
+          ]
+        },
+        {
+          title: "不要在排查时忽略权限",
+          items: [
+            "安全模式会关闭扩展能力，正常模式恢复后权限面也会恢复。",
+            "企业托管 MCP 策略与项目本地设置应分别核对。",
+            "日志和配置可能包含路径、仓库信息或凭据线索，分享前要脱敏。"
+          ]
+        }
+      ]
+    },
     {
       id: "cloudflare-ai-gateway-spend-limits-guide",
       title: "Cloudflare AI Gateway 增加费用上限：新手怎样给模型、团队和 Agent 控制预算",
@@ -2798,6 +2946,56 @@ git push origin main`,
     "common-programming-errors-fixes"
   ],
   hotspots: [
+    {
+      date: "2026-06-09",
+      tag: "开发者大会",
+      title: "Apple WWDC26 发布会开启，开发者更新集中落在 AI、Xcode 27 与 Swift",
+      summary: "Apple WWDC26 于北京时间 6 月 9 日开启。官方大会入口汇总 Keynote、Platforms State of the Union 和超过 100 场开发者视频；首批开发者重点包括 Xcode 27 的 Agent 工作流、Swift 6.4 与新平台 SDK。",
+      why: "发布会本身适合用来建立更新全景，但真正影响开发工作的细节通常藏在 release notes 和技术视频中。新手应先看总览，再按 Xcode、Swift、AI 和目标平台拆分学习，不要只依据发布会演示升级生产项目。",
+      sourceLabel: "Apple Developer WWDC26",
+      sourceUrl: "https://developer.apple.com/wwdc26/",
+      articleIdea: "总览：Apple WWDC26 发布会后，开发者怎样按 Xcode、Swift、AI 与平台更新安排学习顺序"
+    },
+    {
+      date: "2026-06-09",
+      tag: "AI 编程",
+      title: "Claude Code 2.1.169 增加安全模式与 /cd，并修复多项 Windows 问题",
+      summary: "Claude Code 2.1.169 新增 `--safe-mode`，可临时禁用 CLAUDE.md、插件、skills、hooks 和 MCP server；同时加入 `/cd`，修复 Windows 上 `claude -p` 启动缓慢、Git 凭据弹窗与插件缓存问题。",
+      why: "终端 Agent 的自定义项越多，越难判断故障来自核心程序还是配置。安全模式提供了可重复的最小诊断入口，但定位后仍应逐项恢复并修复冲突，而不是长期绕过团队规则。",
+      sourceLabel: "Claude Code GitHub Releases",
+      sourceUrl: "https://github.com/anthropics/claude-code/releases/tag/v2.1.169",
+      articleIdea: "选题：Claude Code 2.1.169 增加安全模式：新手怎样排查插件、skills 和 MCP 冲突"
+    },
+    {
+      date: "2026-06-08",
+      tag: "开发工具",
+      title: "Apple 发布 Xcode 27 beta，把 Agent 计划、模拟器操作与截图验证放进编辑器",
+      summary: "Xcode 27 beta 让 Agent 计划以可编辑 Markdown 工件展示，支持在编辑器中管理会话；Agent 还能启动模拟器、安装和运行 App、合成触摸事件、截图验证，并通过插件接入 skills、MCP 与 ACP。",
+      why: "Agent 从写代码进一步进入计划、运行和界面验证流程，能减少工具切换，但也扩大了权限和误操作范围。Xcode 27 仍是 beta，只支持 Apple silicon Mac，重要项目要保留稳定工具链与人工验收。",
+      sourceLabel: "Apple Xcode 27 Beta Release Notes",
+      sourceUrl: "https://developer.apple.com/documentation/xcode-release-notes/xcode-27-release-notes",
+      articleIdea: "选题：Xcode 27 把 Agent 放进编辑器：新手怎样先审计划、再验证界面"
+    },
+    {
+      date: "2026-06-08",
+      tag: "编程语言",
+      title: "Swift 6.4 扩展跨平台能力，并加强测试、并发与高性能代码支持",
+      summary: "Apple WWDC26 的 Swift 更新介绍了 Swift 6.4 的日常语法改进、并发任务警告和跨平台 FilePath；Swift Testing 增加失败重试等能力，Subprocess 进入 1.0，Swift 也继续扩展到 Web、Android 与嵌入式环境。",
+      why: "Swift 不再只围绕 Apple App 开发演进，跨平台、测试与系统工具能力正在增强。新手可以先关注测试和 Subprocess 等直接可用改进，高级性能属性和所有权类型则应在基准测试后采用。",
+      sourceLabel: "Apple Developer WWDC26：What’s new in Swift",
+      sourceUrl: "https://developer.apple.com/videos/play/wwdc2026/262/",
+      articleIdea: "候选：Swift 6.4 新手更新路线：先学测试、Subprocess 和跨平台能力"
+    },
+    {
+      date: "2026-06-08",
+      tag: "开发安全",
+      title: "GitHub EMU 命名空间 IP allow list 进入 GA",
+      summary: "GitHub Enterprise Cloud 的 Enterprise Managed Users 现在可在用户命名空间仓库中强制执行原生 IP allow list；Web UI、Git 协议与 API 均受限制，PAT、App token 和 SSH key 等凭据也纳入策略。",
+      why: "企业用户拥有的仓库如果不受统一网络策略约束，会形成治理缺口。GA 更新让访问路径覆盖更完整，但管理员仍需验证允许地址、自动化出口和紧急访问流程，避免合法开发任务被意外阻断。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-08-ip-allow-list-coverage-for-emu-namespaces-in-general-availability/",
+      articleIdea: "候选：GitHub 企业 IP allow list 上线前检查：Web、Git、API 与自动化出口"
+    },
     {
       date: "2026-06-08",
       tag: "AI 编程",
