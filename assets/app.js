@@ -9,7 +9,7 @@ const siteData = {
     bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
       { value: "6", label: "原创下载包" },
-      { value: "35", label: "新手专题" },
+      { value: "37", label: "新手专题" },
       { value: "持续", label: "更新与核验" }
     ],
     valueCards: [
@@ -28,6 +28,153 @@ const siteData = {
     ]
   },
   posts: [
+    {
+      id: "github-copilot-cli-security-review-guide",
+      title: "Copilot CLI 加入 /security-review：新手怎样把 AI 安全审查放到提交前",
+      date: "2026-06-11",
+      category: "开发安全",
+      readTime: "9 分钟",
+      excerpt: "GitHub Copilot CLI 新增实验性 /security-review，可分析本地代码改动并给出高置信度安全发现；它适合做提交前补充检查，但不能替代测试、CodeQL、依赖与密钥扫描。",
+      tags: ["GitHub Copilot CLI", "安全审查", "代码检查"],
+      featured: true,
+      intro: [
+        "很多安全问题并不是上线后才出现，而是在一次看似普通的代码修改里被带入：拼接查询造成注入、输出未转义造成跨站脚本、路径参数没有限制，或敏感数据被写进不合适的位置。新手往往知道要看 diff，却不知道应该重点检查哪些风险。",
+        "GitHub 在 2026 年 6 月 10 日为 Copilot CLI 发布实验性的 `/security-review`。该命令会分析当前本地改动，返回按严重性和置信度整理的发现与修复建议，重点覆盖注入、跨站脚本、不安全数据处理、路径遍历和弱加密等常见高影响问题。"
+      ],
+      audience: [
+        "已经使用 GitHub Copilot CLI，希望在提交前增加一道安全检查的新手",
+        "需要快速审查 AI 生成代码、脚本或小型 Web 项目的开发者",
+        "想区分终端 AI 审查、CodeQL、Dependabot 与 secret scanning 职责的团队"
+      ],
+      format: [
+        "适合整理成“检查 diff / 运行测试 / 执行安全审查 / 人工复核 / 再提交”的工作流清单",
+        "后续可以补一个包含注入、路径遍历与密钥误提交风险的最小练习仓库"
+      ],
+      roadmap: [
+        "先在 Copilot CLI 中开启 experimental mode，再在一个有未提交改动的测试项目里运行 `/security-review`。不要第一次就对重要生产改动完全依赖实验功能，先确认输出格式和检查范围。",
+        "逐条核对发现对应的文件、代码路径、输入来源和真实可利用条件。优先处理高严重性、高置信度问题；对不确定项补测试或最小复现，不要因为 AI 给出建议就直接批量修改。",
+        "安全审查通过后仍要运行现有测试，并继续使用 CodeQL、依赖扫描、密钥扫描和人工代码审查。提交前检查完整 diff，确认修复没有改变业务行为或引入新的权限问题。"
+      ],
+      officialLinks: [
+        {
+          label: "GitHub Changelog：Copilot CLI /security-review",
+          url: "https://github.blog/changelog/2026-06-10-dedicated-security-review-command-now-available-in-copilot-cli/",
+          note: "包含命令状态、检查范围、典型漏洞类别和启用方式。"
+        },
+        {
+          label: "GitHub Copilot CLI：Experimental mode",
+          url: "https://github.com/github/copilot-cli#experimental-mode",
+          note: "用于确认怎样启用实验功能以及当前 CLI 使用说明。"
+        },
+        {
+          label: "GitHub Docs：About code scanning with CodeQL",
+          url: "https://docs.github.com/en/code-security/code-scanning/introduction-to-code-scanning/about-code-scanning-with-codeql",
+          note: "用于理解仓库级代码扫描与提交前轻量审查的区别。"
+        }
+      ],
+      curatedLinks: [
+        "`/security-review` 仍是 public preview 中的实验功能，输出和覆盖范围可能变化，不应作为唯一上线门槛。",
+        "命令只分析本地代码改动并返回高置信度发现；没有报告问题不代表代码没有漏洞。",
+        "修复建议也属于 AI 生成内容，应用后必须重新检查 diff、运行测试并验证真实风险是否消除。"
+      ],
+      downloadIdeas: [
+        "可以整理一份提交前安全审查与人工复核清单",
+        "可以补一个 AI 生成代码的测试、扫描和证据记录模板"
+      ],
+      monetization: "适合承接 GitHub Copilot、代码安全、DevSecOps、CodeQL、开发者培训和终端工具类资源位；也可以与本站的 Agent 沙箱、企业插件治理和 npm 安全文章互相推荐。",
+      extraSections: [
+        {
+          title: "推荐的提交前顺序",
+          items: [
+            "先阅读完整 diff，确认修改范围与预期一致。",
+            "运行项目现有测试、lint 和类型检查。",
+            "执行 `/security-review`，逐条核对高置信度发现。",
+            "完成修复后重新测试，再交给人工或仓库级扫描复核。"
+          ]
+        },
+        {
+          title: "它不能替代什么",
+          items: [
+            "不能替代针对业务权限、数据边界和攻击路径的人工威胁建模。",
+            "不能替代依赖漏洞、密钥泄露与完整仓库历史的专用扫描。",
+            "不能证明代码绝对安全，也不能代替生产环境监控和事件响应。"
+          ]
+        }
+      ]
+    },
+    {
+      id: "npm-v12-install-security-migration-guide",
+      title: "npm v12 将默认阻止依赖脚本与远程依赖：新手升级前检查清单",
+      date: "2026-06-11",
+      category: "开发安全",
+      readTime: "10 分钟",
+      excerpt: "npm v12 预计于 2026 年 7 月发布，将默认关闭依赖安装脚本，并默认禁止 Git 与远程 URL 依赖；项目可先升级到 npm 11.16.0，根据警告建立可信允许列表。",
+      tags: ["npm v12", "供应链安全", "Node.js"],
+      featured: true,
+      intro: [
+        "`npm install` 不只会下载 JavaScript 文件。依赖可以自动运行 `preinstall`、`install`、`postinstall`，原生模块还可能隐式执行 `node-gyp rebuild`；项目也可能直接从 Git 仓库或远程 tarball 安装包。这些能力方便，但也扩大了供应链攻击和意外执行代码的范围。",
+        "GitHub 在 2026 年 6 月 9 日预告，预计 7 月发布的 npm v12 会把多项自动行为改成显式选择：`allowScripts` 默认关闭，`--allow-git` 与 `--allow-remote` 默认设为 `none`。npm 11.16.0 或更高版本已经会显示相关警告，团队可以在正式升级前完成盘点。"
+      ],
+      audience: [
+        "使用 Node.js、npm、前端框架或静态站点工具链的新手",
+        "维护包含原生模块、安装脚本、Git 依赖或远程 tarball 的项目开发者",
+        "需要让本地开发与 CI 在 npm v12 上稳定安装依赖的团队"
+      ],
+      format: [
+        "适合整理成“升级 npm 11.16 / 查看警告 / 审核脚本 / 建立允许列表 / 验证 CI”的迁移清单",
+        "后续可以补一个 package.json 依赖来源与安装脚本盘点模板"
+      ],
+      roadmap: [
+        "先在独立分支或可回退环境升级到 npm 11.16.0 或更高版本，执行项目正常安装流程并保存警告。npm v12 尚未正式发布，不要根据预告直接修改所有生产环境。",
+        "运行 `npm approve-scripts --allow-scripts-pending` 查看哪些包希望执行安装脚本。逐个核对包名、来源、用途和脚本内容，只批准确实需要且可信的依赖，并用 `npm deny-scripts` 明确拒绝其余项目。",
+        "检查 `package.json` 和 lockfile 中的 Git、HTTPS tarball 与其他远程 URL 依赖，尽量改为可核验的注册表版本。最后在干净环境和 CI 中重新安装、构建与测试，并提交经过审查的允许列表配置。"
+      ],
+      officialLinks: [
+        {
+          label: "GitHub Changelog：Upcoming breaking changes for npm v12",
+          url: "https://github.blog/changelog/2026-06-09-upcoming-breaking-changes-for-npm-v12",
+          note: "包含预计发布时间、三个默认值变化和官方迁移步骤。"
+        },
+        {
+          label: "npm Docs：npm approve-scripts",
+          url: "https://docs.npmjs.com/cli/v11/commands/npm-approve-scripts",
+          note: "用于查看待批准脚本并建立可信依赖允许列表。"
+        },
+        {
+          label: "npm Docs：allow-scripts config",
+          url: "https://docs.npmjs.com/cli/v11/using-npm/config#allow-scripts",
+          note: "用于理解项目、本地、全局安装与 npx 的脚本控制。"
+        }
+      ],
+      curatedLinks: [
+        "npm v12 目前预计在 2026 年 7 月发布，具体时间和最终行为仍应以正式 release notes 为准。",
+        "安装脚本默认关闭会影响原生模块和隐式 `node-gyp rebuild`，不能只检查 package.json 中显式写出的脚本。",
+        "不要为了消除警告一次批准所有包；允许列表应基于真实用途、可信来源和可重复测试。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 npm v12 安装脚本与远程依赖迁移清单",
+        "可以补一个 Node.js 项目供应链依赖审查表"
+      ],
+      monetization: "适合承接 Node.js、npm、前端工程化、供应链安全、CI/CD 和开发者课程类资源位；也可以与本站的 GitHub 安全审查、Dependabot 和建站工具文章互相推荐。",
+      extraSections: [
+        {
+          title: "升级前必须盘点的三类行为",
+          items: [
+            "依赖的 preinstall、install、postinstall 与隐式 node-gyp 构建。",
+            "直接或间接引用的 Git 依赖。",
+            "通过 HTTPS tarball 等远程 URL 引入的依赖。"
+          ]
+        },
+        {
+          title: "验证迁移是否完成",
+          items: [
+            "在无旧 node_modules 和缓存的干净环境执行安装。",
+            "确认本地开发、构建、测试与部署流程全部通过。",
+            "检查允许列表已提交，并让团队理解每个获批脚本的用途。"
+          ]
+        }
+      ]
+    },
     {
       id: "xcode-27-agentic-coding-beginner-guide",
       title: "Xcode 27 把 Agent 放进编辑器：新手怎样先审计划、再验证界面",
@@ -2947,6 +3094,56 @@ git push origin main`,
   ],
   hotspots: [
     {
+      date: "2026-06-10",
+      tag: "开发安全",
+      title: "GitHub Copilot CLI 增加实验性 /security-review，支持提交前检查本地改动",
+      summary: "Copilot CLI 的新命令会分析当前本地代码改动，返回按严重性和置信度整理的安全发现与修复建议，重点覆盖注入、跨站脚本、不安全数据处理、路径遍历和弱加密等风险。",
+      why: "把安全检查放到提交前能更早发现常见漏洞，但该命令仍是 public preview 中的实验功能，只报告高置信度发现。开发者仍需检查 diff、运行测试，并结合 CodeQL、依赖与密钥扫描。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-10-dedicated-security-review-command-now-available-in-copilot-cli/",
+      articleIdea: "选题：Copilot CLI 加入 /security-review：新手怎样把 AI 安全审查放到提交前"
+    },
+    {
+      date: "2026-06-10",
+      tag: "AI 模型",
+      title: "Google 发布实验性 DiffusionGemma，以并行文本扩散探索更快本地生成",
+      summary: "DiffusionGemma 是基于 Gemma 4 的 26B MoE 开放模型，推理时激活 3.8B 参数，通过并行生成和迭代优化 256-token 区块，在专用 GPU 上可实现最高约 4 倍的文本生成速度。",
+      why: "并行生成适合低并发、本地和强调响应速度的交互流程，也能利用双向上下文进行自我修正；但 Google 明确说明它是实验模型，整体输出质量低于标准 Gemma 4，量化运行仍需要约 18GB VRAM。",
+      sourceLabel: "Google Developers Blog",
+      sourceUrl: "https://developers.googleblog.com/diffusiongemma-the-developer-guide/",
+      articleIdea: "候选：DiffusionGemma 新手实验路线：先理解速度、显存与输出质量取舍"
+    },
+    {
+      date: "2026-06-10",
+      tag: "AI Agent",
+      title: "Copilot Chat 可查看进行中的 Agent 状态，并搜索和追问历史会话",
+      summary: "GitHub 改进网页端 Copilot Chat 与 Copilot cloud agent 的交接：Chat 现在会显示进行中会话状态，并可读取 Agent 日志、按主题、标题或时间搜索历史会话，再继续追问或启动新任务。",
+      why: "Agent 长任务如果只有最终 PR，很难理解过程、验证内容和决策原因。会话日志与搜索能改善交接和复盘，但团队仍应以代码差异、测试结果和可审计记录作为最终依据。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-10-copilot-chat-now-sees-your-agent-sessions",
+      articleIdea: "候选：怎样用 Agent 日志和会话搜索复盘 AI 编程任务"
+    },
+    {
+      date: "2026-06-09",
+      tag: "供应链安全",
+      title: "npm v12 预告收紧安装默认值，将阻止未批准脚本与远程依赖",
+      summary: "预计 2026 年 7 月发布的 npm v12 将默认关闭依赖安装脚本，并默认禁止 Git 与远程 URL 依赖。npm 11.16.0 或更高版本已提供警告与 `npm approve-scripts` 迁移工具。",
+      why: "新默认值能缩小安装阶段执行恶意代码的风险，也可能让原生模块、Git 依赖和现有 CI 突然失败。项目应先审核脚本和依赖来源、建立最小允许列表，再在干净环境验证安装与构建。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-09-upcoming-breaking-changes-for-npm-v12",
+      articleIdea: "选题：npm v12 将默认阻止依赖脚本与远程依赖：新手升级前检查清单"
+    },
+    {
+      date: "2026-06-09",
+      tag: "AI 安全",
+      title: "GitHub 为第三方编码 Agent 默认启用自动安全验证",
+      summary: "GitHub 的第三方编码 Agent 安全验证进入 GA。Claude、OpenAI Codex 等 Agent 创建代码后，GitHub 会用 CodeQL、Advisory Database 和 secret scanning 检查漏洞、新依赖与敏感信息，并让 Agent 尝试修复。",
+      why: "不同 Agent 生成的代码现在可以进入统一的仓库安全检查流程，而且不要求 GitHub Advanced Security 许可证；但自动修复仍需人工复核，仓库设置、权限边界和业务风险也不能只交给 Agent 判断。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-09-security-validation-for-third-party-coding-agents/",
+      articleIdea: "候选：第三方编码 Agent 安全验证上线后，团队还要人工检查什么"
+    },
+    {
       date: "2026-06-09",
       tag: "开发者大会",
       title: "Apple WWDC26 发布会开启，开发者更新集中落在 AI、Xcode 27 与 Swift",
@@ -3333,7 +3530,7 @@ git push origin main`,
       summary: "QwenLM/qwen-code 的 GitHub Releases 显示，v0.17.0 包含飞书 Channel adapter、遥测基础能力、open-computer-use MCP 零配置内置、上下文压缩重构等更新；5 月 31 日 nightly 继续修复 rewind 场景下的 compressed turn 误报。",
       why: "国内开源 AI 编程代理正在把终端、协作渠道、桌面操作和长会话上下文管理串起来，新手可以借它理解代理不是单一聊天窗口，而是一套持续迭代的开发工作流。",
       sourceLabel: "Qwen Code GitHub Releases",
-      sourceUrl: "https://github.com/QwenLM/qwen-code/releases",
+      sourceUrl: "https://github.com/QwenLM/qwen-code/releases/tag/v0.17.0",
       articleIdea: "选题：Qwen Code v0.17.0 新手观察：终端 AI 编程代理如何补齐协作、桌面能力和上下文压缩"
     },
     {
@@ -3343,7 +3540,7 @@ git push origin main`,
       summary: "Claude Code 5 月 31 日 v2.1.159 只写明是内部基础设施改进、没有用户侧变化；前一版 v2.1.158 则把 Auto mode 扩展到 Bedrock、Vertex 和 Foundry 上的 Opus 4.7/4.8，需要通过 CLAUDE_CODE_ENABLE_AUTO_MODE=1 启用。",
       why: "这类更新提醒新手区分“最新版本”和“值得学习的用户侧能力”：真正要理解的是 Auto mode、托管模型平台和本地工具调用之间的权限边界。",
       sourceLabel: "Claude Code GitHub Releases",
-      sourceUrl: "https://github.com/anthropics/claude-code/releases",
+      sourceUrl: "https://github.com/anthropics/claude-code/releases/tag/v2.1.159",
       articleIdea: "选题：Claude Code Auto mode 上云后，新手该怎样理解模型、权限和工具调用"
     },
     {
@@ -3363,7 +3560,7 @@ git push origin main`,
       summary: "Claude Code v2.1.157 的发布说明显示，本地 .claude/skills 中的插件现在可自动加载，新增 claude plugin init <name> 脚手架，并改进 /plugin 自动补全、agents 设置和 worktree 切换体验。",
       why: "这让重复提示、检查清单和团队流程更容易从聊天记录沉淀成可复用工具，适合扩成 Claude Code skills 与 plugins 的新手入门文章。",
       sourceLabel: "Claude Code GitHub Releases",
-      sourceUrl: "https://github.com/anthropics/claude-code/releases",
+      sourceUrl: "https://github.com/anthropics/claude-code/releases/tag/v2.1.157",
       articleIdea: "选题：Claude Code 本地 skills 和插件自动加载：新手怎么把重复工作流沉淀成工具"
     },
     {
@@ -3417,6 +3614,16 @@ git push origin main`,
       articleIdea: "选题：建站新手怎么看 serverless 调用计费：从 Vercel Functions per-unit pricing 说起"
     },
     {
+      date: "2026-05-29",
+      tag: "国内开源",
+      title: "Qwen Code 连续发布 5 月 28-29 日 nightly，继续打磨终端 AI 编程代理",
+      summary: "QwenLM/qwen-code 的 GitHub Releases 显示，项目在 5 月 28 日和 5 月 29 日连续发布 nightly 版本，包含 TUI、遥测、飞书通道、技能优化等改动。",
+      why: "这是国内开源 AI 编程代理持续迭代的信号，适合后续观察它如何从命令行工具扩展到团队协作和多通道工作流。",
+      sourceLabel: "Qwen Code GitHub Releases",
+      sourceUrl: "https://github.com/QwenLM/qwen-code/releases",
+      articleIdea: "选题：Qwen Code 新手观察：终端里的 AI 编程代理正在补哪些能力"
+    },
+    {
       date: "2026-05-28",
       tag: "开发工具",
       title: "VS Code 1.122 发布：Agents、离线 BYOK 和浏览器设备模拟继续增强",
@@ -3447,16 +3654,6 @@ git push origin main`,
       articleIdea: "选题：GitHub Copilot 和 AI Gateway 里怎么选择高阶编程模型"
     },
     {
-      date: "2026-05-29",
-      tag: "国内开源",
-      title: "Qwen Code 连续发布 5 月 28-29 日 nightly，继续打磨终端 AI 编程代理",
-      summary: "QwenLM/qwen-code 的 GitHub Releases 显示，项目在 5 月 28 日和 5 月 29 日连续发布 nightly 版本，包含 TUI、遥测、飞书通道、技能优化等改动。",
-      why: "这是国内开源 AI 编程代理持续迭代的信号，适合后续观察它如何从命令行工具扩展到团队协作和多通道工作流。",
-      sourceLabel: "Qwen Code GitHub Releases",
-      sourceUrl: "https://github.com/QwenLM/qwen-code/releases",
-      articleIdea: "选题：Qwen Code 新手观察：终端里的 AI 编程代理正在补哪些能力"
-    },
-    {
       date: "2026-05-28",
       tag: "代码质量",
       title: "CodeQL 2.25.5 改进 GitHub Actions 查询准确性",
@@ -3475,6 +3672,16 @@ git push origin main`,
       sourceLabel: "Arm Newsroom",
       sourceUrl: "https://newsroom.arm.com/blog/arm-empowers-developers-for-agentic-ai",
       articleIdea: "选题：AI Agent 应用为什么也要关心运行环境和硬件生态"
+    },
+    {
+      date: "2026-05-27",
+      tag: "今日观察",
+      title: "Google I/O 后，开发者工具正在从“写代码”转向“让智能体完成流程”",
+      summary: "Google 在 I/O 2026 开发者重点中强调 Gemini API、AI Studio、Antigravity 和 Chrome DevTools for agents，说明 AI 工具正在更深地进入本地开发、调试和上线流程。",
+      why: "适合写成一篇“AI 编程工具怎么选”的文章，也能自然连接到本站的 VS Code、Codex、GitHub Pages 教程。",
+      sourceLabel: "Google Developers Blog",
+      sourceUrl: "https://developers.googleblog.com/all-the-news-from-the-google-io-2026-developer-keynote/",
+      articleIdea: "选题：AI 编程代理入门：从提示词到真实开发流程"
     },
     {
       date: "2026-05-26",
@@ -3515,16 +3722,6 @@ git push origin main`,
       sourceLabel: "Vercel Changelog",
       sourceUrl: "https://vercel.com/changelog/firecrawl-joins-the-vercel-marketplace",
       articleIdea: "选题：AI 资料整理为什么需要网页抓取工具：从搜索到结构化数据"
-    },
-    {
-      date: "2026-05-27",
-      tag: "今日观察",
-      title: "Google I/O 后，开发者工具正在从“写代码”转向“让智能体完成流程”",
-      summary: "Google 在 I/O 2026 开发者重点中强调 Gemini API、AI Studio、Antigravity 和 Chrome DevTools for agents，说明 AI 工具正在更深地进入本地开发、调试和上线流程。",
-      why: "适合写成一篇“AI 编程工具怎么选”的文章，也能自然连接到本站的 VS Code、Codex、GitHub Pages 教程。",
-      sourceLabel: "Google Developers Blog",
-      sourceUrl: "https://developers.googleblog.com/all-the-news-from-the-google-io-2026-developer-keynote/",
-      articleIdea: "选题：AI 编程代理入门：从提示词到真实开发流程"
     },
     {
       date: "2026-05-26",
