@@ -9,7 +9,7 @@ const siteData = {
     bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
       { value: "6", label: "原创下载包" },
-      { value: "37", label: "新手专题" },
+      { value: "39", label: "新手专题" },
       { value: "持续", label: "更新与核验" }
     ],
     valueCards: [
@@ -28,6 +28,149 @@ const siteData = {
     ]
   },
   posts: [
+    {
+      id: "github-agentic-workflows-public-preview-guide",
+      title: "GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务",
+      date: "2026-06-12",
+      category: "AI 编程",
+      readTime: "10 分钟",
+      excerpt: "GitHub Agentic Workflows 已进入 public preview，可把自然语言 Markdown 编译为标准 Actions YAML，用编码 Agent 处理 issue 分类、CI 失败分析和文档更新；新手应从只读、小范围、可审查任务开始。",
+      tags: ["GitHub Actions", "Agentic Workflows", "自动化"],
+      featured: true,
+      intro: [
+        "传统 GitHub Actions 擅长执行确定步骤，例如安装依赖、运行测试和部署网站；但 issue 内容并不整齐，CI 失败原因也经常需要阅读日志后再判断。GitHub Agentic Workflows 把编码 Agent 放进 Actions，让自动化可以处理需要理解上下文和做出判断的工程任务。",
+        "GitHub 在 2026 年 6 月 11 日宣布 Agentic Workflows 进入 public preview。开发者使用自然语言 Markdown 描述任务，再由工具编译为标准 Actions YAML，因此仍可复用现有 runner group、仓库策略和 Actions 审批流程。官方列出的典型场景包括 issue 分类、CI 失败分析和文档更新。"
+      ],
+      audience: [
+        "已经使用 GitHub Actions，想尝试把重复分析任务交给编码 Agent 的新手",
+        "需要自动整理 issue、分析 CI 日志或维护文档，但希望保留人工审批的团队",
+        "正在评估 Agent 权限、沙箱、输出审查和费用边界的仓库维护者"
+      ],
+      format: [
+        "适合整理成“选低风险任务 / 写 Markdown / 编译工作流 / 检查权限 / 触发测试 / 审批输出”的入门路线",
+        "后续可以补一个只给 issue 添加建议标签、不直接修改代码的最小练习仓库"
+      ],
+      roadmap: [
+        "先选择容易验证、失败后影响较小的任务，例如为新 issue 建议标签、汇总 CI 失败日志或检查文档链接。不要把首次实验直接设为自动修改生产代码、自动合并 PR 或访问大量敏感数据。",
+        "按照官方 quickstart 安装并升级 Agentic Workflows CLI，用自然语言 Markdown 描述目标、输入、允许访问的内容和期望输出，再编译为 Actions YAML。提交前检查生成的工作流、锁文件、触发条件和权限，确认没有获得任务之外的写入能力。",
+        "运行后同时检查 Agent 日志、safe outputs、threat detection 结果和最终代码差异。即使工作流使用只读默认权限、沙箱与防火墙，仍应保留人工审批、测试和费用上限，并根据误判和失败记录逐步缩小或调整任务范围。"
+      ],
+      officialLinks: [
+        {
+          label: "GitHub Changelog：Agentic Workflows public preview",
+          url: "https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview/",
+          note: "包含公测状态、适用任务、Markdown 编译方式和分层安全控制。"
+        },
+        {
+          label: "GitHub Agentic Workflows：Quickstart",
+          url: "https://gh.io/gh-aw-quickstart",
+          note: "用于安装 CLI、创建并触发第一个 Agentic Workflow。"
+        },
+        {
+          label: "GitHub Changelog：使用 GITHUB_TOKEN",
+          url: "https://github.blog/changelog/2026-06-11-agentic-workflows-no-longer-need-a-personal-access-token/",
+          note: "说明怎样减少长期 PAT、启用组织计费并控制单次运行成本。"
+        }
+      ],
+      curatedLinks: [
+        "Agentic Workflows 目前处于 public preview，行为、配置和安全控制仍可能变化，重要仓库应从测试环境开始。",
+        "自然语言 Markdown 最终会编译为 Actions YAML；真正执行的触发条件、权限和步骤必须像普通工作流一样审查。",
+        "只读默认权限、沙箱、防火墙、safe outputs 和 threat detection 能降低风险，但不能替代人工审批、测试和业务规则检查。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Agentic Workflow 首次上线权限与审批清单",
+        "可以补一个 issue 分类、CI 日志分析和文档更新任务的风险分级模板"
+      ],
+      monetization: "适合承接 GitHub Actions、AI 编程、Agent 自动化、DevSecOps、CI/CD 和团队工程效率类资源位；也可以与本站的 Agent 沙箱、代码审查和 npm 安全文档互相推荐。",
+      extraSections: [
+        {
+          title: "最适合第一次尝试的任务",
+          items: [
+            "只读取 issue 内容并建议标签或负责人，不直接关闭 issue。",
+            "读取失败的 CI 日志并生成原因摘要，不自动修改保护分支。",
+            "检查文档链接、版本说明和待更新段落，再通过 PR 交给人工审核。"
+          ]
+        },
+        {
+          title: "上线前必须检查的四个边界",
+          items: [
+            "触发条件是否可能被外部用户或不可信内容反复触发。",
+            "工作流、工具和令牌是否只拥有完成任务所需的最小权限。",
+            "Agent 输出是否必须经过 safe outputs、测试与人工审批。",
+            "单次运行的模型、token、时间和组织费用是否设置了可接受上限。"
+          ]
+        }
+      ]
+    },
+    {
+      id: "github-copilot-cli-settings-guide",
+      title: "Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置",
+      date: "2026-06-12",
+      category: "AI 编程",
+      readTime: "8 分钟",
+      excerpt: "GitHub Copilot CLI 新增统一的 /settings 命令，可通过搜索界面、行内命令或脚本管理配置，并在写入前进行 schema 校验；新手可用它减少手改配置文件造成的拼写和类型错误。",
+      tags: ["GitHub Copilot CLI", "终端工具", "配置管理"],
+      featured: true,
+      intro: [
+        "终端 AI 工具的配置越来越多：主题、自动更新、streamer mode、会话同步、实验功能和其他行为可能分散在不同命令或配置文件里。手动编辑虽然灵活，却容易写错键名、值类型或 JSON 结构，导致下一次会话出现难以定位的问题。",
+        "GitHub 在 2026 年 6 月 11 日为 Copilot CLI 发布新的 `/settings` 命令。它把分散命令和原本需要手改文件的选项放到统一、由 schema 驱动的入口，并支持全屏搜索界面、行内设置、重置默认值与脚本调用。配置只有在解析并通过 schema 校验后才会写入。"
+      ],
+      audience: [
+        "正在学习 GitHub Copilot CLI，希望更稳妥管理配置的新手",
+        "需要在多台设备或多个会话中统一自动更新、同步和实验选项的开发者",
+        "想通过脚本设置 CLI，但不希望直接拼接或覆盖配置文件的团队"
+      ],
+      format: [
+        "适合整理成“升级 CLI / 浏览设置 / 搜索键名 / 修改与验证 / 重置默认值”的配置清单",
+        "后续可以补一份常用设置变更记录与故障回退模板"
+      ],
+      roadmap: [
+        "先运行 `copilot update` 升级 CLI，再执行 `/settings` 打开完整配置界面。使用搜索查找目标选项，阅读键名、说明和允许值，不要为了试用一次功能同时修改大量无关配置。",
+        "简单设置可以使用行内形式，例如 `/settings autoUpdate true`；需要回退时使用 `/settings reset` 或对具体键重置默认值。复杂 JSON 容器可以交给 `$EDITOR`，但保存前仍应检查作用域和最终内容。",
+        "设置写入后重新打开 `/settings` 核对结果，并启动一个低风险会话确认行为。对会话同步、实验功能和可能影响输出展示的选项，记录修改前后的值，出现异常时先回退单项而不是重装整个工具。"
+      ],
+      officialLinks: [
+        {
+          label: "GitHub Changelog：Copilot CLI /settings",
+          url: "https://github.blog/changelog/2026-06-11-copilot-cli-configure-everything-from-one-place-with-settings/",
+          note: "包含三种使用方式、编辑器类型、schema 校验与升级命令。"
+        },
+        {
+          label: "GitHub：Copilot CLI 仓库",
+          url: "https://github.com/github/copilot-cli",
+          note: "用于查看当前 CLI 使用说明、问题反馈和后续版本变化。"
+        }
+      ],
+      curatedLinks: [
+        "`/settings` 能减少手改文件错误，但不会自动判断某项配置是否适合你的隐私、费用或团队政策。",
+        "行内设置适合单项、可验证的修改；批量脚本修改前应先在测试环境确认键名和允许值。",
+        "实验功能和会话同步可能影响数据范围与使用体验，启用前应阅读说明并保留可回退记录。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Copilot CLI 常用设置与回退记录表",
+        "可以补一个终端 AI 工具配置变更审查清单"
+      ],
+      monetization: "适合承接 GitHub Copilot、终端效率、AI 编程、开发者培训和团队配置治理类资源位；也可以与本站的 Copilot CLI 安全审查和 Claude Code 故障排查文章互相推荐。",
+      extraSections: [
+        {
+          title: "三种使用方式怎样选",
+          items: [
+            "不知道键名或想全面浏览时，直接运行 `/settings` 使用搜索界面。",
+            "只修改一个明确设置时，使用 `/settings <key> <value>` 并立即验证。",
+            "需要自动化配置时，在 `copilot -p` 调用中设置单项，并保留日志与回退步骤。"
+          ]
+        },
+        {
+          title: "配置异常时的排查顺序",
+          items: [
+            "确认 CLI 已升级到包含 `/settings` 的最新版本。",
+            "检查最近修改的单个键和值类型，优先重置该项。",
+            "重新打开设置界面确认文件已通过 schema 校验并正确写入。",
+            "仍无法恢复时，再到官方仓库核对已知问题或提交最小复现。"
+          ]
+        }
+      ]
+    },
     {
       id: "github-copilot-cli-security-review-guide",
       title: "Copilot CLI 加入 /security-review：新手怎样把 AI 安全审查放到提交前",
@@ -3093,6 +3236,56 @@ git push origin main`,
     "common-programming-errors-fixes"
   ],
   hotspots: [
+    {
+      date: "2026-06-11",
+      tag: "AI Agent",
+      title: "GitHub Agentic Workflows 进入公测，可用 Markdown 定义推理型工程自动化",
+      summary: "GitHub Agentic Workflows 允许开发者用自然语言 Markdown 定义 issue 分类、CI 失败分析和文档更新等任务，再编译为标准 Actions YAML，复用现有 runner group 与策略约束。",
+      why: "Agent 现在可以进入熟悉的 Actions 工作流，但公测阶段更应从只读、小范围、可审查任务开始。官方提供只读默认权限、沙箱、防火墙、safe outputs 和 threat detection，团队仍需检查生成的 YAML、日志、测试与最终差异。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview/",
+      articleIdea: "选题：GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务"
+    },
+    {
+      date: "2026-06-11",
+      tag: "AI 编程",
+      title: "OpenAI 宣布拟收购 Ona，为 Codex 增加客户可控的持久云端执行环境",
+      summary: "OpenAI 宣布拟收购 Ona，并计划把其安全云端执行与编排技术带入 Codex，让 Agent 可在客户自己的云环境中持续工作，在笔记本关闭后仍保留工具、系统与上下文。",
+      why: "长时间 Agent 任务不仅需要模型能力，也需要明确的运行位置、凭据范围、活动日志和审查流程。该交易仍需满足惯常交割条件与监管批准，在完成前两家公司保持独立。",
+      sourceLabel: "OpenAI",
+      sourceUrl: "https://openai.com/index/openai-to-acquire-ona/",
+      articleIdea: "候选：长时间 AI Agent 为什么需要持久环境、最小权限与可审查日志"
+    },
+    {
+      date: "2026-06-11",
+      tag: "开发工具",
+      title: "GitHub Copilot CLI 新增 /settings，把分散配置集中到统一入口",
+      summary: "新的 `/settings` 命令支持全屏搜索界面、行内设置、重置默认值和脚本调用，可管理原本分散在独立命令或配置文件中的选项，并在写入前执行 schema 校验。",
+      why: "统一入口能减少新手猜键名、写错值类型和破坏配置文件的概率，也便于记录与回退单项修改；但会话同步、实验功能和其他敏感设置仍需按团队政策逐项判断。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-11-copilot-cli-configure-everything-from-one-place-with-settings/",
+      articleIdea: "选题：Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置"
+    },
+    {
+      date: "2026-06-11",
+      tag: "开发安全",
+      title: "GitHub Agentic Workflows 可使用内置 GITHUB_TOKEN，不再需要长期 PAT",
+      summary: "组织仓库中的 Agentic Workflow 现在可使用 GitHub Actions 内置 `GITHUB_TOKEN`，并通过 `copilot-requests: write` 权限把 AI credits 直接计入组织；官方同时提供 cost center 与单次运行费用控制。",
+      why: "减少长期 PAT 能降低密钥存储、轮换和泄露风险，但内置令牌仍应遵循最小权限。组织级计费不会参考用户级推理预算，启用前必须配置成本归属、运行上限和审查流程。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-11-agentic-workflows-no-longer-need-a-personal-access-token/",
+      articleIdea: "候选：Agentic Workflow 不再需要 PAT 后，怎样同时收紧权限与费用边界"
+    },
+    {
+      date: "2026-06-11",
+      tag: "CI/CD",
+      title: "github-actions[bot] 创建的 PR 经人工批准后可运行 CI/CD",
+      summary: "由 `github-actions[bot]` 创建的 PR 现在可在拥有仓库写权限的用户批准后运行 CI/CD，解决机器人改动可能在未经过 CI 的情况下被误合并的问题。",
+      why: "人工批准既让自动生成的改动可以接受正常测试，也防止未经审查的代码自动运行可能访问敏感信息的工作流。团队仍应把必需检查与分支保护配置为合并前门槛。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-11-bot-created-pull-requests-can-run-workflows-if-approved/",
+      articleIdea: "候选：机器人 PR 可以跑 CI 后，怎样设置审批与分支保护"
+    },
     {
       date: "2026-06-10",
       tag: "开发安全",
