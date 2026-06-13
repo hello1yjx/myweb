@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claude Code 2.1.169 增加安全模式：新手怎样排查插件、skills 和 MCP 冲突 | 学习资源库</title>
+  <meta name="description" content="Claude Code 2.1.169 新增 --safe-mode，可临时禁用 CLAUDE.md、插件、skills、hooks 和 MCP server，帮助判断卡顿或异常来自核心程序还是自定义配置。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/claude-code-safe-mode-troubleshooting-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Claude Code 2.1.169 增加安全模式：新手怎样排查插件、skills 和 MCP 冲突","description":"Claude Code 2.1.169 新增 --safe-mode，可临时禁用 CLAUDE.md、插件、skills、hooks 和 MCP server，帮助判断卡顿或异常来自核心程序还是自定义配置。","datePublished":"2026-06-09","dateModified":"2026-06-09","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/claude-code-safe-mode-troubleshooting-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 编程</span>
+      <h1>Claude Code 2.1.169 增加安全模式：新手怎样排查插件、skills 和 MCP 冲突</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-09">2026年6月9日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Claude Code 2.1.169 新增 --safe-mode，可临时禁用 CLAUDE.md、插件、skills、hooks 和 MCP server，帮助判断卡顿或异常来自核心程序还是自定义配置。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.169" target="_blank" rel="noreferrer">Claude Code GitHub Release：v2.1.169</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>终端 Agent 用久以后，项目说明、插件、skills、hooks 和 MCP server 会越来越多。当 Claude Code 启动变慢、工具没有加载、权限策略不生效或行为突然改变时，新手很难判断问题来自 Claude Code 本身，还是某个自定义配置。</p><p>Anthropic 在北京时间 2026 年 6 月 9 日发布 Claude Code 2.1.169，新增 `--safe-mode` 与 `CLAUDE_CODE_SAFE_MODE`，可在排查时禁用 CLAUDE.md、插件、skills、hooks 和 MCP server。版本还新增 `/cd` 命令，并修复 Windows 上 `claude -p` 启动缓慢、Git Credential Manager 弹窗、企业 MCP 策略重连执行等问题。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>安装过多个插件、skills、hooks 或 MCP server，遇到启动和行为异常的 Claude Code 用户</li><li>在 Windows、WSL 或企业托管环境中使用终端 Agent 的开发者</li><li>需要区分核心程序故障与项目自定义配置问题的团队管理员</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先保存当前工作并记录异常现象，包括启动耗时、错误文本、受影响项目和最近更新。不要一开始就删除配置，否则会失去复现问题的证据。</li><li>使用 `claude --safe-mode` 启动并重复最小操作。如果问题消失，说明更可能来自 CLAUDE.md、插件、skills、hooks 或 MCP；如果仍存在，再检查版本、网络、登录状态和官方 troubleshooting 文档。</li><li>最后逐组恢复自定义项，而不是一次全部开启。每恢复一组就重复测试，定位冲突后更新、修复或移除对应配置，并把可靠的最小复现和日志保留下来。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.169" target="_blank" rel="noreferrer">Claude Code GitHub Release：v2.1.169</a>
+              <span>：本次安全模式、/cd、Windows 修复与企业策略改进的原始发布说明。</span>
+            </li>
+
+            <li>
+              <a href="https://code.claude.com/docs/en/troubleshooting" target="_blank" rel="noreferrer">Claude Code Docs：Troubleshooting</a>
+              <span>：适合继续排查卡顿、资源占用、搜索和配置问题。</span>
+            </li>
+
+            <li>
+              <a href="https://code.claude.com/docs/en/settings" target="_blank" rel="noreferrer">Claude Code Docs：Settings</a>
+              <span>：适合核对插件、MCP、权限与托管设置。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>安全模式是诊断入口，不是长期绕过配置问题的替代方案。确认冲突后仍应修复或移除有问题的自定义项。</li><li>排查时不要删除包含团队规则的 CLAUDE.md 或托管策略；优先复制日志、记录版本并最小化复现。</li><li>`/cd` 可以在不中断 prompt cache 的情况下移动会话目录，但切换后仍要重新确认当前工作区和权限范围。</li></ul>
+
+        <h2>推荐的最小排查顺序</h2>
+
+        <ul><li>记录版本、项目目录、错误信息和最近配置变化。</li><li>用安全模式复现，判断问题是否来自自定义项。</li><li>逐组恢复 CLAUDE.md、插件、skills、hooks 和 MCP。</li><li>运行 `/doctor` 并对照官方 troubleshooting 文档。</li></ul>
+
+
+
+        <h2>不要在排查时忽略权限</h2>
+
+        <ul><li>安全模式会关闭扩展能力，正常模式恢复后权限面也会恢复。</li><li>企业托管 MCP 策略与项目本地设置应分别核对。</li><li>日志和配置可能包含路径、仓库信息或凭据线索，分享前要脱敏。</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Claude Code</span><span>安全模式</span><span>故障排查</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

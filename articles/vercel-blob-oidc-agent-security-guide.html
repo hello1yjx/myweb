@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vercel Blob 支持 OIDC：新手为什么要少用长期 Token，让函数和代理更安全 | 学习资源库</title>
+  <meta name="description" content="Vercel 2026 年 6 月 1 日宣布 Blob 支持 OIDC authentication，新项目默认使用短期、自动轮换的 Vercel-issued OIDC token，不再需要长期保存 BLOB_READ_WRITE_TOKEN。对新手建站和 AI 代理工作流来说，这是一次很实用的凭据安全提醒。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/vercel-blob-oidc-agent-security-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Vercel Blob 支持 OIDC：新手为什么要少用长期 Token，让函数和代理更安全","description":"Vercel 2026 年 6 月 1 日宣布 Blob 支持 OIDC authentication，新项目默认使用短期、自动轮换的 Vercel-issued OIDC token，不再需要长期保存 BLOB_READ_WRITE_TOKEN。对新手建站和 AI 代理工作流来说，这是一次很实用的凭据安全提醒。","datePublished":"2026-06-02","dateModified":"2026-06-02","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/vercel-blob-oidc-agent-security-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">建站工具</span>
+      <h1>Vercel Blob 支持 OIDC：新手为什么要少用长期 Token，让函数和代理更安全</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-02">2026年6月2日</time>
+        <span>8 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Vercel 2026 年 6 月 1 日宣布 Blob 支持 OIDC authentication，新项目默认使用短期、自动轮换的 Vercel-issued OIDC token，不再需要长期保存 BLOB_READ_WRITE_TOKEN。对新手建站和 AI 代理工作流来说，这是一次很实用的凭据安全提醒。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://vercel.com/changelog/vercel-blob-now-supports-oidc-authentication" target="_blank" rel="noreferrer">Vercel Changelog：Vercel Blob now supports OIDC authentication</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>很多新手第一次做网站上传功能、资源库或后台管理时，会把存储服务的长期 Token 放进环境变量，然后长期不再检查。这个做法简单，但风险也很直接：一旦 Token 泄露，别人可能在很长时间内继续访问或修改你的存储内容。</p><p>Vercel 在 2026 年 6 月 1 日的 Changelog 中宣布，Vercel Blob 支持 OIDC authentication，并且新连接项目默认使用这种方式。官方说明里最关键的一点是：Vercel-issued OIDC tokens 是短期的，并会自动轮换，因此不再需要长期的 BLOB_READ_WRITE_TOKEN。对正在接入 AI 代理、CLI 自动化或上传功能的新手来说，这条更新值得认真看。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>正在用 Vercel Blob 做图片、附件、静态资源或上传功能的新手站长</li><li>希望让 CLI、脚本或 AI 代理访问私有存储，但又不想长期暴露 Token 的开发者</li><li>正在学习环境变量、OIDC、短期凭据和最小权限原则的前端或全栈新手</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先理解风险：长期 Token 像一把长期有效的钥匙，泄露后需要手动轮换，否则风险会持续存在。</li><li>再理解 OIDC：让平台按需要发放短期、自动轮换的凭据，减少你手动保存和分发密钥的机会。</li><li>最后检查工作流：函数、CLI 和代理都应该只拿到当前任务需要的权限，尤其不要把生产存储 Token 粘贴进聊天窗口或日志里。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://vercel.com/changelog/vercel-blob-now-supports-oidc-authentication" target="_blank" rel="noreferrer">Vercel Changelog：Vercel Blob now supports OIDC authentication</a>
+              <span>：说明 Blob OIDC 默认设置、短期 token、升级方式，以及 CLI 如何读取同一组环境变量。</span>
+            </li>
+
+            <li>
+              <a href="https://vercel.com/blob" target="_blank" rel="noreferrer">Vercel Blob</a>
+              <span>：适合继续了解 Vercel Blob 的定位、存储场景和产品入口。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>如果你的项目还在长期保存 BLOB_READ_WRITE_TOKEN，先确认是否能升级到 OIDC，并记录升级前后的环境变量变化。</li><li>AI 代理可以帮你运行 CLI、列文件或上传测试文件，但它不应该看到与任务无关的生产密钥。</li><li>短期凭据不是万能安全方案，仍然需要配合最小权限、日志脱敏、分环境管理和人工审批。</li></ul>
+
+        <h2>升级前先确认</h2>
+
+        <ul><li>项目是否已经使用最新版 @vercel/blob。</li><li>Blob store 是否已经在 Vercel 控制台里切换到 OIDC。</li><li>本地 CLI、部署函数和代理任务是否还依赖旧的长期 Token。</li></ul>
+
+
+
+        <h2>给 AI 代理的边界</h2>
+
+        <ul><li>只允许它在测试项目或低风险目录里操作存储。</li><li>让它执行前先列出计划使用的命令和目标资源。</li><li>涉及删除、覆盖和生产数据读取时，必须停下来等人工确认。</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Vercel Blob</span><span>OIDC</span><span>建站安全</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

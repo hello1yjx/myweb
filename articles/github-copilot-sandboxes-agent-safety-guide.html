@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitHub Copilot 沙箱公测：新手怎么让 AI 代理在更可控的环境里运行命令 | 学习资源库</title>
+  <meta name="description" content="GitHub 2026 年 6 月 2 日 Changelog 宣布，GitHub Copilot 的本地和云端 sandboxes 进入 public preview。Copilot 可以在受隔离的本机环境或 GitHub 托管的临时 Linux 云环境中运行工具和命令，这让新手更容易理解 AI 代理为什么需要权限边界。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/github-copilot-sandboxes-agent-safety-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"GitHub Copilot 沙箱公测：新手怎么让 AI 代理在更可控的环境里运行命令","description":"GitHub 2026 年 6 月 2 日 Changelog 宣布，GitHub Copilot 的本地和云端 sandboxes 进入 public preview。Copilot 可以在受隔离的本机环境或 GitHub 托管的临时 Linux 云环境中运行工具和命令，这让新手更容易理解 AI 代理为什么需要权限边界。","datePublished":"2026-06-03","dateModified":"2026-06-03","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/github-copilot-sandboxes-agent-safety-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 编程</span>
+      <h1>GitHub Copilot 沙箱公测：新手怎么让 AI 代理在更可控的环境里运行命令</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-03">2026年6月3日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>GitHub 2026 年 6 月 2 日 Changelog 宣布，GitHub Copilot 的本地和云端 sandboxes 进入 public preview。Copilot 可以在受隔离的本机环境或 GitHub 托管的临时 Linux 云环境中运行工具和命令，这让新手更容易理解 AI 代理为什么需要权限边界。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://github.blog/changelog/2026-06-02-cloud-and-local-sandboxes-for-github-copilot-now-in-public-preview/" target="_blank" rel="noreferrer">GitHub Changelog：Cloud and local sandboxes for GitHub Copilot</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>AI 编程代理越来越常见，但很多新手最容易忽略的问题是：当代理开始运行命令、改文件、访问网络时，它已经不只是“给建议”的聊天工具了。GitHub 2026 年 6 月 2 日宣布 Copilot 的本地和云端 sandboxes 进入 public preview，正好把这个问题摆到台面上。</p><p>GitHub 的说明里有两个重点：本地沙箱可以限制 Copilot 发起的 shell 命令对文件系统、网络和系统能力的访问；云端沙箱则通过 `copilot --cloud` 启动一个 GitHub 托管的、临时的 Linux 环境。对新手来说，最实用的理解是：把 AI 代理放进受控环境，不等于完全没有风险，但能让试错、并行任务和命令执行更容易管理。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>正在尝试 GitHub Copilot CLI、云端代理或桌面代理的新手开发者</li><li>希望让 AI 代理帮忙跑测试、执行脚本、修改项目，但担心权限过大的站长</li><li>维护团队仓库、需要给代理执行命令设边界的开发者和管理员</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先理解本地沙箱：它限制的是 Copilot 在当前会话里发起的命令执行，让代理不能随意触碰无关文件、网络或系统能力。</li><li>再理解云端沙箱：它把任务放到 GitHub 托管的临时 Linux 环境中，适合并行运行、跨设备继续和减少本机资源占用。</li><li>最后建立任务分级：文档整理、测试运行、低风险脚本可以更自动；删除、覆盖、密钥、生产配置和付费资源必须人工确认。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://github.blog/changelog/2026-06-02-cloud-and-local-sandboxes-for-github-copilot-now-in-public-preview/" target="_blank" rel="noreferrer">GitHub Changelog：Cloud and local sandboxes for GitHub Copilot</a>
+              <span>：本次本地和云端 Copilot sandboxes public preview 的原始来源。</span>
+            </li>
+
+            <li>
+              <a href="https://news.microsoft.com/build-2026/" target="_blank" rel="noreferrer">Microsoft Build 2026</a>
+              <span>：Build 2026 官方汇总页，包含 GitHub Copilot、代理和开发平台相关发布入口。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>沙箱不是让代理完全可信，而是给代理执行命令时增加隔离层和策略边界。</li><li>第一次试用时，建议选择没有生产数据的小仓库，让代理只跑测试、读错误日志或改一个小问题。</li><li>团队使用时要同步关注策略、身份、日志和成本：代理能做什么、谁批准、执行结果在哪里看，都要提前约定。</li></ul>
+
+        <h2>适合先放进沙箱的任务</h2>
+
+        <ul><li>运行测试、lint 或构建命令，并把失败原因整理成清单。</li><li>在临时环境里复现一个 bug，记录命令、日志和最小复现步骤。</li><li>让代理尝试一个小修复，再由人工检查 diff 和运行结果。</li></ul>
+
+
+
+        <h2>仍然不建议直接自动化的动作</h2>
+
+        <ul><li>删除大量文件、覆盖数据库、改生产环境变量或操作真实支付配置。</li><li>把长期有效的密钥、Token、客户数据或私人文件交给代理处理。</li><li>在没有日志、没有回滚方案、没有人工复核的仓库里运行复杂自动化。</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>GitHub Copilot</span><span>沙箱</span><span>AI Agent</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

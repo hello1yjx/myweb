@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claude Code 2.1.166 增加回退模型：新手怎样兼顾可用性和权限安全 | 学习资源库</title>
+  <meta name="description" content="Claude Code 2.1.166 可配置最多三个回退模型，并加强 deny 规则与跨会话消息权限。更新也修复了 Windows PowerShell 命令验证可能长时间挂起的问题。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/claude-code-fallback-model-permission-safety-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Claude Code 2.1.166 增加回退模型：新手怎样兼顾可用性和权限安全","description":"Claude Code 2.1.166 可配置最多三个回退模型，并加强 deny 规则与跨会话消息权限。更新也修复了 Windows PowerShell 命令验证可能长时间挂起的问题。","datePublished":"2026-06-07","dateModified":"2026-06-07","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/claude-code-fallback-model-permission-safety-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 编程</span>
+      <h1>Claude Code 2.1.166 增加回退模型：新手怎样兼顾可用性和权限安全</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-07">2026年6月7日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Claude Code 2.1.166 可配置最多三个回退模型，并加强 deny 规则与跨会话消息权限。更新也修复了 Windows PowerShell 命令验证可能长时间挂起的问题。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.166" target="_blank" rel="noreferrer">Claude Code GitHub Release：v2.1.166</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>AI 编程代理执行长任务时，主模型过载或暂时不可用会让工作中断。直接无限重试不可靠，临时换模型又可能改变输出质量、成本和工具行为。Claude Code 2.1.166 新增 `fallbackModel` 设置，让用户可以按顺序配置最多三个回退模型，并把 `--fallback-model` 扩展到交互会话。</p><p>这次更新同时加强了权限边界：deny 规则的工具名称位置支持 glob，`"*"` 可以拒绝全部工具；其他 Claude 会话通过 `SendMessage` 转发的消息不再携带用户权限，接收会话会拒绝被转发的权限请求，自动模式也会阻止这类请求。Windows 用户还获得了 PowerShell 命令验证挂起修复。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>使用 Claude Code 处理长任务、远程会话或后台 Agent 的开发者</li><li>需要在模型可用性、成本、输出质量和权限边界之间做取舍的团队</li><li>想理解回退模型为什么不能替代错误处理和人工复核的新手</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先把回退模型当作可用性策略，而不是质量保证。选择能力和工具支持相近的模型，记录顺序、成本和适用任务，并用一个可重复的小任务验证模型切换后的输出。</li><li>再收紧工具权限。对不需要工具的会话使用明确 deny 规则；需要工具时按任务最小化开放，尤其要审查 Bash、文件写入、网络访问和 MCP。不要依赖跨会话消息替你批准权限。</li><li>最后处理失败和复核。官方说明意外的非重试错误会在回退模型上重试一次，但认证、限流、请求大小和传输错误仍会直接返回。自动化应识别错误类型，而不是把所有失败都交给回退模型。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.166" target="_blank" rel="noreferrer">Claude Code GitHub Release：v2.1.166</a>
+              <span>：回退模型、deny 规则、跨会话权限和 Windows 修复的官方发布说明。</span>
+            </li>
+
+            <li>
+              <a href="https://code.claude.com/docs/en/settings" target="_blank" rel="noreferrer">Claude Code Docs：Settings</a>
+              <span>：适合继续查看用户、项目和托管设置的作用范围。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>回退模型只能处理部分模型不可用问题。认证失败、限流、请求过大和网络传输错误仍需要单独处理。</li><li>模型切换可能改变回答风格、推理深度、工具选择和成本。对关键任务要保留输入、输出和人工复核记录。</li><li>跨会话消息不再携带用户权限是重要安全边界。不要设计成让一个 Agent 替另一个 Agent 自动批准高风险操作。</li></ul>
+
+        <h2>回退模型上线前先验证</h2>
+
+        <ul><li>主模型不可用时是否按预期切换。</li><li>回退模型是否支持任务需要的工具和上下文。</li><li>输出质量、速度和成本是否仍在可接受范围。</li><li>失败日志是否能说明实际使用了哪个模型。</li></ul>
+
+
+
+        <h2>权限规则要避免两个误区</h2>
+
+        <ul><li>不要因为配置了回退模型，就给所有模型开放相同的高风险工具。</li><li>不要把跨会话消息视为用户确认；高风险操作仍需真实用户或受控策略批准。</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Claude Code</span><span>回退模型</span><span>权限安全</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Google Colab CLI 发布：新手怎样让本地脚本和 AI Agent 使用远程 GPU | 学习资源库</title>
+  <meta name="description" content="Google 2026 年 6 月 5 日发布 Colab CLI，可从终端申请 CPU、GPU 或 TPU，远程执行本地 Python 脚本，下载结果并导出运行日志。它也附带 agent skill，但目前只支持 Linux 和 macOS。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/google-colab-cli-agent-remote-compute-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Google Colab CLI 发布：新手怎样让本地脚本和 AI Agent 使用远程 GPU","description":"Google 2026 年 6 月 5 日发布 Colab CLI，可从终端申请 CPU、GPU 或 TPU，远程执行本地 Python 脚本，下载结果并导出运行日志。它也附带 agent skill，但目前只支持 Linux 和 macOS。","datePublished":"2026-06-07","dateModified":"2026-06-07","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/google-colab-cli-agent-remote-compute-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">开发工具</span>
+      <h1>Google Colab CLI 发布：新手怎样让本地脚本和 AI Agent 使用远程 GPU</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-07">2026年6月7日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Google 2026 年 6 月 5 日发布 Colab CLI，可从终端申请 CPU、GPU 或 TPU，远程执行本地 Python 脚本，下载结果并导出运行日志。它也附带 agent skill，但目前只支持 Linux 和 macOS。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://developers.googleblog.com/introducing-the-google-colab-cli/" target="_blank" rel="noreferrer">Google Developers Blog：Introducing the Google Colab CLI</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>很多新手第一次需要 GPU 时，会在“本地电脑跑不动”和“云平台配置太复杂”之间卡住。Google 新发布的 Colab CLI 把 Colab 远程运行环境带进终端：你可以在本地写脚本，再通过命令申请 GPU、安装依赖、执行代码、下载产物，最后释放运行环境。</p><p>Google Developers Blog 在 2026 年 6 月 5 日宣布 Colab CLI。官方仓库说明它支持 CPU、T4、L4、G4、H100、A100 和 TPU 等运行环境，也能执行 Python、Notebook 或标准输入代码，并导出 `.ipynb`、Markdown 和 JSONL 日志。需要注意的是，当前版本只支持 Linux 和 macOS，Windows 尚未支持。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>本地电脑缺少 GPU，但想学习模型训练、数据处理或机器学习的新手</li><li>希望从终端或自动化脚本调用 Colab 远程算力的开发者</li><li>想让 Codex、Claude Code 等终端 Agent 执行可回收远程任务的人</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先安装 CLI 并从最小 CPU 会话开始。使用 `uv tool install google-colab-cli` 或 `pip install google-colab-cli`，运行 `colab new` 后，用简单 Python 输出验证认证、连接和会话状态。</li><li>再把耗时脚本交给远程环境。需要加速器时使用 `colab new --gpu T4` 等命令，安装依赖后通过 `colab exec -f script.py` 执行；如果只是一次性任务，可以用 `colab run --gpu T4 script.py` 自动创建和释放环境。</li><li>最后回收产物与证据。使用 `colab download` 下载模型或数据，用 `colab log` 导出可复查日志，并运行 `colab stop` 释放资源。不要把会话令牌、凭据或不需要的敏感数据交给 Agent。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://developers.googleblog.com/introducing-the-google-colab-cli/" target="_blank" rel="noreferrer">Google Developers Blog：Introducing the Google Colab CLI</a>
+              <span>：Colab CLI 发布公告，包含远程执行和 Agent 工作流示例。</span>
+            </li>
+
+            <li>
+              <a href="https://github.com/googlecolab/google-colab-cli" target="_blank" rel="noreferrer">Google Colab CLI GitHub 仓库</a>
+              <span>：适合查看安装方式、平台限制、命令列表和完整示例。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>Colab CLI 当前只支持 Linux 和 macOS。Windows 用户不要直接照搬安装步骤，可以等待官方支持或在可控的 Linux 环境中测试。</li><li>远程执行不等于自动保存所有内容。重要模型、数据和日志要显式下载或导出，并确认会话停止后哪些文件会消失。</li><li>让 AI Agent 调用 CLI 前，先限制它能使用的命令、算力和数据范围，并保留日志与停止步骤，避免任务失控或资源持续占用。</li></ul>
+
+        <h2>第一次尝试建议只做五步</h2>
+
+        <ul><li>创建一个最小会话并确认状态。</li><li>运行只输出环境信息的 Python 脚本。</li><li>安装一个小型依赖并再次执行。</li><li>导出日志和一个测试文件。</li><li>停止会话并确认资源已释放。</li></ul>
+
+
+
+        <h2>交给 Agent 前要设的边界</h2>
+
+        <ul><li>限定可申请的 GPU 类型、任务时长和下载目录。</li><li>不要把长期凭据、隐私数据和生产数据直接放进远程会话。</li><li>要求 Agent 返回命令、日志、产物路径和停止结果。</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Google Colab</span><span>CLI</span><span>远程 GPU</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

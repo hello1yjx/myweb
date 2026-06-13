@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenAI Codex 支持 Windows Computer Use 和远程控制：新手怎么把本机代理用稳 | 学习资源库</title>
+  <meta name="description" content="OpenAI 在 2026 年 5 月 29 日的 ChatGPT Release Notes 中更新 Codex：Codex app 支持 Windows Computer Use，用户还可以从手机或 Mac 远程查看进度、继续线程并处理提示。本文把它整理成适合新手理解本机 AI 代理的入门指南。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/openai-codex-windows-remote-control-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"OpenAI Codex 支持 Windows Computer Use 和远程控制：新手怎么把本机代理用稳","description":"OpenAI 在 2026 年 5 月 29 日的 ChatGPT Release Notes 中更新 Codex：Codex app 支持 Windows Computer Use，用户还可以从手机或 Mac 远程查看进度、继续线程并处理提示。本文把它整理成适合新手理解本机 AI 代理的入门指南。","datePublished":"2026-05-31","dateModified":"2026-05-31","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/openai-codex-windows-remote-control-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 工具</span>
+      <h1>OpenAI Codex 支持 Windows Computer Use 和远程控制：新手怎么把本机代理用稳</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-05-31">2026年5月31日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>OpenAI 在 2026 年 5 月 29 日的 ChatGPT Release Notes 中更新 Codex：Codex app 支持 Windows Computer Use，用户还可以从手机或 Mac 远程查看进度、继续线程并处理提示。本文把它整理成适合新手理解本机 AI 代理的入门指南。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank" rel="noreferrer">OpenAI Help：ChatGPT Release Notes</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>AI 编程代理正在从“帮我改代码”变成“看见我的开发环境、点击应用、运行服务并等待我远程接管”的工作流。OpenAI 2026 年 5 月 29 日的发布说明把这个变化讲得很清楚：Codex app 现在支持 Windows Computer Use，并且可以让用户从 iOS、Android、Mac 继续查看和控制同一条 Codex 线程。</p><p>对新手来说，这个热点不只是多了一个按钮，而是提醒我们重新整理本机代理的使用边界：项目文件、shell、应用服务器和本地上下文仍然在 Windows 主机上；远程端更适合看进度、回复提示和做方向调整。把这个边界想清楚，才能既提高效率，又避免把账号、文件和系统权限交给不清楚的任务。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>第一次尝试让 AI 代理操作本机应用、浏览器或桌面工具的新手</li><li>想在外出时继续查看 Codex 任务进度、回复确认提示的开发者</li><li>维护个人站点、脚本或小型项目，希望让 AI 帮忙测试和调试的站长</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先把 Windows 机器看作真正的工作主机，项目文件、终端、应用服务器和本地上下文都在这里。</li><li>再把手机、Mac 或 ChatGPT 端看作远程驾驶位，用来查看进度、继续线程、回复提示和调整方向。</li><li>最后给每类任务设边界：测试和调试可以开放更多操作，涉及账号、支付、生产数据时必须停下来人工确认。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank" rel="noreferrer">OpenAI Help：ChatGPT Release Notes</a>
+              <span>：本次 Codex Windows Computer Use、远程控制和 Profiles 更新的原始来源。</span>
+            </li>
+
+            <li>
+              <a href="https://developers.openai.com/codex/app/computer-use" target="_blank" rel="noreferrer">OpenAI Developers：Computer Use</a>
+              <span>：适合继续了解 Codex app 里 Computer Use 的入口和使用方式。</span>
+            </li>
+
+            <li>
+              <a href="https://developers.openai.com/codex/remote-connections" target="_blank" rel="noreferrer">OpenAI Developers：Remote connections</a>
+              <span>：适合查看远程连接、接管和跨设备继续工作的官方说明。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>不要把远程控制理解成“手机在跑代码”。真正执行项目的仍然是 Windows 主机，远程端只是继续同一条工作线程。</li><li>第一次使用时，优先选择低风险任务，例如打开本地预览、跑测试、复现界面问题、整理错误日志。</li><li>把高风险动作写进提示里的禁止清单：不要操作真实支付、不要改生产配置、不要访问无关私人文件。</li></ul>
+
+        <h2>新手最适合先试的三个任务</h2>
+
+        <ul><li>让 Codex 打开本地预览页面，复现一个样式或交互问题。</li><li>让 Codex 在终端运行静态检查，把失败命令、错误位置和建议修复列出来。</li><li>外出时从手机查看任务是否卡在确认提示，再决定继续、暂停或要求它总结当前状态。</li></ul>
+
+
+
+        <h2>使用前先写清楚的边界</h2>
+
+        <ul><li>哪些目录可以读取和修改，哪些目录绝对不要碰。</li><li>哪些命令可以自动运行，哪些命令必须先征得人工确认。</li><li>遇到登录页、支付页、真实用户数据或生产密钥时，必须停止并汇报。</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>OpenAI Codex</span><span>Computer Use</span><span>远程控制</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

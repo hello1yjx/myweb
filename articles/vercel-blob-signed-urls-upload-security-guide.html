@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vercel Blob signed URLs：新手怎么给上传、下载和删除操作收窄权限 | 学习资源库</title>
+  <meta name="description" content="Vercel 2026 年 6 月 2 日宣布 Blob 支持 signed URLs。开发者可以生成有时限、按操作和路径收窄范围的 URL，让浏览器直接上传、下载、检查或删除特定对象，而不需要把整个 Blob store 的长期 Token 暴露出去。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/vercel-blob-signed-urls-upload-security-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Vercel Blob signed URLs：新手怎么给上传、下载和删除操作收窄权限","description":"Vercel 2026 年 6 月 2 日宣布 Blob 支持 signed URLs。开发者可以生成有时限、按操作和路径收窄范围的 URL，让浏览器直接上传、下载、检查或删除特定对象，而不需要把整个 Blob store 的长期 Token 暴露出去。","datePublished":"2026-06-04","dateModified":"2026-06-04","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/vercel-blob-signed-urls-upload-security-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">建站工具</span>
+      <h1>Vercel Blob signed URLs：新手怎么给上传、下载和删除操作收窄权限</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-04">2026年6月4日</time>
+        <span>8 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Vercel 2026 年 6 月 2 日宣布 Blob 支持 signed URLs。开发者可以生成有时限、按操作和路径收窄范围的 URL，让浏览器直接上传、下载、检查或删除特定对象，而不需要把整个 Blob store 的长期 Token 暴露出去。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://vercel.com/changelog/signed-urls-are-now-available-for-vercel-blob" target="_blank" rel="noreferrer">Vercel Changelog：Signed URLs are now available for Vercel Blob</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>做个人网站、资源库或后台上传功能时，很多新手会遇到一个矛盾：前端浏览器需要上传图片或下载附件，但你又不想把存储服务的完整权限交给浏览器。Vercel 2026 年 6 月 2 日发布的 Blob signed URLs，正好解决的是这个边界问题。</p><p>signed URL 可以理解成一张临时通行证。它只允许某个操作，例如上传、下载、检查或删除；只对应一个 pathname；并且有过期时间，最长可以设到 7 天。这样浏览器可以直接把文件传到 Blob，或者读取一个指定文件，但拿不到整个 store 的长期读写 Token。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>正在给个人网站、作品集、资料库或管理后台做文件上传的新手</li><li>想把图片、发票、头像、下载资源等放到 Vercel Blob，但担心前端权限过大的站长</li><li>正在学习 OIDC、短期凭据、对象存储和上传安全边界的前端或全栈开发者</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先理解作用域：signed URL 应该绑定具体操作、具体 pathname 和具体过期时间，不要把完整存储权限交给浏览器。</li><li>再理解前后端分工：服务端通过 OIDC 或安全凭据生成签名，浏览器只拿到临时 URL 去完成这一次上传、下载或删除。</li><li>最后关注并发和误删：删除 URL 可以配合 ifMatch，只有对象版本没有变化时才执行，避免签名后文件已被覆盖还继续删除。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://vercel.com/changelog/signed-urls-are-now-available-for-vercel-blob" target="_blank" rel="noreferrer">Vercel Changelog：Signed URLs are now available for Vercel Blob</a>
+              <span>：本次 signed URLs 功能发布的原始来源，说明 put、get、head、delete、过期时间和 OIDC 配合。</span>
+            </li>
+
+            <li>
+              <a href="https://vercel.com/docs/vercel-blob/vercel-signed-urls" target="_blank" rel="noreferrer">Vercel Docs：Vercel Blob signed URLs</a>
+              <span>：适合继续查看签名 URL 的具体用法和代码入口。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>不要让浏览器持有长期 BLOB_READ_WRITE_TOKEN。浏览器只应该拿到短期、受限、任务相关的 URL。</li><li>上传 URL 适合头像、图片、附件这类单次任务；真正的权限判断和路径生成仍应放在服务端。</li><li>删除操作要更谨慎。建议配合 ifMatch、日志和人工确认，避免用户或代理误删已经变化的对象。</li></ul>
+
+        <h2>第一次接入先做这几步</h2>
+
+        <ul><li>把 @vercel/blob 升级到支持 signed URLs 的版本。</li><li>在服务端生成只允许单个操作和单个 pathname 的签名 URL。</li><li>让浏览器用这个临时 URL 上传或读取文件，然后在过期后重新申请。</li></ul>
+
+
+
+        <h2>哪些场景特别适合</h2>
+
+        <ul><li>用户上传头像、封面图、作业附件或报名材料。</li><li>给登录用户提供短期下载链接，而不是长期公开文件地址。</li><li>让 AI 代理或自动化脚本只处理一个低风险对象，不接触整个存储空间。</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Vercel Blob</span><span>Signed URL</span><span>建站安全</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

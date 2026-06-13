@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260612-hotspots">
+  <link rel="stylesheet" href="assets/styles.css?v=20260613-quality">
 </head>
 <body>
   <header class="site-header">
@@ -31,7 +31,7 @@
         <a href="resources.html">资源下载</a>
         <a href="projects.html">项目实战</a>
         <a href="hotspots.html">AI 专区</a>
-        <a href="contact.html">打赏联系</a>
+        <a href="contact.html">联系</a>
       </nav>
     </div>
   </header>
@@ -41,7 +41,7 @@
       <div class="page-hero__panel reveal">
         <p class="eyebrow">Posts</p>
         <h1>先从最容易上手的资源型内容开始，再逐步扩成真正好用的教程库。</h1>
-        <p>这里的文章优先服务新手读者，重点整理官方入口、学习路径、工具资料和后续可扩展的下载内容。</p>
+        <p>每篇文章保留一手来源，并补充适用场景、限制条件、实践步骤和核验清单。</p>
       </div>
     </section>
 
@@ -55,7 +55,604 @@
           <input class="filter-input" type="search" placeholder="例如：GitHub Pages、Python、AI 工具" data-post-filter>
         </label>
       </div>
-      <div class="content-grid" data-post-list></div>
+      <div class="content-grid" data-post-list>
+        <!-- STATIC_POSTS_START -->
+<article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/vercel-ai-sdk-harnessagent-beginner-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-13">2026年6月13日</time>
+        </div>
+        <h3><a href="articles/vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a></h3>
+        <p>Vercel AI SDK 7 的实验性 HarnessAgent 用统一接口连接 Claude Code、Codex 与 Pi，并统一处理沙箱、会话、权限、skills 和子 Agent；新手应先从可销毁沙箱和单一任务开始验证。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--github" href="articles/github-copilot-code-review-controls-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>开发安全</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>开发安全</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-13">2026年6月13日</time>
+        </div>
+        <h3><a href="articles/github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a></h3>
+        <p>GitHub Copilot Code Review 新增组织级 Runner 默认值与锁定、内容排除支持，并移除仓库自定义指令的 4000 字符读取上限；团队应把运行环境、可见内容与审查规则分开配置和验证。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/github-agentic-workflows-public-preview-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-12">2026年6月12日</time>
+        </div>
+        <h3><a href="articles/github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a></h3>
+        <p>GitHub Agentic Workflows 已进入 public preview，可把自然语言 Markdown 编译为标准 Actions YAML，用编码 Agent 处理 issue 分类、CI 失败分析和文档更新；新手应从只读、小范围、可审查任务开始。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/github-copilot-cli-settings-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>8 分钟</span>
+          <time datetime="2026-06-12">2026年6月12日</time>
+        </div>
+        <h3><a href="articles/github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a></h3>
+        <p>GitHub Copilot CLI 新增统一的 /settings 命令，可通过搜索界面、行内命令或脚本管理配置，并在写入前进行 schema 校验；新手可用它减少手改配置文件造成的拼写和类型错误。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--github" href="articles/github-copilot-cli-security-review-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>开发安全</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>开发安全</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-11">2026年6月11日</time>
+        </div>
+        <h3><a href="articles/github-copilot-cli-security-review-guide.html">Copilot CLI 加入 /security-review：新手怎样把 AI 安全审查放到提交前</a></h3>
+        <p>GitHub Copilot CLI 新增实验性 /security-review，可分析本地代码改动并给出高置信度安全发现；它适合做提交前补充检查，但不能替代测试、CodeQL、依赖与密钥扫描。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--github" href="articles/npm-v12-install-security-migration-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>开发安全</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>开发安全</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-11">2026年6月11日</time>
+        </div>
+        <h3><a href="articles/npm-v12-install-security-migration-guide.html">npm v12 将默认阻止依赖脚本与远程依赖：新手升级前检查清单</a></h3>
+        <p>npm v12 预计于 2026 年 7 月发布，将默认关闭依赖安装脚本，并默认禁止 Git 与远程 URL 依赖；项目可先升级到 npm 11.16.0，根据警告建立可信允许列表。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--git" href="articles/xcode-27-agentic-coding-beginner-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="开发工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>开发工具</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>开发工具</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-09">2026年6月9日</time>
+        </div>
+        <h3><a href="articles/xcode-27-agentic-coding-beginner-guide.html">Xcode 27 把 Agent 放进编辑器：新手怎样先审计划、再验证界面</a></h3>
+        <p>Apple 在 WWDC26 发布 Xcode 27 beta，加入可编辑计划、编辑器内 Agent 会话、模拟器操作、截图验证、插件与 MCP 扩展；新手应先把它当成需要审查和测试的协作工具。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/claude-code-safe-mode-troubleshooting-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-09">2026年6月9日</time>
+        </div>
+        <h3><a href="articles/claude-code-safe-mode-troubleshooting-guide.html">Claude Code 2.1.169 增加安全模式：新手怎样排查插件、skills 和 MCP 冲突</a></h3>
+        <p>Claude Code 2.1.169 新增 --safe-mode，可临时禁用 CLAUDE.md、插件、skills、hooks 和 MCP server，帮助判断卡顿或异常来自核心程序还是自定义配置。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/cloudflare-ai-gateway-spend-limits-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 工具</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 工具</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-08">2026年6月8日</time>
+        </div>
+        <h3><a href="articles/cloudflare-ai-gateway-spend-limits-guide.html">Cloudflare AI Gateway 增加费用上限：新手怎样给模型、团队和 Agent 控制预算</a></h3>
+        <p>Cloudflare AI Gateway 现可按模型、提供商和自定义属性设置美元预算，达到上限后阻止请求或切换到备用模型；身份驱动预算与策略仍处于 closed beta。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--git" href="articles/google-colab-cli-agent-remote-compute-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="开发工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>开发工具</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>开发工具</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-07">2026年6月7日</time>
+        </div>
+        <h3><a href="articles/google-colab-cli-agent-remote-compute-guide.html">Google Colab CLI 发布：新手怎样让本地脚本和 AI Agent 使用远程 GPU</a></h3>
+        <p>Google 2026 年 6 月 5 日发布 Colab CLI，可从终端申请 CPU、GPU 或 TPU，远程执行本地 Python 脚本，下载结果并导出运行日志。它也附带 agent skill，但目前只支持 Linux 和 macOS。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/claude-code-fallback-model-permission-safety-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-07">2026年6月7日</time>
+        </div>
+        <h3><a href="articles/claude-code-fallback-model-permission-safety-guide.html">Claude Code 2.1.166 增加回退模型：新手怎样兼顾可用性和权限安全</a></h3>
+        <p>Claude Code 2.1.166 可配置最多三个回退模型，并加强 deny 规则与跨会话消息权限。更新也修复了 Windows PowerShell 命令验证可能长时间挂起的问题。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/github-copilot-enterprise-managed-plugins-vscode-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-06">2026年6月6日</time>
+        </div>
+        <h3><a href="articles/github-copilot-enterprise-managed-plugins-vscode-guide.html">GitHub Copilot 企业托管插件进入 VS Code：团队怎样统一 agents、skills 和 MCP 配置</a></h3>
+        <p>GitHub 2026 年 6 月 5 日宣布，企业托管 Copilot 插件能力已从 CLI 扩展到 VS Code public preview。团队可以通过 .github-private 仓库统一发布插件市场、自动安装插件，并集中配置 agents、skills、hooks 和 MCP。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--git" href="articles/vercel-skills-sh-api-oidc-security-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="开发工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>开发工具</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>开发工具</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-06">2026年6月6日</time>
+        </div>
+        <h3><a href="articles/vercel-skills-sh-api-oidc-security-guide.html">skills.sh API 开放：新手怎样用 OIDC 搜索、审计和管理 AI skills</a></h3>
+        <p>Vercel 2026 年 6 月 5 日开放 skills.sh API，可查询超过 60 万个开源 skills，并读取详情、官方精选和安全审计结果。部署在 Vercel 的应用可使用项目 OIDC 短期令牌认证，不需要保存长期 API Key。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/github-copilot-context-reasoning-levels-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-05">2026年6月5日</time>
+        </div>
+        <h3><a href="articles/github-copilot-context-reasoning-levels-guide.html">GitHub Copilot 支持百万 token 上下文和推理等级：新手怎么判断什么时候该开大模型能力</a></h3>
+        <p>GitHub 2026 年 6 月 4 日宣布 Copilot 支持更大的上下文窗口和可配置推理等级。对新手来说，这不是“越大越好”的模型开关，而是要学会按任务复杂度、代码库规模和 AI Credits 成本来选择。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--vscode" href="articles/chatgpt-memory-dreaming-update-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="效率工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>效率工具</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>效率工具</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-05">2026年6月5日</time>
+        </div>
+        <h3><a href="articles/chatgpt-memory-dreaming-update-guide.html">ChatGPT memory dreaming 更新：新手怎么理解长期上下文、偏好和隐私边界</a></h3>
+        <p>OpenAI 2026 年 6 月 4 日介绍 ChatGPT memory 的 dreaming 更新，目标是让记忆更及时、连续和相关。对新手来说，重点不是让 AI 记住所有东西，而是学会哪些偏好值得保留、哪些内容要临时聊、哪些记忆需要定期检查。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/github-copilot-vscode-agent-window-byok-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-04">2026年6月4日</time>
+        </div>
+        <h3><a href="articles/github-copilot-vscode-agent-window-byok-guide.html">GitHub Copilot in VS Code 5 月更新：新手怎么理解 Agents window、BYOK 和终端安全</a></h3>
+        <p>GitHub 2026 年 6 月 3 日发布 Copilot in Visual Studio Code 5 月更新汇总，覆盖 v1.120 到 v1.123：Agents window 进入 Stable 预览，远程代理、BYOK、终端风险提示、敏感输入保护和集成浏览器能力继续增强。对新手来说，这是一条理解 AI 编程工具从聊天框走向完整开发环境的好入口。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--github" href="articles/vercel-blob-signed-urls-upload-security-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="建站工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>建站工具</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>建站工具</span>
+          <span>8 分钟</span>
+          <time datetime="2026-06-04">2026年6月4日</time>
+        </div>
+        <h3><a href="articles/vercel-blob-signed-urls-upload-security-guide.html">Vercel Blob signed URLs：新手怎么给上传、下载和删除操作收窄权限</a></h3>
+        <p>Vercel 2026 年 6 月 2 日宣布 Blob 支持 signed URLs。开发者可以生成有时限、按操作和路径收窄范围的 URL，让浏览器直接上传、下载、检查或删除特定对象，而不需要把整个 Blob store 的长期 Token 暴露出去。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/openai-codex-role-plugins-sites-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 工具</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 工具</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-03">2026年6月3日</time>
+        </div>
+        <h3><a href="articles/openai-codex-role-plugins-sites-guide.html">OpenAI Codex 新增角色插件、Sites 和注释：新手怎么看 AI 从写代码走向做完整工作</a></h3>
+        <p>OpenAI 2026 年 6 月 2 日发布 Codex 更新，重点包括面向不同角色的插件、可分享的 Sites 预览，以及能直接在结果上修改和反馈的 annotations。对新手来说，这条更新适合用来理解 Codex 不只是写代码，而是在把报告、仪表盘、原型和轻量应用放进同一套工作流。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/github-copilot-sandboxes-agent-safety-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-03">2026年6月3日</time>
+        </div>
+        <h3><a href="articles/github-copilot-sandboxes-agent-safety-guide.html">GitHub Copilot 沙箱公测：新手怎么让 AI 代理在更可控的环境里运行命令</a></h3>
+        <p>GitHub 2026 年 6 月 2 日 Changelog 宣布，GitHub Copilot 的本地和云端 sandboxes 进入 public preview。Copilot 可以在受隔离的本机环境或 GitHub 托管的临时 Linux 云环境中运行工具和命令，这让新手更容易理解 AI 代理为什么需要权限边界。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/vercel-ai-gateway-qwen37-plus-agent-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 工具</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 工具</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-02">2026年6月2日</time>
+        </div>
+        <h3><a href="articles/vercel-ai-gateway-qwen37-plus-agent-guide.html">Vercel AI Gateway 接入 Qwen 3.7 Plus：新手怎么看多模态代理模型进入建站工作流</a></h3>
+        <p>Vercel 在 2026 年 6 月 1 日的 Changelog 中宣布，来自 Alibaba 的 Qwen 3.7 Plus 已可通过 Vercel AI Gateway 使用。官方描述它面向 GUI、CLI、编码、效率工作流和视觉代理任务，适合新手理解“模型能力”和“统一网关”怎样一起进入实际项目。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--github" href="articles/vercel-blob-oidc-agent-security-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="建站工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>建站工具</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>建站工具</span>
+          <span>8 分钟</span>
+          <time datetime="2026-06-02">2026年6月2日</time>
+        </div>
+        <h3><a href="articles/vercel-blob-oidc-agent-security-guide.html">Vercel Blob 支持 OIDC：新手为什么要少用长期 Token，让函数和代理更安全</a></h3>
+        <p>Vercel 2026 年 6 月 1 日宣布 Blob 支持 OIDC authentication，新项目默认使用短期、自动轮换的 Vercel-issued OIDC token，不再需要长期保存 BLOB_READ_WRITE_TOKEN。对新手建站和 AI 代理工作流来说，这是一次很实用的凭据安全提醒。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/github-copilot-code-review-actions-minutes-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-01">2026年6月1日</time>
+        </div>
+        <h3><a href="articles/github-copilot-code-review-actions-minutes-guide.html">GitHub Copilot Code Review 开始消耗 Actions minutes：新手怎么读懂 AI 代码审查成本</a></h3>
+        <p>GitHub 早前在 Changelog 中说明，从 2026 年 6 月 1 日起，每次 Copilot code review 会同时按 AI Credits 计入 Copilot 用量；私有仓库使用 GitHub-hosted runners 时，还会消耗 GitHub Actions minutes。本文把它整理成新手能看懂的成本和权限清单。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--git" href="articles/qwen-code-017-terminal-agent-workflow-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="开发工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>开发工具</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>开发工具</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-01">2026年6月1日</time>
+        </div>
+        <h3><a href="articles/qwen-code-017-terminal-agent-workflow-guide.html">Qwen Code v0.17.0：新手怎么看终端 AI 编程代理的协作、桌面能力和上下文压缩</a></h3>
+        <p>QwenLM/qwen-code 在 v0.17.0 中加入飞书 Channel adapter、open-computer-use MCP 零配置内置、遥测基础能力和上下文压缩重构，并在 5 月 31 日 nightly 继续修复 rewind 场景。本文把它整理成适合新手观察终端 AI 代理演进的资源指南。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/openai-codex-windows-remote-control-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 工具</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 工具</span>
+          <span>9 分钟</span>
+          <time datetime="2026-05-31">2026年5月31日</time>
+        </div>
+        <h3><a href="articles/openai-codex-windows-remote-control-guide.html">OpenAI Codex 支持 Windows Computer Use 和远程控制：新手怎么把本机代理用稳</a></h3>
+        <p>OpenAI 在 2026 年 5 月 29 日的 ChatGPT Release Notes 中更新 Codex：Codex app 支持 Windows Computer Use，用户还可以从手机或 Mac 远程查看进度、继续线程并处理提示。本文把它整理成适合新手理解本机 AI 代理的入门指南。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--git" href="articles/claude-code-local-skills-plugins-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="开发工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>开发工具</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>开发工具</span>
+          <span>10 分钟</span>
+          <time datetime="2026-05-31">2026年5月31日</time>
+        </div>
+        <h3><a href="articles/claude-code-local-skills-plugins-guide.html">Claude Code 本地 skills 和插件自动加载：新手怎么把重复工作流沉淀成工具</a></h3>
+        <p>Anthropic 在 Claude Code v2.1.157 中加入本地 .claude/skills 插件自动加载，并提供 claude plugin init <name> 脚手架。对新手来说，这是把常用提示、检查清单和团队流程从聊天记录整理成可复用工具的好入口。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/github-copilot-ai-adoption-metrics-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>9 分钟</span>
+          <time datetime="2026-05-30">2026年5月30日</time>
+        </div>
+        <h3><a href="articles/github-copilot-ai-adoption-metrics-guide.html">GitHub Copilot 指标新增 AI 采用阶段：新手怎么看团队从补全走向多智能体</a></h3>
+        <p>GitHub 在 2026 年 5 月 29 日更新 Copilot usage metrics API，新增 ai_adoption_phase 字段，把用户使用情况分成 Code first、Agent first 和 Multi-agent 等阶段。本文把它整理成适合新手理解 AI 编程采用度的资源型指南。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--github" href="articles/vercel-sandbox-docker-agent-testing-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="开发环境 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>开发环境</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>开发环境</span>
+          <span>10 分钟</span>
+          <time datetime="2026-05-30">2026年5月30日</time>
+        </div>
+        <h3><a href="articles/vercel-sandbox-docker-agent-testing-guide.html">Vercel Sandbox 支持运行 Docker：AI 代理开发环境怎么跑 Redis、Postgres 和容器测试</a></h3>
+        <p>Vercel 在 2026 年 5 月 29 日宣布 Sandbox 支持安装和运行 Docker。对使用 AI 代理写代码、跑测试和预览应用的新手来说，这意味着隔离环境里可以启动 Redis、Postgres 等容器化依赖，而不必污染本机。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--git" href="articles/vscode-122-agent-byok-responsive-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="开发工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>开发工具</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>开发工具</span>
+          <span>10 分钟</span>
+          <time datetime="2026-05-29">2026年5月29日</time>
+        </div>
+        <h3><a href="articles/vscode-122-agent-byok-responsive-guide.html">VS Code 1.122 新手指南：Agents 窗口、离线 BYOK 和设备模拟怎么用</a></h3>
+        <p>VS Code 1.122 在 2026 年 5 月 28 日发布，带来更集中化的 Agents 体验、无需 GitHub 登录的离线 BYOK 模式，以及浏览器工具里的设备模拟能力。本文把它整理成适合新手判断是否升级和怎么试用的路线。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/microsoft-learn-mcp-agent-grounding-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>9 分钟</span>
+          <time datetime="2026-05-29">2026年5月29日</time>
+        </div>
+        <h3><a href="articles/microsoft-learn-mcp-agent-grounding-guide.html">让 AI 编程代理先查官方文档：Microsoft Learn MCP Server 新手入门</a></h3>
+        <p>Microsoft ISE 在 2026 年 5 月 28 日介绍了 Microsoft Learn MCP Server：它把代理工具直接连到最新官方文档，减少模型凭旧知识写出过时代码的风险。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/github-copilot-memory-controls-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>9 分钟</span>
+          <time datetime="2026-05-28">2026年5月28日</time>
+        </div>
+        <h3><a href="articles/github-copilot-memory-controls-guide.html">GitHub Copilot Memory 新手指南：记忆会保存什么，什么时候该关闭</a></h3>
+        <p>GitHub 在 2026 年 5 月 26 日更新了 Copilot Memory 的删除、仓库级关闭和 CLI 控制能力。本文把它整理成适合个人开发者和小团队阅读的使用边界清单。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--git" href="articles/vercel-sandbox-persistence-agent-workflow.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="开发工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>开发工具</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>开发工具</span>
+          <span>10 分钟</span>
+          <time datetime="2026-05-28">2026年5月28日</time>
+        </div>
+        <h3><a href="articles/vercel-sandbox-persistence-agent-workflow.html">Vercel Sandboxes 持久化后，AI 代理开发环境可以怎样保存进度</a></h3>
+        <p>Vercel 在 2026 年 5 月 26 日宣布 Sandbox persistence 正式可用。对于使用 AI 代理写代码、跑测试和反复调试的人，这意味着临时环境也能更像一个可恢复的工作台。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--github" href="articles/github-pages-blog-tutorial.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="建站指南 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>建站指南</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>建站指南</span>
+          <span>10 分钟</span>
+          <time datetime="2026-05-27">2026年5月27日</time>
+        </div>
+        <h3><a href="articles/github-pages-blog-tutorial.html">零基础 GitHub Pages 搭建博客教程：资源入口、上线流程与避坑清单</a></h3>
+        <p>适合新手程序员、学生和内容创作者的 GitHub Pages 资源导航页，先带你找到官方入口、学习顺序和可直接照着做的上线步骤。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--hexo" href="articles/hexo-next-theme-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="博客主题 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>博客主题</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>博客主题</span>
+          <span>9 分钟</span>
+          <time datetime="2026-05-27">2026年5月27日</time>
+        </div>
+        <h3><a href="articles/hexo-next-theme-guide.html">Hexo / NexT 博客主题完整配置指南：官方文档、主题设置与扩展入口</a></h3>
+        <p>给博客爱好者准备的 Hexo 与 NexT 主题资源页，覆盖安装、配置、常用功能和后续美化方向。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--python" href="articles/python-beginner-series.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="编程入门 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>编程入门</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>编程入门</span>
+          <span>11 分钟</span>
+          <time datetime="2026-05-27">2026年5月27日</time>
+        </div>
+        <h3><a href="articles/python-beginner-series.html">Python 入门教程系列：官方教程、练习资源与学习路线整理</a></h3>
+        <p>把 Python 初学者最需要的官方教程、练习路径和配套资料集中整理，适合后续扩成分章节图文教程和 PDF 下载页。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--vscode" href="articles/vscode-ai-plugins-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="效率工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>效率工具</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>效率工具</span>
+          <span>9 分钟</span>
+          <time datetime="2026-05-27">2026年5月27日</time>
+        </div>
+        <h3><a href="articles/vscode-ai-plugins-guide.html">VS Code 插件使用指南：AI 编码、效率插件与官方入口整理</a></h3>
+        <p>面向程序员的 VS Code 资源分享页，优先整理扩展市场、官方文档、AI 编码工具和常用效率插件的入口。</p>
+      </div>
+    </article>
+<!-- STATIC_POSTS_END -->
+      </div>
     </section>
   </main>
 
@@ -73,6 +670,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260612-hotspots"></script>
+  <script src="assets/app.js?v=20260613-quality"></script>
 </body>
 </html>

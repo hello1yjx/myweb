@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitHub Copilot Memory 新手指南：记忆会保存什么，什么时候该关闭 | 学习资源库</title>
+  <meta name="description" content="GitHub 在 2026 年 5 月 26 日更新了 Copilot Memory 的删除、仓库级关闭和 CLI 控制能力。本文把它整理成适合个人开发者和小团队阅读的使用边界清单。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/github-copilot-memory-controls-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"GitHub Copilot Memory 新手指南：记忆会保存什么，什么时候该关闭","description":"GitHub 在 2026 年 5 月 26 日更新了 Copilot Memory 的删除、仓库级关闭和 CLI 控制能力。本文把它整理成适合个人开发者和小团队阅读的使用边界清单。","datePublished":"2026-05-28","dateModified":"2026-05-28","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/github-copilot-memory-controls-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 编程</span>
+      <h1>GitHub Copilot Memory 新手指南：记忆会保存什么，什么时候该关闭</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-05-28">2026年5月28日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>GitHub 在 2026 年 5 月 26 日更新了 Copilot Memory 的删除、仓库级关闭和 CLI 控制能力。本文把它整理成适合个人开发者和小团队阅读的使用边界清单。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://github.blog/changelog/2026-05-26-copilot-memory-has-more-controls-for-deletion-scope-and-the-copilot-cli/" target="_blank" rel="noreferrer">GitHub Changelog：Copilot Memory controls</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>AI 编程工具越来越像长期协作的队友：它不只回答一次问题，还会记住仓库里的约定、偏好和上下文。这样可以少解释很多重复信息，但也带来一个新问题：哪些内容适合被记住，哪些内容应该明确关闭或删除？</p><p>GitHub 2026 年 5 月 26 日的更新，把 Copilot Memory 的控制入口做得更清楚：包括删除提示、仓库级关闭开关、Copilot CLI 里的 /memory 命令，以及保存记忆时更明确的作用域说明。新手可以把这次更新当成理解 AI 编程记忆边界的入口。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>正在使用 GitHub Copilot、Copilot CLI 或代码代理的新手开发者</li><li>维护个人网站、开源仓库或小团队项目的站长</li><li>担心 AI 工具记住敏感规则、内部约定或过期信息的人</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先确认自己用的是个人 Copilot 还是组织/企业 Copilot，因为控制入口和权限不同。</li><li>再区分用户级偏好和仓库级事实：前者跟着个人走，后者可能影响仓库贡献者。</li><li>最后定期检查 Copilot Memory 设置，把敏感、错误或已经过期的记忆删掉。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://github.blog/changelog/2026-05-26-copilot-memory-has-more-controls-for-deletion-scope-and-the-copilot-cli/" target="_blank" rel="noreferrer">GitHub Changelog：Copilot Memory controls</a>
+              <span>：本次更新的原始来源，包含删除、关闭和 CLI 控制说明。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>如果只是让 Copilot 记住代码风格、测试命令、目录约定，通常比较适合保存为仓库级事实。</li><li>如果内容涉及密钥、客户信息、内部账号、未公开业务规则，不要保存进记忆。</li><li>当仓库刚经历大重构、框架升级或目录迁移时，建议回头检查旧记忆是否已经失效。</li></ul>
+
+        <h2>新手先记住这 3 个边界</h2>
+
+        <ul><li>能公开写进 README 的项目约定，通常更适合被 AI 记住。</li><li>只属于你个人习惯的偏好，应该尽量留在用户级范围。</li><li>涉及安全、客户、账号、商业策略的信息，不应该交给记忆功能。</li></ul>
+
+
+
+        <h2>Copilot CLI 里可以先看的命令</h2>
+        <p>GitHub 这次提到 Copilot CLI 新增了 /memory 控制入口。第一次使用时，建议先查看当前状态，再决定是否开启。</p>
+
+
+        <pre><code class="language-text">/memory show
+/memory on
+/memory off</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>GitHub Copilot</span><span>AI 编程</span><span>开发效率</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

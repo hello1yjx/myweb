@@ -9,7 +9,7 @@ const siteData = {
     bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
       { value: "6", label: "原创下载包" },
-      { value: "39", label: "新手专题" },
+      { value: "35", label: "新手专题" },
       { value: "持续", label: "更新与核验" }
     ],
     valueCards: [
@@ -23,11 +23,154 @@ const siteData = {
       },
       {
         title: "每个主题都能长大",
-        text: "资源卡可以继续扩成长文教程、下载页、广告位或联盟推荐，让网站越做越有价值。"
+        text: "每个主题都保留官方来源、实践步骤和核验说明，方便读者继续学习与复现。"
       }
     ]
   },
   posts: [
+    {
+      id: "vercel-ai-sdk-harnessagent-beginner-guide",
+      title: "AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi",
+      date: "2026-06-13",
+      category: "AI 编程",
+      readTime: "10 分钟",
+      excerpt: "Vercel AI SDK 7 的实验性 HarnessAgent 用统一接口连接 Claude Code、Codex 与 Pi，并统一处理沙箱、会话、权限、skills 和子 Agent；新手应先从可销毁沙箱和单一任务开始验证。",
+      tags: ["AI SDK 7", "HarnessAgent", "Coding Agent"],
+      featured: true,
+      intro: [
+        "模型 API 解决的是“怎样调用模型”，但真正的编码 Agent 还要管理会话、沙箱、权限确认、skills、上下文压缩、运行配置和子 Agent。不同工具各自提供这些能力，如果应用直接绑定某一个 harness，后续切换或比较 Claude Code、Codex 与 Pi 会产生大量适配工作。",
+        "Vercel 在 2026 年 6 月 12 日发布 AI SDK 7 的实验性 `HarnessAgent`。开发者可以用统一 API 创建会话、流式执行任务并销毁环境，再通过更换 adapter 切换 Claude Code、Codex 或 Pi。官方同时说明，每个 harness 都在沙箱工作区运行，相关包目前位于 canary release，后续版本可能包含破坏性变化。"
+      ],
+      audience: [
+        "已经会调用模型 API，想进一步理解编码 Agent 运行层的新手",
+        "需要在 Claude Code、Codex 与 Pi 之间比较或切换的 TypeScript 开发者",
+        "正在评估 Agent 沙箱、权限、会话生命周期与工具接入边界的团队"
+      ],
+      format: [
+        "适合整理成“安装 canary / 选择 adapter / 创建沙箱 / 运行单一任务 / 检查结果 / 销毁会话”的入门路线",
+        "后续可以补一个在同一测试仓库中切换两个 harness、比较输出与日志的最小示例"
+      ],
+      roadmap: [
+        "先把 `HarnessAgent` 当作实验性 API，在可删除的示例仓库和独立沙箱里安装 AI SDK canary 与一个 harness adapter。不要第一次就连接生产凭据、重要仓库或不可回退的部署环境。",
+        "创建 Agent 时明确选择 harness、沙箱、允许的 tools 与 skills；创建 session 后只交付一个容易验证的任务，例如修复一个已有失败测试。使用 `generate()` 或 `stream()` 收集结果，并检查实际代码差异、命令日志和测试结果。",
+        "无论任务成功还是失败，都在 `finally` 中销毁 session。需要切换 harness 时只替换 adapter，并保持相同任务与验收条件做对照；正式采用前固定依赖版本，记录破坏性变化，并重新审查权限、费用和数据范围。"
+      ],
+      officialLinks: [
+        {
+          label: "Vercel Changelog：Program agent harnesses with AI SDK",
+          url: "https://vercel.com/changelog/program-agent-harnesses-with-ai-sdk",
+          note: "包含 HarnessAgent 的定位、初始 adapters、沙箱示例与实验状态。"
+        },
+        {
+          label: "AI SDK 7 Docs：AI SDK Harnesses",
+          url: "https://ai-sdk.dev/v7/docs/ai-sdk-harnesses/overview",
+          note: "用于查看当前 canary 安装方式、接口和 adapter 使用说明。"
+        },
+        {
+          label: "Vercel Sandbox",
+          url: "https://vercel.com/sandbox",
+          note: "用于理解示例中隔离执行工作区的产品能力与边界。"
+        }
+      ],
+      curatedLinks: [
+        "`HarnessAgent` 统一的是 harness 接口，不代表不同工具的能力、权限行为、输出质量和费用完全相同。",
+        "相关包处于实验阶段并通过 canary release 提供，版本之间可能发生破坏性变化，生产项目应固定版本并保留回退方案。",
+        "沙箱能降低宿主环境风险，但仍要限制凭据、网络、工具和写入范围，并人工检查最终差异与测试结果。"
+      ],
+      downloadIdeas: [
+        "可以整理一份编码 Agent harness 选型、权限与会话生命周期检查表",
+        "可以补一个 Claude Code、Codex 与 Pi 同任务对照记录模板"
+      ],
+      monetization: "适合承接 AI SDK、Coding Agent、TypeScript、Agent 沙箱、开发者工具和工程效率类资源位；也可以与本站的 Agentic Workflows、Vercel Sandbox 和终端 AI 配置文章互相推荐。",
+      extraSections: [
+        {
+          title: "第一次实验建议只比较四件事",
+          items: [
+            "同一个任务能否在不同 harness 中稳定启动并完成。",
+            "工具、skills、沙箱和权限提示是否符合预期。",
+            "最终代码差异、测试结果和日志是否容易审查。",
+            "会话结束后环境、进程和临时凭据是否被正确清理。"
+          ]
+        },
+        {
+          title: "不要被统一接口隐藏的差异",
+          items: [
+            "不同 harness 支持的工具、子 Agent、上下文管理和权限流程可能不同。",
+            "相同提示在不同 harness 与模型组合中可能产生不同修改范围。",
+            "实验 API、adapter 和沙箱实现都会继续变化，升级前要阅读 changelog。"
+          ]
+        }
+      ]
+    },
+    {
+      id: "github-copilot-code-review-controls-guide",
+      title: "Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界",
+      date: "2026-06-13",
+      category: "开发安全",
+      readTime: "9 分钟",
+      excerpt: "GitHub Copilot Code Review 新增组织级 Runner 默认值与锁定、内容排除支持，并移除仓库自定义指令的 4000 字符读取上限；团队应把运行环境、可见内容与审查规则分开配置和验证。",
+      tags: ["GitHub Copilot", "代码审查", "内容排除"],
+      featured: true,
+      intro: [
+        "把 AI 代码审查接入仓库后，团队不仅要关心它能发现什么，还要明确它在哪里运行、可以读取哪些内容、应遵循哪些审查规则。如果这些设置分散在每个仓库中，规模变大后容易出现 runner 不一致、敏感目录未排除或自定义规则没有完整生效的问题。",
+        "GitHub 在 2026 年 6 月 12 日为 Copilot Code Review 发布三项控制：组织管理员可以设置并锁定默认 runner；代码审查开始遵守仓库、组织和企业级内容排除；位于 `.github` 下的 `copilot-instructions.md` 与 `*.instructions.md` 不再受 4000 字符读取上限限制。组织级 runner 配置在同时启用时也会应用于 Copilot cloud agent。"
+      ],
+      audience: [
+        "准备为仓库启用 Copilot Code Review，希望先理解配置边界的新手",
+        "需要统一多个仓库 runner、内容排除与审查指令的组织管理员",
+        "担心敏感文件、无关生成文件或过长规则影响 AI 审查的开发团队"
+      ],
+      format: [
+        "适合整理成“确定 runner / 排除内容 / 编写指令 / 发起测试 PR / 检查审查结果”的配置路线",
+        "后续可以补一个组织默认值、仓库例外和验证证据记录模板"
+      ],
+      roadmap: [
+        "先列出代码审查的运行要求：使用 GitHub-hosted、自托管还是 large runner，以及哪些仓库必须遵循统一默认值。组织管理员可在 Copilot 的 Runner type configuration 中设置默认 runner，并在需要时锁定，避免仓库单独覆盖。",
+        "再按路径配置内容排除，把不应提供给 Copilot Code Review 的文件或目录排除，同时检查仓库、组织和企业规则是否叠加到预期范围。内容排除应作为数据范围控制的一部分，而不是替代仓库权限、密钥管理和人工审查。",
+        "最后整理 `.github/copilot-instructions.md` 与 `*.instructions.md`。虽然 4000 字符读取上限已移除，规则仍应简短、明确、可验证。创建一个测试 PR，检查 runner、被排除内容和自定义指令是否实际生效，再逐步推广到其他仓库。"
+      ],
+      officialLinks: [
+        {
+          label: "GitHub Changelog：Copilot code review new configurations and controls",
+          url: "https://github.blog/changelog/2026-06-12-copilot-code-review-new-configurations-and-controls/",
+          note: "包含组织级 runner、内容排除与自定义指令读取上限变化。"
+        },
+        {
+          label: "GitHub Docs：Exclude content from Copilot",
+          url: "https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot",
+          note: "用于配置路径规则并理解当前内容排除范围。"
+        }
+      ],
+      curatedLinks: [
+        "组织级 runner 默认值可以统一运行环境；锁定前应确认特殊仓库是否确实不需要单独配置。",
+        "内容排除能限制 Copilot Code Review 使用指定路径，但不能代替最小权限、密钥扫描、分支保护和人工复核。",
+        "取消字符上限不代表指令越长越好；规则之间冲突、描述模糊或无法验证，都会降低审查质量。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Copilot Code Review runner、内容排除与指令配置清单",
+        "可以补一个测试 PR 验证证据和组织推广记录模板"
+      ],
+      monetization: "适合承接 GitHub Copilot、代码审查、DevSecOps、企业治理、GitHub Actions 和开发者培训类资源位；也可以与本站的 Copilot CLI 安全审查、第三方 Agent 安全验证和 Agentic Workflows 文章互相推荐。",
+      extraSections: [
+        {
+          title: "三类配置不要混在一起",
+          items: [
+            "Runner 配置决定 AI 代码审查在哪类执行环境中运行。",
+            "内容排除决定 Copilot Code Review 不应使用哪些路径。",
+            "自定义指令决定审查时应重点遵循哪些项目规则。"
+          ]
+        },
+        {
+          title: "测试 PR 应检查什么",
+          items: [
+            "实际使用的 runner 是否与组织默认值和锁定策略一致。",
+            "被排除目录中的内容是否没有进入 Copilot 审查上下文。",
+            "自定义指令中的关键规则是否在审查建议中得到体现。",
+            "AI 建议是否仍经过测试、人工复核和现有合并门槛。"
+          ]
+        }
+      ]
+    },
     {
       id: "github-agentic-workflows-public-preview-guide",
       title: "GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务",
@@ -1824,7 +1967,7 @@ const siteData = {
         },
         {
           label: "VS Code Copilot 文档入口",
-          url: "https://code.visualstudio.com/docs/copilot/overview",
+          url: "https://code.visualstudio.com/docs/copilot/concepts/overview",
           note: "适合继续理解编辑器里的 AI 编程工作流。"
         }
       ],
@@ -1887,7 +2030,7 @@ const siteData = {
       officialLinks: [
         {
           label: "Microsoft ISE：Grounding agentic developer tools in Microsoft Learn",
-          url: "https://devblogs.microsoft.com/ise/improve-your-agentic-developer-tools-by-grounding-in-microsoft-learn/",
+          url: "https://developer.microsoft.com/blog/improve-your-agentic-developer-tools-by-grounding-in-microsoft-learn",
           note: "本次 Microsoft Learn MCP Server 的官方说明。"
         },
         {
@@ -2521,6 +2664,7 @@ else:
     },
     {
       id: "study-materials-pdf-collection",
+      published: false,
       title: "高效学习资料整理：免费课程、PDF 入口与长期可用的学习资源",
       date: "2026-05-27",
       category: "资料整理",
@@ -2611,6 +2755,7 @@ else:
     },
     {
       id: "git-github-complete-manual",
+      published: false,
       title: "Git / GitHub 完整操作手册：官方命令文档、协作流程与排错入口",
       date: "2026-05-27",
       category: "开发工具",
@@ -2709,6 +2854,7 @@ git push origin main`,
     },
     {
       id: "frontend-beginner-roadmap",
+      published: false,
       title: "前端开发入门教程：HTML、CSS、JavaScript 学习路线与官方资料",
       date: "2026-05-27",
       category: "前端入门",
@@ -2828,6 +2974,7 @@ git push origin main`,
     },
     {
       id: "common-programming-errors-fixes",
+      published: false,
       title: "快速解决常见编程报错技巧：错误定位、排查顺序与资料入口",
       date: "2026-05-27",
       category: "问题排查",
@@ -2913,6 +3060,7 @@ git push origin main`,
     },
     {
       id: "ai-tools-practical-tutorials",
+      published: false,
       title: "AI 工具实用教程合集：ChatGPT、Midjourney 与常见 AI 工作流入口",
       date: "2026-05-27",
       category: "AI 工具",
@@ -3008,6 +3156,7 @@ git push origin main`,
     },
     {
       id: "office-templates-share",
+      published: false,
       title: "高效办公资料模板分享：Word、Excel、PowerPoint 官方模板与使用建议",
       date: "2026-05-27",
       category: "办公模板",
@@ -3228,14 +3377,64 @@ git push origin main`,
     }
   ],
   resourcePathPostIds: [
-    "github-pages-blog-tutorial",
-    "git-github-complete-manual",
-    "frontend-beginner-roadmap",
-    "vscode-ai-plugins-guide",
-    "ai-tools-practical-tutorials",
-    "common-programming-errors-fixes"
+    "vercel-ai-sdk-harnessagent-beginner-guide",
+    "github-copilot-code-review-controls-guide",
+    "github-agentic-workflows-public-preview-guide",
+    "npm-v12-install-security-migration-guide",
+    "xcode-27-agentic-coding-beginner-guide",
+    "claude-code-safe-mode-troubleshooting-guide"
   ],
   hotspots: [
+    {
+      date: "2026-06-13",
+      tag: "Web 开发",
+      title: "Vercel Workflow SDK 在 Nitro v3 原生运行，步骤可直接使用服务器端 API",
+      summary: "Workflow SDK 与 Nitro v3 的原生集成进入 beta，`use step` 函数现在与应用其余部分运行在同一打包运行时，可直接调用 Nitro `useStorage()` 等服务器 API；开发服务器还会在 `/_workflow` 提供工作流检查与调试界面。",
+      why: "原生集成减少了独立 bundle 与运行时之间的割裂，依赖追踪和 tree-shaking 也有助于缩小构建输出；但 beta 阶段仍应先验证存储、重试、长任务和部署行为，再迁移关键工作流。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/workflow-sdk-now-runs-natively-in-nitro-v3",
+      articleIdea: "候选：Nitro v3 原生 Workflow SDK 入门，怎样编写、观察和调试第一个持久化步骤"
+    },
+    {
+      date: "2026-06-12",
+      tag: "国产 AI",
+      title: "Moonshot AI Kimi K2.7 Code 上线 Workers AI，支持长上下文、视觉与多轮工具调用",
+      summary: "Cloudflare 上线代码优化模型 Kimi K2.7 Code：采用 1T 总参数、每 token 激活 32B 的 MoE 架构，提供 262.1k token 上下文、视觉输入、多轮工具调用和 JSON Schema 结构化输出，并称其较 K2.6 少用 30% 推理 token。",
+      why: "长上下文和多轮工具调用适合持续编码与 Agent 任务，且从 K2.6 迁移时 API 参数无需变化；实际采用前仍要用自己的代码库评估质量、延迟和费用，并把官方 benchmark 视为供应方测试结果。",
+      sourceLabel: "Cloudflare Changelog",
+      sourceUrl: "https://developers.cloudflare.com/changelog/post/2026-06-12-kimi-k2-7-code-workers-ai/",
+      articleIdea: "候选：Kimi K2.7 Code 新手评测清单，怎样验证长上下文、工具调用与推理成本"
+    },
+    {
+      date: "2026-06-12",
+      tag: "AI Agent",
+      title: "Vercel AI SDK 7 引入 HarnessAgent，用统一接口运行 Claude Code、Codex 与 Pi",
+      summary: "实验性的 `HarnessAgent` 把 Claude Code、Codex 与 Pi 等成熟 agent harness 接入同一 API，统一处理 skills、沙箱、会话、权限流程、上下文压缩、运行配置和子 Agent，并支持 AI SDK 风格的 `generate()` 与 `stream()` 结果。",
+      why: "统一接口让团队更容易切换和比较 harness，也能复用现有 AI SDK 界面；但当前 adapters 位于 canary release，官方明确提示可能出现破坏性变化，首次实验应限制在可销毁沙箱和可验证任务中。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/program-agent-harnesses-with-ai-sdk",
+      articleIdea: "选题：AI SDK HarnessAgent 入门，怎样在沙箱中统一运行并比较不同编码 Agent"
+    },
+    {
+      date: "2026-06-12",
+      tag: "AI 代码审查",
+      title: "Copilot Code Review 新增组织级 Runner、内容排除与更完整自定义指令",
+      summary: "GitHub 现在允许组织管理员为 Copilot Code Review 设置并锁定默认 runner；代码审查开始遵守仓库、组织和企业级内容排除规则，同时移除了 `.github` 自定义指令文件原有的 4000 字符读取上限。",
+      why: "三项变化分别控制审查在哪里运行、可以读取什么、应遵循哪些规则，适合多仓库统一治理；团队仍需通过测试 PR 验证实际行为，并保留权限控制、测试、分支保护和人工复核。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-12-copilot-code-review-new-configurations-and-controls/",
+      articleIdea: "选题：Copilot Code Review 新控制项入门，怎样设置 runner、内容排除与仓库指令"
+    },
+    {
+      date: "2026-06-12",
+      tag: "CI/CD",
+      title: "GitHub Actions 公布自托管 Runner 最低版本与强制升级时间表",
+      summary: "自托管 runner 重新注册必须达到 `2.329.0` 或更高版本，并要在每次新版本发布后 30 天内升级才能继续接收任务；Data Residency 环境将在 7 月 31 日全面执行，GitHub Enterprise Cloud 将在 9 月 25 日全面执行。",
+      why: "只升级到一次性最低版本并不足够，关闭自动更新的 runner、旧镜像和缓存模板都可能在 brownout 或正式执行后停止接单；团队应尽快盘点版本、更新镜像与安装脚本，并监控运行时注释。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-12-github-actions-minimum-version-enforcement-timeline-for-self-hosted-runners/",
+      articleIdea: "候选：GitHub Actions 自托管 Runner 升级清单，怎样避免 CI 在强制执行日停摆"
+    },
     {
       date: "2026-06-11",
       tag: "AI Agent",
@@ -3833,7 +4032,7 @@ git push origin main`,
       summary: "Microsoft ISE 介绍 Microsoft Learn MCP Server，可让 AI 开发工具检索 Microsoft Learn、Azure 和 Microsoft 365 官方文档，并强调不需要安装和认证。",
       why: "这类 grounding 能减少 AI 代理凭旧知识写过时代码的风险，很适合写成“让 AI 先查官方资料再回答”的新手教程。",
       sourceLabel: "Microsoft ISE Dev Blog",
-      sourceUrl: "https://devblogs.microsoft.com/ise/improve-your-agentic-developer-tools-by-grounding-in-microsoft-learn/",
+      sourceUrl: "https://developer.microsoft.com/blog/improve-your-agentic-developer-tools-by-grounding-in-microsoft-learn",
       articleIdea: "选题：让 AI 编程代理先查官方文档：Microsoft Learn MCP Server 新手入门"
     },
     {
@@ -3931,7 +4130,7 @@ git push origin main`,
       tag: "AI 编程",
       title: "OpenAI Codex 被 Gartner 评为企业 AI 编程代理领导者",
       summary: "OpenAI 表示 Codex 已被企业用于代码审查、测试覆盖、事件响应和大型仓库理解等场景，AI 编程代理正在从个人效率工具走向团队基础设施。",
-      why: "这和本站的建站、代码助手、自动更新文章计划高度相关，后续可以扩成“用 AI 管理个人网站”的教程。",
+      why: "企业采用信号说明编码 Agent 的价值不只在生成代码，也包括代码审查、测试、事件响应和大型仓库理解；团队仍需用真实任务、权限边界和可验证结果评估效果。",
       sourceLabel: "OpenAI",
       sourceUrl: "https://openai.com/index/gartner-2026-agentic-coding-leader/",
       articleIdea: "选题：个人网站如何用 Codex 做内容维护和代码更新"
@@ -3941,9 +4140,9 @@ git push origin main`,
       tag: "工具更新",
       title: "Codex 更新 Goal Mode、浏览器标注和远程继续工作能力",
       summary: "OpenAI 帮助中心更新显示，Codex 的 goal mode 已覆盖 App、IDE extension 和 CLI，并加入更适合前端反馈的浏览器标注能力。",
-      why: "这正好对应本站后续自动化方向：把“每日热点更新”拆成目标，让代理持续完成资料整理、文章生成和提交。",
-      sourceLabel: "OpenAI Help Center",
-      sourceUrl: "https://help.openai.com/en/articles/6825453-Chatgpt-reelease-notes",
+      why: "Goal Mode、浏览器标注和远程继续工作让 Agent 更适合处理长任务和前端反馈，但任务目标、验收条件、权限与最终差异仍需要人工确认。",
+      sourceLabel: "OpenAI Developers",
+      sourceUrl: "https://developers.openai.com/codex/changelog",
       articleIdea: "选题：Goal Mode 可以怎样帮个人站每天更新内容"
     },
     {
@@ -3960,38 +4159,38 @@ git push origin main`,
   projects: [
     {
       id: "resource-content-hub",
-      title: "资源分享内容库",
-      summary: "围绕 10 个高需求主题整理官方入口、学习路径、下载思路和广告位建议，是当前站点的核心内容项目。",
+      title: "可抓取的静态文章库",
+      summary: "把站内教程生成独立静态 HTML，确保无需 JavaScript 也能读取正文、标题、来源和 canonical。",
       stack: "HTML / CSS / JavaScript",
       status: "已上线",
       link: "posts.html",
       body: `
-        <p>这个项目把 GitHub Pages、Hexo/NexT、Python、VS Code、Git/GitHub、前端入门、AI 工具和办公模板等主题集中整理成资源型文章。</p>
-        <p>它的目标是先让读者快速找到可靠入口，再逐步把高需求主题扩成图文教程、示例代码和可下载资料。</p>
+        <p>文章列表和每篇详情页都包含可直接抓取的正文，不依赖浏览器执行脚本后才显示内容。</p>
+        <p>每篇文章使用唯一标题、描述、canonical、发布日期和官方来源链接，并在 sitemap 中提供稳定入口。</p>
       `
     },
     {
       id: "topic-resource-map",
-      title: "主题资源导航页",
-      summary: "把资源推荐页改造成按主题浏览的导航库，每个主题都能回到对应文章，适合长期扩展。",
-      stack: "资源导航 / 内容结构",
-      status: "持续更新",
+      title: "原创资料包与学习路线",
+      summary: "围绕建站、Git、VS Code、AI 提示词和 Agent 安全提供可下载资料，并说明用途、来源与使用方式。",
+      stack: "原创资料 / 学习路线",
+      status: "已上线",
       link: "resources.html",
       body: `
-        <p>这个项目负责承接站内所有官方入口和工具推荐，把原来的单一卡片列表升级成“精选入口 + 按主题浏览”的结构。</p>
-        <p>后续如果接联盟链接、赞助位或真实下载包，可以优先从这个页面开始接入。</p>
+        <p>每个下载包都包含 README 和可编辑文件，读者可以直接检查内容并用于个人学习、课堂教学或团队内部使用。</p>
+        <p>外部资料只链接到官方入口，本站不重新打包版权不明的第三方内容。</p>
       `
     },
     {
       id: "monetization-layout-kit",
-      title: "广告与联盟位布局",
-      summary: "为每篇资源文章预留中部推荐位、底部广告位和下载区推荐位，方便后续接入真实商业化资源。",
-      stack: "内容变现 / 页面布局",
-      status: "规划中",
-      link: "contact.html",
+      title: "每日热点核验与发布流程",
+      summary: "从官方博客、changelog 和原始来源筛选开发热点，再补充适用场景、限制条件和新手实践路线。",
+      stack: "来源核验 / 内容维护",
+      status: "每日维护",
+      link: "hotspots.html",
       body: `
-        <p>这个项目用于规划文章里的广告和联盟入口，比如模板推荐、课程推荐、工具下载、PDF 下载旁赞助位和底部 AdSense 区域。</p>
-        <p>当前先保留文案和结构，等真实联盟资源准备好后，可以把占位按钮替换成正式链接。</p>
+        <p>热点只使用官方博客、官方 changelog、官方文档或项目 release 等一手来源，不使用无来源转载填充数量。</p>
+        <p>扩写文章会明确区分官方事实与本站建议，并保留限制、风险和验证步骤。</p>
       `
     }
   ]
@@ -4008,6 +4207,10 @@ function formatDate(value) {
 
 function byId(list, id) {
   return list.find((item) => item.id === id);
+}
+
+function getPublishedPosts() {
+  return siteData.posts.filter((post) => post.published !== false);
 }
 
 const iconBaseUrl = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
@@ -4087,7 +4290,7 @@ function buildPostCard(post) {
 
   return `
     <article class="article-card reveal">
-      <a class="article-card__media article-card__media--${slugify(post.category)}" href="post.html?id=${post.id}">
+      <a class="article-card__media article-card__media--${slugify(post.category)}" href="articles/${post.id}.html">
         <span class="article-card__badge">${post.featured ? "推荐" : post.category}</span>
         <span class="article-card__icon">${buildVisualIcon(icon, `${post.category} 图标`, "visual-icon visual-icon--card")}</span>
         <strong>${post.category}</strong>
@@ -4098,7 +4301,7 @@ function buildPostCard(post) {
           <span>${post.readTime}</span>
           <time datetime="${post.date}">${formatDate(post.date)}</time>
         </div>
-        <h3><a href="post.html?id=${post.id}">${post.title}</a></h3>
+        <h3><a href="articles/${post.id}.html">${post.title}</a></h3>
         <p>${post.excerpt}</p>
       </div>
     </article>
@@ -4110,12 +4313,12 @@ function buildLatestItem(post) {
 
   return `
     <article class="latest-item reveal">
-      <a class="latest-thumb latest-thumb--${slugify(post.category)}" href="post.html?id=${post.id}">
+      <a class="latest-thumb latest-thumb--${slugify(post.category)}" href="articles/${post.id}.html">
         ${buildVisualIcon(icon, `${post.category} 图标`, "visual-icon visual-icon--thumb")}
         <span>${post.category}</span>
       </a>
       <div>
-        <h3><a href="post.html?id=${post.id}">${post.title}</a></h3>
+        <h3><a href="articles/${post.id}.html">${post.title}</a></h3>
         <p>${post.excerpt}</p>
         <div class="meta-row">
           <span>${post.category}</span>
@@ -4235,7 +4438,7 @@ function getHomeCategories() {
 function getHomeStats() {
   return [
     { value: String(siteData.downloads.length), label: "原创下载包" },
-    { value: String(siteData.posts.length), label: "新手专题" },
+    { value: String(getPublishedPosts().length), label: "新手专题" },
     { value: String(siteData.hotspots.length), label: "已核验热点" }
   ];
 }
@@ -4258,7 +4461,7 @@ function buildTopicResourceSection(post) {
           <p class="eyebrow">${post.category}</p>
           <h2>${post.title}</h2>
         </div>
-        <a class="text-link" href="post.html?id=${post.id}">查看对应文章</a>
+        <a class="text-link" href="articles/${post.id}.html">查看对应文章</a>
       </div>
       <div class="topic-grid">
         <article class="topic-panel">
@@ -4278,7 +4481,7 @@ function buildTopicResourceSection(post) {
 
 function getResourcePathPosts() {
   return siteData.resourcePathPostIds
-    .map((id) => byId(siteData.posts, id))
+    .map((id) => byId(getPublishedPosts(), id))
     .filter(Boolean);
 }
 
@@ -4298,7 +4501,7 @@ function buildProjectCard(project) {
         </div>
         <h3>${project.title}</h3>
         <p>${project.summary}</p>
-        <a class="text-link" href="project.html?id=${project.id}">查看详情</a>
+        <a class="text-link" href="${project.link}">查看对应成果</a>
       </div>
     </article>
   `;
@@ -4362,19 +4565,13 @@ function buildArticleBody(post) {
     ${buildParagraphs(post.intro)}
     <h2>这篇内容适合谁</h2>
     ${buildBulletList(post.audience)}
-    <h2>建议呈现形式</h2>
-    ${buildBulletList(post.format)}
-    <h2>推荐学习顺序</h2>
+    <h2>实践与验证步骤</h2>
     ${buildBulletList(post.roadmap)}
     <h2>官方资料入口</h2>
     ${buildLinkList(post.officialLinks)}
-    <h2>整理建议与补充方向</h2>
+    <h2>重点判断与使用建议</h2>
     ${buildBulletList(post.curatedLinks)}
-    <h2>后续可补充的下载内容</h2>
-    ${buildBulletList(post.downloadIdeas)}
     ${buildExtraSections(post.extraSections)}
-    <h2>广告位与资源位建议</h2>
-    <p>${post.monetization}</p>
   `;
 }
 
@@ -4416,7 +4613,7 @@ function injectHomePage() {
   }
 
   if (featuredPosts) {
-    featuredPosts.innerHTML = siteData.posts
+    featuredPosts.innerHTML = getPublishedPosts()
       .filter((post) => post.featured)
       .map(buildPostCard)
       .join("");
@@ -4459,15 +4656,15 @@ function injectHomePage() {
   }
 
   if (recommendations) {
-    recommendations.innerHTML = siteData.posts.filter((post) => post.featured).slice(0, 4).map(buildPostCard).join("");
+    recommendations.innerHTML = getPublishedPosts().filter((post) => post.featured).slice(0, 4).map(buildPostCard).join("");
   }
 
   if (latest) {
-    latest.innerHTML = siteData.posts.slice(4, 8).map(buildLatestItem).join("");
+    latest.innerHTML = getPublishedPosts().slice(4, 8).map(buildLatestItem).join("");
   }
 
   if (tags) {
-    tags.innerHTML = [...new Set(siteData.posts.flatMap((post) => post.tags))]
+    tags.innerHTML = [...new Set(getPublishedPosts().flatMap((post) => post.tags))]
       .slice(0, 14)
       .map((tag) => `<a href="posts.html?q=${encodeURIComponent(tag)}">${tag}</a>`)
       .join("");
@@ -4506,7 +4703,7 @@ function injectPostsPage() {
 
   const render = (query = "") => {
     const normalized = query.trim().toLowerCase();
-    const filtered = siteData.posts.filter((post) => {
+    const filtered = getPublishedPosts().filter((post) => {
       const haystack = [post.title, post.category, post.excerpt, post.tags.join(" ")].join(" ").toLowerCase();
       return haystack.includes(normalized);
     });
@@ -4529,7 +4726,8 @@ function injectPostDetail() {
   if (!detail) return;
 
   const params = new URLSearchParams(window.location.search);
-  const post = byId(siteData.posts, params.get("id")) || siteData.posts[0];
+  const publishedPosts = getPublishedPosts();
+  const post = byId(publishedPosts, params.get("id")) || publishedPosts[0];
   const description = document.querySelector('meta[name="description"]');
 
   document.title = `${post.title} | ${siteData.site.name}`;
@@ -4550,10 +4748,10 @@ function injectPostDetail() {
       <article class="article-body">
         ${buildArticleBody(post)}
         <div class="inline-promo">
-          <p class="label">延伸资源</p>
-          <h3>如果你想继续顺着这个主题往下学，可以去资源页看按方向整理的官方入口。</h3>
-          <p>当前站内先优先做资源分享型内容，后面会把高需求主题逐步扩成完整图文教程、示例代码和可下载资料。</p>
-          <a class="button button--secondary" href="resources.html">查看资源推荐</a>
+          <p class="label">核验说明</p>
+          <h3>事实优先引用一手来源，实践建议需要结合自己的环境验证。</h3>
+          <p>如果官方文档、版本状态或限制条件发生变化，本站会更新文章并保留原始来源入口。</p>
+          <a class="button button--secondary" href="editorial.html">查看内容标准</a>
         </div>
       </article>
       <aside class="article-sidebar">
@@ -4565,15 +4763,15 @@ function injectPostDetail() {
         </div>
         <div class="sidebar-card">
           <p class="label">热门阅读</p>
-          ${siteData.posts
+          ${publishedPosts
             .slice(0, 4)
-            .map((item) => `<a href="post.html?id=${item.id}">${item.title}</a>`)
+            .map((item) => `<a href="articles/${item.id}.html">${item.title}</a>`)
             .join("")}
         </div>
         <div class="sidebar-card sidebar-card--accent">
-          <p class="label">合作入口</p>
-          <h3>接受轻量站点搭建、内容结构整理与资源页策划合作</h3>
-          <a class="button button--dark" href="contact.html">联系我</a>
+          <p class="label">内容标准</p>
+          <h3>了解本站怎样选择来源、补充判断并处理更正。</h3>
+          <a class="button button--dark" href="editorial.html">查看说明</a>
         </div>
       </aside>
     </div>

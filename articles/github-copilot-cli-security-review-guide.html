@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Copilot CLI 加入 /security-review：新手怎样把 AI 安全审查放到提交前 | 学习资源库</title>
+  <meta name="description" content="GitHub Copilot CLI 新增实验性 /security-review，可分析本地代码改动并给出高置信度安全发现；它适合做提交前补充检查，但不能替代测试、CodeQL、依赖与密钥扫描。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/github-copilot-cli-security-review-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Copilot CLI 加入 /security-review：新手怎样把 AI 安全审查放到提交前","description":"GitHub Copilot CLI 新增实验性 /security-review，可分析本地代码改动并给出高置信度安全发现；它适合做提交前补充检查，但不能替代测试、CodeQL、依赖与密钥扫描。","datePublished":"2026-06-11","dateModified":"2026-06-11","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/github-copilot-cli-security-review-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">开发安全</span>
+      <h1>Copilot CLI 加入 /security-review：新手怎样把 AI 安全审查放到提交前</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-11">2026年6月11日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>GitHub Copilot CLI 新增实验性 /security-review，可分析本地代码改动并给出高置信度安全发现；它适合做提交前补充检查，但不能替代测试、CodeQL、依赖与密钥扫描。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://github.blog/changelog/2026-06-10-dedicated-security-review-command-now-available-in-copilot-cli/" target="_blank" rel="noreferrer">GitHub Changelog：Copilot CLI /security-review</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>很多安全问题并不是上线后才出现，而是在一次看似普通的代码修改里被带入：拼接查询造成注入、输出未转义造成跨站脚本、路径参数没有限制，或敏感数据被写进不合适的位置。新手往往知道要看 diff，却不知道应该重点检查哪些风险。</p><p>GitHub 在 2026 年 6 月 10 日为 Copilot CLI 发布实验性的 `/security-review`。该命令会分析当前本地改动，返回按严重性和置信度整理的发现与修复建议，重点覆盖注入、跨站脚本、不安全数据处理、路径遍历和弱加密等常见高影响问题。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>已经使用 GitHub Copilot CLI，希望在提交前增加一道安全检查的新手</li><li>需要快速审查 AI 生成代码、脚本或小型 Web 项目的开发者</li><li>想区分终端 AI 审查、CodeQL、Dependabot 与 secret scanning 职责的团队</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先在 Copilot CLI 中开启 experimental mode，再在一个有未提交改动的测试项目里运行 `/security-review`。不要第一次就对重要生产改动完全依赖实验功能，先确认输出格式和检查范围。</li><li>逐条核对发现对应的文件、代码路径、输入来源和真实可利用条件。优先处理高严重性、高置信度问题；对不确定项补测试或最小复现，不要因为 AI 给出建议就直接批量修改。</li><li>安全审查通过后仍要运行现有测试，并继续使用 CodeQL、依赖扫描、密钥扫描和人工代码审查。提交前检查完整 diff，确认修复没有改变业务行为或引入新的权限问题。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://github.blog/changelog/2026-06-10-dedicated-security-review-command-now-available-in-copilot-cli/" target="_blank" rel="noreferrer">GitHub Changelog：Copilot CLI /security-review</a>
+              <span>：包含命令状态、检查范围、典型漏洞类别和启用方式。</span>
+            </li>
+
+            <li>
+              <a href="https://github.com/github/copilot-cli#experimental-mode" target="_blank" rel="noreferrer">GitHub Copilot CLI：Experimental mode</a>
+              <span>：用于确认怎样启用实验功能以及当前 CLI 使用说明。</span>
+            </li>
+
+            <li>
+              <a href="https://docs.github.com/en/code-security/code-scanning/introduction-to-code-scanning/about-code-scanning-with-codeql" target="_blank" rel="noreferrer">GitHub Docs：About code scanning with CodeQL</a>
+              <span>：用于理解仓库级代码扫描与提交前轻量审查的区别。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>`/security-review` 仍是 public preview 中的实验功能，输出和覆盖范围可能变化，不应作为唯一上线门槛。</li><li>命令只分析本地代码改动并返回高置信度发现；没有报告问题不代表代码没有漏洞。</li><li>修复建议也属于 AI 生成内容，应用后必须重新检查 diff、运行测试并验证真实风险是否消除。</li></ul>
+
+        <h2>推荐的提交前顺序</h2>
+
+        <ul><li>先阅读完整 diff，确认修改范围与预期一致。</li><li>运行项目现有测试、lint 和类型检查。</li><li>执行 `/security-review`，逐条核对高置信度发现。</li><li>完成修复后重新测试，再交给人工或仓库级扫描复核。</li></ul>
+
+
+
+        <h2>它不能替代什么</h2>
+
+        <ul><li>不能替代针对业务权限、数据边界和攻击路径的人工威胁建模。</li><li>不能替代依赖漏洞、密钥泄露与完整仓库历史的专用扫描。</li><li>不能证明代码绝对安全，也不能代替生产环境监控和事件响应。</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>GitHub Copilot CLI</span><span>安全审查</span><span>代码检查</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

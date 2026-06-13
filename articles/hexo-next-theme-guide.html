@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hexo / NexT 博客主题完整配置指南：官方文档、主题设置与扩展入口 | 学习资源库</title>
+  <meta name="description" content="给博客爱好者准备的 Hexo 与 NexT 主题资源页，覆盖安装、配置、常用功能和后续美化方向。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/hexo-next-theme-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Hexo / NexT 博客主题完整配置指南：官方文档、主题设置与扩展入口","description":"给博客爱好者准备的 Hexo 与 NexT 主题资源页，覆盖安装、配置、常用功能和后续美化方向。","datePublished":"2026-05-27","dateModified":"2026-05-27","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/hexo-next-theme-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">博客主题</span>
+      <h1>Hexo / NexT 博客主题完整配置指南：官方文档、主题设置与扩展入口</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-05-27">2026年5月27日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>给博客爱好者准备的 Hexo 与 NexT 主题资源页，覆盖安装、配置、常用功能和后续美化方向。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://hexo.io/docs/" target="_blank" rel="noreferrer">Hexo 官方文档</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>如果你想做博客，但又不想从头写前端，Hexo 配合 NexT 仍然是很适合中文用户的经典组合。资料多、生态成熟、配置项丰富，非常适合做长期内容站。</p><p>第一阶段我们先把它整理成资源导航页，后面再扩成完整图文教程和视频演示脚本。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>喜欢折腾博客样式和结构的个人站长</li><li>已经接触过 Markdown 和命令行的博客爱好者</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先看 Hexo 官方文档，理解初始化、写作和部署命令</li><li>再看 NexT 文档，完成菜单、评论、代码高亮、SEO 等设置</li><li>最后按自己的站点需求补评论系统、统计和主题美化</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://hexo.io/docs/" target="_blank" rel="noreferrer">Hexo 官方文档</a>
+              <span>：安装、写作、部署和配置都以这里为准。</span>
+            </li>
+
+            <li>
+              <a href="https://theme-next.js.org/docs/" target="_blank" rel="noreferrer">NexT 官方文档</a>
+              <span>：主题菜单、侧边栏、评论和外观设置入口。</span>
+            </li>
+
+            <li>
+              <a href="https://hexo.io/docs/configuration" target="_blank" rel="noreferrer">Hexo 配置说明</a>
+              <span>：适合搭配主题配置一起看。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>优先整理最常用的 5 类配置：站点信息、菜单导航、评论系统、SEO、页面美化。</li><li>录 GIF 或短视频时，重点演示改配置前后页面的变化，读者更容易理解。</li><li>如果未来准备做付费主题或模板下载，这篇底部非常适合承接联盟或付费资源入口。</li></ul>
+
+        <h2>更适合落地的配置顺序</h2>
+
+        <ul><li>先完成基础站点初始化，确保 Hexo 本地能正常启动和生成页面。</li><li>再切到 NexT 主题，先改站点标题、菜单、头像和社交链接。</li><li>然后补评论、代码高亮、搜索、SEO 和统计，不要一开始就改太多视觉细节。</li><li>最后再做主题美化、页面动效和第三方服务接入。</li></ul>
+
+
+
+        <h2>适合加入正文的官方入口</h2>
+
+
+
+    <ul>
+
+            <li>
+              <a href="https://hexo.io/docs/commands" target="_blank" rel="noreferrer">Hexo Commands</a>
+              <span>：适合讲本地预览、生成和部署命令。</span>
+            </li>
+
+            <li>
+              <a href="https://hexo.io/docs/writing" target="_blank" rel="noreferrer">Hexo Writing</a>
+              <span>：适合解释文章、草稿和资源文件夹。</span>
+            </li>
+
+            <li>
+              <a href="https://theme-next.js.org/docs/getting-started/" target="_blank" rel="noreferrer">NexT Getting Started</a>
+              <span>：适合快速入门主题配置。</span>
+            </li>
+
+    </ul>
+
+
+
+        <h2>示例命令：本地启动与生成静态文件</h2>
+        <p>如果这篇后面扩成长文教程，建议在最前面就放这组最常用命令。</p>
+
+
+        <pre><code class="language-bash">hexo init my-blog
+cd my-blog
+npm install
+hexo server
+hexo generate</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Hexo</span><span>NexT</span><span>博客主题</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

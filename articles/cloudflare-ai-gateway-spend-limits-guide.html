@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cloudflare AI Gateway 增加费用上限：新手怎样给模型、团队和 Agent 控制预算 | 学习资源库</title>
+  <meta name="description" content="Cloudflare AI Gateway 现可按模型、提供商和自定义属性设置美元预算，达到上限后阻止请求或切换到备用模型；身份驱动预算与策略仍处于 closed beta。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/cloudflare-ai-gateway-spend-limits-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Cloudflare AI Gateway 增加费用上限：新手怎样给模型、团队和 Agent 控制预算","description":"Cloudflare AI Gateway 现可按模型、提供商和自定义属性设置美元预算，达到上限后阻止请求或切换到备用模型；身份驱动预算与策略仍处于 closed beta。","datePublished":"2026-06-08","dateModified":"2026-06-08","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/cloudflare-ai-gateway-spend-limits-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 工具</span>
+      <h1>Cloudflare AI Gateway 增加费用上限：新手怎样给模型、团队和 Agent 控制预算</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-08">2026年6月8日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Cloudflare AI Gateway 现可按模型、提供商和自定义属性设置美元预算，达到上限后阻止请求或切换到备用模型；身份驱动预算与策略仍处于 closed beta。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://blog.cloudflare.com/ai-gateway-spend-limits/" target="_blank" rel="noreferrer">Cloudflare Blog：Your AI bill is out of control. Cloudflare can fix it now.</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>AI 应用刚开始测试时，每次调用只花一点钱，很容易忽略成本边界。等到团队、自动化和 Agent 都开始共享模型后，某个循环任务、昂贵模型或失控的 CI 流程就可能快速消耗预算。单靠月末账单很难判断费用来自哪个模型、应用或用户。</p><p>Cloudflare 2026 年 6 月 5 日宣布 AI Gateway spend limits 进入 open beta，所有方案用户都可以按美元设置预算。限制可以组合模型、提供商和管理员定义的自定义属性，并使用固定或滚动的日、周、月窗口；达到上限后默认阻止后续请求，也可以通过 Dynamic Routes 切换到更便宜的备用模型。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>正在搭建 AI 聊天、内容生成、代码审查或 Agent 自动化的新手</li><li>需要把多个模型提供商的日志、调用量和费用集中查看的开发者</li><li>想给团队、应用或自动化任务设置预算边界的站长和管理员</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先只做观察，不要一开始就设置过低的硬上限。把应用请求通过 AI Gateway 转发，确认模型、提供商、token 和费用日志完整，再按真实使用情况估算日、周或月预算。</li><li>再按风险拆分预算。可以用模型和提供商限制昂贵调用，也可以让应用传递自定义属性，分别观察网站聊天、代码审查、内容生成和后台 Agent。自定义属性由应用提供，仍需防止错误或伪造数据。</li><li>最后决定达到上限后的行为。关键任务可以通过 Dynamic Routes 切换到更便宜的备用模型，低优先级任务可以直接阻止；无论选择哪种方式，都要保留错误处理、日志和人工复核，避免静默降级影响结果质量。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://blog.cloudflare.com/ai-gateway-spend-limits/" target="_blank" rel="noreferrer">Cloudflare Blog：Your AI bill is out of control. Cloudflare can fix it now.</a>
+              <span>：本次费用上限、身份驱动预算和后续路由计划的原始公告。</span>
+            </li>
+
+            <li>
+              <a href="https://developers.cloudflare.com/ai-gateway/features/spend-limits/" target="_blank" rel="noreferrer">Cloudflare Docs：AI Gateway spend limits</a>
+              <span>：适合查看预算范围、时间窗口和达到上限后的行为配置。</span>
+            </li>
+
+            <li>
+              <a href="https://developers.cloudflare.com/ai-gateway/features/dynamic-routing/" target="_blank" rel="noreferrer">Cloudflare Docs：Dynamic Routes</a>
+              <span>：适合继续了解达到预算后切换备用模型的路由方式。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>费用上限按美元统计，不等于普通速率限制。速率限制控制请求频率，预算限制控制累计花费，两者应分别配置。</li><li>达到上限后切换便宜模型可以保持服务可用，但模型能力、输出格式和工具调用行为可能改变，关键流程要做回归测试。</li><li>身份驱动预算和策略目前仍是 closed beta。普通 spend limits 已进入 open beta，但上线前仍应在非关键环境验证。</li></ul>
+
+        <h2>第一次设置预算建议</h2>
+
+        <ul><li>先用较高额度观察真实使用模式，再逐步收紧。</li><li>为生产、测试、CI 和 Agent 使用不同的属性或网关。</li><li>明确达到上限时是阻止请求、提醒人工，还是切换备用模型。</li><li>定期检查高费用模型和异常任务，而不是只等月末账单。</li></ul>
+
+
+
+        <h2>不要把预算控制当成质量控制</h2>
+
+        <ul><li>便宜模型不一定适合复杂重构、关键内容或高风险决策。</li><li>模型降级后要验证输出结构、工具支持和失败处理。</li><li>预算、权限、隐私和结果复核仍是四个独立问题。</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Cloudflare</span><span>AI Gateway</span><span>成本控制</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

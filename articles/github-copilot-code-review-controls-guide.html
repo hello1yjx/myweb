@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界 | 学习资源库</title>
+  <meta name="description" content="GitHub Copilot Code Review 新增组织级 Runner 默认值与锁定、内容排除支持，并移除仓库自定义指令的 4000 字符读取上限；团队应把运行环境、可见内容与审查规则分开配置和验证。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/github-copilot-code-review-controls-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界","description":"GitHub Copilot Code Review 新增组织级 Runner 默认值与锁定、内容排除支持，并移除仓库自定义指令的 4000 字符读取上限；团队应把运行环境、可见内容与审查规则分开配置和验证。","datePublished":"2026-06-13","dateModified":"2026-06-13","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/github-copilot-code-review-controls-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">开发安全</span>
+      <h1>Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-13">2026年6月13日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>GitHub Copilot Code Review 新增组织级 Runner 默认值与锁定、内容排除支持，并移除仓库自定义指令的 4000 字符读取上限；团队应把运行环境、可见内容与审查规则分开配置和验证。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://github.blog/changelog/2026-06-12-copilot-code-review-new-configurations-and-controls/" target="_blank" rel="noreferrer">GitHub Changelog：Copilot code review new configurations and controls</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>把 AI 代码审查接入仓库后，团队不仅要关心它能发现什么，还要明确它在哪里运行、可以读取哪些内容、应遵循哪些审查规则。如果这些设置分散在每个仓库中，规模变大后容易出现 runner 不一致、敏感目录未排除或自定义规则没有完整生效的问题。</p><p>GitHub 在 2026 年 6 月 12 日为 Copilot Code Review 发布三项控制：组织管理员可以设置并锁定默认 runner；代码审查开始遵守仓库、组织和企业级内容排除；位于 `.github` 下的 `copilot-instructions.md` 与 `*.instructions.md` 不再受 4000 字符读取上限限制。组织级 runner 配置在同时启用时也会应用于 Copilot cloud agent。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>准备为仓库启用 Copilot Code Review，希望先理解配置边界的新手</li><li>需要统一多个仓库 runner、内容排除与审查指令的组织管理员</li><li>担心敏感文件、无关生成文件或过长规则影响 AI 审查的开发团队</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先列出代码审查的运行要求：使用 GitHub-hosted、自托管还是 large runner，以及哪些仓库必须遵循统一默认值。组织管理员可在 Copilot 的 Runner type configuration 中设置默认 runner，并在需要时锁定，避免仓库单独覆盖。</li><li>再按路径配置内容排除，把不应提供给 Copilot Code Review 的文件或目录排除，同时检查仓库、组织和企业规则是否叠加到预期范围。内容排除应作为数据范围控制的一部分，而不是替代仓库权限、密钥管理和人工审查。</li><li>最后整理 `.github/copilot-instructions.md` 与 `*.instructions.md`。虽然 4000 字符读取上限已移除，规则仍应简短、明确、可验证。创建一个测试 PR，检查 runner、被排除内容和自定义指令是否实际生效，再逐步推广到其他仓库。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://github.blog/changelog/2026-06-12-copilot-code-review-new-configurations-and-controls/" target="_blank" rel="noreferrer">GitHub Changelog：Copilot code review new configurations and controls</a>
+              <span>：包含组织级 runner、内容排除与自定义指令读取上限变化。</span>
+            </li>
+
+            <li>
+              <a href="https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot" target="_blank" rel="noreferrer">GitHub Docs：Exclude content from Copilot</a>
+              <span>：用于配置路径规则并理解当前内容排除范围。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>组织级 runner 默认值可以统一运行环境；锁定前应确认特殊仓库是否确实不需要单独配置。</li><li>内容排除能限制 Copilot Code Review 使用指定路径，但不能代替最小权限、密钥扫描、分支保护和人工复核。</li><li>取消字符上限不代表指令越长越好；规则之间冲突、描述模糊或无法验证，都会降低审查质量。</li></ul>
+
+        <h2>三类配置不要混在一起</h2>
+
+        <ul><li>Runner 配置决定 AI 代码审查在哪类执行环境中运行。</li><li>内容排除决定 Copilot Code Review 不应使用哪些路径。</li><li>自定义指令决定审查时应重点遵循哪些项目规则。</li></ul>
+
+
+
+        <h2>测试 PR 应检查什么</h2>
+
+        <ul><li>实际使用的 runner 是否与组织默认值和锁定策略一致。</li><li>被排除目录中的内容是否没有进入 Copilot 审查上下文。</li><li>自定义指令中的关键规则是否在审查建议中得到体现。</li><li>AI 建议是否仍经过测试、人工复核和现有合并门槛。</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>GitHub Copilot</span><span>代码审查</span><span>内容排除</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="npm-v12-install-security-migration-guide.html">npm v12 将默认阻止依赖脚本与远程依赖：新手升级前检查清单</a><a href="xcode-27-agentic-coding-beginner-guide.html">Xcode 27 把 Agent 放进编辑器：新手怎样先审计划、再验证界面</a><a href="claude-code-safe-mode-troubleshooting-guide.html">Claude Code 2.1.169 增加安全模式：新手怎样排查插件、skills 和 MCP 冲突</a><a href="cloudflare-ai-gateway-spend-limits-guide.html">Cloudflare AI Gateway 增加费用上限：新手怎样给模型、团队和 Agent 控制预算</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

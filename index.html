@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260612-hotspots">
+  <link rel="stylesheet" href="assets/styles.css?v=20260613-quality">
 </head>
 <body>
   <header class="site-header">
@@ -31,7 +31,7 @@
         <a href="resources.html">资源下载</a>
         <a href="projects.html">项目实战</a>
         <a href="hotspots.html">AI 专区</a>
-        <a href="contact.html">打赏联系</a>
+        <a href="contact.html">联系</a>
       </nav>
       <form class="header-search" data-site-search>
         <input type="search" name="q" placeholder="搜索教程 / 资源 / 工具...">
@@ -69,18 +69,150 @@
             </div>
             <a class="text-link" href="hotspots.html">查看全部</a>
           </div>
-          <div class="hotspot-grid hotspot-grid--preview" data-hotspots-preview></div>
+          <div class="hotspot-grid hotspot-grid--preview" data-hotspots-preview>
+            <!-- STATIC_HOME_HOTSPOTS_START -->
+<article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Web 开发 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>Web 开发</span>
+            <time datetime="2026-06-13">2026年6月13日</time>
+          </div>
+          <h3>Vercel Workflow SDK 在 Nitro v3 原生运行，步骤可直接使用服务器端 API</h3>
+        </div>
+      </div>
+      <p>Workflow SDK 与 Nitro v3 的原生集成进入 beta，`use step` 函数现在与应用其余部分运行在同一打包运行时，可直接调用 Nitro `useStorage()` 等服务器 API；开发服务器还会在 `/_workflow` 提供工作流检查与调试界面。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>原生集成减少了独立 bundle 与运行时之间的割裂，依赖追踪和 tree-shaking 也有助于缩小构建输出；但 beta 阶段仍应先验证存储、重试、长任务和部署行为，再迁移关键工作流。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：Nitro v3 原生 Workflow SDK 入门，怎样编写、观察和调试第一个持久化步骤</p>
+      <a class="text-link" href="https://vercel.com/changelog/workflow-sdk-now-runs-natively-in-nitro-v3" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="国产 AI 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>国产 AI</span>
+            <time datetime="2026-06-12">2026年6月12日</time>
+          </div>
+          <h3>Moonshot AI Kimi K2.7 Code 上线 Workers AI，支持长上下文、视觉与多轮工具调用</h3>
+        </div>
+      </div>
+      <p>Cloudflare 上线代码优化模型 Kimi K2.7 Code：采用 1T 总参数、每 token 激活 32B 的 MoE 架构，提供 262.1k token 上下文、视觉输入、多轮工具调用和 JSON Schema 结构化输出，并称其较 K2.6 少用 30% 推理 token。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>长上下文和多轮工具调用适合持续编码与 Agent 任务，且从 K2.6 迁移时 API 参数无需变化；实际采用前仍要用自己的代码库评估质量、延迟和费用，并把官方 benchmark 视为供应方测试结果。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：Kimi K2.7 Code 新手评测清单，怎样验证长上下文、工具调用与推理成本</p>
+      <a class="text-link" href="https://developers.cloudflare.com/changelog/post/2026-06-12-kimi-k2-7-code-workers-ai/" target="_blank" rel="noreferrer">查看来源：Cloudflare Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI Agent</span>
+            <time datetime="2026-06-12">2026年6月12日</time>
+          </div>
+          <h3>Vercel AI SDK 7 引入 HarnessAgent，用统一接口运行 Claude Code、Codex 与 Pi</h3>
+        </div>
+      </div>
+      <p>实验性的 `HarnessAgent` 把 Claude Code、Codex 与 Pi 等成熟 agent harness 接入同一 API，统一处理 skills、沙箱、会话、权限流程、上下文压缩、运行配置和子 Agent，并支持 AI SDK 风格的 `generate()` 与 `stream()` 结果。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>统一接口让团队更容易切换和比较 harness，也能复用现有 AI SDK 界面；但当前 adapters 位于 canary release，官方明确提示可能出现破坏性变化，首次实验应限制在可销毁沙箱和可验证任务中。</p>
+      </div>
+      <p class="hotspot-card__idea">选题：AI SDK HarnessAgent 入门，怎样在沙箱中统一运行并比较不同编码 Agent</p>
+      <a class="text-link" href="https://vercel.com/changelog/program-agent-harnesses-with-ai-sdk" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
+    </article>
+<!-- STATIC_HOME_HOTSPOTS_END -->
+          </div>
         </section>
 
         <section class="content-section">
           <div class="section-title">
             <div>
               <p class="eyebrow">精选推荐</p>
-              <h2>适合先看的高点击教程</h2>
+              <h2>适合先看的实践教程</h2>
             </div>
             <a class="text-link" href="posts.html">查看更多</a>
           </div>
-          <div class="recommend-grid" data-recommendations></div>
+          <div class="recommend-grid" data-recommendations>
+            <!-- STATIC_HOME_RECOMMENDATIONS_START -->
+<article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/vercel-ai-sdk-harnessagent-beginner-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-13">2026年6月13日</time>
+        </div>
+        <h3><a href="articles/vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a></h3>
+        <p>Vercel AI SDK 7 的实验性 HarnessAgent 用统一接口连接 Claude Code、Codex 与 Pi，并统一处理沙箱、会话、权限、skills 和子 Agent；新手应先从可销毁沙箱和单一任务开始验证。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--github" href="articles/github-copilot-code-review-controls-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>开发安全</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>开发安全</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-13">2026年6月13日</time>
+        </div>
+        <h3><a href="articles/github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a></h3>
+        <p>GitHub Copilot Code Review 新增组织级 Runner 默认值与锁定、内容排除支持，并移除仓库自定义指令的 4000 字符读取上限；团队应把运行环境、可见内容与审查规则分开配置和验证。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/github-agentic-workflows-public-preview-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-12">2026年6月12日</time>
+        </div>
+        <h3><a href="articles/github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a></h3>
+        <p>GitHub Agentic Workflows 已进入 public preview，可把自然语言 Markdown 编译为标准 Actions YAML，用编码 Agent 处理 issue 分类、CI 失败分析和文档更新；新手应从只读、小范围、可审查任务开始。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/github-copilot-cli-settings-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>8 分钟</span>
+          <time datetime="2026-06-12">2026年6月12日</time>
+        </div>
+        <h3><a href="articles/github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a></h3>
+        <p>GitHub Copilot CLI 新增统一的 /settings 命令，可通过搜索界面、行内命令或脚本管理配置，并在写入前进行 schema 校验；新手可用它减少手改配置文件造成的拼写和类型错误。</p>
+      </div>
+    </article>
+<!-- STATIC_HOME_RECOMMENDATIONS_END -->
+          </div>
         </section>
 
         <section class="content-section">
@@ -91,7 +223,73 @@
             </div>
             <a class="text-link" href="posts.html">全部文章</a>
           </div>
-          <div class="latest-list" data-home-latest></div>
+          <div class="latest-list" data-home-latest>
+            <!-- STATIC_HOME_LATEST_START -->
+<article class="latest-item reveal">
+      <a class="latest-thumb latest-thumb--github" href="articles/github-copilot-cli-security-review-guide.html">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
+        <span>开发安全</span>
+      </a>
+      <div>
+        <h3><a href="articles/github-copilot-cli-security-review-guide.html">Copilot CLI 加入 /security-review：新手怎样把 AI 安全审查放到提交前</a></h3>
+        <p>GitHub Copilot CLI 新增实验性 /security-review，可分析本地代码改动并给出高置信度安全发现；它适合做提交前补充检查，但不能替代测试、CodeQL、依赖与密钥扫描。</p>
+        <div class="meta-row">
+          <span>开发安全</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-11">2026年6月11日</time>
+        </div>
+      </div>
+    </article>
+
+    <article class="latest-item reveal">
+      <a class="latest-thumb latest-thumb--github" href="articles/npm-v12-install-security-migration-guide.html">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
+        <span>开发安全</span>
+      </a>
+      <div>
+        <h3><a href="articles/npm-v12-install-security-migration-guide.html">npm v12 将默认阻止依赖脚本与远程依赖：新手升级前检查清单</a></h3>
+        <p>npm v12 预计于 2026 年 7 月发布，将默认关闭依赖安装脚本，并默认禁止 Git 与远程 URL 依赖；项目可先升级到 npm 11.16.0，根据警告建立可信允许列表。</p>
+        <div class="meta-row">
+          <span>开发安全</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-11">2026年6月11日</time>
+        </div>
+      </div>
+    </article>
+
+    <article class="latest-item reveal">
+      <a class="latest-thumb latest-thumb--git" href="articles/xcode-27-agentic-coding-beginner-guide.html">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="开发工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
+        <span>开发工具</span>
+      </a>
+      <div>
+        <h3><a href="articles/xcode-27-agentic-coding-beginner-guide.html">Xcode 27 把 Agent 放进编辑器：新手怎样先审计划、再验证界面</a></h3>
+        <p>Apple 在 WWDC26 发布 Xcode 27 beta，加入可编辑计划、编辑器内 Agent 会话、模拟器操作、截图验证、插件与 MCP 扩展；新手应先把它当成需要审查和测试的协作工具。</p>
+        <div class="meta-row">
+          <span>开发工具</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-09">2026年6月9日</time>
+        </div>
+      </div>
+    </article>
+
+    <article class="latest-item reveal">
+      <a class="latest-thumb latest-thumb--ai" href="articles/claude-code-safe-mode-troubleshooting-guide.html">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
+        <span>AI 编程</span>
+      </a>
+      <div>
+        <h3><a href="articles/claude-code-safe-mode-troubleshooting-guide.html">Claude Code 2.1.169 增加安全模式：新手怎样排查插件、skills 和 MCP 冲突</a></h3>
+        <p>Claude Code 2.1.169 新增 --safe-mode，可临时禁用 CLAUDE.md、插件、skills、hooks 和 MCP server，帮助判断卡顿或异常来自核心程序还是自定义配置。</p>
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-09">2026年6月9日</time>
+        </div>
+      </div>
+    </article>
+<!-- STATIC_HOME_LATEST_END -->
+          </div>
         </section>
       </div>
 
@@ -113,9 +311,9 @@
         </section>
 
         <section class="side-panel side-panel--community">
-          <h3>支持本站更新</h3>
-          <p>如果教程和资料整理对你有帮助，可以在联系页扫码打赏，支持继续更新。</p>
-          <a class="button button--primary" href="contact.html">查看打赏码</a>
+          <h3>内容怎样整理</h3>
+          <p>查看本站的来源选择、原创增量、更新与更正规则。</p>
+          <a class="button button--primary" href="editorial.html">查看内容标准</a>
         </section>
       </aside>
     </section>
@@ -136,10 +334,10 @@
         <strong>项目实战</strong>
         <p>从教程到作品</p>
       </a>
-      <a class="quick-card" href="contact.html">
-        <span>收藏</span>
-        <strong>网站收藏</strong>
-        <p>联系与打赏支持</p>
+      <a class="quick-card" href="editorial.html">
+        <span>标准</span>
+        <strong>内容标准</strong>
+        <p>来源、核验与更正</p>
       </a>
     </section>
   </main>
@@ -168,7 +366,8 @@
         <a href="posts.html">编程开发</a>
         <a href="resources.html">学习资料</a>
         <a href="hotspots.html">AI 工具</a>
-        <a href="contact.html">打赏联系</a>
+        <a href="editorial.html">内容标准</a>
+        <a href="contact.html">联系</a>
         <a href="privacy.html">隐私政策</a>
       </div>
       <div>
@@ -179,6 +378,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260612-hotspots"></script>
+  <script src="assets/app.js?v=20260613-quality"></script>
 </body>
 </html>

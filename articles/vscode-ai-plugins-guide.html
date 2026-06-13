@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VS Code 插件使用指南：AI 编码、效率插件与官方入口整理 | 学习资源库</title>
+  <meta name="description" content="面向程序员的 VS Code 资源分享页，优先整理扩展市场、官方文档、AI 编码工具和常用效率插件的入口。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/vscode-ai-plugins-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"VS Code 插件使用指南：AI 编码、效率插件与官方入口整理","description":"面向程序员的 VS Code 资源分享页，优先整理扩展市场、官方文档、AI 编码工具和常用效率插件的入口。","datePublished":"2026-05-27","dateModified":"2026-05-27","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/vscode-ai-plugins-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">效率工具</span>
+      <h1>VS Code 插件使用指南：AI 编码、效率插件与官方入口整理</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-05-27">2026年5月27日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>面向程序员的 VS Code 资源分享页，优先整理扩展市场、官方文档、AI 编码工具和常用效率插件的入口。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://code.visualstudio.com/docs" target="_blank" rel="noreferrer">VS Code 官方文档</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>VS Code 插件类内容天然适合做资源导航，因为很多人会先搜索“某个插件值不值得装、怎么装、装完怎么用”。只要把入口、用途和安装顺序讲清楚，就很容易形成收藏型文章。</p><p>这类文章后续非常适合补 GIF、演示视频和场景化截图。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>希望提升编码效率的程序员</li><li>想尝试 AI 编码工具的新手开发者</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先用 VS Code 官方文档理解扩展、设置同步和工作区概念</li><li>再进入 Marketplace 按场景挑插件，不要一上来装一堆</li><li>AI 工具优先讲清楚用途、适合场景和使用边界</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://code.visualstudio.com/docs" target="_blank" rel="noreferrer">VS Code 官方文档</a>
+              <span>：先理解编辑器本身，再谈插件。</span>
+            </li>
+
+            <li>
+              <a href="https://code.visualstudio.com/docs/editor/extension-marketplace" target="_blank" rel="noreferrer">VS Code 扩展使用说明</a>
+              <span>：扩展安装、禁用、同步和管理入口。</span>
+            </li>
+
+            <li>
+              <a href="https://marketplace.visualstudio.com/vscode" target="_blank" rel="noreferrer">VS Code Marketplace</a>
+              <span>：查插件详情和下载量最直接。</span>
+            </li>
+
+            <li>
+              <a href="https://platform.openai.com/docs" target="_blank" rel="noreferrer">OpenAI API 文档</a>
+              <span>：如果后续要介绍与 OpenAI 相关的开发者工作流，可优先引用这里。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>推荐先按 4 类整理插件：AI 编码、代码格式化、Git 协作、语言增强。</li><li>插件文章不要只罗列名称，最好写清楚“解决什么问题、适合谁、有没有替代方案”。</li><li>如果后面补演示，优先录插件安装后 30 秒内就能看到效果的功能。</li></ul>
+
+        <h2>更适合新手的阅读顺序</h2>
+
+        <ul><li>先学 VS Code 基础：扩展、设置、工作区、Profiles。</li><li>再学效率增强：格式化、Git 集成、Settings Sync。</li><li>最后再上 AI 编码工具，避免一开始就把工作流搞得太复杂。</li></ul>
+
+
+
+        <h2>建议加入正文的官方入口</h2>
+
+
+
+    <ul>
+
+            <li>
+              <a href="https://code.visualstudio.com/docs/editor/settings-sync" target="_blank" rel="noreferrer">Settings Sync</a>
+              <span>：适合讲多设备同步和环境迁移。</span>
+            </li>
+
+            <li>
+              <a href="https://code.visualstudio.com/docs/configure/profiles" target="_blank" rel="noreferrer">Profiles in VS Code</a>
+              <span>：适合讲不同开发场景如何隔离插件和设置。</span>
+            </li>
+
+            <li>
+              <a href="https://code.visualstudio.com/docs/configure/settings" target="_blank" rel="noreferrer">User and workspace settings</a>
+              <span>：适合解释 settings.json 和工作区定制。</span>
+            </li>
+
+            <li>
+              <a href="https://code.visualstudio.com/docs/copilot/agents/agent-tools" target="_blank" rel="noreferrer">Use tools with agents</a>
+              <span>：如果后续要写 AI agent 工作流，这篇很关键。</span>
+            </li>
+
+            <li>
+              <a href="https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan" target="_blank" rel="noreferrer">Using Codex with your ChatGPT plan</a>
+              <span>：适合介绍 Codex 客户端、IDE 扩展与使用前提。</span>
+            </li>
+
+            <li>
+              <a href="https://openai.com/index/introducing-upgrades-to-codex/" target="_blank" rel="noreferrer">Introducing upgrades to Codex</a>
+              <span>：适合补充 Codex IDE 扩展的定位和能力。</span>
+            </li>
+
+    </ul>
+
+
+
+        <h2>插件文章的推荐分组</h2>
+
+        <ul><li>AI 编码：用于生成、解释、重构和多文件修改。</li><li>代码质量：格式化、Lint、拼写检查和测试辅助。</li><li>协作效率：Git、Pull Request、工作区共享和注释类工具。</li><li>语言增强：前端、Python、Markdown、JSON 和配置文件支持。</li></ul>
+
+
+
+        <h2>示例配置：适合教程中展示的 settings.json 片段</h2>
+        <p>这类片段适合放在正文下半段，让读者装完插件以后还能顺手把常用设置带走。</p>
+
+
+        <pre><code class="language-json">{
+  "editor.formatOnSave": true,
+  "files.autoSave": "afterDelay",
+  "editor.minimap.enabled": false,
+  "workbench.startupEditor": "none",
+  "editor.tabSize": 2
+}</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>VS Code</span><span>AI 工具</span><span>插件推荐</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

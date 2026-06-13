@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitHub Copilot 企业托管插件进入 VS Code：团队怎样统一 agents、skills 和 MCP 配置 | 学习资源库</title>
+  <meta name="description" content="GitHub 2026 年 6 月 5 日宣布，企业托管 Copilot 插件能力已从 CLI 扩展到 VS Code public preview。团队可以通过 .github-private 仓库统一发布插件市场、自动安装插件，并集中配置 agents、skills、hooks 和 MCP。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/github-copilot-enterprise-managed-plugins-vscode-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"GitHub Copilot 企业托管插件进入 VS Code：团队怎样统一 agents、skills 和 MCP 配置","description":"GitHub 2026 年 6 月 5 日宣布，企业托管 Copilot 插件能力已从 CLI 扩展到 VS Code public preview。团队可以通过 .github-private 仓库统一发布插件市场、自动安装插件，并集中配置 agents、skills、hooks 和 MCP。","datePublished":"2026-06-06","dateModified":"2026-06-06","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/github-copilot-enterprise-managed-plugins-vscode-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 编程</span>
+      <h1>GitHub Copilot 企业托管插件进入 VS Code：团队怎样统一 agents、skills 和 MCP 配置</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-06">2026年6月6日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>GitHub 2026 年 6 月 5 日宣布，企业托管 Copilot 插件能力已从 CLI 扩展到 VS Code public preview。团队可以通过 .github-private 仓库统一发布插件市场、自动安装插件，并集中配置 agents、skills、hooks 和 MCP。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://github.blog/changelog/2026-06-05-enterprise-managed-plugins-in-vs-code-in-public-preview/" target="_blank" rel="noreferrer">GitHub Changelog：Enterprise-managed plugins in VS Code in public preview</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>当团队里的每个人都开始使用 AI 编程代理，问题很快会从“能不能用”变成“怎样让大家用同一套规则”。有人手动安装插件，有人漏掉内部 skill，有人的 MCP 配置已经过期，这些差异会让代理输出、权限边界和新成员上手速度都变得不可控。</p><p>GitHub 2026 年 6 月 5 日宣布，enterprise-managed plugins 已支持 VS Code public preview。企业管理员可以在 `.github-private/.github/copilot/settings.json` 中定义额外插件市场和默认启用的插件；用户通过企业 Copilot 账号在 VS Code 或 Copilot CLI 登录时，客户端会自动拉取并应用这些设置。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>正在给团队统一 GitHub Copilot、VS Code 和 Copilot CLI 配置的管理员</li><li>需要共享 custom agents、skills、hooks 或 MCP 配置的开发团队</li><li>想理解 AI 编程工具为什么需要版本化配置和治理边界的新手</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先盘点团队真正需要共享的能力。把通用编码规范、内部文档入口、固定工具和安全检查放进受控插件，不要把每个人的临时偏好都做成企业默认。</li><li>再在企业的 `.github-private` 仓库里维护 `.github/copilot/settings.json`，通过 `extraKnownMarketplaces` 声明可信插件市场，通过 `enabledPlugins` 指定自动安装项。</li><li>最后把插件更新当成代码变更审查。每次新增 agent、skill、hook 或 MCP 配置，都要检查来源、权限、网络访问和失败回滚，再让团队客户端自动同步。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://github.blog/changelog/2026-06-05-enterprise-managed-plugins-in-vs-code-in-public-preview/" target="_blank" rel="noreferrer">GitHub Changelog：Enterprise-managed plugins in VS Code in public preview</a>
+              <span>：本次 VS Code 企业托管插件 public preview 的原始公告。</span>
+            </li>
+
+            <li>
+              <a href="https://docs.github.com/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-agents/configure-enterprise-plugin-standards" target="_blank" rel="noreferrer">GitHub Docs：Configuring enterprise plugin standards for Copilot CLI</a>
+              <span>：适合查看 `.github-private` 仓库位置、settings.json 字段和生效条件。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>自动安装能减少新成员配置时间，但默认插件越多，代理可用能力和潜在权限也越多。先从少量、可解释、可审计的插件开始。</li><li>插件可以携带 agents、skills、hooks 和 MCP 配置。团队审查时不能只看插件名称，还要查看它实际启用了哪些工具、命令和外部连接。</li><li>这项能力目前仍是 public preview。上线前要准备回滚方式，并验证 VS Code 与 Copilot CLI 客户端版本、企业授权和 Usage billed to 选择是否正确。</li></ul>
+
+        <h2>团队首次上线建议</h2>
+
+        <ul><li>先选择一个低风险内部插件，在小团队验证自动安装和更新是否正常。</li><li>明确插件维护人、版本来源、权限范围和故障回滚步骤。</li><li>让使用者知道哪些设置由企业统一控制，哪些仍可以个人配置。</li></ul>
+
+
+
+        <h2>审查插件时要看什么</h2>
+
+        <ul><li>插件来源仓库是否可信，更新是否经过代码审查。</li><li>包含的 hooks、MCP 和命令是否会访问网络、文件或敏感系统。</li><li>默认安装是否确实帮助大多数成员，而不是只服务少数场景。</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>GitHub Copilot</span><span>VS Code</span><span>企业插件</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

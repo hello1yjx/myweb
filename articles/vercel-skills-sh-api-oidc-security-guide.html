@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>skills.sh API 开放：新手怎样用 OIDC 搜索、审计和管理 AI skills | 学习资源库</title>
+  <meta name="description" content="Vercel 2026 年 6 月 5 日开放 skills.sh API，可查询超过 60 万个开源 skills，并读取详情、官方精选和安全审计结果。部署在 Vercel 的应用可使用项目 OIDC 短期令牌认证，不需要保存长期 API Key。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/vercel-skills-sh-api-oidc-security-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"skills.sh API 开放：新手怎样用 OIDC 搜索、审计和管理 AI skills","description":"Vercel 2026 年 6 月 5 日开放 skills.sh API，可查询超过 60 万个开源 skills，并读取详情、官方精选和安全审计结果。部署在 Vercel 的应用可使用项目 OIDC 短期令牌认证，不需要保存长期 API Key。","datePublished":"2026-06-06","dateModified":"2026-06-06","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/vercel-skills-sh-api-oidc-security-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">开发工具</span>
+      <h1>skills.sh API 开放：新手怎样用 OIDC 搜索、审计和管理 AI skills</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-06">2026年6月6日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Vercel 2026 年 6 月 5 日开放 skills.sh API，可查询超过 60 万个开源 skills，并读取详情、官方精选和安全审计结果。部署在 Vercel 的应用可使用项目 OIDC 短期令牌认证，不需要保存长期 API Key。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://vercel.com/changelog/the-skills-sh-api-is-now-available" target="_blank" rel="noreferrer">Vercel Changelog：The skills.sh API is now available</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>AI agent 的 skill 可以把一套专业流程、规则和脚本打包复用，但数量变多后，单靠网页搜索和手动复制很难管理。你需要知道 skill 来自哪里、包含哪些文件、是否重复、有没有安全审计，以及更新后内容是否发生变化。</p><p>Vercel 2026 年 6 月 5 日宣布 skills.sh API 可用。官方说明可以通过 API 搜索超过 60 万个开源 skills，读取 skill 详情、文件树、安装量、官方精选和多家安全伙伴的审计结果。Vercel 应用还可以使用项目 OIDC token 认证，由平台签发短期凭据，避免在环境变量里长期保存 API Key。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>正在做 AI agent、skill 市场、开发工具目录或内部插件平台的新手</li><li>希望在安装 skill 前检查来源、文件内容和安全审计结果的开发者</li><li>想理解 OIDC 短期令牌为什么比长期 API Key 更适合自动化调用的站长</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先用搜索和官方精选接口缩小候选范围，不要只按安装量判断。记录稳定 id、来源仓库、installUrl 和是否为重复副本。</li><li>再读取详情与审计接口，检查 SKILL.md、支持文件、内容 hash 和安全伙伴结果。审计通过不等于可以跳过人工复核，尤其要关注脚本、网络请求和凭据读取。</li><li>最后配置 OIDC。调用时在请求处理函数内部获取短期 token，按 team 和 project 控制范围，处理 401、429 和 503，并且不要把本地 `.env.local` 提交到仓库。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://vercel.com/changelog/the-skills-sh-api-is-now-available" target="_blank" rel="noreferrer">Vercel Changelog：The skills.sh API is now available</a>
+              <span>：本次 skills.sh API 发布的原始公告，包含 OIDC 和速率限制概要。</span>
+            </li>
+
+            <li>
+              <a href="https://skills.sh/docs/api" target="_blank" rel="noreferrer">skills.sh Docs：API Reference</a>
+              <span>：适合查看搜索、详情、官方精选、安全审计、错误处理和缓存规则。</span>
+            </li>
+
+            <li>
+              <a href="https://vercel.com/docs/oidc" target="_blank" rel="noreferrer">Vercel Docs：OpenID Connect Federation</a>
+              <span>：适合继续理解 Vercel OIDC 短期令牌、环境范围和本地开发方式。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>安装量和热门排名只能说明使用情况，不能证明 skill 适合你的项目。先看来源、内容、权限和审计结果。</li><li>OIDC 的价值不是“少写一个 API Key”，而是让凭据短期有效并按团队、项目和环境收窄范围。</li><li>skills.sh API 的认证请求按 team 和 project 限制为每分钟 600 次。应用应读取速率限制响应头，对 429 和 503 使用等待与退避，而不是无限重试。</li></ul>
+
+        <h2>安装 skill 前至少检查五项</h2>
+
+        <ul><li>来源仓库和作者是否可信，是否存在重复副本。</li><li>SKILL.md 和支持文件是否要求执行脚本、访问网络或读取凭据。</li><li>安全审计结果是否存在 warn、fail 或尚未生成审计的情况。</li><li>内容 hash 是否变化，更新后是否需要重新审查。</li><li>skill 能力是否真的符合当前任务，避免给代理增加不必要的权限。</li></ul>
+
+
+
+        <h2>OIDC 调用时的三个边界</h2>
+
+        <ul><li>在每次请求的处理函数里获取 token，不要长期缓存短期凭据。</li><li>本地开发可以使用 Vercel CLI 拉取环境，但 `.env.local` 仍然不能提交。</li><li>记录错误状态和限流信息，不记录原始 bearer token。</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>skills.sh</span><span>OIDC</span><span>AI Skills</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

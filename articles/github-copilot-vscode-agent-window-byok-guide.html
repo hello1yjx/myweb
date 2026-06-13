@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitHub Copilot in VS Code 5 月更新：新手怎么理解 Agents window、BYOK 和终端安全 | 学习资源库</title>
+  <meta name="description" content="GitHub 2026 年 6 月 3 日发布 Copilot in Visual Studio Code 5 月更新汇总，覆盖 v1.120 到 v1.123：Agents window 进入 Stable 预览，远程代理、BYOK、终端风险提示、敏感输入保护和集成浏览器能力继续增强。对新手来说，这是一条理解 AI 编程工具从聊天框走向完整开发环境的好入口。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/github-copilot-vscode-agent-window-byok-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"GitHub Copilot in VS Code 5 月更新：新手怎么理解 Agents window、BYOK 和终端安全","description":"GitHub 2026 年 6 月 3 日发布 Copilot in Visual Studio Code 5 月更新汇总，覆盖 v1.120 到 v1.123：Agents window 进入 Stable 预览，远程代理、BYOK、终端风险提示、敏感输入保护和集成浏览器能力继续增强。对新手来说，这是一条理解 AI 编程工具从聊天框走向完整开发环境的好入口。","datePublished":"2026-06-04","dateModified":"2026-06-04","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/github-copilot-vscode-agent-window-byok-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 编程</span>
+      <h1>GitHub Copilot in VS Code 5 月更新：新手怎么理解 Agents window、BYOK 和终端安全</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-04">2026年6月4日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>GitHub 2026 年 6 月 3 日发布 Copilot in Visual Studio Code 5 月更新汇总，覆盖 v1.120 到 v1.123：Agents window 进入 Stable 预览，远程代理、BYOK、终端风险提示、敏感输入保护和集成浏览器能力继续增强。对新手来说，这是一条理解 AI 编程工具从聊天框走向完整开发环境的好入口。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://github.blog/changelog/2026-06-03-github-copilot-in-visual-studio-code-may-releases/" target="_blank" rel="noreferrer">GitHub Changelog：GitHub Copilot in Visual Studio Code, May releases</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>以前很多人把 VS Code 里的 AI 功能理解成“问一句、补一段代码”。GitHub 2026 年 6 月 3 日的 Changelog 汇总了 Copilot in Visual Studio Code 在 5 月和 6 月初的更新，方向已经明显不只是补全代码，而是让代理在更完整的开发环境里接任务、改文件、跑命令、查看浏览器结果，并把过程留给人复核。</p><p>这条更新最适合新手看的地方，是它把三个问题放在一起：代理工作区怎么组织、模型和密钥怎么管理、终端命令怎么更安全。理解这三件事，比单纯追某个新模型更实用。因为当 AI 开始真正跑测试、读日志、开浏览器和改多个项目时，你需要知道它在哪里工作、用什么模型、能看到什么输出，以及哪些输入不会被交给模型。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>刚开始用 VS Code、GitHub Copilot Chat 或 Agents window 的新手开发者</li><li>想把 AI 编程从简单问答升级到任务执行、网页调试和多项目协作的站长</li><li>需要在公司或受限环境里使用 BYOK、远程机器和终端命令的开发者</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先理解 Agents window：它是一个更偏代理任务的工作区，适合跨项目、并行会话、远程机器和变更复核，而不只是普通聊天侧栏。</li><li>再理解 BYOK 和模型控制：自带密钥、Custom Endpoint、按 provider 选模型、token 可见性和 reasoning effort，都是为了让不同环境能更清楚地管理成本、权限和可用性。</li><li>最后看终端安全：输出压缩、实验性的命令风险提示、敏感输入留在终端、后台命令状态提示，说明 AI 代理跑命令时必须有边界和可观察性。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://github.blog/changelog/2026-06-03-github-copilot-in-visual-studio-code-may-releases/" target="_blank" rel="noreferrer">GitHub Changelog：GitHub Copilot in Visual Studio Code, May releases</a>
+              <span>：本次 VS Code Copilot 5 月更新汇总的原始来源，覆盖 Agents window、BYOK、终端和浏览器能力。</span>
+            </li>
+
+            <li>
+              <a href="https://code.visualstudio.com/updates/v1_123" target="_blank" rel="noreferrer">Visual Studio Code 1.123 Release Notes</a>
+              <span>：适合继续查看 VS Code 最新稳定版本的具体发布说明。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>不要一开始就让代理处理生产仓库。先选一个小项目，让它跑测试、解释失败原因或修一个很小的问题。</li><li>BYOK 不只是填 API Key。你还要确认模型来源、token 用量、推理强度、是否能在受限网络里工作，以及哪些任务交给哪个模型。</li><li>终端风险提示只是辅助判断。涉及删除、覆盖、密钥、生产数据库和发布动作时，仍然要人工确认命令和目标路径。</li></ul>
+
+        <h2>新手可以先试的三个场景</h2>
+
+        <ul><li>让代理在一个示例项目里跑测试，并把失败原因整理成中文清单。</li><li>用集成浏览器打开本地页面，让代理截图并说明移动端布局问题。</li><li>把一个小需求拆成计划、修改、diff 检查和人工确认四步，而不是直接要求它全自动完成。</li></ul>
+
+
+
+        <h2>配置前先问自己</h2>
+
+        <ul><li>这个项目是否可以被 AI 代理读取和修改？</li><li>使用的是 Copilot 默认模型、BYOK 模型，还是自定义兼容端点？</li><li>代理运行命令时，网络、文件系统和敏感输入边界是否清楚？</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>VS Code</span><span>GitHub Copilot</span><span>AI Agent</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitHub Copilot Code Review 开始消耗 Actions minutes：新手怎么读懂 AI 代码审查成本 | 学习资源库</title>
+  <meta name="description" content="GitHub 早前在 Changelog 中说明，从 2026 年 6 月 1 日起，每次 Copilot code review 会同时按 AI Credits 计入 Copilot 用量；私有仓库使用 GitHub-hosted runners 时，还会消耗 GitHub Actions minutes。本文把它整理成新手能看懂的成本和权限清单。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/github-copilot-code-review-actions-minutes-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"GitHub Copilot Code Review 开始消耗 Actions minutes：新手怎么读懂 AI 代码审查成本","description":"GitHub 早前在 Changelog 中说明，从 2026 年 6 月 1 日起，每次 Copilot code review 会同时按 AI Credits 计入 Copilot 用量；私有仓库使用 GitHub-hosted runners 时，还会消耗 GitHub Actions minutes。本文把它整理成新手能看懂的成本和权限清单。","datePublished":"2026-06-01","dateModified":"2026-06-01","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/github-copilot-code-review-actions-minutes-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 编程</span>
+      <h1>GitHub Copilot Code Review 开始消耗 Actions minutes：新手怎么读懂 AI 代码审查成本</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-01">2026年6月1日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>GitHub 早前在 Changelog 中说明，从 2026 年 6 月 1 日起，每次 Copilot code review 会同时按 AI Credits 计入 Copilot 用量；私有仓库使用 GitHub-hosted runners 时，还会消耗 GitHub Actions minutes。本文把它整理成新手能看懂的成本和权限清单。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://github.blog/changelog/2026-04-27-github-copilot-code-review-will-start-consuming-github-actions-minutes-on-june-1-2026/" target="_blank" rel="noreferrer">GitHub Changelog：Copilot code review billing change</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>AI 代码审查正在从“多一个智能评论入口”变成真正会进入账单和 CI 资源的开发流程。GitHub 在 2026 年 4 月 27 日提前公告，从 2026 年 6 月 1 日起，Copilot code review 的计费方式会发生变化：Copilot 本身的使用会计入 AI Credits；如果审查运行在私有仓库并使用 GitHub-hosted runners，还会消耗 GitHub Actions minutes。</p><p>对新手来说，重点不是记住复杂账单名词，而是理解 AI 代码审查背后的运行方式。它不是凭空在网页上发表评论，而是一个会读取仓库上下文、运行在 runner 上、再把结果反馈到 Pull Request 的自动化流程。只要它进入自动化流程，就需要看预算、权限、触发条件和仓库类型。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>刚开始在 Pull Request 中使用 GitHub Copilot code review 的开发者</li><li>维护私有仓库、个人网站或小团队项目，担心 AI 工具产生额外成本的站长</li><li>想理解 AI Credits、GitHub Actions minutes 和 runner 设置关系的新手</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先区分仓库类型：公共仓库和私有仓库在 Actions minutes 上的影响不同。</li><li>再区分两类用量：Copilot 的 AI Credits 是模型与代理能力用量，Actions minutes 是 runner 执行资源用量。</li><li>最后检查组织或个人账号的预算、runner 设置和 code review 触发范围，避免把所有 PR 都无差别交给代理审查。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://github.blog/changelog/2026-04-27-github-copilot-code-review-will-start-consuming-github-actions-minutes-on-june-1-2026/" target="_blank" rel="noreferrer">GitHub Changelog：Copilot code review billing change</a>
+              <span>：说明 2026 年 6 月 1 日起 Copilot code review 如何计入 AI Credits 和 GitHub Actions minutes。</span>
+            </li>
+
+            <li>
+              <a href="https://github.blog/news-insights/company-news/github-copilot-individual-plans-introducing-flex-allotments-in-pro-and-pro-and-a-new-max-plan/" target="_blank" rel="noreferrer">GitHub Blog：Copilot individual plans and flex allotments</a>
+              <span>：适合继续理解 2026 年 6 月 1 日后个人套餐、base credits、flex allotment 和 Max 计划。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>把 AI code review 看成一次自动化工作流：触发、读取上下文、运行 runner、返回评论都可能对应到用量或权限。</li><li>私有仓库更需要先做预算和触发范围控制；公共仓库虽然 Actions minutes 仍免费，但 Copilot 用量本身也要关注。</li><li>如果团队刚开始试用，建议先在低风险仓库或少量 PR 上观察评论质量、耗时和用量，再扩大到关键项目。</li></ul>
+
+        <h2>先记住三个判断问题</h2>
+
+        <ul><li>这个 PR 在公共仓库还是私有仓库？</li><li>审查使用的是 GitHub-hosted runner、larger runner，还是 self-hosted runner？</li><li>账号或组织有没有设置 Copilot 与 Actions 的预算提醒？</li></ul>
+
+
+
+        <h2>不建议一开始就自动化的场景</h2>
+
+        <ul><li>涉及生产密钥、客户数据或合规材料的私有仓库。</li><li>没有测试、没有分支保护、也没有人工复核习惯的仓库。</li><li>PR 数量很高但评论质量还没有经过抽样验证的团队工作流。</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>GitHub Copilot</span><span>Code Review</span><span>Actions</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

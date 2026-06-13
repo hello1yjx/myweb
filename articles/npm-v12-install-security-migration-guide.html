@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>npm v12 将默认阻止依赖脚本与远程依赖：新手升级前检查清单 | 学习资源库</title>
+  <meta name="description" content="npm v12 预计于 2026 年 7 月发布，将默认关闭依赖安装脚本，并默认禁止 Git 与远程 URL 依赖；项目可先升级到 npm 11.16.0，根据警告建立可信允许列表。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/npm-v12-install-security-migration-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"npm v12 将默认阻止依赖脚本与远程依赖：新手升级前检查清单","description":"npm v12 预计于 2026 年 7 月发布，将默认关闭依赖安装脚本，并默认禁止 Git 与远程 URL 依赖；项目可先升级到 npm 11.16.0，根据警告建立可信允许列表。","datePublished":"2026-06-11","dateModified":"2026-06-11","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/npm-v12-install-security-migration-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260613-quality">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">开发安全</span>
+      <h1>npm v12 将默认阻止依赖脚本与远程依赖：新手升级前检查清单</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-11">2026年6月11日</time>
+        <span>10 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>npm v12 预计于 2026 年 7 月发布，将默认关闭依赖安装脚本，并默认禁止 Git 与远程 URL 依赖；项目可先升级到 npm 11.16.0，根据警告建立可信允许列表。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://github.blog/changelog/2026-06-09-upcoming-breaking-changes-for-npm-v12" target="_blank" rel="noreferrer">GitHub Changelog：Upcoming breaking changes for npm v12</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>`npm install` 不只会下载 JavaScript 文件。依赖可以自动运行 `preinstall`、`install`、`postinstall`，原生模块还可能隐式执行 `node-gyp rebuild`；项目也可能直接从 Git 仓库或远程 tarball 安装包。这些能力方便，但也扩大了供应链攻击和意外执行代码的范围。</p><p>GitHub 在 2026 年 6 月 9 日预告，预计 7 月发布的 npm v12 会把多项自动行为改成显式选择：`allowScripts` 默认关闭，`--allow-git` 与 `--allow-remote` 默认设为 `none`。npm 11.16.0 或更高版本已经会显示相关警告，团队可以在正式升级前完成盘点。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>使用 Node.js、npm、前端框架或静态站点工具链的新手</li><li>维护包含原生模块、安装脚本、Git 依赖或远程 tarball 的项目开发者</li><li>需要让本地开发与 CI 在 npm v12 上稳定安装依赖的团队</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先在独立分支或可回退环境升级到 npm 11.16.0 或更高版本，执行项目正常安装流程并保存警告。npm v12 尚未正式发布，不要根据预告直接修改所有生产环境。</li><li>运行 `npm approve-scripts --allow-scripts-pending` 查看哪些包希望执行安装脚本。逐个核对包名、来源、用途和脚本内容，只批准确实需要且可信的依赖，并用 `npm deny-scripts` 明确拒绝其余项目。</li><li>检查 `package.json` 和 lockfile 中的 Git、HTTPS tarball 与其他远程 URL 依赖，尽量改为可核验的注册表版本。最后在干净环境和 CI 中重新安装、构建与测试，并提交经过审查的允许列表配置。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://github.blog/changelog/2026-06-09-upcoming-breaking-changes-for-npm-v12" target="_blank" rel="noreferrer">GitHub Changelog：Upcoming breaking changes for npm v12</a>
+              <span>：包含预计发布时间、三个默认值变化和官方迁移步骤。</span>
+            </li>
+
+            <li>
+              <a href="https://docs.npmjs.com/cli/v11/commands/npm-approve-scripts" target="_blank" rel="noreferrer">npm Docs：npm approve-scripts</a>
+              <span>：用于查看待批准脚本并建立可信依赖允许列表。</span>
+            </li>
+
+            <li>
+              <a href="https://docs.npmjs.com/cli/v11/using-npm/config#allow-scripts" target="_blank" rel="noreferrer">npm Docs：allow-scripts config</a>
+              <span>：用于理解项目、本地、全局安装与 npx 的脚本控制。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>npm v12 目前预计在 2026 年 7 月发布，具体时间和最终行为仍应以正式 release notes 为准。</li><li>安装脚本默认关闭会影响原生模块和隐式 `node-gyp rebuild`，不能只检查 package.json 中显式写出的脚本。</li><li>不要为了消除警告一次批准所有包；允许列表应基于真实用途、可信来源和可重复测试。</li></ul>
+
+        <h2>升级前必须盘点的三类行为</h2>
+
+        <ul><li>依赖的 preinstall、install、postinstall 与隐式 node-gyp 构建。</li><li>直接或间接引用的 Git 依赖。</li><li>通过 HTTPS tarball 等远程 URL 引入的依赖。</li></ul>
+
+
+
+        <h2>验证迁移是否完成</h2>
+
+        <ul><li>在无旧 node_modules 和缓存的干净环境执行安装。</li><li>确认本地开发、构建、测试与部署流程全部通过。</li><li>检查允许列表已提交，并让团队理解每个获批脚本的用途。</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>npm v12</span><span>供应链安全</span><span>Node.js</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
