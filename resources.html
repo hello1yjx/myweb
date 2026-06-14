@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260613-quality">
+  <link rel="stylesheet" href="assets/styles.css?v=20260614-hotspots">
 </head>
 <body>
   <header class="site-header">
@@ -333,6 +333,88 @@
       <div class="section-heading">
         <div>
           <p class="eyebrow">AI 编程</p>
+          <h2>Qwen Code v0.18.0 稳定版：新手怎样组合 Skills、记忆、计划审批与后台任务</h2>
+        </div>
+        <a class="text-link" href="articles/qwen-code-018-stable-agent-workflow-guide.html">查看对应文章</a>
+      </div>
+      <div class="topic-grid">
+        <article class="topic-panel">
+          <p class="label">适合谁</p>
+          <p>已经能使用终端命令，准备系统学习 Qwen Code 的新手 / 希望把团队规范整理为 Skills、QWEN.md 与可审查任务流程的开发者 / 需要评估后台 Agent、定时任务、自动记忆和权限边界的团队</p>
+          <p class="label">推荐顺序</p>
+          <ul><li>先升级到 v0.18.0，并在可回退的练习仓库中运行 `/about`、`/skills`、`/memory` 与 `/stats`，确认版本、可用 Skills、记忆位置和当前统计。把必须长期遵守的构建命令、测试命令与代码约定写入项目根目录的 `QWEN.md`，不要把密钥或临时聊天内容写进去。</li><li>第一次任务先使用 `/plan` 或计划审批功能，让 Agent 说明将读取、修改和验证哪些内容；只选择一个可以通过测试或明确文件差异验收的小任务。需要复用流程时再把稳定步骤整理成项目 Skill，并检查 Skill 声明的工具和路径范围。</li><li>只有在前台任务稳定后，再尝试 `/fork`、`/loop` 或 cron 工具。为后台和定时任务限定仓库、命令、运行频率与停止条件，结束后检查实际 diff、测试结果、`/stats` 和自动记忆内容；发现错误或过期信息时及时编辑或删除记忆。</li></ul>
+        </article>
+        <article class="topic-panel">
+          <p class="label">官方入口</p>
+
+    <ul>
+
+            <li>
+              <a href="https://github.com/QwenLM/qwen-code/releases/tag/v0.18.0" target="_blank" rel="noreferrer">Qwen Code GitHub Release：v0.18.0</a>
+              <span>：包含稳定版的完整变更列表、功能新增、安全修复与对应 pull request。</span>
+            </li>
+
+            <li>
+              <a href="https://qwenlm.github.io/qwen-code-docs/en/users/features/skills/" target="_blank" rel="noreferrer">Qwen Code Docs：Agent Skills</a>
+              <span>：用于理解个人与项目 Skills 的目录、调用、测试和共享方式。</span>
+            </li>
+
+            <li>
+              <a href="https://qwenlm.github.io/qwen-code-docs/en/users/features/memory/" target="_blank" rel="noreferrer">Qwen Code Docs：Memory</a>
+              <span>：说明 QWEN.md、自动记忆、清理方式和相关命令。</span>
+            </li>
+
+            <li>
+              <a href="https://qwenlm.github.io/qwen-code-docs/en/users/features/commands/" target="_blank" rel="noreferrer">Qwen Code Docs：Commands</a>
+              <span>：用于核对 `/plan`、`/skills`、`/memory`、`/loop`、`/stats` 等命令。</span>
+            </li>
+
+    </ul>
+
+        </article>
+      </div>
+    </section>
+
+    <section class="topic-section reveal">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">开发安全</p>
+          <h2>Claude Code v2.1.175 强化模型白名单：新手怎样避免默认模型绕过组织策略</h2>
+        </div>
+        <a class="text-link" href="articles/claude-code-managed-model-allowlist-guide.html">查看对应文章</a>
+      </div>
+      <div class="topic-grid">
+        <article class="topic-panel">
+          <p class="label">适合谁</p>
+          <p>需要理解 Claude Code 用户、项目与托管设置优先级的新手管理员 / 希望统一主会话、子 Agent 和 advisor 可选模型范围的团队 / 关心模型费用、合规、可复现性和错误策略回退的企业环境维护者</p>
+          <p class="label">推荐顺序</p>
+          <ul><li>先列出组织真正允许使用的模型、适用团队和原因，并确认主会话、子 Agent 与 advisor 是否应遵循同一范围。不要直接从个人偏好复制列表；模型可用性、费用、地区和合规要求都可能不同。</li><li>在测试设备的托管设置中配置 `availableModels` 与 `enforceAvailableModels`，再分别测试显式选择允许模型、显式选择禁止模型和使用 Default 的行为。确认 Default 回退到预期模型，并验证用户设置与项目设置不能扩大组织白名单。</li><li>运行 `claude doctor` 检查策略来源与无效字段，在交互会话和无头任务中观察警告。特别测试空列表、拼写错误、版本不满足和子 Agent 场景；保留可工作的回退模型与恢复步骤，再按小范围、分批、可回滚方式部署。</li></ul>
+        </article>
+        <article class="topic-panel">
+          <p class="label">官方入口</p>
+
+    <ul>
+
+            <li>
+              <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.175" target="_blank" rel="noreferrer">Claude Code GitHub Release：v2.1.175</a>
+              <span>：说明 `enforceAvailableModels` 的新增行为和 Default 模型回退规则。</span>
+            </li>
+
+            <li>
+              <a href="https://code.claude.com/docs/en/settings" target="_blank" rel="noreferrer">Claude Code Docs：Settings</a>
+              <span>：用于核对设置作用域、优先级、托管设置路径、无效字段行为与 `claude doctor`。</span>
+            </li>
+
+    </ul>
+
+        </article>
+      </div>
+    </section>
+
+    <section class="topic-section reveal">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">AI 编程</p>
           <h2>AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</h2>
         </div>
         <a class="text-link" href="articles/vercel-ai-sdk-harnessagent-beginner-guide.html">查看对应文章</a>
@@ -488,88 +570,6 @@
       </div>
     </section>
 
-    <section class="topic-section reveal">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">开发工具</p>
-          <h2>Xcode 27 把 Agent 放进编辑器：新手怎样先审计划、再验证界面</h2>
-        </div>
-        <a class="text-link" href="articles/xcode-27-agentic-coding-beginner-guide.html">查看对应文章</a>
-      </div>
-      <div class="topic-grid">
-        <article class="topic-panel">
-          <p class="label">适合谁</p>
-          <p>准备学习 iOS、macOS 或 Swift 开发，想了解 Xcode Agent 工作流的新手 / 希望让 AI 辅助规划、改代码、运行模拟器并验证界面的 Apple 平台开发者 / 需要评估 Agent 插件、MCP 工具和文件访问边界的团队</p>
-          <p class="label">推荐顺序</p>
-          <ul><li>先把 Xcode 27 当作 beta 工具测试。它只会安装和运行在 Apple silicon Mac 上，并要求较新的 macOS；不要直接用它替换唯一的生产开发环境，先备份项目并确认现有构建流程可回退。</li><li>开始任务时先要求 Agent 输出计划。检查要改哪些文件、会调用哪些工具、怎样验证结果，再批准执行；对计划中的模糊步骤直接添加批注，比让 Agent 一次性修改整个项目更容易复核。</li><li>完成后让 Agent 运行构建、启动模拟器并截图，但不要只看它报告成功。开发者仍要检查代码差异、权限、界面状态、测试结果和已知 beta 问题，必要时在稳定版 Xcode 中再次验证。</li></ul>
-        </article>
-        <article class="topic-panel">
-          <p class="label">官方入口</p>
-
-    <ul>
-
-            <li>
-              <a href="https://developer.apple.com/documentation/xcode-release-notes/xcode-27-release-notes" target="_blank" rel="noreferrer">Apple Developer：Xcode 27 Beta Release Notes</a>
-              <span>：包含 Agent 规划、模拟器验证、插件、安全层和系统要求等完整更新。</span>
-            </li>
-
-            <li>
-              <a href="https://developer.apple.com/videos/play/wwdc2026/258/" target="_blank" rel="noreferrer">WWDC26：What’s new in Xcode 27</a>
-              <span>：适合快速了解编辑器内 Agent、Device Hub、Localization、Organizer 和 Instruments。</span>
-            </li>
-
-            <li>
-              <a href="https://developer.apple.com/news/releases/?id=06082026a" target="_blank" rel="noreferrer">Apple Developer Releases：Xcode 27 beta</a>
-              <span>：官方 beta 下载与 release notes 入口。</span>
-            </li>
-
-    </ul>
-
-        </article>
-      </div>
-    </section>
-
-    <section class="topic-section reveal">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">AI 编程</p>
-          <h2>Claude Code 2.1.169 增加安全模式：新手怎样排查插件、skills 和 MCP 冲突</h2>
-        </div>
-        <a class="text-link" href="articles/claude-code-safe-mode-troubleshooting-guide.html">查看对应文章</a>
-      </div>
-      <div class="topic-grid">
-        <article class="topic-panel">
-          <p class="label">适合谁</p>
-          <p>安装过多个插件、skills、hooks 或 MCP server，遇到启动和行为异常的 Claude Code 用户 / 在 Windows、WSL 或企业托管环境中使用终端 Agent 的开发者 / 需要区分核心程序故障与项目自定义配置问题的团队管理员</p>
-          <p class="label">推荐顺序</p>
-          <ul><li>先保存当前工作并记录异常现象，包括启动耗时、错误文本、受影响项目和最近更新。不要一开始就删除配置，否则会失去复现问题的证据。</li><li>使用 `claude --safe-mode` 启动并重复最小操作。如果问题消失，说明更可能来自 CLAUDE.md、插件、skills、hooks 或 MCP；如果仍存在，再检查版本、网络、登录状态和官方 troubleshooting 文档。</li><li>最后逐组恢复自定义项，而不是一次全部开启。每恢复一组就重复测试，定位冲突后更新、修复或移除对应配置，并把可靠的最小复现和日志保留下来。</li></ul>
-        </article>
-        <article class="topic-panel">
-          <p class="label">官方入口</p>
-
-    <ul>
-
-            <li>
-              <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.169" target="_blank" rel="noreferrer">Claude Code GitHub Release：v2.1.169</a>
-              <span>：本次安全模式、/cd、Windows 修复与企业策略改进的原始发布说明。</span>
-            </li>
-
-            <li>
-              <a href="https://code.claude.com/docs/en/troubleshooting" target="_blank" rel="noreferrer">Claude Code Docs：Troubleshooting</a>
-              <span>：适合继续排查卡顿、资源占用、搜索和配置问题。</span>
-            </li>
-
-            <li>
-              <a href="https://code.claude.com/docs/en/settings" target="_blank" rel="noreferrer">Claude Code Docs：Settings</a>
-              <span>：适合核对插件、MCP、权限与托管设置。</span>
-            </li>
-
-    </ul>
-
-        </article>
-      </div>
-    </section>
-
     </section>
 <!-- STATIC_RESOURCES_END -->
     </div>
@@ -589,6 +589,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260613-quality"></script>
+  <script src="assets/app.js?v=20260614-hotspots"></script>
 </body>
 </html>

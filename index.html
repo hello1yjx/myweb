@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260613-quality">
+  <link rel="stylesheet" href="assets/styles.css?v=20260614-hotspots">
 </head>
 <body>
   <header class="site-header">
@@ -99,36 +99,36 @@
             <span>国产 AI</span>
             <time datetime="2026-06-12">2026年6月12日</time>
           </div>
-          <h3>Moonshot AI Kimi K2.7 Code 上线 Workers AI，支持长上下文、视觉与多轮工具调用</h3>
+          <h3>Qwen Code v0.18.0 发布稳定版，整合 Skills、记忆、后台 Agent 与计划审批</h3>
         </div>
       </div>
-      <p>Cloudflare 上线代码优化模型 Kimi K2.7 Code：采用 1T 总参数、每 token 激活 32B 的 MoE 架构，提供 262.1k token 上下文、视觉输入、多轮工具调用和 JSON Schema 结构化输出，并称其较 K2.6 少用 30% 推理 token。</p>
+      <p>Qwen Code v0.18.0 把此前 nightly 中的大批能力带入稳定版，包括 `/skills` 选择器、用户级自动记忆、`/fork` 后台 Agent、`/stats` 跨会话统计、`/compress-fast`、Plan Approval Gate、默认 loop/cron 工具，以及桌面应用和 ACP 集成改进。</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
-        <p>长上下文和多轮工具调用适合持续编码与 Agent 任务，且从 K2.6 迁移时 API 参数无需变化；实际采用前仍要用自己的代码库评估质量、延迟和费用，并把官方 benchmark 视为供应方测试结果。</p>
+        <p>稳定版让终端 Agent 的长期指令、复用流程、后台任务和上下文管理更容易组合，但功能面明显扩大后，权限、定时触发、自动记忆与实验性 Agent Team 都需要分层启用，并以实际 diff、测试和日志验收。</p>
       </div>
-      <p class="hotspot-card__idea">候选：Kimi K2.7 Code 新手评测清单，怎样验证长上下文、工具调用与推理成本</p>
-      <a class="text-link" href="https://developers.cloudflare.com/changelog/post/2026-06-12-kimi-k2-7-code-workers-ai/" target="_blank" rel="noreferrer">查看来源：Cloudflare Changelog</a>
+      <p class="hotspot-card__idea">选题：Qwen Code v0.18.0 稳定版入门，怎样组合 Skills、记忆、计划审批与后台任务</p>
+      <a class="text-link" href="https://github.com/QwenLM/qwen-code/releases/tag/v0.18.0" target="_blank" rel="noreferrer">查看来源：Qwen Code GitHub Release</a>
     </article>
 
     <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
         <div>
           <div class="hotspot-card__meta">
-            <span>AI Agent</span>
+            <span>开发安全</span>
             <time datetime="2026-06-12">2026年6月12日</time>
           </div>
-          <h3>Vercel AI SDK 7 引入 HarnessAgent，用统一接口运行 Claude Code、Codex 与 Pi</h3>
+          <h3>Claude Code v2.1.175 强化托管模型白名单，Default 也不能绕过组织限制</h3>
         </div>
       </div>
-      <p>实验性的 `HarnessAgent` 把 Claude Code、Codex 与 Pi 等成熟 agent harness 接入同一 API，统一处理 skills、沙箱、会话、权限流程、上下文压缩、运行配置和子 Agent，并支持 AI SDK 风格的 `generate()` 与 `stream()` 结果。</p>
+      <p>新版新增 `enforceAvailableModels` 托管设置：启用后，`availableModels` 白名单会同时约束 Default 模型；如果 Default 解析到禁止模型，会回退到第一个允许模型，用户或项目设置也不能扩大托管列表。</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
-        <p>统一接口让团队更容易切换和比较 harness，也能复用现有 AI SDK 界面；但当前 adapters 位于 canary release，官方明确提示可能出现破坏性变化，首次实验应限制在可销毁沙箱和可验证任务中。</p>
+        <p>模型选择会影响费用、合规、数据范围和结果复现，仅隐藏选择器选项并不足够。管理员应在测试设备验证 Default、子 Agent、advisor 与错误配置行为，并通过 `claude doctor` 检查策略后再分批部署。</p>
       </div>
-      <p class="hotspot-card__idea">选题：AI SDK HarnessAgent 入门，怎样在沙箱中统一运行并比较不同编码 Agent</p>
-      <a class="text-link" href="https://vercel.com/changelog/program-agent-harnesses-with-ai-sdk" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
+      <p class="hotspot-card__idea">选题：Claude Code 模型白名单治理入门，怎样验证 Default 回退与组织策略边界</p>
+      <a class="text-link" href="https://github.com/anthropics/claude-code/releases/tag/v2.1.175" target="_blank" rel="noreferrer">查看来源：Claude Code GitHub Release</a>
     </article>
 <!-- STATIC_HOME_HOTSPOTS_END -->
           </div>
@@ -145,6 +145,40 @@
           <div class="recommend-grid" data-recommendations>
             <!-- STATIC_HOME_RECOMMENDATIONS_START -->
 <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/qwen-code-018-stable-agent-workflow-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>11 分钟</span>
+          <time datetime="2026-06-14">2026年6月14日</time>
+        </div>
+        <h3><a href="articles/qwen-code-018-stable-agent-workflow-guide.html">Qwen Code v0.18.0 稳定版：新手怎样组合 Skills、记忆、计划审批与后台任务</a></h3>
+        <p>Qwen Code v0.18.0 把此前 nightly 中的 Skills 选择器、用户级自动记忆、计划审批、后台 Agent、统计面板与上下文压缩等能力带入稳定版；新手应先建立可审查的小任务流程，再逐步启用自动化能力。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--github" href="articles/claude-code-managed-model-allowlist-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>开发安全</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>开发安全</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-14">2026年6月14日</time>
+        </div>
+        <h3><a href="articles/claude-code-managed-model-allowlist-guide.html">Claude Code v2.1.175 强化模型白名单：新手怎样避免默认模型绕过组织策略</a></h3>
+        <p>Claude Code v2.1.175 新增 `enforceAvailableModels` 托管设置，让 `availableModels` 白名单同时约束 Default 模型，并阻止用户或项目设置扩大组织允许范围；管理员应在测试设备上验证回退、子 Agent 与错误配置行为。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
       <a class="article-card__media article-card__media--ai" href="articles/vercel-ai-sdk-harnessagent-beginner-guide.html">
         <span class="article-card__badge">推荐</span>
         <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
@@ -177,40 +211,6 @@
         <p>GitHub Copilot Code Review 新增组织级 Runner 默认值与锁定、内容排除支持，并移除仓库自定义指令的 4000 字符读取上限；团队应把运行环境、可见内容与审查规则分开配置和验证。</p>
       </div>
     </article>
-
-    <article class="article-card reveal">
-      <a class="article-card__media article-card__media--ai" href="articles/github-agentic-workflows-public-preview-guide.html">
-        <span class="article-card__badge">推荐</span>
-        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
-        <strong>AI 编程</strong>
-      </a>
-      <div class="article-card__body">
-        <div class="meta-row">
-          <span>AI 编程</span>
-          <span>10 分钟</span>
-          <time datetime="2026-06-12">2026年6月12日</time>
-        </div>
-        <h3><a href="articles/github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a></h3>
-        <p>GitHub Agentic Workflows 已进入 public preview，可把自然语言 Markdown 编译为标准 Actions YAML，用编码 Agent 处理 issue 分类、CI 失败分析和文档更新；新手应从只读、小范围、可审查任务开始。</p>
-      </div>
-    </article>
-
-    <article class="article-card reveal">
-      <a class="article-card__media article-card__media--ai" href="articles/github-copilot-cli-settings-guide.html">
-        <span class="article-card__badge">推荐</span>
-        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
-        <strong>AI 编程</strong>
-      </a>
-      <div class="article-card__body">
-        <div class="meta-row">
-          <span>AI 编程</span>
-          <span>8 分钟</span>
-          <time datetime="2026-06-12">2026年6月12日</time>
-        </div>
-        <h3><a href="articles/github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a></h3>
-        <p>GitHub Copilot CLI 新增统一的 /settings 命令，可通过搜索界面、行内命令或脚本管理配置，并在写入前进行 schema 校验；新手可用它减少手改配置文件造成的拼写和类型错误。</p>
-      </div>
-    </article>
 <!-- STATIC_HOME_RECOMMENDATIONS_END -->
           </div>
         </section>
@@ -226,6 +226,38 @@
           <div class="latest-list" data-home-latest>
             <!-- STATIC_HOME_LATEST_START -->
 <article class="latest-item reveal">
+      <a class="latest-thumb latest-thumb--ai" href="articles/github-agentic-workflows-public-preview-guide.html">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
+        <span>AI 编程</span>
+      </a>
+      <div>
+        <h3><a href="articles/github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a></h3>
+        <p>GitHub Agentic Workflows 已进入 public preview，可把自然语言 Markdown 编译为标准 Actions YAML，用编码 Agent 处理 issue 分类、CI 失败分析和文档更新；新手应从只读、小范围、可审查任务开始。</p>
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-12">2026年6月12日</time>
+        </div>
+      </div>
+    </article>
+
+    <article class="latest-item reveal">
+      <a class="latest-thumb latest-thumb--ai" href="articles/github-copilot-cli-settings-guide.html">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
+        <span>AI 编程</span>
+      </a>
+      <div>
+        <h3><a href="articles/github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a></h3>
+        <p>GitHub Copilot CLI 新增统一的 /settings 命令，可通过搜索界面、行内命令或脚本管理配置，并在写入前进行 schema 校验；新手可用它减少手改配置文件造成的拼写和类型错误。</p>
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>8 分钟</span>
+          <time datetime="2026-06-12">2026年6月12日</time>
+        </div>
+      </div>
+    </article>
+
+    <article class="latest-item reveal">
       <a class="latest-thumb latest-thumb--github" href="articles/github-copilot-cli-security-review-guide.html">
         <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
         <span>开发安全</span>
@@ -253,38 +285,6 @@
           <span>开发安全</span>
           <span>10 分钟</span>
           <time datetime="2026-06-11">2026年6月11日</time>
-        </div>
-      </div>
-    </article>
-
-    <article class="latest-item reveal">
-      <a class="latest-thumb latest-thumb--git" href="articles/xcode-27-agentic-coding-beginner-guide.html">
-        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="开发工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
-        <span>开发工具</span>
-      </a>
-      <div>
-        <h3><a href="articles/xcode-27-agentic-coding-beginner-guide.html">Xcode 27 把 Agent 放进编辑器：新手怎样先审计划、再验证界面</a></h3>
-        <p>Apple 在 WWDC26 发布 Xcode 27 beta，加入可编辑计划、编辑器内 Agent 会话、模拟器操作、截图验证、插件与 MCP 扩展；新手应先把它当成需要审查和测试的协作工具。</p>
-        <div class="meta-row">
-          <span>开发工具</span>
-          <span>10 分钟</span>
-          <time datetime="2026-06-09">2026年6月9日</time>
-        </div>
-      </div>
-    </article>
-
-    <article class="latest-item reveal">
-      <a class="latest-thumb latest-thumb--ai" href="articles/claude-code-safe-mode-troubleshooting-guide.html">
-        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
-        <span>AI 编程</span>
-      </a>
-      <div>
-        <h3><a href="articles/claude-code-safe-mode-troubleshooting-guide.html">Claude Code 2.1.169 增加安全模式：新手怎样排查插件、skills 和 MCP 冲突</a></h3>
-        <p>Claude Code 2.1.169 新增 --safe-mode，可临时禁用 CLAUDE.md、插件、skills、hooks 和 MCP server，帮助判断卡顿或异常来自核心程序还是自定义配置。</p>
-        <div class="meta-row">
-          <span>AI 编程</span>
-          <span>9 分钟</span>
-          <time datetime="2026-06-09">2026年6月9日</time>
         </div>
       </div>
     </article>
@@ -378,6 +378,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260613-quality"></script>
+  <script src="assets/app.js?v=20260614-hotspots"></script>
 </body>
 </html>

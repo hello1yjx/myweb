@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Qwen Code v0.18.0 稳定版：新手怎样组合 Skills、记忆、计划审批与后台任务 | 学习资源库</title>
+  <meta name="description" content="Qwen Code v0.18.0 把此前 nightly 中的 Skills 选择器、用户级自动记忆、计划审批、后台 Agent、统计面板与上下文压缩等能力带入稳定版；新手应先建立可审查的小任务流程，再逐步启用自动化能力。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/qwen-code-018-stable-agent-workflow-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Qwen Code v0.18.0 稳定版：新手怎样组合 Skills、记忆、计划审批与后台任务","description":"Qwen Code v0.18.0 把此前 nightly 中的 Skills 选择器、用户级自动记忆、计划审批、后台 Agent、统计面板与上下文压缩等能力带入稳定版；新手应先建立可审查的小任务流程，再逐步启用自动化能力。","datePublished":"2026-06-14","dateModified":"2026-06-14","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/qwen-code-018-stable-agent-workflow-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260614-hotspots">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 编程</span>
+      <h1>Qwen Code v0.18.0 稳定版：新手怎样组合 Skills、记忆、计划审批与后台任务</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-14">2026年6月14日</time>
+        <span>11 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Qwen Code v0.18.0 把此前 nightly 中的 Skills 选择器、用户级自动记忆、计划审批、后台 Agent、统计面板与上下文压缩等能力带入稳定版；新手应先建立可审查的小任务流程，再逐步启用自动化能力。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://github.com/QwenLM/qwen-code/releases/tag/v0.18.0" target="_blank" rel="noreferrer">Qwen Code GitHub Release：v0.18.0</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>终端编码 Agent 的能力越来越多，但真正影响日常使用质量的往往不是单个按钮，而是怎样把长期指令、临时任务、审批边界、上下文管理和后台执行组合成一条可重复、可检查的工作流。一次开启全部自动化功能，反而容易让新手失去对改动范围和失败原因的判断。</p><p>Qwen Code 在 2026 年 6 月 12 日发布 v0.18.0 稳定版。该版本包含 `/skills` 选择器、用户级自动记忆、`/fork` 后台 Agent、`/stats` 跨会话统计、`/compress-fast` 规则压缩、Plan Approval Gate、默认启用的 loop/cron 工具，以及自动模式自修改检查和工具输出截断等安全与稳定性改进。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>已经能使用终端命令，准备系统学习 Qwen Code 的新手</li><li>希望把团队规范整理为 Skills、QWEN.md 与可审查任务流程的开发者</li><li>需要评估后台 Agent、定时任务、自动记忆和权限边界的团队</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先升级到 v0.18.0，并在可回退的练习仓库中运行 `/about`、`/skills`、`/memory` 与 `/stats`，确认版本、可用 Skills、记忆位置和当前统计。把必须长期遵守的构建命令、测试命令与代码约定写入项目根目录的 `QWEN.md`，不要把密钥或临时聊天内容写进去。</li><li>第一次任务先使用 `/plan` 或计划审批功能，让 Agent 说明将读取、修改和验证哪些内容；只选择一个可以通过测试或明确文件差异验收的小任务。需要复用流程时再把稳定步骤整理成项目 Skill，并检查 Skill 声明的工具和路径范围。</li><li>只有在前台任务稳定后，再尝试 `/fork`、`/loop` 或 cron 工具。为后台和定时任务限定仓库、命令、运行频率与停止条件，结束后检查实际 diff、测试结果、`/stats` 和自动记忆内容；发现错误或过期信息时及时编辑或删除记忆。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://github.com/QwenLM/qwen-code/releases/tag/v0.18.0" target="_blank" rel="noreferrer">Qwen Code GitHub Release：v0.18.0</a>
+              <span>：包含稳定版的完整变更列表、功能新增、安全修复与对应 pull request。</span>
+            </li>
+
+            <li>
+              <a href="https://qwenlm.github.io/qwen-code-docs/en/users/features/skills/" target="_blank" rel="noreferrer">Qwen Code Docs：Agent Skills</a>
+              <span>：用于理解个人与项目 Skills 的目录、调用、测试和共享方式。</span>
+            </li>
+
+            <li>
+              <a href="https://qwenlm.github.io/qwen-code-docs/en/users/features/memory/" target="_blank" rel="noreferrer">Qwen Code Docs：Memory</a>
+              <span>：说明 QWEN.md、自动记忆、清理方式和相关命令。</span>
+            </li>
+
+            <li>
+              <a href="https://qwenlm.github.io/qwen-code-docs/en/users/features/commands/" target="_blank" rel="noreferrer">Qwen Code Docs：Commands</a>
+              <span>：用于核对 `/plan`、`/skills`、`/memory`、`/loop`、`/stats` 等命令。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>稳定版不代表所有实验功能都适合直接用于重要仓库；Agent Team、后台任务和定时执行仍应先在可回退环境中验证。</li><li>QWEN.md 适合存放明确、长期、团队可审查的规则；自动记忆是可编辑的辅助记录，不应被当作唯一事实来源。</li><li>Skills、自动模式和计划审批能改善流程，但最终验收仍应以代码差异、测试结果、权限范围和人工复核为准。</li></ul>
+
+        <h2>建议按四层逐步启用</h2>
+
+        <ul><li>第一层：用 QWEN.md 固定构建、测试和代码约定。</li><li>第二层：用 Skills 封装已经验证过的重复流程。</li><li>第三层：用计划审批和默认审批模式控制每次任务的修改范围。</li><li>第四层：确认前面三层稳定后，再启用后台 Agent、loop 或 cron。</li></ul>
+
+
+
+        <h2>每次任务结束后的检查证据</h2>
+
+        <ul><li>检查 Agent 实际修改的文件、命令日志和测试结果。</li><li>检查 `/stats` 是否出现异常的长会话、工具调用或资源消耗。</li><li>检查自动记忆是否保存了错误、敏感或已经过期的信息。</li><li>后台与定时任务必须确认已经结束，且没有继续修改仓库或重复触发。</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Qwen Code</span><span>Coding Agent</span><span>Agent Skills</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a><a href="github-copilot-cli-security-review-guide.html">Copilot CLI 加入 /security-review：新手怎样把 AI 安全审查放到提交前</a><a href="npm-v12-install-security-migration-guide.html">npm v12 将默认阻止依赖脚本与远程依赖：新手升级前检查清单</a><a href="xcode-27-agentic-coding-beginner-guide.html">Xcode 27 把 Agent 放进编辑器：新手怎样先审计划、再验证界面</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

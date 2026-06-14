@@ -9,7 +9,7 @@ const siteData = {
     bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
       { value: "6", label: "原创下载包" },
-      { value: "35", label: "新手专题" },
+      { value: "37", label: "新手专题" },
       { value: "持续", label: "更新与核验" }
     ],
     valueCards: [
@@ -28,6 +28,157 @@ const siteData = {
     ]
   },
   posts: [
+    {
+      id: "qwen-code-018-stable-agent-workflow-guide",
+      title: "Qwen Code v0.18.0 稳定版：新手怎样组合 Skills、记忆、计划审批与后台任务",
+      date: "2026-06-14",
+      category: "AI 编程",
+      readTime: "11 分钟",
+      excerpt: "Qwen Code v0.18.0 把此前 nightly 中的 Skills 选择器、用户级自动记忆、计划审批、后台 Agent、统计面板与上下文压缩等能力带入稳定版；新手应先建立可审查的小任务流程，再逐步启用自动化能力。",
+      tags: ["Qwen Code", "Coding Agent", "Agent Skills"],
+      featured: true,
+      intro: [
+        "终端编码 Agent 的能力越来越多，但真正影响日常使用质量的往往不是单个按钮，而是怎样把长期指令、临时任务、审批边界、上下文管理和后台执行组合成一条可重复、可检查的工作流。一次开启全部自动化功能，反而容易让新手失去对改动范围和失败原因的判断。",
+        "Qwen Code 在 2026 年 6 月 12 日发布 v0.18.0 稳定版。该版本包含 `/skills` 选择器、用户级自动记忆、`/fork` 后台 Agent、`/stats` 跨会话统计、`/compress-fast` 规则压缩、Plan Approval Gate、默认启用的 loop/cron 工具，以及自动模式自修改检查和工具输出截断等安全与稳定性改进。"
+      ],
+      audience: [
+        "已经能使用终端命令，准备系统学习 Qwen Code 的新手",
+        "希望把团队规范整理为 Skills、QWEN.md 与可审查任务流程的开发者",
+        "需要评估后台 Agent、定时任务、自动记忆和权限边界的团队"
+      ],
+      format: [
+        "适合整理成“升级稳定版 / 固定项目说明 / 选择 Skills / 先做计划 / 执行小任务 / 检查统计与记忆”的练习路线",
+        "后续可以补一个同一测试仓库中对比前台任务、后台 Agent 和定时检查的验证记录模板"
+      ],
+      roadmap: [
+        "先升级到 v0.18.0，并在可回退的练习仓库中运行 `/about`、`/skills`、`/memory` 与 `/stats`，确认版本、可用 Skills、记忆位置和当前统计。把必须长期遵守的构建命令、测试命令与代码约定写入项目根目录的 `QWEN.md`，不要把密钥或临时聊天内容写进去。",
+        "第一次任务先使用 `/plan` 或计划审批功能，让 Agent 说明将读取、修改和验证哪些内容；只选择一个可以通过测试或明确文件差异验收的小任务。需要复用流程时再把稳定步骤整理成项目 Skill，并检查 Skill 声明的工具和路径范围。",
+        "只有在前台任务稳定后，再尝试 `/fork`、`/loop` 或 cron 工具。为后台和定时任务限定仓库、命令、运行频率与停止条件，结束后检查实际 diff、测试结果、`/stats` 和自动记忆内容；发现错误或过期信息时及时编辑或删除记忆。"
+      ],
+      officialLinks: [
+        {
+          label: "Qwen Code GitHub Release：v0.18.0",
+          url: "https://github.com/QwenLM/qwen-code/releases/tag/v0.18.0",
+          note: "包含稳定版的完整变更列表、功能新增、安全修复与对应 pull request。"
+        },
+        {
+          label: "Qwen Code Docs：Agent Skills",
+          url: "https://qwenlm.github.io/qwen-code-docs/en/users/features/skills/",
+          note: "用于理解个人与项目 Skills 的目录、调用、测试和共享方式。"
+        },
+        {
+          label: "Qwen Code Docs：Memory",
+          url: "https://qwenlm.github.io/qwen-code-docs/en/users/features/memory/",
+          note: "说明 QWEN.md、自动记忆、清理方式和相关命令。"
+        },
+        {
+          label: "Qwen Code Docs：Commands",
+          url: "https://qwenlm.github.io/qwen-code-docs/en/users/features/commands/",
+          note: "用于核对 `/plan`、`/skills`、`/memory`、`/loop`、`/stats` 等命令。"
+        }
+      ],
+      curatedLinks: [
+        "稳定版不代表所有实验功能都适合直接用于重要仓库；Agent Team、后台任务和定时执行仍应先在可回退环境中验证。",
+        "QWEN.md 适合存放明确、长期、团队可审查的规则；自动记忆是可编辑的辅助记录，不应被当作唯一事实来源。",
+        "Skills、自动模式和计划审批能改善流程，但最终验收仍应以代码差异、测试结果、权限范围和人工复核为准。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Qwen Code v0.18.0 首次升级与功能验收清单",
+        "可以补一个 QWEN.md、项目 Skill、后台任务和记忆审查记录模板"
+      ],
+      monetization: "适合承接国产 AI、终端编码 Agent、Agent Skills、团队规范、开发效率和自动化安全类资源位；也可以与本站的 Qwen Code v0.17、Claude Code Skills 和 Agent 安全清单互相推荐。",
+      extraSections: [
+        {
+          title: "建议按四层逐步启用",
+          items: [
+            "第一层：用 QWEN.md 固定构建、测试和代码约定。",
+            "第二层：用 Skills 封装已经验证过的重复流程。",
+            "第三层：用计划审批和默认审批模式控制每次任务的修改范围。",
+            "第四层：确认前面三层稳定后，再启用后台 Agent、loop 或 cron。"
+          ]
+        },
+        {
+          title: "每次任务结束后的检查证据",
+          items: [
+            "检查 Agent 实际修改的文件、命令日志和测试结果。",
+            "检查 `/stats` 是否出现异常的长会话、工具调用或资源消耗。",
+            "检查自动记忆是否保存了错误、敏感或已经过期的信息。",
+            "后台与定时任务必须确认已经结束，且没有继续修改仓库或重复触发。"
+          ]
+        }
+      ]
+    },
+    {
+      id: "claude-code-managed-model-allowlist-guide",
+      title: "Claude Code v2.1.175 强化模型白名单：新手怎样避免默认模型绕过组织策略",
+      date: "2026-06-14",
+      category: "开发安全",
+      readTime: "9 分钟",
+      excerpt: "Claude Code v2.1.175 新增 `enforceAvailableModels` 托管设置，让 `availableModels` 白名单同时约束 Default 模型，并阻止用户或项目设置扩大组织允许范围；管理员应在测试设备上验证回退、子 Agent 与错误配置行为。",
+      tags: ["Claude Code", "模型治理", "托管设置"],
+      featured: true,
+      intro: [
+        "组织限制可用模型时，不能只隐藏模型选择器里的部分选项。如果 Default 别名最终解析到白名单之外的模型，或者用户与项目配置可以重新扩大列表，表面上的模型治理仍可能被绕过，进而影响费用、合规、数据处理范围和团队复现结果。",
+        "Claude Code v2.1.175 新增托管设置 `enforceAvailableModels`。启用后，`availableModels` 白名单也会约束 Default 模型；当 Default 将解析到不允许的模型时，会回退到白名单中的第一个模型。用户或项目设置也不能扩大托管的 `availableModels` 列表。官方设置文档同时说明了无效安全字段的保守处理方式和 `claude doctor` 验证入口。"
+      ],
+      audience: [
+        "需要理解 Claude Code 用户、项目与托管设置优先级的新手管理员",
+        "希望统一主会话、子 Agent 和 advisor 可选模型范围的团队",
+        "关心模型费用、合规、可复现性和错误策略回退的企业环境维护者"
+      ],
+      format: [
+        "适合整理成“盘点模型 / 编写托管策略 / 测试 Default 回退 / 检查子 Agent / 运行 doctor / 分批发布”的治理路线",
+        "后续可以补一个允许模型清单、回退结果、错误配置和版本要求的验收记录模板"
+      ],
+      roadmap: [
+        "先列出组织真正允许使用的模型、适用团队和原因，并确认主会话、子 Agent 与 advisor 是否应遵循同一范围。不要直接从个人偏好复制列表；模型可用性、费用、地区和合规要求都可能不同。",
+        "在测试设备的托管设置中配置 `availableModels` 与 `enforceAvailableModels`，再分别测试显式选择允许模型、显式选择禁止模型和使用 Default 的行为。确认 Default 回退到预期模型，并验证用户设置与项目设置不能扩大组织白名单。",
+        "运行 `claude doctor` 检查策略来源与无效字段，在交互会话和无头任务中观察警告。特别测试空列表、拼写错误、版本不满足和子 Agent 场景；保留可工作的回退模型与恢复步骤，再按小范围、分批、可回滚方式部署。"
+      ],
+      officialLinks: [
+        {
+          label: "Claude Code GitHub Release：v2.1.175",
+          url: "https://github.com/anthropics/claude-code/releases/tag/v2.1.175",
+          note: "说明 `enforceAvailableModels` 的新增行为和 Default 模型回退规则。"
+        },
+        {
+          label: "Claude Code Docs：Settings",
+          url: "https://code.claude.com/docs/en/settings",
+          note: "用于核对设置作用域、优先级、托管设置路径、无效字段行为与 `claude doctor`。"
+        }
+      ],
+      curatedLinks: [
+        "`enforceAvailableModels` 是托管设置，目标是让组织白名单成为不能被用户或项目扩大的上限，而不是替代账号权限和供应商侧访问控制。",
+        "白名单中的第一个模型可能成为 Default 的回退目标，因此列表顺序也属于需要测试和记录的策略行为。",
+        "安全字段配置无效时会采取保守行为；部署前应在测试设备运行 `claude doctor`，避免错误策略意外阻断团队工作。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Claude Code 模型白名单、Default 回退与子 Agent 验收清单",
+        "可以补一个托管设置分批发布、版本要求和回滚记录模板"
+      ],
+      monetization: "适合承接 Claude Code、企业 AI 治理、模型路由、开发安全、合规与团队管理类资源位；也可以与本站的 Claude Code 安全模式、fallback model 和本地 Skills 文章互相推荐。",
+      extraSections: [
+        {
+          title: "策略测试至少覆盖五种情况",
+          items: [
+            "用户显式选择白名单中的模型。",
+            "用户尝试选择白名单之外的模型。",
+            "Default 解析到允许模型与禁止模型时的实际结果。",
+            "子 Agent 与 advisor 是否被同一白名单约束。",
+            "白名单为空、字段类型错误或客户端版本过旧时怎样恢复。"
+          ]
+        },
+        {
+          title: "不要遗漏的治理证据",
+          items: [
+            "记录托管策略来源、允许模型列表和预期 Default 回退模型。",
+            "记录测试设备上的版本、`claude doctor` 输出和实际选择结果。",
+            "记录模型变化对费用、数据范围、输出质量和团队工作流的影响。",
+            "为策略错误准备管理员可执行的回滚与紧急恢复步骤。"
+          ]
+        }
+      ]
+    },
     {
       id: "vercel-ai-sdk-harnessagent-beginner-guide",
       title: "AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi",
@@ -3377,12 +3528,12 @@ git push origin main`,
     }
   ],
   resourcePathPostIds: [
+    "qwen-code-018-stable-agent-workflow-guide",
+    "claude-code-managed-model-allowlist-guide",
     "vercel-ai-sdk-harnessagent-beginner-guide",
     "github-copilot-code-review-controls-guide",
     "github-agentic-workflows-public-preview-guide",
-    "npm-v12-install-security-migration-guide",
-    "xcode-27-agentic-coding-beginner-guide",
-    "claude-code-safe-mode-troubleshooting-guide"
+    "npm-v12-install-security-migration-guide"
   ],
   hotspots: [
     {
@@ -3394,6 +3545,46 @@ git push origin main`,
       sourceLabel: "Vercel Changelog",
       sourceUrl: "https://vercel.com/changelog/workflow-sdk-now-runs-natively-in-nitro-v3",
       articleIdea: "候选：Nitro v3 原生 Workflow SDK 入门，怎样编写、观察和调试第一个持久化步骤"
+    },
+    {
+      date: "2026-06-12",
+      tag: "国产 AI",
+      title: "Qwen Code v0.18.0 发布稳定版，整合 Skills、记忆、后台 Agent 与计划审批",
+      summary: "Qwen Code v0.18.0 把此前 nightly 中的大批能力带入稳定版，包括 `/skills` 选择器、用户级自动记忆、`/fork` 后台 Agent、`/stats` 跨会话统计、`/compress-fast`、Plan Approval Gate、默认 loop/cron 工具，以及桌面应用和 ACP 集成改进。",
+      why: "稳定版让终端 Agent 的长期指令、复用流程、后台任务和上下文管理更容易组合，但功能面明显扩大后，权限、定时触发、自动记忆与实验性 Agent Team 都需要分层启用，并以实际 diff、测试和日志验收。",
+      sourceLabel: "Qwen Code GitHub Release",
+      sourceUrl: "https://github.com/QwenLM/qwen-code/releases/tag/v0.18.0",
+      articleIdea: "选题：Qwen Code v0.18.0 稳定版入门，怎样组合 Skills、记忆、计划审批与后台任务"
+    },
+    {
+      date: "2026-06-12",
+      tag: "开发安全",
+      title: "Claude Code v2.1.175 强化托管模型白名单，Default 也不能绕过组织限制",
+      summary: "新版新增 `enforceAvailableModels` 托管设置：启用后，`availableModels` 白名单会同时约束 Default 模型；如果 Default 解析到禁止模型，会回退到第一个允许模型，用户或项目设置也不能扩大托管列表。",
+      why: "模型选择会影响费用、合规、数据范围和结果复现，仅隐藏选择器选项并不足够。管理员应在测试设备验证 Default、子 Agent、advisor 与错误配置行为，并通过 `claude doctor` 检查策略后再分批部署。",
+      sourceLabel: "Claude Code GitHub Release",
+      sourceUrl: "https://github.com/anthropics/claude-code/releases/tag/v2.1.175",
+      articleIdea: "选题：Claude Code 模型白名单治理入门，怎样验证 Default 回退与组织策略边界"
+    },
+    {
+      date: "2026-06-12",
+      tag: "开发工具",
+      title: "Claude Code v2.1.174 增加细分用量归因，并修复后台会话继承错误 Provider 环境",
+      summary: "VS Code 的 Account & usage 对话框现在可按缓存未命中、长上下文、子 Agent、Skill、Agent、插件与 MCP 查看最近 24 小时或 7 天用量；新版还修复后台会话错误继承启动 daemon 的 `ANTHROPIC_*` Provider 环境变量等问题。",
+      why: "细分归因有助于定位成本和上下文膨胀来源，Provider 环境隔离修复则降低后台任务使用错误网关、请求头或模型别名的风险；升级后仍应检查实际路由、账单与关键后台任务日志。",
+      sourceLabel: "Claude Code GitHub Release",
+      sourceUrl: "https://github.com/anthropics/claude-code/releases/tag/v2.1.174",
+      articleIdea: "候选：Claude Code 用量归因与后台会话排查清单，怎样定位成本和 Provider 配置漂移"
+    },
+    {
+      date: "2026-06-12",
+      tag: "AI 模型",
+      title: "Anthropic 暂停所有客户访问 Claude Fable 5 与 Mythos 5，其他 Claude 模型不受影响",
+      summary: "Anthropic 表示已遵从美国政府的出口管制指令，暂停所有客户对 Fable 5 与 Mythos 5 的访问，并正在争取恢复；官方明确说明其他 Anthropic 模型不受影响。",
+      why: "依赖单一前沿模型的应用可能突然失去可用性。团队应把模型可用性视为运行风险，准备可验证的替代模型、路由切换、质量回归与用户提示，而不是只在模型发布时更新配置。",
+      sourceLabel: "Anthropic",
+      sourceUrl: "https://www.anthropic.com/news/fable-mythos-access",
+      articleIdea: "候选：前沿模型突然不可用时，怎样准备路由回退、质量回归与用户沟通"
     },
     {
       date: "2026-06-12",
