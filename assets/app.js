@@ -9,7 +9,7 @@ const siteData = {
     bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
       { value: "6", label: "原创下载包" },
-      { value: "37", label: "新手专题" },
+      { value: "38", label: "新手专题" },
       { value: "持续", label: "更新与核验" }
     ],
     valueCards: [
@@ -28,6 +28,82 @@ const siteData = {
     ]
   },
   posts: [
+    {
+      id: "vercel-drop-static-site-publish-guide",
+      title: "Vercel Drop 拖拽发布：新手怎样先上线原型，再迁移到可持续的 Git 部署",
+      date: "2026-06-15",
+      category: "建站实践",
+      readTime: "9 分钟",
+      excerpt: "Vercel Drop 可以把文件、文件夹或 ZIP 直接拖进浏览器并发布到生产环境，适合原型和一次性站点；真正交付前还要检查根页面、资源路径、构建结果和环境变量，并在需要持续更新时连接 Git。",
+      tags: ["Vercel Drop", "静态网站", "持续部署"],
+      featured: true,
+      intro: [
+        "第一次发布个人站时，最容易卡住的往往不是 HTML 和 CSS，而是 Git、命令行、构建配置和部署平台之间的连接。Vercel Drop 把首次发布压缩成浏览器里的拖拽操作：准备文件、选择团队与项目名、点击 Deploy，就可以拿到公开网址。它适合快速分享原型、课程作业、静态导出结果和一次性演示。",
+        "但“已经出现一个网址”不等于网站已经适合长期维护。Vercel Drop 每次上传都会创建新项目，不会自动更新已有项目，也不会因为代码修改而重新部署。本文把它放在完整建站流程里理解：先用 Drop 验证可发布结果，再检查根页面、资源路径、框架构建和敏感信息，最后根据更新频率迁移到 Git、CLI 或自动化部署。"
+      ],
+      audience: [
+        "已经有静态页面、框架项目或设计工具导出文件，想尽快得到公开预览链接的新手",
+        "不熟悉 Git 或命令行，但需要先验证文件结构、首页和线上资源是否正确的个人站作者",
+        "准备把一次性原型继续维护为正式网站，需要判断何时改用 Git 持续部署的开发者"
+      ],
+      format: [
+        "适合整理成“发布前检查 / 拖拽上传 / 验证线上结果 / 识别限制 / 连接 Git”的首次上线流程",
+        "后续可以补一份静态站发布验收记录，保存网址、首页、资源路径、404、移动端和下一次更新方式"
+      ],
+      roadmap: [
+        "上传前先整理一个可独立运行的发布目录。静态站应确认顶层是否有 `index.html`，并在本地直接打开或通过本地服务器检查图片、CSS、JavaScript 和站内链接；框架项目则要确认依赖清单、构建命令和输出目录完整，不要把密钥、`.env`、数据库导出或私人文件放进上传目录。",
+        "进入 Vercel Drop 后拖入文件、文件夹或 ZIP，选择团队和项目名并部署。静态站顶层没有 `index.html` 时，按官方提示明确选择根页面；发布完成后从公开网址逐项检查首页、深层页面、图片与字体、移动端布局、浏览器控制台、404 路径和外部链接，记录实际部署结果而不是只看成功提示。",
+        "根据更新方式决定下一步。一次性演示可以保留 Drop 项目；只要网站需要持续修复、多人协作、预览分支或每次提交自动上线，就连接 Git 仓库并设置正式发布流程。迁移后再做一次同样的线上验收，并删除不再使用的重复项目，避免网址、配置和维护责任分散。"
+      ],
+      officialLinks: [
+        {
+          label: "Vercel Changelog：Introducing Vercel Drop",
+          url: "https://vercel.com/changelog/vercel-drop",
+          note: "说明 Drop 支持静态站和框架项目、每次上传会创建新项目，以及后续可以连接 Git。"
+        },
+        {
+          label: "Vercel Docs：Deploying with Vercel Drop",
+          url: "https://vercel.com/docs/drop",
+          note: "包含适用场景、上传步骤、根页面选择、限制和后续部署方式对比。"
+        },
+        {
+          label: "Vercel Docs：Git integrations",
+          url: "https://vercel.com/docs/git",
+          note: "用于把一次性上传迁移为提交后自动生成预览与生产部署的持续流程。"
+        }
+      ],
+      curatedLinks: [
+        "Drop 最适合首次验证和一次性分享，不是现有项目的覆盖更新工具。官方明确说明每次拖拽都会创建新项目，长期维护时应尽早建立唯一仓库和明确发布入口。",
+        "拖拽上传不会自动判断哪些文件属于敏感信息。发布目录应只包含可公开的源码、构建输入或构建产物；令牌、私钥、`.env` 和真实用户数据必须留在受控环境。",
+        "部署成功提示只能证明平台完成了构建或上传。网站是否真正可用，仍要通过公开网址检查根页面、资源路径、深层链接、404、移动端、控制台错误和下一次更新流程。"
+      ],
+      downloadIdeas: [
+        "可以整理一份静态站首次上线与公开网址验收清单",
+        "可以补一份从一次性拖拽部署迁移到 Git 持续部署的项目交接记录"
+      ],
+      monetization: "适合与本站的静态站模板、Git/GitHub 入门、网站上线检查清单和持续部署文章互相推荐。",
+      extraSections: [
+        {
+          title: "先判断哪种部署方式适合当前任务",
+          items: [
+            "一次性原型、静态导出或临时演示：优先使用 Drop，重点验证公开结果。",
+            "每次提交都要自动上线：连接 Git，并使用预览部署与生产分支。",
+            "本地脚本或 CI 需要主动发布：使用 Vercel CLI。",
+            "多租户平台或程序化创建部署：评估 REST API，而不是让操作人员反复拖拽。"
+          ]
+        },
+        {
+          title: "公开网址至少检查这些结果",
+          items: [
+            "根路径是否打开正确首页，深层页面和返回首页链接是否可用。",
+            "图片、CSS、JavaScript、字体和下载文件是否没有 404 或跨域错误。",
+            "框架项目是否使用预期构建命令，运行时环境变量是否通过平台配置而不是上传文件提供。",
+            "移动端、浏览器控制台、页面标题、描述和分享链接是否符合发布目标。",
+            "下一次修改由谁完成、从哪里发布、旧项目是否需要删除或归档。"
+          ]
+        }
+      ]
+    },
     {
       id: "qwen-code-018-stable-agent-workflow-guide",
       title: "Qwen Code v0.18.0 稳定版：新手怎样组合 Skills、记忆、计划审批与后台任务",
@@ -3528,14 +3604,24 @@ git push origin main`,
     }
   ],
   resourcePathPostIds: [
+    "vercel-drop-static-site-publish-guide",
     "qwen-code-018-stable-agent-workflow-guide",
     "claude-code-managed-model-allowlist-guide",
     "vercel-ai-sdk-harnessagent-beginner-guide",
     "github-copilot-code-review-controls-guide",
-    "github-agentic-workflows-public-preview-guide",
-    "npm-v12-install-security-migration-guide"
+    "github-agentic-workflows-public-preview-guide"
   ],
   hotspots: [
+    {
+      date: "2026-06-15",
+      tag: "建站工具",
+      title: "Vercel 将 Hobby 用户可创建的 Blob store 上限从 5 个提高到 100 个",
+      summary: "Vercel Hobby 用户现在最多可以创建 100 个 Blob store，适合按项目、环境或区域拆分对象存储；官方同时提醒，存储容量、操作次数和传输量限制仍然适用。",
+      why: "更多 store 能改善原型和多个小站之间的隔离，但不代表免费容量同步扩大。站长仍应记录每个 store 的用途、访问方式和清理责任，并在拆分前检查用量与费用限制。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/increased-blob-store-limit-for-hobby-users",
+      articleIdea: "候选：多个个人站怎样划分 Blob store，并避免把数量上限误当成容量上限"
+    },
     {
       date: "2026-06-13",
       tag: "Web 开发",
@@ -3545,6 +3631,36 @@ git push origin main`,
       sourceLabel: "Vercel Changelog",
       sourceUrl: "https://vercel.com/changelog/workflow-sdk-now-runs-natively-in-nitro-v3",
       articleIdea: "候选：Nitro v3 原生 Workflow SDK 入门，怎样编写、观察和调试第一个持久化步骤"
+    },
+    {
+      date: "2026-06-13",
+      tag: "开发工具",
+      title: "Claude Code v2.1.176 修补模型白名单绕过，并集中修复远程控制与 Windows 后台会话",
+      summary: "新版阻止模型别名通过 `ANTHROPIC_DEFAULT_*_MODEL` 环境变量跳转到白名单外模型，`/fast` 也会拒绝切换到禁止模型；同时修复远程控制静默切换模型、Windows 后台服务只读目录、后台会话恢复和 hooks 路径条件等问题。",
+      why: "这是 v2.1.175 模型治理更新后的关键补丁，说明白名单、别名、快捷切换和远程会话必须一起验证。使用后台 Agent 或远程控制的团队应升级后复测实际模型、目录、账号切换与 daemon 状态。",
+      sourceLabel: "Claude Code GitHub Release",
+      sourceUrl: "https://github.com/anthropics/claude-code/releases/tag/v2.1.176",
+      articleIdea: "候选：Claude Code 升级后怎样回归测试模型白名单、Remote Control 与 Windows 后台服务"
+    },
+    {
+      date: "2026-06-12",
+      tag: "建站工具",
+      title: "Vercel Drop 支持把文件、文件夹或 ZIP 直接拖进浏览器发布",
+      summary: "Vercel Drop 不要求 Git、CLI 或本地配置，可直接上传静态站或框架项目并发布到生产网址；框架项目会自动检测和构建，静态站顶层没有 `index.html` 时可以手动选择根页面。",
+      why: "它适合原型、一次性站点和首次上线验证，但每次拖拽都会创建新项目，也不会随代码提交自动部署。需要持续更新时应连接 Git，并重新核验根页面、资源路径、构建结果和敏感文件边界。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/vercel-drop",
+      articleIdea: "选题：Vercel Drop 拖拽发布入门，怎样先上线原型，再迁移到 Git 持续部署"
+    },
+    {
+      date: "2026-06-12",
+      tag: "AI 运维",
+      title: "Cloudflare AI Gateway 日志新增 User-Agent 记录与筛选",
+      summary: "AI Gateway 日志现在会记录发起请求的客户端 User-Agent，并支持等于、不等于和包含筛选，可区分 `openai-python`、自定义应用或 Cloudflare Worker 等流量来源。",
+      why: "多 SDK、多应用共用网关时，客户端标识能帮助定位异常请求、迁移影响和成本来源；但 User-Agent 可以缺失或被修改，仍应结合 API key、项目标签、请求元数据和实际日志判断。",
+      sourceLabel: "Cloudflare Changelog",
+      sourceUrl: "https://developers.cloudflare.com/changelog/post/2026-06-12-user-agent-logging/",
+      articleIdea: "候选：AI Gateway 多客户端排查清单，怎样结合 User-Agent、密钥与元数据定位请求"
     },
     {
       date: "2026-06-12",

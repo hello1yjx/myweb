@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vercel Drop 拖拽发布：新手怎样先上线原型，再迁移到可持续的 Git 部署 | 学习资源库</title>
+  <meta name="description" content="Vercel Drop 可以把文件、文件夹或 ZIP 直接拖进浏览器并发布到生产环境，适合原型和一次性站点；真正交付前还要检查根页面、资源路径、构建结果和环境变量，并在需要持续更新时连接 Git。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/vercel-drop-static-site-publish-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Vercel Drop 拖拽发布：新手怎样先上线原型，再迁移到可持续的 Git 部署","description":"Vercel Drop 可以把文件、文件夹或 ZIP 直接拖进浏览器并发布到生产环境，适合原型和一次性站点；真正交付前还要检查根页面、资源路径、构建结果和环境变量，并在需要持续更新时连接 Git。","datePublished":"2026-06-15","dateModified":"2026-06-15","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/vercel-drop-static-site-publish-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260615-hotspots">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">建站实践</span>
+      <h1>Vercel Drop 拖拽发布：新手怎样先上线原型，再迁移到可持续的 Git 部署</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-15">2026年6月15日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Vercel Drop 可以把文件、文件夹或 ZIP 直接拖进浏览器并发布到生产环境，适合原型和一次性站点；真正交付前还要检查根页面、资源路径、构建结果和环境变量，并在需要持续更新时连接 Git。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://vercel.com/changelog/vercel-drop" target="_blank" rel="noreferrer">Vercel Changelog：Introducing Vercel Drop</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>第一次发布个人站时，最容易卡住的往往不是 HTML 和 CSS，而是 Git、命令行、构建配置和部署平台之间的连接。Vercel Drop 把首次发布压缩成浏览器里的拖拽操作：准备文件、选择团队与项目名、点击 Deploy，就可以拿到公开网址。它适合快速分享原型、课程作业、静态导出结果和一次性演示。</p><p>但“已经出现一个网址”不等于网站已经适合长期维护。Vercel Drop 每次上传都会创建新项目，不会自动更新已有项目，也不会因为代码修改而重新部署。本文把它放在完整建站流程里理解：先用 Drop 验证可发布结果，再检查根页面、资源路径、框架构建和敏感信息，最后根据更新频率迁移到 Git、CLI 或自动化部署。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>已经有静态页面、框架项目或设计工具导出文件，想尽快得到公开预览链接的新手</li><li>不熟悉 Git 或命令行，但需要先验证文件结构、首页和线上资源是否正确的个人站作者</li><li>准备把一次性原型继续维护为正式网站，需要判断何时改用 Git 持续部署的开发者</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>上传前先整理一个可独立运行的发布目录。静态站应确认顶层是否有 `index.html`，并在本地直接打开或通过本地服务器检查图片、CSS、JavaScript 和站内链接；框架项目则要确认依赖清单、构建命令和输出目录完整，不要把密钥、`.env`、数据库导出或私人文件放进上传目录。</li><li>进入 Vercel Drop 后拖入文件、文件夹或 ZIP，选择团队和项目名并部署。静态站顶层没有 `index.html` 时，按官方提示明确选择根页面；发布完成后从公开网址逐项检查首页、深层页面、图片与字体、移动端布局、浏览器控制台、404 路径和外部链接，记录实际部署结果而不是只看成功提示。</li><li>根据更新方式决定下一步。一次性演示可以保留 Drop 项目；只要网站需要持续修复、多人协作、预览分支或每次提交自动上线，就连接 Git 仓库并设置正式发布流程。迁移后再做一次同样的线上验收，并删除不再使用的重复项目，避免网址、配置和维护责任分散。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://vercel.com/changelog/vercel-drop" target="_blank" rel="noreferrer">Vercel Changelog：Introducing Vercel Drop</a>
+              <span>：说明 Drop 支持静态站和框架项目、每次上传会创建新项目，以及后续可以连接 Git。</span>
+            </li>
+
+            <li>
+              <a href="https://vercel.com/docs/drop" target="_blank" rel="noreferrer">Vercel Docs：Deploying with Vercel Drop</a>
+              <span>：包含适用场景、上传步骤、根页面选择、限制和后续部署方式对比。</span>
+            </li>
+
+            <li>
+              <a href="https://vercel.com/docs/git" target="_blank" rel="noreferrer">Vercel Docs：Git integrations</a>
+              <span>：用于把一次性上传迁移为提交后自动生成预览与生产部署的持续流程。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>Drop 最适合首次验证和一次性分享，不是现有项目的覆盖更新工具。官方明确说明每次拖拽都会创建新项目，长期维护时应尽早建立唯一仓库和明确发布入口。</li><li>拖拽上传不会自动判断哪些文件属于敏感信息。发布目录应只包含可公开的源码、构建输入或构建产物；令牌、私钥、`.env` 和真实用户数据必须留在受控环境。</li><li>部署成功提示只能证明平台完成了构建或上传。网站是否真正可用，仍要通过公开网址检查根页面、资源路径、深层链接、404、移动端、控制台错误和下一次更新流程。</li></ul>
+
+        <h2>先判断哪种部署方式适合当前任务</h2>
+
+        <ul><li>一次性原型、静态导出或临时演示：优先使用 Drop，重点验证公开结果。</li><li>每次提交都要自动上线：连接 Git，并使用预览部署与生产分支。</li><li>本地脚本或 CI 需要主动发布：使用 Vercel CLI。</li><li>多租户平台或程序化创建部署：评估 REST API，而不是让操作人员反复拖拽。</li></ul>
+
+
+
+        <h2>公开网址至少检查这些结果</h2>
+
+        <ul><li>根路径是否打开正确首页，深层页面和返回首页链接是否可用。</li><li>图片、CSS、JavaScript、字体和下载文件是否没有 404 或跨域错误。</li><li>框架项目是否使用预期构建命令，运行时环境变量是否通过平台配置而不是上传文件提供。</li><li>移动端、浏览器控制台、页面标题、描述和分享链接是否符合发布目标。</li><li>下一次修改由谁完成、从哪里发布、旧项目是否需要删除或归档。</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Vercel Drop</span><span>静态网站</span><span>持续部署</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a><a href="github-copilot-cli-security-review-guide.html">Copilot CLI 加入 /security-review：新手怎样把 AI 安全审查放到提交前</a><a href="npm-v12-install-security-migration-guide.html">npm v12 将默认阻止依赖脚本与远程依赖：新手升级前检查清单</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
