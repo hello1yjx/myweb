@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claude Code v2.1.178 权限与嵌套 Skills：新手怎样回归测试 subagent、工作流和远程控制 | 学习资源库</title>
+  <meta name="description" content="Claude Code v2.1.178 新增 `Tool(param:value)` 权限规则、嵌套 `.claude/skills` 加载、最近目录优先的 agent 与 workflow 解析，并加强自动模式下 subagent 启动前的分类检查；升级后应重点回归权限、嵌套配置、远程控制和后台会话。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/claude-code-2178-permission-nested-skills-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Claude Code v2.1.178 权限与嵌套 Skills：新手怎样回归测试 subagent、工作流和远程控制","description":"Claude Code v2.1.178 新增 `Tool(param:value)` 权限规则、嵌套 `.claude/skills` 加载、最近目录优先的 agent 与 workflow 解析，并加强自动模式下 subagent 启动前的分类检查；升级后应重点回归权限、嵌套配置、远程控制和后台会话。","datePublished":"2026-06-16","dateModified":"2026-06-16","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/claude-code-2178-permission-nested-skills-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260616-hotspots">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">开发安全</span>
+      <h1>Claude Code v2.1.178 权限与嵌套 Skills：新手怎样回归测试 subagent、工作流和远程控制</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-16">2026年6月16日</time>
+        <span>10 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Claude Code v2.1.178 新增 `Tool(param:value)` 权限规则、嵌套 `.claude/skills` 加载、最近目录优先的 agent 与 workflow 解析，并加强自动模式下 subagent 启动前的分类检查；升级后应重点回归权限、嵌套配置、远程控制和后台会话。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.178" target="_blank" rel="noreferrer">Claude Code GitHub Release：v2.1.178</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>编码 Agent 的风险很多时候不是来自它会不会写代码，而是来自它在什么目录里读取了什么规则、以什么模型启动了 subagent、哪些工具被允许、远程控制失败时有没有清楚提示。Claude Code v2.1.178 在这些边界上做了一组比较集中的更新，适合团队拿来做一次权限和工作流回归测试。</p><p>这次更新增加了 `Tool(param:value)` 形式的权限匹配，可以用参数条件和 `*` 通配符约束工具调用；嵌套 `.claude/skills` 现在会在处理对应目录文件时加载，重名时用 `＜dir＞:＜name＞` 区分；嵌套 `.claude/` 里的 agent、workflow 和 output-style 冲突时，离工作目录最近的配置优先。自动模式也会在 subagent 启动前交给分类器判断，减少被 subagent 绕过审查的空档。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>已经在日常仓库中使用 Claude Code、skills、subagent 或远程控制的新手开发者</li><li>需要在 monorepo、客户项目或团队模板中分目录管理 `.claude/` 配置的维护者</li><li>关心模型选择、工具权限、后台任务和非交互运行安全边界的团队</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先在可回退仓库升级到 v2.1.178，并记录升级前的 `.claude/` 目录、托管设置、项目 settings、常用 skills 和远程控制状态。升级后先运行版本检查和 `/doctor`，不要一开始就让 Agent 修改重要分支。</li><li>把原来过宽的权限规则拆成能解释的最小规则。重点测试 `Agent(model:opus)` 这类带参数的限制、带 `*` 的通配规则、MCP server 级规则，以及非交互运行中目录限定 skill 是否仍会触发权限提示。每条规则都要做一次“应该允许”和“应该拒绝”的实际请求。</li><li>在 monorepo 或多项目目录中验证嵌套 `.claude/skills`、workflow 和 agent 的优先级。故意准备一个同名 skill，确认列表里是否出现目录前缀；在子目录保存 project-scope workflow，确认它写入最近的 `.claude/workflows/`，而不是顶层目录。</li><li>最后再回归 subagent、后台会话和远程控制。检查自动模式下 subagent 是否会在启动前被审查，`ctrl+b` 后是否不会重启任务，`/bg` 会话是否不再卡在 Working，Remote Control 失败时是否能区分 gate、检查失败、过期权益或组织策略。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.178" target="_blank" rel="noreferrer">Claude Code GitHub Release：v2.1.178</a>
+              <span>：包含参数级权限规则、嵌套 skills、自动模式 subagent 检查、远程控制与后台会话修复的完整变更列表。</span>
+            </li>
+
+            <li>
+              <a href="https://docs.anthropic.com/en/docs/claude-code/settings" target="_blank" rel="noreferrer">Claude Code Docs：Settings</a>
+              <span>：用于理解全局、项目、托管设置和权限相关配置的作用范围。</span>
+            </li>
+
+            <li>
+              <a href="https://docs.anthropic.com/en/docs/claude-code/skills" target="_blank" rel="noreferrer">Claude Code Docs：Skills</a>
+              <span>：用于核对 skills 的目录、加载、触发、共享和可见性控制。</span>
+            </li>
+
+            <li>
+              <a href="https://docs.anthropic.com/en/docs/claude-code/common-workflows" target="_blank" rel="noreferrer">Claude Code Docs：Common workflows</a>
+              <span>：用于把升级验证落到探索、计划、测试、PR 和多会话协作这些日常场景。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>参数级权限是更细的边界，不是一次配置后永远可靠的保证；每次新增工具、模型别名或 subagent 流程都要补测试。</li><li>嵌套 skills 适合 monorepo，但也会让“当前目录到底加载了哪套规则”变得更重要，团队应统一命名和审计方式。</li><li>远程控制和后台会话修复降低了误判成本，但升级后仍要看实际账号、daemon、Provider 环境变量和组织策略是否一致。</li></ul>
+
+        <h2>升级回归测试清单</h2>
+
+        <ul><li>列出允许与禁止的模型、subagent 和 MCP server 工具。</li><li>为每条关键权限准备一个应该通过和一个应该被拦截的请求。</li><li>在根目录和子目录分别调用同名 skill，确认实际加载来源。</li><li>保存 workflow 时检查目标目录是否符合最近 `.claude/workflows/` 规则。</li><li>用真实账号测试 Remote Control 连接失败时的错误提示。</li></ul>
+
+
+
+        <h2>权限规则示例要先当作测试用例</h2>
+        <p>发布说明里的重点是参数匹配能力。新手可以先把规则字符串写进回归清单，再按自己的 settings 结构落地。</p>
+
+
+        <pre><code class="language-text">Agent(model:opus)
+Agent(model:*)
+Tool(param:value)
+Tool(param:*)</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Claude Code</span><span>Agent Skills</span><span>权限治理</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

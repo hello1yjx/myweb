@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vercel Functions 可运行 30 分钟：新手怎样给 AI 长任务设置超时、队列和验收边界 | 学习资源库</title>
+  <meta name="description" content="Vercel Functions 的 Node.js 与 Python 运行时现在可在 Pro 和 Enterprise 团队中设置最长 30 分钟执行时间，适合长推理、流式 AI、OCR、媒体处理和复杂队列任务；但它仍是 beta 能力，需要 Fluid Compute，并且不应替代队列、幂等重试和成本监控。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/vercel-functions-30-minute-ai-tasks-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Vercel Functions 可运行 30 分钟：新手怎样给 AI 长任务设置超时、队列和验收边界","description":"Vercel Functions 的 Node.js 与 Python 运行时现在可在 Pro 和 Enterprise 团队中设置最长 30 分钟执行时间，适合长推理、流式 AI、OCR、媒体处理和复杂队列任务；但它仍是 beta 能力，需要 Fluid Compute，并且不应替代队列、幂等重试和成本监控。","datePublished":"2026-06-16","dateModified":"2026-06-16","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/vercel-functions-30-minute-ai-tasks-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260616-hotspots">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">建站实践</span>
+      <h1>Vercel Functions 可运行 30 分钟：新手怎样给 AI 长任务设置超时、队列和验收边界</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-16">2026年6月16日</time>
+        <span>10 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Vercel Functions 的 Node.js 与 Python 运行时现在可在 Pro 和 Enterprise 团队中设置最长 30 分钟执行时间，适合长推理、流式 AI、OCR、媒体处理和复杂队列任务；但它仍是 beta 能力，需要 Fluid Compute，并且不应替代队列、幂等重试和成本监控。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://vercel.com/changelog/vercel-functions-can-now-run-up-to-30-minutes" target="_blank" rel="noreferrer">Vercel Changelog：Vercel Functions can now run up to 30 minutes</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>很多 AI 应用第一次上线时会把所有事情都塞进一个接口：接收文件、调用模型、等待工具结果、整理输出、再把结果返回给前端。原来的函数超时一到，用户只看到失败；开发者也很难判断是模型慢、第三方 API 慢，还是自己的代码没有拆分好。Vercel 在 2026 年 6 月 15 日宣布，Node.js 和 Python 运行时的 Vercel Functions 现在可以把执行时间设置到最长 30 分钟。</p><p>这个变化对 AI 长任务很有用，但它不是“把所有后台任务都放进 HTTP 请求里”的许可。官方说明里同时写明：超过 800 秒的时长仍处于 beta，要求启用 Fluid Compute，目前仅覆盖 Node.js 与 Python，其他运行时还在后续支持中。新手更应该把它理解为一个需要明确边界的工具：哪些任务可以拉长，哪些任务应该进队列，哪些结果必须能重试、能追踪、能停止。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>正在用 Vercel 部署 Next.js、API Route、Python 函数或 AI 原型的新手开发者</li><li>遇到长 LLM 推理、文档解析、OCR、媒体处理、浏览器自动化或队列处理超时的个人站作者</li><li>希望把 AI 功能从演示推进到可观测、可控成本、可回滚上线流程的团队</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先判断任务是不是必须留在同一个 Function 里。长 LLM 推理、几分钟流式响应、文档和媒体处理、OCR、网页抓取、浏览器自动化、Workflow 步骤或 Queue handler 都可能受益；但如果任务可以异步完成，仍应优先把用户请求、后台处理和结果通知拆开，避免用户一直等待同一个连接。</li><li>只给需要的路径设置 `maxDuration`，不要全站一刀切改成 1800 秒。Next.js App Router 可以在 route 文件里导出 `maxDuration`；其他框架或 Python 函数可以在 `vercel.json` 的具体 function 路径下配置。超过 800 秒前先确认团队套餐、Fluid Compute、运行时和 beta 风险都满足要求。</li><li>部署后用小输入和可控长输入各跑一次验收。检查函数日志、实际持续时间、模型 token 成本、第三方 API 等待时间、客户端断开后的行为、重复提交是否幂等，以及失败时用户能否看到明确状态；如果任何一项不可解释，就先不要把它放进关键生产路径。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://vercel.com/changelog/vercel-functions-can-now-run-up-to-30-minutes" target="_blank" rel="noreferrer">Vercel Changelog：Vercel Functions can now run up to 30 minutes</a>
+              <span>：说明 Node.js 与 Python 运行时最长 30 分钟、适用场景、`maxDuration` 示例、beta 与 Fluid Compute 要求。</span>
+            </li>
+
+            <li>
+              <a href="https://vercel.com/docs/functions/configuring-functions/duration" target="_blank" rel="noreferrer">Vercel Docs：Configuring maximum duration for Vercel Functions</a>
+              <span>：用于核对 App Router、函数路径和 `vercel.json` 中的最大执行时间配置方式。</span>
+            </li>
+
+            <li>
+              <a href="https://vercel.com/docs/fluid-compute" target="_blank" rel="noreferrer">Vercel Docs：Fluid Compute</a>
+              <span>：用于理解长函数背后的执行模型、等待 I/O 时的计费说明和适用限制。</span>
+            </li>
+
+            <li>
+              <a href="https://vercel.com/docs/workflows" target="_blank" rel="noreferrer">Vercel Docs：Workflows</a>
+              <span>：当任务需要持久化步骤、重试或更清晰的后台编排时，用来判断是否应该从单个函数拆出去。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>30 分钟上限解决的是“函数还没有来得及完成”的问题，不自动解决任务状态、重复提交、取消、重试和用户通知问题。</li><li>长函数最适合少数明确路径；如果每个接口都需要十几分钟，通常说明任务边界、队列或数据处理方式需要重新设计。</li><li>Fluid Compute 可以降低等待 I/O 时的执行成本，但模型 token、第三方 API、数据库和对象存储费用仍然要单独监控。</li></ul>
+
+        <h2>什么时候不该直接拉长 Function</h2>
+
+        <ul><li>任务没有用户必须实时等待的结果，只需要稍后通知或刷新状态。</li><li>失败后需要自动重试、人工补偿或跨多个步骤恢复。</li><li>输入大小差异很大，少数超大文件会拖慢整个服务。</li><li>需要长时间持有外部资源，例如浏览器实例、数据库事务或第三方会话。</li><li>团队还没有日志、告警、成本上限和幂等键。</li></ul>
+
+
+
+        <h2>最小配置示例</h2>
+        <p>下面的重点不是照抄数值，而是只给确实需要长时间的路由单独设置上限，并在正文里的验收清单中验证它。</p>
+
+
+        <pre><code class="language-ts">export const maxDuration = 1800;
+
+export async function POST(request: Request) {
+  return Response.json({ ok: true });
+}</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Vercel Functions</span><span>AI 长任务</span><span>Fluid Compute</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a><a href="github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

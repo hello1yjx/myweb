@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260615-hotspots">
+  <link rel="stylesheet" href="assets/styles.css?v=20260616-hotspots">
 </head>
 <body>
   <header class="site-header">
@@ -73,62 +73,62 @@
             <!-- STATIC_HOME_HOTSPOTS_START -->
 <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="建站工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="建站工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
         <div>
           <div class="hotspot-card__meta">
             <span>建站工具</span>
             <time datetime="2026-06-15">2026年6月15日</time>
           </div>
-          <h3>Vercel 将 Hobby 用户可创建的 Blob store 上限从 5 个提高到 100 个</h3>
+          <h3>Vercel Functions 的 Node.js 与 Python 运行时可设置最长 30 分钟</h3>
         </div>
       </div>
-      <p>Vercel Hobby 用户现在最多可以创建 100 个 Blob store，适合按项目、环境或区域拆分对象存储；官方同时提醒，存储容量、操作次数和传输量限制仍然适用。</p>
+      <p>Vercel Functions 现在支持在 Pro 和 Enterprise 团队中把 Node.js、Python 运行时的执行时间设置到 30 分钟，适合长 LLM 推理、几分钟流式响应、文档和媒体处理、OCR、网页抓取、浏览器自动化、Workflow 步骤和 Queue handler。</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
-        <p>更多 store 能改善原型和多个小站之间的隔离，但不代表免费容量同步扩大。站长仍应记录每个 store 的用途、访问方式和清理责任，并在拆分前检查用量与费用限制。</p>
+        <p>更长时长能减少 AI 长任务被硬超时截断的情况，但官方明确说明超过 800 秒仍处于 beta，并要求 Fluid Compute。站长应只给必要路径设置 `maxDuration`，同时验证成本、日志、幂等重试和失败提示。</p>
       </div>
-      <p class="hotspot-card__idea">候选：多个个人站怎样划分 Blob store，并避免把数量上限误当成容量上限</p>
-      <a class="text-link" href="https://vercel.com/changelog/increased-blob-store-limit-for-hobby-users" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
+      <p class="hotspot-card__idea">选题：Vercel 30 分钟 Functions 入门，怎样给 AI 长任务设置超时、队列和验收边界</p>
+      <a class="text-link" href="https://vercel.com/changelog/vercel-functions-can-now-run-up-to-30-minutes" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
     </article>
 
     <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Web 开发 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
         <div>
           <div class="hotspot-card__meta">
-            <span>Web 开发</span>
-            <time datetime="2026-06-13">2026年6月13日</time>
+            <span>开发安全</span>
+            <time datetime="2026-06-15">2026年6月15日</time>
           </div>
-          <h3>Vercel Workflow SDK 在 Nitro v3 原生运行，步骤可直接使用服务器端 API</h3>
+          <h3>Claude Code v2.1.178 增加参数级权限规则，并强化嵌套 Skills 与 subagent 检查</h3>
         </div>
       </div>
-      <p>Workflow SDK 与 Nitro v3 的原生集成进入 beta，`use step` 函数现在与应用其余部分运行在同一打包运行时，可直接调用 Nitro `useStorage()` 等服务器 API；开发服务器还会在 `/_workflow` 提供工作流检查与调试界面。</p>
+      <p>新版增加 `Tool(param:value)` 权限匹配和通配符，支持在嵌套 `.claude/skills` 中加载目录级 skill，并让最近目录的 agent、workflow、output-style 在冲突时优先生效；自动模式下 subagent 启动前也会先经过分类器检查。</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
-        <p>原生集成减少了独立 bundle 与运行时之间的割裂，依赖追踪和 tree-shaking 也有助于缩小构建输出；但 beta 阶段仍应先验证存储、重试、长任务和部署行为，再迁移关键工作流。</p>
+        <p>这些改动直接影响 monorepo、团队模板、subagent 权限和远程控制排错。升级后不能只看版本号，应回归测试允许/拒绝规则、同名 skill、project-scope workflow 保存位置和后台会话状态。</p>
       </div>
-      <p class="hotspot-card__idea">候选：Nitro v3 原生 Workflow SDK 入门，怎样编写、观察和调试第一个持久化步骤</p>
-      <a class="text-link" href="https://vercel.com/changelog/workflow-sdk-now-runs-natively-in-nitro-v3" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
+      <p class="hotspot-card__idea">选题：Claude Code v2.1.178 升级后怎样回归测试权限、嵌套 Skills、subagent 与远程控制</p>
+      <a class="text-link" href="https://github.com/anthropics/claude-code/releases/tag/v2.1.178" target="_blank" rel="noreferrer">查看来源：Claude Code GitHub Release</a>
     </article>
 
     <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="开发工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 管理 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
         <div>
           <div class="hotspot-card__meta">
-            <span>开发工具</span>
-            <time datetime="2026-06-13">2026年6月13日</time>
+            <span>AI 管理</span>
+            <time datetime="2026-06-15">2026年6月15日</time>
           </div>
-          <h3>Claude Code v2.1.176 修补模型白名单绕过，并集中修复远程控制与 Windows 后台会话</h3>
+          <h3>Copilot 使用指标引入服务端遥测，活跃用户统计会更接近账单与活动日志</h3>
         </div>
       </div>
-      <p>新版阻止模型别名通过 `ANTHROPIC_DEFAULT_*_MODEL` 环境变量跳转到白名单外模型，`/fast` 也会拒绝切换到禁止模型；同时修复远程控制静默切换模型、Windows 后台服务只读目录、后台会话恢复和 hooks 路径条件等问题。</p>
+      <p>GitHub Copilot usage metrics API 现在会把服务端确认的活跃用户补进单日和 28 天企业报告，使部分过去因客户端遥测缺失而没有出现在报表里的已活跃、已计费用户被统计进 DAU。</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
-        <p>这是 v2.1.175 模型治理更新后的关键补丁，说明白名单、别名、快捷切换和远程会话必须一起验证。使用后台 Agent 或远程控制的团队应升级后复测实际模型、目录、账号切换与 daemon 状态。</p>
+        <p>团队可能看到顶层活跃用户数上升，但这些新增用户暂时不会带来 IDE、功能、模型或代码行等细分维度。管理者应把它看成指标口径变化，并重新解释采用率、成本归因和缺失明细。</p>
       </div>
-      <p class="hotspot-card__idea">候选：Claude Code 升级后怎样回归测试模型白名单、Remote Control 与 Windows 后台服务</p>
-      <a class="text-link" href="https://github.com/anthropics/claude-code/releases/tag/v2.1.176" target="_blank" rel="noreferrer">查看来源：Claude Code GitHub Release</a>
+      <p class="hotspot-card__idea">候选：Copilot 活跃用户统计口径变化后，怎样重读 DAU、明细缺口与成本报表</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-06-15-copilot-usage-metrics-now-include-more-of-your-active-users/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
     </article>
 <!-- STATIC_HOME_HOTSPOTS_END -->
           </div>
@@ -145,6 +145,40 @@
           <div class="recommend-grid" data-recommendations>
             <!-- STATIC_HOME_RECOMMENDATIONS_START -->
 <article class="article-card reveal">
+      <a class="article-card__media article-card__media--github" href="articles/vercel-functions-30-minute-ai-tasks-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="建站实践 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>建站实践</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>建站实践</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-16">2026年6月16日</time>
+        </div>
+        <h3><a href="articles/vercel-functions-30-minute-ai-tasks-guide.html">Vercel Functions 可运行 30 分钟：新手怎样给 AI 长任务设置超时、队列和验收边界</a></h3>
+        <p>Vercel Functions 的 Node.js 与 Python 运行时现在可在 Pro 和 Enterprise 团队中设置最长 30 分钟执行时间，适合长推理、流式 AI、OCR、媒体处理和复杂队列任务；但它仍是 beta 能力，需要 Fluid Compute，并且不应替代队列、幂等重试和成本监控。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--github" href="articles/claude-code-2178-permission-nested-skills-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>开发安全</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>开发安全</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-16">2026年6月16日</time>
+        </div>
+        <h3><a href="articles/claude-code-2178-permission-nested-skills-guide.html">Claude Code v2.1.178 权限与嵌套 Skills：新手怎样回归测试 subagent、工作流和远程控制</a></h3>
+        <p>Claude Code v2.1.178 新增 `Tool(param:value)` 权限规则、嵌套 `.claude/skills` 加载、最近目录优先的 agent 与 workflow 解析，并加强自动模式下 subagent 启动前的分类检查；升级后应重点回归权限、嵌套配置、远程控制和后台会话。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
       <a class="article-card__media article-card__media--github" href="articles/vercel-drop-static-site-publish-guide.html">
         <span class="article-card__badge">推荐</span>
         <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="建站实践 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
@@ -177,40 +211,6 @@
         <p>Qwen Code v0.18.0 把此前 nightly 中的 Skills 选择器、用户级自动记忆、计划审批、后台 Agent、统计面板与上下文压缩等能力带入稳定版；新手应先建立可审查的小任务流程，再逐步启用自动化能力。</p>
       </div>
     </article>
-
-    <article class="article-card reveal">
-      <a class="article-card__media article-card__media--github" href="articles/claude-code-managed-model-allowlist-guide.html">
-        <span class="article-card__badge">推荐</span>
-        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
-        <strong>开发安全</strong>
-      </a>
-      <div class="article-card__body">
-        <div class="meta-row">
-          <span>开发安全</span>
-          <span>9 分钟</span>
-          <time datetime="2026-06-14">2026年6月14日</time>
-        </div>
-        <h3><a href="articles/claude-code-managed-model-allowlist-guide.html">Claude Code v2.1.175 强化模型白名单：新手怎样避免默认模型绕过组织策略</a></h3>
-        <p>Claude Code v2.1.175 新增 `enforceAvailableModels` 托管设置，让 `availableModels` 白名单同时约束 Default 模型，并阻止用户或项目设置扩大组织允许范围；管理员应在测试设备上验证回退、子 Agent 与错误配置行为。</p>
-      </div>
-    </article>
-
-    <article class="article-card reveal">
-      <a class="article-card__media article-card__media--ai" href="articles/vercel-ai-sdk-harnessagent-beginner-guide.html">
-        <span class="article-card__badge">推荐</span>
-        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
-        <strong>AI 编程</strong>
-      </a>
-      <div class="article-card__body">
-        <div class="meta-row">
-          <span>AI 编程</span>
-          <span>10 分钟</span>
-          <time datetime="2026-06-13">2026年6月13日</time>
-        </div>
-        <h3><a href="articles/vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a></h3>
-        <p>Vercel AI SDK 7 的实验性 HarnessAgent 用统一接口连接 Claude Code、Codex 与 Pi，并统一处理沙箱、会话、权限、skills 和子 Agent；新手应先从可销毁沙箱和单一任务开始验证。</p>
-      </div>
-    </article>
 <!-- STATIC_HOME_RECOMMENDATIONS_END -->
           </div>
         </section>
@@ -226,6 +226,38 @@
           <div class="latest-list" data-home-latest>
             <!-- STATIC_HOME_LATEST_START -->
 <article class="latest-item reveal">
+      <a class="latest-thumb latest-thumb--github" href="articles/claude-code-managed-model-allowlist-guide.html">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
+        <span>开发安全</span>
+      </a>
+      <div>
+        <h3><a href="articles/claude-code-managed-model-allowlist-guide.html">Claude Code v2.1.175 强化模型白名单：新手怎样避免默认模型绕过组织策略</a></h3>
+        <p>Claude Code v2.1.175 新增 `enforceAvailableModels` 托管设置，让 `availableModels` 白名单同时约束 Default 模型，并阻止用户或项目设置扩大组织允许范围；管理员应在测试设备上验证回退、子 Agent 与错误配置行为。</p>
+        <div class="meta-row">
+          <span>开发安全</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-14">2026年6月14日</time>
+        </div>
+      </div>
+    </article>
+
+    <article class="latest-item reveal">
+      <a class="latest-thumb latest-thumb--ai" href="articles/vercel-ai-sdk-harnessagent-beginner-guide.html">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
+        <span>AI 编程</span>
+      </a>
+      <div>
+        <h3><a href="articles/vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a></h3>
+        <p>Vercel AI SDK 7 的实验性 HarnessAgent 用统一接口连接 Claude Code、Codex 与 Pi，并统一处理沙箱、会话、权限、skills 和子 Agent；新手应先从可销毁沙箱和单一任务开始验证。</p>
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-13">2026年6月13日</time>
+        </div>
+      </div>
+    </article>
+
+    <article class="latest-item reveal">
       <a class="latest-thumb latest-thumb--github" href="articles/github-copilot-code-review-controls-guide.html">
         <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
         <span>开发安全</span>
@@ -253,38 +285,6 @@
           <span>AI 编程</span>
           <span>10 分钟</span>
           <time datetime="2026-06-12">2026年6月12日</time>
-        </div>
-      </div>
-    </article>
-
-    <article class="latest-item reveal">
-      <a class="latest-thumb latest-thumb--ai" href="articles/github-copilot-cli-settings-guide.html">
-        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
-        <span>AI 编程</span>
-      </a>
-      <div>
-        <h3><a href="articles/github-copilot-cli-settings-guide.html">Copilot CLI 新增 /settings：新手怎样统一管理自动更新、会话同步与实验设置</a></h3>
-        <p>GitHub Copilot CLI 新增统一的 /settings 命令，可通过搜索界面、行内命令或脚本管理配置，并在写入前进行 schema 校验；新手可用它减少手改配置文件造成的拼写和类型错误。</p>
-        <div class="meta-row">
-          <span>AI 编程</span>
-          <span>8 分钟</span>
-          <time datetime="2026-06-12">2026年6月12日</time>
-        </div>
-      </div>
-    </article>
-
-    <article class="latest-item reveal">
-      <a class="latest-thumb latest-thumb--github" href="articles/github-copilot-cli-security-review-guide.html">
-        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
-        <span>开发安全</span>
-      </a>
-      <div>
-        <h3><a href="articles/github-copilot-cli-security-review-guide.html">Copilot CLI 加入 /security-review：新手怎样把 AI 安全审查放到提交前</a></h3>
-        <p>GitHub Copilot CLI 新增实验性 /security-review，可分析本地代码改动并给出高置信度安全发现；它适合做提交前补充检查，但不能替代测试、CodeQL、依赖与密钥扫描。</p>
-        <div class="meta-row">
-          <span>开发安全</span>
-          <span>9 分钟</span>
-          <time datetime="2026-06-11">2026年6月11日</time>
         </div>
       </div>
     </article>
@@ -378,6 +378,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260615-hotspots"></script>
+  <script src="assets/app.js?v=20260616-hotspots"></script>
 </body>
 </html>

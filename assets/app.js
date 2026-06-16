@@ -9,7 +9,7 @@ const siteData = {
     bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
       { value: "6", label: "原创下载包" },
-      { value: "38", label: "新手专题" },
+      { value: "40", label: "新手专题" },
       { value: "持续", label: "更新与核验" }
     ],
     valueCards: [
@@ -28,6 +28,163 @@ const siteData = {
     ]
   },
   posts: [
+    {
+      id: "vercel-functions-30-minute-ai-tasks-guide",
+      title: "Vercel Functions 可运行 30 分钟：新手怎样给 AI 长任务设置超时、队列和验收边界",
+      date: "2026-06-16",
+      category: "建站实践",
+      readTime: "10 分钟",
+      excerpt: "Vercel Functions 的 Node.js 与 Python 运行时现在可在 Pro 和 Enterprise 团队中设置最长 30 分钟执行时间，适合长推理、流式 AI、OCR、媒体处理和复杂队列任务；但它仍是 beta 能力，需要 Fluid Compute，并且不应替代队列、幂等重试和成本监控。",
+      tags: ["Vercel Functions", "AI 长任务", "Fluid Compute"],
+      featured: true,
+      intro: [
+        "很多 AI 应用第一次上线时会把所有事情都塞进一个接口：接收文件、调用模型、等待工具结果、整理输出、再把结果返回给前端。原来的函数超时一到，用户只看到失败；开发者也很难判断是模型慢、第三方 API 慢，还是自己的代码没有拆分好。Vercel 在 2026 年 6 月 15 日宣布，Node.js 和 Python 运行时的 Vercel Functions 现在可以把执行时间设置到最长 30 分钟。",
+        "这个变化对 AI 长任务很有用，但它不是“把所有后台任务都放进 HTTP 请求里”的许可。官方说明里同时写明：超过 800 秒的时长仍处于 beta，要求启用 Fluid Compute，目前仅覆盖 Node.js 与 Python，其他运行时还在后续支持中。新手更应该把它理解为一个需要明确边界的工具：哪些任务可以拉长，哪些任务应该进队列，哪些结果必须能重试、能追踪、能停止。"
+      ],
+      audience: [
+        "正在用 Vercel 部署 Next.js、API Route、Python 函数或 AI 原型的新手开发者",
+        "遇到长 LLM 推理、文档解析、OCR、媒体处理、浏览器自动化或队列处理超时的个人站作者",
+        "希望把 AI 功能从演示推进到可观测、可控成本、可回滚上线流程的团队"
+      ],
+      format: [
+        "适合整理成“判断是否需要长函数 / 设置 maxDuration / 拆分前台与后台 / 验证日志与成本 / 准备回退”的上线清单",
+        "后续可以补一份长任务验收记录，记录输入规模、模型调用次数、总耗时、失败方式和用户可见状态"
+      ],
+      roadmap: [
+        "先判断任务是不是必须留在同一个 Function 里。长 LLM 推理、几分钟流式响应、文档和媒体处理、OCR、网页抓取、浏览器自动化、Workflow 步骤或 Queue handler 都可能受益；但如果任务可以异步完成，仍应优先把用户请求、后台处理和结果通知拆开，避免用户一直等待同一个连接。",
+        "只给需要的路径设置 `maxDuration`，不要全站一刀切改成 1800 秒。Next.js App Router 可以在 route 文件里导出 `maxDuration`；其他框架或 Python 函数可以在 `vercel.json` 的具体 function 路径下配置。超过 800 秒前先确认团队套餐、Fluid Compute、运行时和 beta 风险都满足要求。",
+        "部署后用小输入和可控长输入各跑一次验收。检查函数日志、实际持续时间、模型 token 成本、第三方 API 等待时间、客户端断开后的行为、重复提交是否幂等，以及失败时用户能否看到明确状态；如果任何一项不可解释，就先不要把它放进关键生产路径。"
+      ],
+      officialLinks: [
+        {
+          label: "Vercel Changelog：Vercel Functions can now run up to 30 minutes",
+          url: "https://vercel.com/changelog/vercel-functions-can-now-run-up-to-30-minutes",
+          note: "说明 Node.js 与 Python 运行时最长 30 分钟、适用场景、`maxDuration` 示例、beta 与 Fluid Compute 要求。"
+        },
+        {
+          label: "Vercel Docs：Configuring maximum duration for Vercel Functions",
+          url: "https://vercel.com/docs/functions/configuring-functions/duration",
+          note: "用于核对 App Router、函数路径和 `vercel.json` 中的最大执行时间配置方式。"
+        },
+        {
+          label: "Vercel Docs：Fluid Compute",
+          url: "https://vercel.com/docs/fluid-compute",
+          note: "用于理解长函数背后的执行模型、等待 I/O 时的计费说明和适用限制。"
+        },
+        {
+          label: "Vercel Docs：Workflows",
+          url: "https://vercel.com/docs/workflows",
+          note: "当任务需要持久化步骤、重试或更清晰的后台编排时，用来判断是否应该从单个函数拆出去。"
+        }
+      ],
+      curatedLinks: [
+        "30 分钟上限解决的是“函数还没有来得及完成”的问题，不自动解决任务状态、重复提交、取消、重试和用户通知问题。",
+        "长函数最适合少数明确路径；如果每个接口都需要十几分钟，通常说明任务边界、队列或数据处理方式需要重新设计。",
+        "Fluid Compute 可以降低等待 I/O 时的执行成本，但模型 token、第三方 API、数据库和对象存储费用仍然要单独监控。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 AI 长任务上线前验收清单",
+        "可以补一份 Vercel Function、Workflow 和 Queue 的选型对照表"
+      ],
+      monetization: "适合与本站的 Vercel Drop、AI SDK HarnessAgent、AI Gateway、静态站上线检查清单和 Agent 安全清单互相推荐。",
+      extraSections: [
+        {
+          title: "什么时候不该直接拉长 Function",
+          items: [
+            "任务没有用户必须实时等待的结果，只需要稍后通知或刷新状态。",
+            "失败后需要自动重试、人工补偿或跨多个步骤恢复。",
+            "输入大小差异很大，少数超大文件会拖慢整个服务。",
+            "需要长时间持有外部资源，例如浏览器实例、数据库事务或第三方会话。",
+            "团队还没有日志、告警、成本上限和幂等键。"
+          ]
+        },
+        {
+          title: "最小配置示例",
+          text: "下面的重点不是照抄数值，而是只给确实需要长时间的路由单独设置上限，并在正文里的验收清单中验证它。",
+          code: "export const maxDuration = 1800;\n\nexport async function POST(request: Request) {\n  return Response.json({ ok: true });\n}",
+          language: "ts"
+        }
+      ]
+    },
+    {
+      id: "claude-code-2178-permission-nested-skills-guide",
+      title: "Claude Code v2.1.178 权限与嵌套 Skills：新手怎样回归测试 subagent、工作流和远程控制",
+      date: "2026-06-16",
+      category: "开发安全",
+      readTime: "10 分钟",
+      excerpt: "Claude Code v2.1.178 新增 `Tool(param:value)` 权限规则、嵌套 `.claude/skills` 加载、最近目录优先的 agent 与 workflow 解析，并加强自动模式下 subagent 启动前的分类检查；升级后应重点回归权限、嵌套配置、远程控制和后台会话。",
+      tags: ["Claude Code", "Agent Skills", "权限治理"],
+      featured: true,
+      intro: [
+        "编码 Agent 的风险很多时候不是来自它会不会写代码，而是来自它在什么目录里读取了什么规则、以什么模型启动了 subagent、哪些工具被允许、远程控制失败时有没有清楚提示。Claude Code v2.1.178 在这些边界上做了一组比较集中的更新，适合团队拿来做一次权限和工作流回归测试。",
+        "这次更新增加了 `Tool(param:value)` 形式的权限匹配，可以用参数条件和 `*` 通配符约束工具调用；嵌套 `.claude/skills` 现在会在处理对应目录文件时加载，重名时用 `＜dir＞:＜name＞` 区分；嵌套 `.claude/` 里的 agent、workflow 和 output-style 冲突时，离工作目录最近的配置优先。自动模式也会在 subagent 启动前交给分类器判断，减少被 subagent 绕过审查的空档。"
+      ],
+      audience: [
+        "已经在日常仓库中使用 Claude Code、skills、subagent 或远程控制的新手开发者",
+        "需要在 monorepo、客户项目或团队模板中分目录管理 `.claude/` 配置的维护者",
+        "关心模型选择、工具权限、后台任务和非交互运行安全边界的团队"
+      ],
+      format: [
+        "适合整理成“升级前备份 / 检查权限规则 / 验证嵌套 skills / 测试 subagent / 回归远程控制”的升级路线",
+        "后续可以补一份团队 Claude Code 配置审计表，记录每个目录的 skills、workflows、agents 和权限规则"
+      ],
+      roadmap: [
+        "先在可回退仓库升级到 v2.1.178，并记录升级前的 `.claude/` 目录、托管设置、项目 settings、常用 skills 和远程控制状态。升级后先运行版本检查和 `/doctor`，不要一开始就让 Agent 修改重要分支。",
+        "把原来过宽的权限规则拆成能解释的最小规则。重点测试 `Agent(model:opus)` 这类带参数的限制、带 `*` 的通配规则、MCP server 级规则，以及非交互运行中目录限定 skill 是否仍会触发权限提示。每条规则都要做一次“应该允许”和“应该拒绝”的实际请求。",
+        "在 monorepo 或多项目目录中验证嵌套 `.claude/skills`、workflow 和 agent 的优先级。故意准备一个同名 skill，确认列表里是否出现目录前缀；在子目录保存 project-scope workflow，确认它写入最近的 `.claude/workflows/`，而不是顶层目录。",
+        "最后再回归 subagent、后台会话和远程控制。检查自动模式下 subagent 是否会在启动前被审查，`ctrl+b` 后是否不会重启任务，`/bg` 会话是否不再卡在 Working，Remote Control 失败时是否能区分 gate、检查失败、过期权益或组织策略。"
+      ],
+      officialLinks: [
+        {
+          label: "Claude Code GitHub Release：v2.1.178",
+          url: "https://github.com/anthropics/claude-code/releases/tag/v2.1.178",
+          note: "包含参数级权限规则、嵌套 skills、自动模式 subagent 检查、远程控制与后台会话修复的完整变更列表。"
+        },
+        {
+          label: "Claude Code Docs：Settings",
+          url: "https://docs.anthropic.com/en/docs/claude-code/settings",
+          note: "用于理解全局、项目、托管设置和权限相关配置的作用范围。"
+        },
+        {
+          label: "Claude Code Docs：Skills",
+          url: "https://docs.anthropic.com/en/docs/claude-code/skills",
+          note: "用于核对 skills 的目录、加载、触发、共享和可见性控制。"
+        },
+        {
+          label: "Claude Code Docs：Common workflows",
+          url: "https://docs.anthropic.com/en/docs/claude-code/common-workflows",
+          note: "用于把升级验证落到探索、计划、测试、PR 和多会话协作这些日常场景。"
+        }
+      ],
+      curatedLinks: [
+        "参数级权限是更细的边界，不是一次配置后永远可靠的保证；每次新增工具、模型别名或 subagent 流程都要补测试。",
+        "嵌套 skills 适合 monorepo，但也会让“当前目录到底加载了哪套规则”变得更重要，团队应统一命名和审计方式。",
+        "远程控制和后台会话修复降低了误判成本，但升级后仍要看实际账号、daemon、Provider 环境变量和组织策略是否一致。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Claude Code v2.1.178 升级回归测试清单",
+        "可以补一个 `.claude/` 目录、skills、workflows 和权限规则盘点模板"
+      ],
+      monetization: "适合与本站的 Claude Code 模型白名单、Skills 插件、回退模型、安全模式、AI Agent 安全清单和团队规范类文章互相推荐。",
+      extraSections: [
+        {
+          title: "升级回归测试清单",
+          items: [
+            "列出允许与禁止的模型、subagent 和 MCP server 工具。",
+            "为每条关键权限准备一个应该通过和一个应该被拦截的请求。",
+            "在根目录和子目录分别调用同名 skill，确认实际加载来源。",
+            "保存 workflow 时检查目标目录是否符合最近 `.claude/workflows/` 规则。",
+            "用真实账号测试 Remote Control 连接失败时的错误提示。"
+          ]
+        },
+        {
+          title: "权限规则示例要先当作测试用例",
+          text: "发布说明里的重点是参数匹配能力。新手可以先把规则字符串写进回归清单，再按自己的 settings 结构落地。",
+          code: "Agent(model:opus)\nAgent(model:*)\nTool(param:value)\nTool(param:*)",
+          language: "text"
+        }
+      ]
+    },
     {
       id: "vercel-drop-static-site-publish-guide",
       title: "Vercel Drop 拖拽发布：新手怎样先上线原型，再迁移到可持续的 Git 部署",
@@ -1951,11 +2108,11 @@ const siteData = {
       date: "2026-05-31",
       category: "开发工具",
       readTime: "10 分钟",
-      excerpt: "Anthropic 在 Claude Code v2.1.157 中加入本地 .claude/skills 插件自动加载，并提供 claude plugin init <name> 脚手架。对新手来说，这是把常用提示、检查清单和团队流程从聊天记录整理成可复用工具的好入口。",
+      excerpt: "Anthropic 在 Claude Code v2.1.157 中加入本地 .claude/skills 插件自动加载，并提供 claude plugin init ＜name＞ 脚手架。对新手来说，这是把常用提示、检查清单和团队流程从聊天记录整理成可复用工具的好入口。",
       tags: ["Claude Code", "Plugins", "Skills"],
       featured: true,
       intro: [
-        "很多人用 AI 编程工具时，会反复粘贴同一段要求：怎么提交、怎么跑检查、怎么写报告、怎么处理安全边界。Claude Code 2026 年 5 月 29 日的 v2.1.157 发布说明把这个习惯往工具化推进了一步：.claude/skills 目录中的插件可以自动加载，不再必须依赖 marketplace；同时新增了 claude plugin init <name> 来脚手架化创建插件。",
+        "很多人用 AI 编程工具时，会反复粘贴同一段要求：怎么提交、怎么跑检查、怎么写报告、怎么处理安全边界。Claude Code 2026 年 5 月 29 日的 v2.1.157 发布说明把这个习惯往工具化推进了一步：.claude/skills 目录中的插件可以自动加载，不再必须依赖 marketplace；同时新增了 claude plugin init ＜name＞ 来脚手架化创建插件。",
         "这对新手很重要，因为它说明 AI 工具的效率提升不只来自更强模型，还来自把稳定流程变成可复用、可版本化、可审查的本地能力。你可以先从一个很小的技能开始，例如“发布前检查静态站”“整理今日热点来源”“提交前列出风险”，再逐步把它变成团队共享的插件。"
       ],
       audience: [
@@ -3615,6 +3772,56 @@ git push origin main`,
     {
       date: "2026-06-15",
       tag: "建站工具",
+      title: "Vercel Functions 的 Node.js 与 Python 运行时可设置最长 30 分钟",
+      summary: "Vercel Functions 现在支持在 Pro 和 Enterprise 团队中把 Node.js、Python 运行时的执行时间设置到 30 分钟，适合长 LLM 推理、几分钟流式响应、文档和媒体处理、OCR、网页抓取、浏览器自动化、Workflow 步骤和 Queue handler。",
+      why: "更长时长能减少 AI 长任务被硬超时截断的情况，但官方明确说明超过 800 秒仍处于 beta，并要求 Fluid Compute。站长应只给必要路径设置 `maxDuration`，同时验证成本、日志、幂等重试和失败提示。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/vercel-functions-can-now-run-up-to-30-minutes",
+      articleIdea: "选题：Vercel 30 分钟 Functions 入门，怎样给 AI 长任务设置超时、队列和验收边界"
+    },
+    {
+      date: "2026-06-15",
+      tag: "开发安全",
+      title: "Claude Code v2.1.178 增加参数级权限规则，并强化嵌套 Skills 与 subagent 检查",
+      summary: "新版增加 `Tool(param:value)` 权限匹配和通配符，支持在嵌套 `.claude/skills` 中加载目录级 skill，并让最近目录的 agent、workflow、output-style 在冲突时优先生效；自动模式下 subagent 启动前也会先经过分类器检查。",
+      why: "这些改动直接影响 monorepo、团队模板、subagent 权限和远程控制排错。升级后不能只看版本号，应回归测试允许/拒绝规则、同名 skill、project-scope workflow 保存位置和后台会话状态。",
+      sourceLabel: "Claude Code GitHub Release",
+      sourceUrl: "https://github.com/anthropics/claude-code/releases/tag/v2.1.178",
+      articleIdea: "选题：Claude Code v2.1.178 升级后怎样回归测试权限、嵌套 Skills、subagent 与远程控制"
+    },
+    {
+      date: "2026-06-15",
+      tag: "AI 管理",
+      title: "Copilot 使用指标引入服务端遥测，活跃用户统计会更接近账单与活动日志",
+      summary: "GitHub Copilot usage metrics API 现在会把服务端确认的活跃用户补进单日和 28 天企业报告，使部分过去因客户端遥测缺失而没有出现在报表里的已活跃、已计费用户被统计进 DAU。",
+      why: "团队可能看到顶层活跃用户数上升，但这些新增用户暂时不会带来 IDE、功能、模型或代码行等细分维度。管理者应把它看成指标口径变化，并重新解释采用率、成本归因和缺失明细。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-15-copilot-usage-metrics-now-include-more-of-your-active-users/",
+      articleIdea: "候选：Copilot 活跃用户统计口径变化后，怎样重读 DAU、明细缺口与成本报表"
+    },
+    {
+      date: "2026-06-15",
+      tag: "Web 开发",
+      title: "Auth0 加入 Vercel Marketplace，可为 Next.js 项目自动配置登录能力",
+      summary: "Vercel Marketplace 新增 Auth0 集成，支持为 Vercel 项目自动创建 Auth0 application，面向 Next.js 应用提供 Auth0 Next.js SDK、用户管理、sessions、roles，并在 Development、Preview、Production 环境之间同步认证配置。",
+      why: "身份系统常常是原型走向生产的第一道门槛。Marketplace 集成可以减少手工复制回调地址和环境变量的错误，但仍要核对环境隔离、角色权限、回调 URL、密钥管理和预览环境登录行为。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/auth0-joins-the-vercel-marketplace",
+      articleIdea: "候选：Next.js 项目第一次接入 Auth0 时，怎样检查环境、回调地址和角色边界"
+    },
+    {
+      date: "2026-06-15",
+      tag: "前端体验",
+      title: "WebKit 提醒 Customizable Select 不能只用图标或色块替代选项文本",
+      summary: "Safari 27 将支持 Customizable Select，开发者可以样式化原生 `＜select＞`，但 WebKit 强调每个 `option` 必须保留文本内容或可访问文本属性；图标、色块和插图只能增强选项，不能替代含义。",
+      why: "只用视觉元素会同时破坏普通用户理解、屏幕阅读器输出和不支持新特性的浏览器回退。前端新手应把文字当作基线，再用 `@supports (appearance: base-select)` 增强样式。",
+      sourceLabel: "WebKit Blog",
+      sourceUrl: "https://webkit.org/blog/18117/the-golden-rule-of-customizable-select/",
+      articleIdea: "候选：Customizable Select 新特性下，怎样同时保留文字、可访问性和渐进增强"
+    },
+    {
+      date: "2026-06-15",
+      tag: "建站工具",
       title: "Vercel 将 Hobby 用户可创建的 Blob store 上限从 5 个提高到 100 个",
       summary: "Vercel Hobby 用户现在最多可以创建 100 个 Blob store，适合按项目、环境或区域拆分对象存储；官方同时提醒，存储容量、操作次数和传输量限制仍然适用。",
       why: "更多 store 能改善原型和多个小站之间的隔离，但不代表免费容量同步扩大。站长仍应记录每个 store 的用途、访问方式和清理责任，并在拆分前检查用量与费用限制。",
@@ -4256,7 +4463,7 @@ git push origin main`,
       date: "2026-05-29",
       tag: "开发工具",
       title: "Claude Code 本地 .claude/skills 插件可自动加载",
-      summary: "Claude Code v2.1.157 的发布说明显示，本地 .claude/skills 中的插件现在可自动加载，新增 claude plugin init <name> 脚手架，并改进 /plugin 自动补全、agents 设置和 worktree 切换体验。",
+      summary: "Claude Code v2.1.157 的发布说明显示，本地 .claude/skills 中的插件现在可自动加载，新增 claude plugin init ＜name＞ 脚手架，并改进 /plugin 自动补全、agents 设置和 worktree 切换体验。",
       why: "这让重复提示、检查清单和团队流程更容易从聊天记录沉淀成可复用工具，适合扩成 Claude Code skills 与 plugins 的新手入门文章。",
       sourceLabel: "Claude Code GitHub Releases",
       sourceUrl: "https://github.com/anthropics/claude-code/releases/tag/v2.1.157",
