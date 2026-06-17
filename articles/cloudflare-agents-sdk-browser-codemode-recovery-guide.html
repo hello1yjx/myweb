@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cloudflare Agents SDK v0.16.1：新手怎样把浏览器自动化、代码执行和恢复机制接进 AI Agent | 学习资源库</title>
+  <meta name="description" content="Cloudflare Agents SDK v0.16.1 在 2026 年 6 月 16 日集中增强 Browser Run、Codemode、Think 子代理和连接恢复能力。新手不应只把它看成“多了几个工具”，而要先规划浏览器会话、审批暂停、执行日志、回放确定性和部署恢复边界。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/cloudflare-agents-sdk-browser-codemode-recovery-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Cloudflare Agents SDK v0.16.1：新手怎样把浏览器自动化、代码执行和恢复机制接进 AI Agent","description":"Cloudflare Agents SDK v0.16.1 在 2026 年 6 月 16 日集中增强 Browser Run、Codemode、Think 子代理和连接恢复能力。新手不应只把它看成“多了几个工具”，而要先规划浏览器会话、审批暂停、执行日志、回放确定性和部署恢复边界。","datePublished":"2026-06-17","dateModified":"2026-06-17","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/cloudflare-agents-sdk-browser-codemode-recovery-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260617-hotspots">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 编程</span>
+      <h1>Cloudflare Agents SDK v0.16.1：新手怎样把浏览器自动化、代码执行和恢复机制接进 AI Agent</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-17">2026年6月17日</time>
+        <span>11 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Cloudflare Agents SDK v0.16.1 在 2026 年 6 月 16 日集中增强 Browser Run、Codemode、Think 子代理和连接恢复能力。新手不应只把它看成“多了几个工具”，而要先规划浏览器会话、审批暂停、执行日志、回放确定性和部署恢复边界。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://developers.cloudflare.com/changelog/post/2026-06-16-agents-sdk-v0161/" target="_blank" rel="noreferrer">Cloudflare Changelog：Agents SDK improves browser automation, code execution, and recovery</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>越来越多 AI Agent 不再只回答文本，而是要打开真实网页、调试前端、读取渲染后的内容、调用外部系统、创建 issue 或修改业务数据。问题在于：浏览器会话会中断，外部动作需要审批，代码执行要能审计，部署或 Durable Object 回收后还要继续恢复。Cloudflare 在 2026 年 6 月 16 日发布 Agents SDK v0.16.1，正是围绕这些“真实系统接入”问题做了一组更新。</p><p>这次更新的重点包括：通过 Browser Run 暴露一个耐久的 `browser_execute` 工具，让模型用 CDP 操作真实浏览器；Codemode 使用 `createCodemodeRuntime`、connectors 和耐久执行日志，把外部工具调用放进可暂停、可审批、可回放的代码执行中；Think 子代理可以通过 `clientTools` 使用调用方提供的工具；同时还修复了 WebSocket 替换、聊天流重放、部署后恢复和大历史启动时的内存压力。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>正在学习 Cloudflare Workers、Durable Objects 或 Agents SDK 的新手开发者</li><li>想让 AI Agent 检查网页、截图、调试前端或处理需要登录页面的建站作者</li><li>需要把 GitHub、内部 API、审批和审计日志接进 Agent 工作流的团队</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>第一步只做只读浏览器任务。给 Agent 绑定 Browser Run 后，先让它读取公开页面、抓取标题、检查控制台或生成截图，不要一开始就处理登录、支付、删除或发布操作。浏览器工具虽然可以执行 CDP 命令，但新手应把 `browser_execute` 用在可复现、低风险的页面检查上，并限制每轮最大步骤。</li><li>第二步再接 Codemode。Codemode 的价值不是让模型随便写脚本，而是把“发现工具、读取类型、调用外部系统、等待审批、继续执行”放在同一个耐久运行时里。连接 GitHub、Stripe 或内部 API 前，先把 connector 的用途、可调用方法、哪些动作需要 `requiresApproval`、哪些动作支持回滚写清楚。</li><li>第三步专门测试暂停和恢复。准备一个会触发审批的动作，让运行先暂停，再批准继续，确认已经完成的读取不会重复执行，批准后的动作才真正落地。涉及时间戳、随机数或外部状态时，用 `codemode.step()` 固定一次性结果，避免回放时分支变化导致执行失败。</li><li>最后再扩大到子代理和生产恢复。Think 子代理可以使用调用方提供的 client tools，但工具边界要和父代理一样可解释；上线前还要模拟部署、Durable Object 休眠、连接断开和大历史恢复，确认用户看到的是可继续的状态，而不是重复执行或静默失败。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://developers.cloudflare.com/changelog/post/2026-06-16-agents-sdk-v0161/" target="_blank" rel="noreferrer">Cloudflare Changelog：Agents SDK improves browser automation, code execution, and recovery</a>
+              <span>：发布说明列出 Browser Run、Codemode、Think delegation、语音输出设备选择和恢复能力改进。</span>
+            </li>
+
+            <li>
+              <a href="https://developers.cloudflare.com/agents/tools/browser/" target="_blank" rel="noreferrer">Cloudflare Agents Docs：Browser tools</a>
+              <span>：用于核对 Browser Run 绑定、`browser_execute`、Quick Actions、Live View、session lifecycle 和记录能力。</span>
+            </li>
+
+            <li>
+              <a href="https://developers.cloudflare.com/agents/model-context-protocol/protocol/codemode/" target="_blank" rel="noreferrer">Cloudflare Agents Docs：Codemode</a>
+              <span>：说明 `createCodemodeRuntime`、connectors、审批暂停、abort-and-replay、snippets 和安全限制。</span>
+            </li>
+
+            <li>
+              <a href="https://developers.cloudflare.com/agents/harnesses/think/tools/" target="_blank" rel="noreferrer">Cloudflare Think Docs：Tools</a>
+              <span>：用于理解 Think 的工具合并顺序、client tools、workspace tools、code execution tool 和 browser tools 接入方式。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>浏览器自动化最适合先从只读检查开始：打开页面、读取 DOM、截图、查看 console 和 network，比直接操作生产后台更适合新手验证。</li><li>Codemode 把大量工具描述从提示词里移到沙箱内按需发现，但这不等于可以省略权限设计；真正需要人确认的动作仍要显式标记审批。</li><li>耐久日志和回放能让暂停后继续执行，但前提是模型写出的代码在工具调用顺序上可确定。随机数、当前时间和并发调用都需要特别处理。</li></ul>
+
+        <h2>第一次接入建议先做小闭环</h2>
+
+        <ul><li>只读取公开测试页面，不接真实账号和敏感后台。</li><li>只开放一个浏览器工具和一个只读 connector，先观察模型会怎样发现和调用能力。</li><li>为所有会写入、发布、创建、删除或扣费的动作加审批。</li><li>每次运行保存输入、执行日志、审批结果、最终输出和人工验收结论。</li><li>确认失败后用户能看到可解释状态，并能重新开始或继续，而不是让 Agent 静默重试。</li></ul>
+
+
+
+        <h2>wrangler 绑定要先核对</h2>
+        <p>Browser Run 和 Codemode 都依赖运行时绑定。下面只是核对方向，实际项目仍要以官方文档和当前 SDK 版本为准。</p>
+
+
+        <pre><code class="language-json">{
+  "compatibility_flags": ["nodejs_compat"],
+  "browser": { "binding": "BROWSER" },
+  "worker_loaders": [
+    { "binding": "LOADER" }
+  ]
+}</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Cloudflare Agents</span><span>Browser Run</span><span>Codemode</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="claude-code-managed-model-allowlist-guide.html">Claude Code v2.1.175 强化模型白名单：新手怎样避免默认模型绕过组织策略</a><a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a><a href="github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a><a href="github-agentic-workflows-public-preview-guide.html">GitHub Agentic Workflows 进入公测：新手怎样用 Markdown 安全自动化 issue、CI 与文档任务</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

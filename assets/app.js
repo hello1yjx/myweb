@@ -9,7 +9,7 @@ const siteData = {
     bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
       { value: "6", label: "原创下载包" },
-      { value: "40", label: "新手专题" },
+      { value: "41", label: "新手专题" },
       { value: "持续", label: "更新与核验" }
     ],
     valueCards: [
@@ -28,6 +28,85 @@ const siteData = {
     ]
   },
   posts: [
+    {
+      id: "cloudflare-agents-sdk-browser-codemode-recovery-guide",
+      title: "Cloudflare Agents SDK v0.16.1：新手怎样把浏览器自动化、代码执行和恢复机制接进 AI Agent",
+      date: "2026-06-17",
+      category: "AI 编程",
+      readTime: "11 分钟",
+      excerpt: "Cloudflare Agents SDK v0.16.1 在 2026 年 6 月 16 日集中增强 Browser Run、Codemode、Think 子代理和连接恢复能力。新手不应只把它看成“多了几个工具”，而要先规划浏览器会话、审批暂停、执行日志、回放确定性和部署恢复边界。",
+      tags: ["Cloudflare Agents", "Browser Run", "Codemode"],
+      featured: true,
+      intro: [
+        "越来越多 AI Agent 不再只回答文本，而是要打开真实网页、调试前端、读取渲染后的内容、调用外部系统、创建 issue 或修改业务数据。问题在于：浏览器会话会中断，外部动作需要审批，代码执行要能审计，部署或 Durable Object 回收后还要继续恢复。Cloudflare 在 2026 年 6 月 16 日发布 Agents SDK v0.16.1，正是围绕这些“真实系统接入”问题做了一组更新。",
+        "这次更新的重点包括：通过 Browser Run 暴露一个耐久的 `browser_execute` 工具，让模型用 CDP 操作真实浏览器；Codemode 使用 `createCodemodeRuntime`、connectors 和耐久执行日志，把外部工具调用放进可暂停、可审批、可回放的代码执行中；Think 子代理可以通过 `clientTools` 使用调用方提供的工具；同时还修复了 WebSocket 替换、聊天流重放、部署后恢复和大历史启动时的内存压力。"
+      ],
+      audience: [
+        "正在学习 Cloudflare Workers、Durable Objects 或 Agents SDK 的新手开发者",
+        "想让 AI Agent 检查网页、截图、调试前端或处理需要登录页面的建站作者",
+        "需要把 GitHub、内部 API、审批和审计日志接进 Agent 工作流的团队"
+      ],
+      format: [
+        "适合整理成“先做只读浏览器检查 / 再接 Codemode / 标出审批动作 / 验证中断恢复 / 最后接入子代理”的实验路线",
+        "后续可以补一份 Agent 外部动作验收表，记录每个工具是否只读、是否需要审批、能否回放、是否有回滚方式"
+      ],
+      roadmap: [
+        "第一步只做只读浏览器任务。给 Agent 绑定 Browser Run 后，先让它读取公开页面、抓取标题、检查控制台或生成截图，不要一开始就处理登录、支付、删除或发布操作。浏览器工具虽然可以执行 CDP 命令，但新手应把 `browser_execute` 用在可复现、低风险的页面检查上，并限制每轮最大步骤。",
+        "第二步再接 Codemode。Codemode 的价值不是让模型随便写脚本，而是把“发现工具、读取类型、调用外部系统、等待审批、继续执行”放在同一个耐久运行时里。连接 GitHub、Stripe 或内部 API 前，先把 connector 的用途、可调用方法、哪些动作需要 `requiresApproval`、哪些动作支持回滚写清楚。",
+        "第三步专门测试暂停和恢复。准备一个会触发审批的动作，让运行先暂停，再批准继续，确认已经完成的读取不会重复执行，批准后的动作才真正落地。涉及时间戳、随机数或外部状态时，用 `codemode.step()` 固定一次性结果，避免回放时分支变化导致执行失败。",
+        "最后再扩大到子代理和生产恢复。Think 子代理可以使用调用方提供的 client tools，但工具边界要和父代理一样可解释；上线前还要模拟部署、Durable Object 休眠、连接断开和大历史恢复，确认用户看到的是可继续的状态，而不是重复执行或静默失败。"
+      ],
+      officialLinks: [
+        {
+          label: "Cloudflare Changelog：Agents SDK improves browser automation, code execution, and recovery",
+          url: "https://developers.cloudflare.com/changelog/post/2026-06-16-agents-sdk-v0161/",
+          note: "发布说明列出 Browser Run、Codemode、Think delegation、语音输出设备选择和恢复能力改进。"
+        },
+        {
+          label: "Cloudflare Agents Docs：Browser tools",
+          url: "https://developers.cloudflare.com/agents/tools/browser/",
+          note: "用于核对 Browser Run 绑定、`browser_execute`、Quick Actions、Live View、session lifecycle 和记录能力。"
+        },
+        {
+          label: "Cloudflare Agents Docs：Codemode",
+          url: "https://developers.cloudflare.com/agents/model-context-protocol/protocol/codemode/",
+          note: "说明 `createCodemodeRuntime`、connectors、审批暂停、abort-and-replay、snippets 和安全限制。"
+        },
+        {
+          label: "Cloudflare Think Docs：Tools",
+          url: "https://developers.cloudflare.com/agents/harnesses/think/tools/",
+          note: "用于理解 Think 的工具合并顺序、client tools、workspace tools、code execution tool 和 browser tools 接入方式。"
+        }
+      ],
+      curatedLinks: [
+        "浏览器自动化最适合先从只读检查开始：打开页面、读取 DOM、截图、查看 console 和 network，比直接操作生产后台更适合新手验证。",
+        "Codemode 把大量工具描述从提示词里移到沙箱内按需发现，但这不等于可以省略权限设计；真正需要人确认的动作仍要显式标记审批。",
+        "耐久日志和回放能让暂停后继续执行，但前提是模型写出的代码在工具调用顺序上可确定。随机数、当前时间和并发调用都需要特别处理。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Cloudflare Agent 浏览器自动化接入前检查清单",
+        "可以补一个 Codemode connector 审批、回放和回滚能力盘点模板"
+      ],
+      monetization: "适合与本站的 AI Agent 安全清单、Cloudflare AI Gateway、Vercel Sandbox、GitHub Copilot 沙箱和前端调试类文章互相推荐。",
+      extraSections: [
+        {
+          title: "第一次接入建议先做小闭环",
+          items: [
+            "只读取公开测试页面，不接真实账号和敏感后台。",
+            "只开放一个浏览器工具和一个只读 connector，先观察模型会怎样发现和调用能力。",
+            "为所有会写入、发布、创建、删除或扣费的动作加审批。",
+            "每次运行保存输入、执行日志、审批结果、最终输出和人工验收结论。",
+            "确认失败后用户能看到可解释状态，并能重新开始或继续，而不是让 Agent 静默重试。"
+          ]
+        },
+        {
+          title: "wrangler 绑定要先核对",
+          text: "Browser Run 和 Codemode 都依赖运行时绑定。下面只是核对方向，实际项目仍要以官方文档和当前 SDK 版本为准。",
+          code: "{\n  \"compatibility_flags\": [\"nodejs_compat\"],\n  \"browser\": { \"binding\": \"BROWSER\" },\n  \"worker_loaders\": [\n    { \"binding\": \"LOADER\" }\n  ]\n}",
+          language: "json"
+        }
+      ]
+    },
     {
       id: "vercel-functions-30-minute-ai-tasks-guide",
       title: "Vercel Functions 可运行 30 分钟：新手怎样给 AI 长任务设置超时、队列和验收边界",
@@ -3769,6 +3848,56 @@ git push origin main`,
     "github-agentic-workflows-public-preview-guide"
   ],
   hotspots: [
+    {
+      date: "2026-06-16",
+      tag: "AI Agent",
+      title: "Cloudflare Agents SDK v0.16.1 强化浏览器自动化、Codemode 与恢复能力",
+      summary: "Cloudflare 发布 Agents SDK v0.16.1，Agent 现在可以通过 Browser Run 使用耐久 `browser_execute` 工具操作真实浏览器，通过 Codemode 用 typed connectors 执行外部系统代码，并在部署、Durable Object 回收和连接波动后更可靠地恢复。",
+      why: "这类能力让 AI Agent 更接近真实生产流程，但也带来审批、回放、浏览器会话和审计边界。新手应先从只读页面检查、审批暂停和恢复验证开始，而不是直接让 Agent 操作生产后台。",
+      sourceLabel: "Cloudflare Changelog",
+      sourceUrl: "https://developers.cloudflare.com/changelog/post/2026-06-16-agents-sdk-v0161/",
+      articleIdea: "已扩写：Cloudflare Agents SDK v0.16.1 新手接入浏览器自动化、Codemode 与恢复机制"
+    },
+    {
+      date: "2026-06-16",
+      tag: "开发环境",
+      title: "Vercel Sandbox 最长运行时间从 5 小时提高到 24 小时",
+      summary: "Vercel Sandbox 现在可运行最长 24 小时的不间断会话，面向大规模数据处理、端到端测试流水线和长时间 agentic workflow；官方建议可与 persistent sandboxes 搭配使用，让扩展运行期间保留状态。",
+      why: "更长沙箱适合 AI 代理跑测试、构建和批处理，但也更需要停止条件、日志、资源上限和状态清理。把超时调长前，应先确认任务是否真的需要 24 小时以及失败后怎样恢复。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/vercel-sandbox-can-now-run-for-up-to-24-hours",
+      articleIdea: "候选：Vercel Sandbox 24 小时会话下，怎样给长测试和 AI 代理任务设置停止条件"
+    },
+    {
+      date: "2026-06-16",
+      tag: "Codex",
+      title: "OpenAI Codex 将桌面控制、Chrome 扩展和记忆能力扩展到 EEA、英国与瑞士",
+      summary: "OpenAI Codex changelog 显示，EEA、英国和瑞士用户开始获得更多 Codex app 能力：macOS 与 Windows Computer Use、Codex Chrome extension、可选 Memories，以及面向 ChatGPT Pro macOS 用户的 Chronicle 研究预览。",
+      why: "这说明本地应用控制、已登录浏览器任务和长期偏好记忆正在覆盖更多地区。团队启用前仍要检查区域默认值、记忆是否开启、浏览器登录上下文和敏感操作审批。",
+      sourceLabel: "OpenAI Codex Changelog",
+      sourceUrl: "https://developers.openai.com/codex/changelog?type=codex-app#month-2026-06",
+      articleIdea: "候选：Codex 区域功能扩展后，怎样检查 Computer Use、Chrome 扩展和记忆默认值"
+    },
+    {
+      date: "2026-06-16",
+      tag: "代码质量",
+      title: "GitHub Code Quality 将在 2026 年 7 月 20 日进入 GA 并改为付费产品",
+      summary: "GitHub 宣布 Code Quality 将在 2026 年 7 月 20 日从 public preview 转为 GA，可购买使用；定价包含每月每活跃提交者 10 美元基础订阅，以及 Copilot code review、AI-assisted detection、Copilot Autofix 等 AI 能力的用量计费。",
+      why: "代码质量门禁、覆盖率规则和 AI 审查会直接影响团队成本与合并流程。管理员应在 7 月 20 日前确认哪些仓库启用、哪些质量阈值会阻止合并，以及是否需要关闭不再使用的仓库配置。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-16-github-code-quality-generally-available-july-20-2026",
+      articleIdea: "候选：GitHub Code Quality GA 前，怎样盘点仓库启用范围、质量门禁和 AI 用量成本"
+    },
+    {
+      date: "2026-06-16",
+      tag: "AI 模型",
+      title: "Vercel AI Gateway 接入 GLM 5.2，模型上下文窗口升级到 100 万 token",
+      summary: "Vercel AI Gateway 新增 `zai/glm-5.2`，官方称它面向长周期工程任务，能在单个任务中保留项目级上下文，并把上下文窗口从 GLM 5.1 的 20 万 token 提高到 100 万 token。",
+      why: "大上下文模型适合长代码库分析和多文件修改，但也更容易放大提示、成本和验证难度。新手应先用小仓库对比输出质量、调用费用、重试行为和是否真的需要 100 万 token。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/glm-5-2-now-available-on-ai-gateway",
+      articleIdea: "候选：GLM 5.2 接入 AI Gateway 后，怎样评估大上下文模型是否适合工程任务"
+    },
     {
       date: "2026-06-15",
       tag: "建站工具",

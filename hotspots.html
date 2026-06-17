@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260616-hotspots">
+  <link rel="stylesheet" href="assets/styles.css?v=20260617-hotspots">
 </head>
 <body>
   <header class="site-header">
@@ -67,6 +67,106 @@
       <div class="hotspot-grid" data-hotspot-list>
         <!-- STATIC_HOTSPOTS_START -->
 <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI Agent</span>
+            <time datetime="2026-06-16">2026年6月16日</time>
+          </div>
+          <h3>Cloudflare Agents SDK v0.16.1 强化浏览器自动化、Codemode 与恢复能力</h3>
+        </div>
+      </div>
+      <p>Cloudflare 发布 Agents SDK v0.16.1，Agent 现在可以通过 Browser Run 使用耐久 `browser_execute` 工具操作真实浏览器，通过 Codemode 用 typed connectors 执行外部系统代码，并在部署、Durable Object 回收和连接波动后更可靠地恢复。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这类能力让 AI Agent 更接近真实生产流程，但也带来审批、回放、浏览器会话和审计边界。新手应先从只读页面检查、审批暂停和恢复验证开始，而不是直接让 Agent 操作生产后台。</p>
+      </div>
+      <p class="hotspot-card__idea">已扩写：Cloudflare Agents SDK v0.16.1 新手接入浏览器自动化、Codemode 与恢复机制</p>
+      <a class="text-link" href="https://developers.cloudflare.com/changelog/post/2026-06-16-agents-sdk-v0161/" target="_blank" rel="noreferrer">查看来源：Cloudflare Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="开发环境 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>开发环境</span>
+            <time datetime="2026-06-16">2026年6月16日</time>
+          </div>
+          <h3>Vercel Sandbox 最长运行时间从 5 小时提高到 24 小时</h3>
+        </div>
+      </div>
+      <p>Vercel Sandbox 现在可运行最长 24 小时的不间断会话，面向大规模数据处理、端到端测试流水线和长时间 agentic workflow；官方建议可与 persistent sandboxes 搭配使用，让扩展运行期间保留状态。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>更长沙箱适合 AI 代理跑测试、构建和批处理，但也更需要停止条件、日志、资源上限和状态清理。把超时调长前，应先确认任务是否真的需要 24 小时以及失败后怎样恢复。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：Vercel Sandbox 24 小时会话下，怎样给长测试和 AI 代理任务设置停止条件</p>
+      <a class="text-link" href="https://vercel.com/changelog/vercel-sandbox-can-now-run-for-up-to-24-hours" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Codex 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>Codex</span>
+            <time datetime="2026-06-16">2026年6月16日</time>
+          </div>
+          <h3>OpenAI Codex 将桌面控制、Chrome 扩展和记忆能力扩展到 EEA、英国与瑞士</h3>
+        </div>
+      </div>
+      <p>OpenAI Codex changelog 显示，EEA、英国和瑞士用户开始获得更多 Codex app 能力：macOS 与 Windows Computer Use、Codex Chrome extension、可选 Memories，以及面向 ChatGPT Pro macOS 用户的 Chronicle 研究预览。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这说明本地应用控制、已登录浏览器任务和长期偏好记忆正在覆盖更多地区。团队启用前仍要检查区域默认值、记忆是否开启、浏览器登录上下文和敏感操作审批。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：Codex 区域功能扩展后，怎样检查 Computer Use、Chrome 扩展和记忆默认值</p>
+      <a class="text-link" href="https://developers.openai.com/codex/changelog?type=codex-app#month-2026-06" target="_blank" rel="noreferrer">查看来源：OpenAI Codex Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="代码质量 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>代码质量</span>
+            <time datetime="2026-06-16">2026年6月16日</time>
+          </div>
+          <h3>GitHub Code Quality 将在 2026 年 7 月 20 日进入 GA 并改为付费产品</h3>
+        </div>
+      </div>
+      <p>GitHub 宣布 Code Quality 将在 2026 年 7 月 20 日从 public preview 转为 GA，可购买使用；定价包含每月每活跃提交者 10 美元基础订阅，以及 Copilot code review、AI-assisted detection、Copilot Autofix 等 AI 能力的用量计费。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>代码质量门禁、覆盖率规则和 AI 审查会直接影响团队成本与合并流程。管理员应在 7 月 20 日前确认哪些仓库启用、哪些质量阈值会阻止合并，以及是否需要关闭不再使用的仓库配置。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：GitHub Code Quality GA 前，怎样盘点仓库启用范围、质量门禁和 AI 用量成本</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-06-16-github-code-quality-generally-available-july-20-2026" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 模型 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 模型</span>
+            <time datetime="2026-06-16">2026年6月16日</time>
+          </div>
+          <h3>Vercel AI Gateway 接入 GLM 5.2，模型上下文窗口升级到 100 万 token</h3>
+        </div>
+      </div>
+      <p>Vercel AI Gateway 新增 `zai/glm-5.2`，官方称它面向长周期工程任务，能在单个任务中保留项目级上下文，并把上下文窗口从 GLM 5.1 的 20 万 token 提高到 100 万 token。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>大上下文模型适合长代码库分析和多文件修改，但也更容易放大提示、成本和验证难度。新手应先用小仓库对比输出质量、调用费用、重试行为和是否真的需要 100 万 token。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：GLM 5.2 接入 AI Gateway 后，怎样评估大上下文模型是否适合工程任务</p>
+      <a class="text-link" href="https://vercel.com/changelog/glm-5-2-now-available-on-ai-gateway" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
         <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="建站工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
         <div>
@@ -1884,6 +1984,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260616-hotspots"></script>
+  <script src="assets/app.js?v=20260617-hotspots"></script>
 </body>
 </html>
