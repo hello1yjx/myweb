@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cloudflare Flue 与 Agents SDK：新手怎样理解 Agent 的框架、harness 和可恢复运行时 | 学习资源库</title>
+  <meta name="description" content="Cloudflare 在 2026 年 6 月 17 日介绍 Flue 如何构建在 Agents SDK 之上，并把 durable execution、sandboxed code execution、durable filesystem 和 dynamic workflows 作为 agent 平台底座开放给更多 harness 与框架。新手应该先分清框架、harness 和运行时，再做恢复、审批和沙箱测试。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/cloudflare-flue-agents-sdk-production-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Cloudflare Flue 与 Agents SDK：新手怎样理解 Agent 的框架、harness 和可恢复运行时","description":"Cloudflare 在 2026 年 6 月 17 日介绍 Flue 如何构建在 Agents SDK 之上，并把 durable execution、sandboxed code execution、durable filesystem 和 dynamic workflows 作为 agent 平台底座开放给更多 harness 与框架。新手应该先分清框架、harness 和运行时，再做恢复、审批和沙箱测试。","datePublished":"2026-06-17","dateModified":"2026-06-17","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/cloudflare-flue-agents-sdk-production-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260618-hotspots">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 编程</span>
+      <h1>Cloudflare Flue 与 Agents SDK：新手怎样理解 Agent 的框架、harness 和可恢复运行时</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-17">2026年6月17日</time>
+        <span>11 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Cloudflare 在 2026 年 6 月 17 日介绍 Flue 如何构建在 Agents SDK 之上，并把 durable execution、sandboxed code execution、durable filesystem 和 dynamic workflows 作为 agent 平台底座开放给更多 harness 与框架。新手应该先分清框架、harness 和运行时，再做恢复、审批和沙箱测试。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://blog.cloudflare.com/agents-platform-flue-sdk/" target="_blank" rel="noreferrer">Cloudflare Blog：Bringing more agent harnesses and frameworks to Cloudflare, starting with Flue</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>AI Agent 走向生产之后，问题不再只是“模型会不会写代码”。真正麻烦的是一次任务可能会持续几分钟甚至更久，中间要流式输出、调用工具、等待审批、运行代码、写入工作区、连接 Slack 或 GitHub，还可能遇到部署、进程重启、API 超时和连接断开。Cloudflare 在 2026 年 6 月 17 日的文章里，把这类问题拆成三层：框架负责项目结构和开发体验，harness 负责 agent loop，运行时平台负责状态、存储、计算和恢复。</p><p>Flue 是这次文章里的第一个框架示例。它来自 Astro 团队，主张用声明式方式描述 agent 需要的模型、skills、sandbox 和说明，而不是让开发者手写完整编排循环。Cloudflare Agents SDK 则提供底层运行时能力：Durable Object 身份、本地状态、fibers 可恢复执行、沙箱代码执行、Browser、MCP、AI Gateway、Containers 等。对新手来说，最重要的是不要把这些词混在一起，而是逐层验证：任务能不能恢复，工具能不能限权，代码能不能被沙箱隔离，用户能不能看到明确状态。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>正在从本地 coding agent、脚本机器人或聊天机器人升级到长期运行 AI Agent 的开发者</li><li>想理解 Flue、Cloudflare Agents SDK、Project Think、MCP、沙箱和 Durable Objects 分工的新手</li><li>需要给 Slack、GitHub、Linear、Discord 或内部系统接入 Agent，但担心中断恢复、审批和日志的团队</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先分清三层。框架层决定项目结构、CLI、channel 和开发体验；harness 层决定模型怎样规划、调用工具、读结果、管理上下文；运行时层决定状态放在哪里、进程中断后怎样恢复、代码在哪里执行、工具凭据怎样隔离。排查问题时也按这三层定位，不要一开始就怀疑模型。</li><li>用一个低风险任务试 Flue 或 Agents SDK。比如让 agent 读取公开 issue、总结 README、生成一个不写入生产系统的建议。先不要接账单、DNS、数据库写入和自动部署。等你能看清输入、工具调用、日志、输出和人工确认后，再逐步扩大任务。</li><li>专门测试中断恢复。Cloudflare 的 fibers 文档说明 `runFiber()` 会登记任务，`stash()` 可保存中间状态，`onFiberRecovered()` 可在下一次激活时处理恢复。新手应模拟部署、重启或 Durable Object 回收，确认用户不会只看到永远转圈，也不会重复执行已经完成的写入动作。</li><li>把沙箱和权限写进验收。LLM 生成代码时，应该只能访问你明确提供的 binding、文件和网络能力。涉及 GitHub、Slack、Linear、Cloudflare API 或内部接口时，先给只读 token 或测试环境 token；所有写入动作都要能被审批、日志记录和回滚。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://blog.cloudflare.com/agents-platform-flue-sdk/" target="_blank" rel="noreferrer">Cloudflare Blog：Bringing more agent harnesses and frameworks to Cloudflare, starting with Flue</a>
+              <span>：介绍 Flue 与 Agents SDK 的分层关系，以及 durable execution、code execution、filesystem 和 workflows 等平台能力。</span>
+            </li>
+
+            <li>
+              <a href="https://flueframework.com/blog/flue-1-0-beta/" target="_blank" rel="noreferrer">Flue Blog：Flue 1.0 Beta</a>
+              <span>：说明 Flue 1.0 Beta 的 agents、workflows、sandboxes、channels、observability 和数据库适配器等更新。</span>
+            </li>
+
+            <li>
+              <a href="https://flueframework.com/docs/getting-started/quickstart/" target="_blank" rel="noreferrer">Flue Docs：Getting Started</a>
+              <span>：用于核对 Flue 的基础定位、快速开始和可部署目标。</span>
+            </li>
+
+            <li>
+              <a href="https://developers.cloudflare.com/agents/" target="_blank" rel="noreferrer">Cloudflare Agents Docs：Build Agents on Cloudflare</a>
+              <span>：说明 Agents SDK 的 runtime、channels、harness、tools、state、routing、WebSockets、scheduling 和 recovery。</span>
+            </li>
+
+            <li>
+              <a href="https://developers.cloudflare.com/agents/runtime/execution/durable-execution/" target="_blank" rel="noreferrer">Cloudflare Agents Docs：Durable execution with fibers</a>
+              <span>：用于核对 `runFiber()`、`stash()` 和 `onFiberRecovered()` 的可恢复执行语义。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>Agent 生产化的第一道门槛不是模型分数，而是失败后用户能不能知道发生了什么，以及系统能不能从上一次安全位置继续。</li><li>框架让开发体验变简单，但不会自动替你设计权限边界。每一个 channel、connector、sandbox binding 和外部 API token 都要有用途说明和审计记录。</li><li>可恢复执行必须和幂等设计一起考虑。恢复后继续执行不应该重复扣费、重复发消息、重复创建 issue 或重复写入数据库。</li></ul>
+
+        <h2>最小验收顺序</h2>
+
+        <ul><li>先跑本地或测试环境，只接一个只读 channel 和一个只读工具。</li><li>记录每次 prompt、工具调用、模型选择、审批结果和最终输出。</li><li>模拟进程重启或部署中断，确认恢复后不会重复执行已完成动作。</li><li>只把低风险任务接进真实 channel，再逐步添加写入能力。</li><li>上线前设置成本上限、错误告警、人工接管方式和禁用开关。</li></ul>
+
+
+
+        <h2>分层排查提示</h2>
+        <p>当 Agent 行为异常时，先判断问题属于哪一层。这样比笼统地说“模型不稳定”更容易复现和修复。</p>
+
+
+        <pre><code class="language-text">框架层：项目结构、channel、CLI、配置是否正确
+harness 层：计划、工具选择、上下文管理、审批流程是否正确
+运行时层：状态、恢复、沙箱、凭据、网络和日志是否正确
+业务层：任务本身是否幂等，失败后是否能回滚</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Cloudflare Agents</span><span>Flue</span><span>Durable Objects</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-drop-static-site-publish-guide.html">Vercel Drop 拖拽发布：新手怎样先上线原型，再迁移到可持续的 Git 部署</a><a href="qwen-code-018-stable-agent-workflow-guide.html">Qwen Code v0.18.0 稳定版：新手怎样组合 Skills、记忆、计划审批与后台任务</a><a href="claude-code-managed-model-allowlist-guide.html">Claude Code v2.1.175 强化模型白名单：新手怎样避免默认模型绕过组织策略</a><a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -68,6 +68,106 @@
         <!-- STATIC_HOTSPOTS_START -->
 <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI Agent</span>
+            <time datetime="2026-06-17">2026年6月17日</time>
+          </div>
+          <h3>GitHub Copilot agent finder 上线，开始按任务发现 MCP、skills 与 agents</h3>
+        </div>
+      </div>
+      <p>GitHub 发布 Copilot agent finder：开发者用自然语言描述任务后，Copilot 会在指定 registry 中搜索 AI resources，返回排序后的候选，并按需拉取相关 MCP servers、skills、agents、canvases 或 tools；官方说明它实现了开放的 ARD 规范。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这能减少“把所有工具都预加载进上下文”的做法，但也把资源来源、registry 信任、权限审批和安装记录变成新的基础工作。新手应先用只读任务验证候选，再决定是否长期保留。</p>
+      </div>
+      <p class="hotspot-card__idea">已扩写：GitHub Copilot agent finder 与 ARD 新手接入流程</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-06-17-agent-finder-for-github-copilot-now-available/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI Agent</span>
+            <time datetime="2026-06-17">2026年6月17日</time>
+          </div>
+          <h3>Cloudflare 介绍 Flue 如何把 Agent framework 接到 Agents SDK 运行时</h3>
+        </div>
+      </div>
+      <p>Cloudflare 介绍 Flue 作为首个构建在 Agents SDK primitives 之上的开放框架，强调 framework、harness、runtime 三层分工，并把 durable execution、dynamic code execution、durable filesystem 和 dynamic workflows 作为生产 Agent 的底座能力。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>Agent 从本地演示走向生产时，最容易出问题的是中断恢复、沙箱执行、状态持久化和工具凭据隔离。把这些能力放到运行时层，可以让新手先测试恢复和审批，再扩展到 Slack、GitHub、Linear 等 channel。</p>
+      </div>
+      <p class="hotspot-card__idea">已扩写：Cloudflare Flue 与 Agents SDK 分层、恢复和沙箱验收路线</p>
+      <a class="text-link" href="https://blog.cloudflare.com/agents-platform-flue-sdk/" target="_blank" rel="noreferrer">查看来源：Cloudflare Blog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 编程</span>
+            <time datetime="2026-06-17">2026年6月17日</time>
+          </div>
+          <h3>GitHub Copilot app 正式 GA，桌面端成为 agent-driven development 入口</h3>
+        </div>
+      </div>
+      <p>GitHub 宣布 Copilot app 已在 macOS、Windows 和 Linux 上正式可用，定位为原生 GitHub 的 agent-driven development 桌面入口，可从应用中启动 Copilot 会话并围绕仓库与 pull request 工作。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>桌面 Agent 工具会把本地文件、GitHub 登录状态、PR 审查和长任务会话放到同一个入口。团队启用前应检查账户范围、仓库权限、会话日志、可回滚提交和是否需要独立测试仓库。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：GitHub Copilot app GA 后，怎样用测试仓库验证桌面 Agent 工作流</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-06-17-github-copilot-app-generally-available/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>开发工具</span>
+            <time datetime="2026-06-17">2026年6月17日</time>
+          </div>
+          <h3>GitHub CLI 新增 gh repo read-file 与 read-dir，可不克隆读取远程仓库内容</h3>
+        </div>
+      </div>
+      <p>GitHub CLI 增加 `gh repo read-file` 和 `gh repo read-dir`，开发者可以直接从终端读取有权限访问的公开或私有仓库文件与目录；官方示例场景包括快速查看 README、检查配置、自动化脚本和 AI agent workflow。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这对排查、脚本和 Agent 很实用：很多任务只需要读远程配置，不需要完整 clone。新手应先确认 gh 版本、仓库权限和输出记录，避免把只读检查误升级成写入或部署流程。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：怎样用 gh repo read-file / read-dir 做远程仓库只读检查和 Agent 上下文补充</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-06-17-read-remote-repository-content-with-github-cli/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 编程</span>
+            <time datetime="2026-06-17">2026年6月17日</time>
+          </div>
+          <h3>Qwen Code v0.18.3 发布，继续修复 CLI 提示、计划模式和提问取消流程</h3>
+        </div>
+      </div>
+      <p>QwenLM/qwen-code 在 6 月 17 日连续发布 v0.18.2 与 v0.18.3，最新版本包含取消 ask_user_question 后停止、slash suggestion 描述单行截断、release PR 检查、以及 plan mode 中 `exit_plan_mode` 声明等修复。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这类小版本不适合写成大文章，但对日常 Agent CLI 稳定性很关键。使用 Qwen Code 的读者应关注升级后的计划模式、提问取消、提示渲染和团队自动化发布检查是否符合预期。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：Qwen Code 小版本升级后，怎样回归测试 CLI 交互、计划模式和 release 检查</p>
+      <a class="text-link" href="https://github.com/QwenLM/qwen-code/releases/tag/v0.18.3" target="_blank" rel="noreferrer">查看来源：Qwen Code GitHub Releases</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
         <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
         <div>
           <div class="hotspot-card__meta">

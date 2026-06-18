@@ -9,7 +9,7 @@ const siteData = {
     bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
       { value: "6", label: "原创下载包" },
-      { value: "41", label: "新手专题" },
+      { value: "43", label: "新手专题" },
       { value: "持续", label: "更新与核验" }
     ],
     valueCards: [
@@ -28,6 +28,169 @@ const siteData = {
     ]
   },
   posts: [
+    {
+      id: "github-copilot-agent-finder-ard-guide",
+      title: "GitHub Copilot agent finder 与 ARD：新手怎样给 AI Agent 选择可信工具、Skills 和 MCP 资源",
+      date: "2026-06-17",
+      category: "AI 编程",
+      readTime: "10 分钟",
+      excerpt: "GitHub 在 2026 年 6 月 17 日推出 Copilot agent finder，Google 同日公布 Agentic Resource Discovery（ARD）开放规范。它们共同指向一个变化：AI Agent 不应该把所有 MCP server、skills、agents 和工具一次性塞进上下文，而应该按任务发现、核验、安装和记录能力。",
+      tags: ["GitHub Copilot", "ARD", "MCP"],
+      featured: true,
+      intro: [
+        "很多人第一次给 AI 编程助手加能力时，会直接把一长串 MCP server、插件、skills 和内部工具都接上去。短期看起来省事，长期会让上下文变重、权限边界变模糊，也更难判断某个回答到底用了哪个能力。GitHub 在 2026 年 6 月 17 日发布 Copilot agent finder，核心思路是让你用自然语言描述任务，由 finder 在指定 registry 中搜索可用 AI 资源，返回排序后的候选，再按需拉取给 Copilot 使用。",
+        "同一天，Google Developers Blog 公布 Agentic Resource Discovery（ARD）规范，目标是给工具、skills、MCP servers、agents 和其他可调用服务提供一种跨组织、跨框架的发布、发现和验证方式。对新手来说，重点不是马上追每个规范字段，而是把“发现能力”当成一个需要审计的流程：先说明任务，确认来源，限制权限，做只读试跑，再把最终采用的资源和原因写下来。"
+      ],
+      audience: [
+        "已经在 GitHub Copilot、Claude Code、Codex、Qwen Code 或其他 Agent 工具里接入 MCP、skills、插件的开发者",
+        "想给团队维护一组内部工具、模板、skills 或 agent registry，但担心上下文膨胀和权限失控的站长与管理员",
+        "刚开始学习 AI Agent 生态，希望分清工具发现、安装、授权、验证和下线步骤的新手"
+      ],
+      format: [
+        "适合整理成“描述任务 / 搜索候选 / 核验来源 / 最小授权 / 只读验收 / 记录决策”的接入流程",
+        "后续可以补一份 Agent 资源评估表，记录资源名称、发布方、registry、权限、适用任务、测试结果和移除条件"
+      ],
+      roadmap: [
+        "第一步先把任务写窄。不要从“帮我接入所有开发工具”开始，而是写成“读取这个仓库的 README 并找出部署命令”“检查最近一个失败的 CI job”“从内部文档中查 API 限制”。任务越窄，agent finder 或 ARD registry 返回的候选越容易判断，也越不容易装进无关工具。",
+        "第二步核验候选来源。看 resource 是否来自你信任的组织、仓库或域名，是否有清晰的维护者、版本、文档、权限说明和问题反馈入口。ARD 的价值在于让资源可以被描述和发现，但发现不等于可信；真正接入前仍要看发布方、签名或域名绑定、开源仓库历史和最小权限边界。",
+        "第三步只安装当前任务需要的一小组能力。让 Copilot 或其他 Agent 先使用一个候选完成只读任务，例如读取公开文件、列目录、查询文档或生成建议。不要在第一次试用时就授权写入仓库、创建部署、修改 DNS、发邮件或访问生产数据。",
+        "第四步把结果写进团队记录。记录这次任务用了哪个 registry、选择了哪个资源、拒绝了哪些候选、开放了哪些权限、试跑输出是否可复现、什么时候需要升级或移除。以后再遇到类似任务，团队就不用重复猜测，也能解释为什么某个工具值得保留。"
+      ],
+      officialLinks: [
+        {
+          label: "GitHub Changelog：Agent finder for GitHub Copilot now available",
+          url: "https://github.blog/changelog/2026-06-17-agent-finder-for-github-copilot-now-available/",
+          note: "说明 Copilot agent finder 可按自然语言任务搜索 registry，并按需加载排序后的 AI resources。"
+        },
+        {
+          label: "Google Developers Blog：Announcing the Agentic Resource Discovery specification",
+          url: "https://developers.googleblog.com/announcing-the-agentic-resource-discovery-specification/",
+          note: "解释 ARD 解决“能力在哪里、该用哪个、怎样验证安全连接”的跨组织发现问题。"
+        },
+        {
+          label: "ARD Specification GitHub Repository",
+          url: "https://github.com/ards-project/ard-spec",
+          note: "规范仓库包含 specification、schema、URN 命名指南和 conformance 工具，适合跟踪草案演进。"
+        },
+        {
+          label: "Microsoft Command Line Blog：Agentic Resource Discovery specification",
+          url: "https://commandline.microsoft.com/agentic-resource-discovery-specification-ard/",
+          note: "微软侧说明 ARD 在 AI client 自动发现能力时的安全公共层定位。"
+        }
+      ],
+      curatedLinks: [
+        "把 agent finder 理解成“候选发现器”，不要把它当成“自动批准器”。排序靠前只说明它可能相关，不说明它一定适合你的仓库、权限模型和合规要求。",
+        "registry 应该有退出机制。每个接入的工具都要能被禁用、降级或替换，尤其是会写入代码、发起部署、访问账单、读取私有数据的能力。",
+        "团队内部资源最好给人和 Agent 都能读懂的说明：用途、示例任务、权限、失败模式、维护人、更新节奏。只写给模型看的描述很容易在人工排查时变成黑箱。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Agent 资源接入前检查表，覆盖来源、权限、试跑、日志和移除条件",
+        "可以补一个 MCP / Skill / Agent registry 评估模板，帮助团队记录为什么采用或拒绝某个资源"
+      ],
+      monetization: "适合与本站的 GitHub Copilot、Claude Code、Codex、Qwen Code、MCP 与 Agent 安全清单类内容互相串联，帮助读者建立稳定的工具接入方法。",
+      extraSections: [
+        {
+          title: "第一次接入前的检查清单",
+          items: [
+            "确认任务是否真的需要外部资源，普通仓库搜索或命令行能解决的事不要额外授权。",
+            "确认资源发布方、仓库、域名和文档是否匹配，避免从转载页面或不明镜像安装。",
+            "先做只读任务，再逐步打开写入、部署、账单、邮件、工单等高风险能力。",
+            "保留一次完整试跑记录：输入、候选、选择理由、输出、人工验收结论。",
+            "给资源设置移除条件，例如连续失效、权限过宽、维护停止、输出不可解释或替代方案更稳定。"
+          ]
+        },
+        {
+          title: "团队记录模板",
+          text: "下面不是规范字段，只是适合新手落地的最小记录。把它放进仓库文档或团队知识库，可以减少以后重复接入和重复排查。",
+          code: "资源名称：\n来源 / registry：\n发布方与维护入口：\n适用任务：\n开放权限：\n首次只读试跑结果：\n人工验收人：\n升级或移除条件：",
+          language: "text"
+        }
+      ]
+    },
+    {
+      id: "cloudflare-flue-agents-sdk-production-guide",
+      title: "Cloudflare Flue 与 Agents SDK：新手怎样理解 Agent 的框架、harness 和可恢复运行时",
+      date: "2026-06-17",
+      category: "AI 编程",
+      readTime: "11 分钟",
+      excerpt: "Cloudflare 在 2026 年 6 月 17 日介绍 Flue 如何构建在 Agents SDK 之上，并把 durable execution、sandboxed code execution、durable filesystem 和 dynamic workflows 作为 agent 平台底座开放给更多 harness 与框架。新手应该先分清框架、harness 和运行时，再做恢复、审批和沙箱测试。",
+      tags: ["Cloudflare Agents", "Flue", "Durable Objects"],
+      featured: true,
+      intro: [
+        "AI Agent 走向生产之后，问题不再只是“模型会不会写代码”。真正麻烦的是一次任务可能会持续几分钟甚至更久，中间要流式输出、调用工具、等待审批、运行代码、写入工作区、连接 Slack 或 GitHub，还可能遇到部署、进程重启、API 超时和连接断开。Cloudflare 在 2026 年 6 月 17 日的文章里，把这类问题拆成三层：框架负责项目结构和开发体验，harness 负责 agent loop，运行时平台负责状态、存储、计算和恢复。",
+        "Flue 是这次文章里的第一个框架示例。它来自 Astro 团队，主张用声明式方式描述 agent 需要的模型、skills、sandbox 和说明，而不是让开发者手写完整编排循环。Cloudflare Agents SDK 则提供底层运行时能力：Durable Object 身份、本地状态、fibers 可恢复执行、沙箱代码执行、Browser、MCP、AI Gateway、Containers 等。对新手来说，最重要的是不要把这些词混在一起，而是逐层验证：任务能不能恢复，工具能不能限权，代码能不能被沙箱隔离，用户能不能看到明确状态。"
+      ],
+      audience: [
+        "正在从本地 coding agent、脚本机器人或聊天机器人升级到长期运行 AI Agent 的开发者",
+        "想理解 Flue、Cloudflare Agents SDK、Project Think、MCP、沙箱和 Durable Objects 分工的新手",
+        "需要给 Slack、GitHub、Linear、Discord 或内部系统接入 Agent，但担心中断恢复、审批和日志的团队"
+      ],
+      format: [
+        "适合整理成“先分层 / 再做最小 agent / 加只读工具 / 测试中断恢复 / 最后接入生产 channel”的学习路线",
+        "后续可以补一份生产 Agent 验收表，专门检查 fibers、日志、沙箱、权限、成本和用户可见状态"
+      ],
+      roadmap: [
+        "先分清三层。框架层决定项目结构、CLI、channel 和开发体验；harness 层决定模型怎样规划、调用工具、读结果、管理上下文；运行时层决定状态放在哪里、进程中断后怎样恢复、代码在哪里执行、工具凭据怎样隔离。排查问题时也按这三层定位，不要一开始就怀疑模型。",
+        "用一个低风险任务试 Flue 或 Agents SDK。比如让 agent 读取公开 issue、总结 README、生成一个不写入生产系统的建议。先不要接账单、DNS、数据库写入和自动部署。等你能看清输入、工具调用、日志、输出和人工确认后，再逐步扩大任务。",
+        "专门测试中断恢复。Cloudflare 的 fibers 文档说明 `runFiber()` 会登记任务，`stash()` 可保存中间状态，`onFiberRecovered()` 可在下一次激活时处理恢复。新手应模拟部署、重启或 Durable Object 回收，确认用户不会只看到永远转圈，也不会重复执行已经完成的写入动作。",
+        "把沙箱和权限写进验收。LLM 生成代码时，应该只能访问你明确提供的 binding、文件和网络能力。涉及 GitHub、Slack、Linear、Cloudflare API 或内部接口时，先给只读 token 或测试环境 token；所有写入动作都要能被审批、日志记录和回滚。"
+      ],
+      officialLinks: [
+        {
+          label: "Cloudflare Blog：Bringing more agent harnesses and frameworks to Cloudflare, starting with Flue",
+          url: "https://blog.cloudflare.com/agents-platform-flue-sdk/",
+          note: "介绍 Flue 与 Agents SDK 的分层关系，以及 durable execution、code execution、filesystem 和 workflows 等平台能力。"
+        },
+        {
+          label: "Flue Blog：Flue 1.0 Beta",
+          url: "https://flueframework.com/blog/flue-1-0-beta/",
+          note: "说明 Flue 1.0 Beta 的 agents、workflows、sandboxes、channels、observability 和数据库适配器等更新。"
+        },
+        {
+          label: "Flue Docs：Getting Started",
+          url: "https://flueframework.com/docs/getting-started/quickstart/",
+          note: "用于核对 Flue 的基础定位、快速开始和可部署目标。"
+        },
+        {
+          label: "Cloudflare Agents Docs：Build Agents on Cloudflare",
+          url: "https://developers.cloudflare.com/agents/",
+          note: "说明 Agents SDK 的 runtime、channels、harness、tools、state、routing、WebSockets、scheduling 和 recovery。"
+        },
+        {
+          label: "Cloudflare Agents Docs：Durable execution with fibers",
+          url: "https://developers.cloudflare.com/agents/runtime/execution/durable-execution/",
+          note: "用于核对 `runFiber()`、`stash()` 和 `onFiberRecovered()` 的可恢复执行语义。"
+        }
+      ],
+      curatedLinks: [
+        "Agent 生产化的第一道门槛不是模型分数，而是失败后用户能不能知道发生了什么，以及系统能不能从上一次安全位置继续。",
+        "框架让开发体验变简单，但不会自动替你设计权限边界。每一个 channel、connector、sandbox binding 和外部 API token 都要有用途说明和审计记录。",
+        "可恢复执行必须和幂等设计一起考虑。恢复后继续执行不应该重复扣费、重复发消息、重复创建 issue 或重复写入数据库。"
+      ],
+      downloadIdeas: [
+        "可以整理一份生产 Agent 最小验收清单，覆盖恢复、幂等、沙箱、审批、日志和成本",
+        "可以补一个框架 / harness / runtime 分层对照表，帮助新手排查 Agent 问题"
+      ],
+      monetization: "适合与本站的 Cloudflare Agents SDK、Browser Run、Codemode、Vercel Sandbox、AI Gateway 和 Agent 安全类文章互相推荐，形成生产 Agent 学习路线。",
+      extraSections: [
+        {
+          title: "最小验收顺序",
+          items: [
+            "先跑本地或测试环境，只接一个只读 channel 和一个只读工具。",
+            "记录每次 prompt、工具调用、模型选择、审批结果和最终输出。",
+            "模拟进程重启或部署中断，确认恢复后不会重复执行已完成动作。",
+            "只把低风险任务接进真实 channel，再逐步添加写入能力。",
+            "上线前设置成本上限、错误告警、人工接管方式和禁用开关。"
+          ]
+        },
+        {
+          title: "分层排查提示",
+          text: "当 Agent 行为异常时，先判断问题属于哪一层。这样比笼统地说“模型不稳定”更容易复现和修复。",
+          code: "框架层：项目结构、channel、CLI、配置是否正确\nharness 层：计划、工具选择、上下文管理、审批流程是否正确\n运行时层：状态、恢复、沙箱、凭据、网络和日志是否正确\n业务层：任务本身是否幂等，失败后是否能回滚",
+          language: "text"
+        }
+      ]
+    },
     {
       id: "cloudflare-agents-sdk-browser-codemode-recovery-guide",
       title: "Cloudflare Agents SDK v0.16.1：新手怎样把浏览器自动化、代码执行和恢复机制接进 AI Agent",
@@ -3848,6 +4011,56 @@ git push origin main`,
     "github-agentic-workflows-public-preview-guide"
   ],
   hotspots: [
+    {
+      date: "2026-06-17",
+      tag: "AI Agent",
+      title: "GitHub Copilot agent finder 上线，开始按任务发现 MCP、skills 与 agents",
+      summary: "GitHub 发布 Copilot agent finder：开发者用自然语言描述任务后，Copilot 会在指定 registry 中搜索 AI resources，返回排序后的候选，并按需拉取相关 MCP servers、skills、agents、canvases 或 tools；官方说明它实现了开放的 ARD 规范。",
+      why: "这能减少“把所有工具都预加载进上下文”的做法，但也把资源来源、registry 信任、权限审批和安装记录变成新的基础工作。新手应先用只读任务验证候选，再决定是否长期保留。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-17-agent-finder-for-github-copilot-now-available/",
+      articleIdea: "已扩写：GitHub Copilot agent finder 与 ARD 新手接入流程"
+    },
+    {
+      date: "2026-06-17",
+      tag: "AI Agent",
+      title: "Cloudflare 介绍 Flue 如何把 Agent framework 接到 Agents SDK 运行时",
+      summary: "Cloudflare 介绍 Flue 作为首个构建在 Agents SDK primitives 之上的开放框架，强调 framework、harness、runtime 三层分工，并把 durable execution、dynamic code execution、durable filesystem 和 dynamic workflows 作为生产 Agent 的底座能力。",
+      why: "Agent 从本地演示走向生产时，最容易出问题的是中断恢复、沙箱执行、状态持久化和工具凭据隔离。把这些能力放到运行时层，可以让新手先测试恢复和审批，再扩展到 Slack、GitHub、Linear 等 channel。",
+      sourceLabel: "Cloudflare Blog",
+      sourceUrl: "https://blog.cloudflare.com/agents-platform-flue-sdk/",
+      articleIdea: "已扩写：Cloudflare Flue 与 Agents SDK 分层、恢复和沙箱验收路线"
+    },
+    {
+      date: "2026-06-17",
+      tag: "AI 编程",
+      title: "GitHub Copilot app 正式 GA，桌面端成为 agent-driven development 入口",
+      summary: "GitHub 宣布 Copilot app 已在 macOS、Windows 和 Linux 上正式可用，定位为原生 GitHub 的 agent-driven development 桌面入口，可从应用中启动 Copilot 会话并围绕仓库与 pull request 工作。",
+      why: "桌面 Agent 工具会把本地文件、GitHub 登录状态、PR 审查和长任务会话放到同一个入口。团队启用前应检查账户范围、仓库权限、会话日志、可回滚提交和是否需要独立测试仓库。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-17-github-copilot-app-generally-available/",
+      articleIdea: "候选：GitHub Copilot app GA 后，怎样用测试仓库验证桌面 Agent 工作流"
+    },
+    {
+      date: "2026-06-17",
+      tag: "开发工具",
+      title: "GitHub CLI 新增 gh repo read-file 与 read-dir，可不克隆读取远程仓库内容",
+      summary: "GitHub CLI 增加 `gh repo read-file` 和 `gh repo read-dir`，开发者可以直接从终端读取有权限访问的公开或私有仓库文件与目录；官方示例场景包括快速查看 README、检查配置、自动化脚本和 AI agent workflow。",
+      why: "这对排查、脚本和 Agent 很实用：很多任务只需要读远程配置，不需要完整 clone。新手应先确认 gh 版本、仓库权限和输出记录，避免把只读检查误升级成写入或部署流程。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-17-read-remote-repository-content-with-github-cli/",
+      articleIdea: "候选：怎样用 gh repo read-file / read-dir 做远程仓库只读检查和 Agent 上下文补充"
+    },
+    {
+      date: "2026-06-17",
+      tag: "AI 编程",
+      title: "Qwen Code v0.18.3 发布，继续修复 CLI 提示、计划模式和提问取消流程",
+      summary: "QwenLM/qwen-code 在 6 月 17 日连续发布 v0.18.2 与 v0.18.3，最新版本包含取消 ask_user_question 后停止、slash suggestion 描述单行截断、release PR 检查、以及 plan mode 中 `exit_plan_mode` 声明等修复。",
+      why: "这类小版本不适合写成大文章，但对日常 Agent CLI 稳定性很关键。使用 Qwen Code 的读者应关注升级后的计划模式、提问取消、提示渲染和团队自动化发布检查是否符合预期。",
+      sourceLabel: "Qwen Code GitHub Releases",
+      sourceUrl: "https://github.com/QwenLM/qwen-code/releases/tag/v0.18.3",
+      articleIdea: "候选：Qwen Code 小版本升级后，怎样回归测试 CLI 交互、计划模式和 release 检查"
+    },
     {
       date: "2026-06-16",
       tag: "AI Agent",

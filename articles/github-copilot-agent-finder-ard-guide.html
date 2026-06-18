@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitHub Copilot agent finder 与 ARD：新手怎样给 AI Agent 选择可信工具、Skills 和 MCP 资源 | 学习资源库</title>
+  <meta name="description" content="GitHub 在 2026 年 6 月 17 日推出 Copilot agent finder，Google 同日公布 Agentic Resource Discovery（ARD）开放规范。它们共同指向一个变化：AI Agent 不应该把所有 MCP server、skills、agents 和工具一次性塞进上下文，而应该按任务发现、核验、安装和记录能力。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/github-copilot-agent-finder-ard-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"GitHub Copilot agent finder 与 ARD：新手怎样给 AI Agent 选择可信工具、Skills 和 MCP 资源","description":"GitHub 在 2026 年 6 月 17 日推出 Copilot agent finder，Google 同日公布 Agentic Resource Discovery（ARD）开放规范。它们共同指向一个变化：AI Agent 不应该把所有 MCP server、skills、agents 和工具一次性塞进上下文，而应该按任务发现、核验、安装和记录能力。","datePublished":"2026-06-17","dateModified":"2026-06-17","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/github-copilot-agent-finder-ard-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260618-hotspots">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 编程</span>
+      <h1>GitHub Copilot agent finder 与 ARD：新手怎样给 AI Agent 选择可信工具、Skills 和 MCP 资源</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-17">2026年6月17日</time>
+        <span>10 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>GitHub 在 2026 年 6 月 17 日推出 Copilot agent finder，Google 同日公布 Agentic Resource Discovery（ARD）开放规范。它们共同指向一个变化：AI Agent 不应该把所有 MCP server、skills、agents 和工具一次性塞进上下文，而应该按任务发现、核验、安装和记录能力。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://github.blog/changelog/2026-06-17-agent-finder-for-github-copilot-now-available/" target="_blank" rel="noreferrer">GitHub Changelog：Agent finder for GitHub Copilot now available</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>很多人第一次给 AI 编程助手加能力时，会直接把一长串 MCP server、插件、skills 和内部工具都接上去。短期看起来省事，长期会让上下文变重、权限边界变模糊，也更难判断某个回答到底用了哪个能力。GitHub 在 2026 年 6 月 17 日发布 Copilot agent finder，核心思路是让你用自然语言描述任务，由 finder 在指定 registry 中搜索可用 AI 资源，返回排序后的候选，再按需拉取给 Copilot 使用。</p><p>同一天，Google Developers Blog 公布 Agentic Resource Discovery（ARD）规范，目标是给工具、skills、MCP servers、agents 和其他可调用服务提供一种跨组织、跨框架的发布、发现和验证方式。对新手来说，重点不是马上追每个规范字段，而是把“发现能力”当成一个需要审计的流程：先说明任务，确认来源，限制权限，做只读试跑，再把最终采用的资源和原因写下来。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>已经在 GitHub Copilot、Claude Code、Codex、Qwen Code 或其他 Agent 工具里接入 MCP、skills、插件的开发者</li><li>想给团队维护一组内部工具、模板、skills 或 agent registry，但担心上下文膨胀和权限失控的站长与管理员</li><li>刚开始学习 AI Agent 生态，希望分清工具发现、安装、授权、验证和下线步骤的新手</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>第一步先把任务写窄。不要从“帮我接入所有开发工具”开始，而是写成“读取这个仓库的 README 并找出部署命令”“检查最近一个失败的 CI job”“从内部文档中查 API 限制”。任务越窄，agent finder 或 ARD registry 返回的候选越容易判断，也越不容易装进无关工具。</li><li>第二步核验候选来源。看 resource 是否来自你信任的组织、仓库或域名，是否有清晰的维护者、版本、文档、权限说明和问题反馈入口。ARD 的价值在于让资源可以被描述和发现，但发现不等于可信；真正接入前仍要看发布方、签名或域名绑定、开源仓库历史和最小权限边界。</li><li>第三步只安装当前任务需要的一小组能力。让 Copilot 或其他 Agent 先使用一个候选完成只读任务，例如读取公开文件、列目录、查询文档或生成建议。不要在第一次试用时就授权写入仓库、创建部署、修改 DNS、发邮件或访问生产数据。</li><li>第四步把结果写进团队记录。记录这次任务用了哪个 registry、选择了哪个资源、拒绝了哪些候选、开放了哪些权限、试跑输出是否可复现、什么时候需要升级或移除。以后再遇到类似任务，团队就不用重复猜测，也能解释为什么某个工具值得保留。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://github.blog/changelog/2026-06-17-agent-finder-for-github-copilot-now-available/" target="_blank" rel="noreferrer">GitHub Changelog：Agent finder for GitHub Copilot now available</a>
+              <span>：说明 Copilot agent finder 可按自然语言任务搜索 registry，并按需加载排序后的 AI resources。</span>
+            </li>
+
+            <li>
+              <a href="https://developers.googleblog.com/announcing-the-agentic-resource-discovery-specification/" target="_blank" rel="noreferrer">Google Developers Blog：Announcing the Agentic Resource Discovery specification</a>
+              <span>：解释 ARD 解决“能力在哪里、该用哪个、怎样验证安全连接”的跨组织发现问题。</span>
+            </li>
+
+            <li>
+              <a href="https://github.com/ards-project/ard-spec" target="_blank" rel="noreferrer">ARD Specification GitHub Repository</a>
+              <span>：规范仓库包含 specification、schema、URN 命名指南和 conformance 工具，适合跟踪草案演进。</span>
+            </li>
+
+            <li>
+              <a href="https://commandline.microsoft.com/agentic-resource-discovery-specification-ard/" target="_blank" rel="noreferrer">Microsoft Command Line Blog：Agentic Resource Discovery specification</a>
+              <span>：微软侧说明 ARD 在 AI client 自动发现能力时的安全公共层定位。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>把 agent finder 理解成“候选发现器”，不要把它当成“自动批准器”。排序靠前只说明它可能相关，不说明它一定适合你的仓库、权限模型和合规要求。</li><li>registry 应该有退出机制。每个接入的工具都要能被禁用、降级或替换，尤其是会写入代码、发起部署、访问账单、读取私有数据的能力。</li><li>团队内部资源最好给人和 Agent 都能读懂的说明：用途、示例任务、权限、失败模式、维护人、更新节奏。只写给模型看的描述很容易在人工排查时变成黑箱。</li></ul>
+
+        <h2>第一次接入前的检查清单</h2>
+
+        <ul><li>确认任务是否真的需要外部资源，普通仓库搜索或命令行能解决的事不要额外授权。</li><li>确认资源发布方、仓库、域名和文档是否匹配，避免从转载页面或不明镜像安装。</li><li>先做只读任务，再逐步打开写入、部署、账单、邮件、工单等高风险能力。</li><li>保留一次完整试跑记录：输入、候选、选择理由、输出、人工验收结论。</li><li>给资源设置移除条件，例如连续失效、权限过宽、维护停止、输出不可解释或替代方案更稳定。</li></ul>
+
+
+
+        <h2>团队记录模板</h2>
+        <p>下面不是规范字段，只是适合新手落地的最小记录。把它放进仓库文档或团队知识库，可以减少以后重复接入和重复排查。</p>
+
+
+        <pre><code class="language-text">资源名称：
+来源 / registry：
+发布方与维护入口：
+适用任务：
+开放权限：
+首次只读试跑结果：
+人工验收人：
+升级或移除条件：</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>GitHub Copilot</span><span>ARD</span><span>MCP</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-drop-static-site-publish-guide.html">Vercel Drop 拖拽发布：新手怎样先上线原型，再迁移到可持续的 Git 部署</a><a href="qwen-code-018-stable-agent-workflow-guide.html">Qwen Code v0.18.0 稳定版：新手怎样组合 Skills、记忆、计划审批与后台任务</a><a href="claude-code-managed-model-allowlist-guide.html">Claude Code v2.1.175 强化模型白名单：新手怎样避免默认模型绕过组织策略</a><a href="vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

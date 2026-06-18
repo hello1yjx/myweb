@@ -73,62 +73,62 @@
             <!-- STATIC_HOME_HOTSPOTS_START -->
 <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI Agent</span>
+            <time datetime="2026-06-17">2026年6月17日</time>
+          </div>
+          <h3>GitHub Copilot agent finder 上线，开始按任务发现 MCP、skills 与 agents</h3>
+        </div>
+      </div>
+      <p>GitHub 发布 Copilot agent finder：开发者用自然语言描述任务后，Copilot 会在指定 registry 中搜索 AI resources，返回排序后的候选，并按需拉取相关 MCP servers、skills、agents、canvases 或 tools；官方说明它实现了开放的 ARD 规范。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这能减少“把所有工具都预加载进上下文”的做法，但也把资源来源、registry 信任、权限审批和安装记录变成新的基础工作。新手应先用只读任务验证候选，再决定是否长期保留。</p>
+      </div>
+      <p class="hotspot-card__idea">已扩写：GitHub Copilot agent finder 与 ARD 新手接入流程</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-06-17-agent-finder-for-github-copilot-now-available/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
         <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
         <div>
           <div class="hotspot-card__meta">
             <span>AI Agent</span>
-            <time datetime="2026-06-16">2026年6月16日</time>
+            <time datetime="2026-06-17">2026年6月17日</time>
           </div>
-          <h3>Cloudflare Agents SDK v0.16.1 强化浏览器自动化、Codemode 与恢复能力</h3>
+          <h3>Cloudflare 介绍 Flue 如何把 Agent framework 接到 Agents SDK 运行时</h3>
         </div>
       </div>
-      <p>Cloudflare 发布 Agents SDK v0.16.1，Agent 现在可以通过 Browser Run 使用耐久 `browser_execute` 工具操作真实浏览器，通过 Codemode 用 typed connectors 执行外部系统代码，并在部署、Durable Object 回收和连接波动后更可靠地恢复。</p>
+      <p>Cloudflare 介绍 Flue 作为首个构建在 Agents SDK primitives 之上的开放框架，强调 framework、harness、runtime 三层分工，并把 durable execution、dynamic code execution、durable filesystem 和 dynamic workflows 作为生产 Agent 的底座能力。</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
-        <p>这类能力让 AI Agent 更接近真实生产流程，但也带来审批、回放、浏览器会话和审计边界。新手应先从只读页面检查、审批暂停和恢复验证开始，而不是直接让 Agent 操作生产后台。</p>
+        <p>Agent 从本地演示走向生产时，最容易出问题的是中断恢复、沙箱执行、状态持久化和工具凭据隔离。把这些能力放到运行时层，可以让新手先测试恢复和审批，再扩展到 Slack、GitHub、Linear 等 channel。</p>
       </div>
-      <p class="hotspot-card__idea">已扩写：Cloudflare Agents SDK v0.16.1 新手接入浏览器自动化、Codemode 与恢复机制</p>
-      <a class="text-link" href="https://developers.cloudflare.com/changelog/post/2026-06-16-agents-sdk-v0161/" target="_blank" rel="noreferrer">查看来源：Cloudflare Changelog</a>
+      <p class="hotspot-card__idea">已扩写：Cloudflare Flue 与 Agents SDK 分层、恢复和沙箱验收路线</p>
+      <a class="text-link" href="https://blog.cloudflare.com/agents-platform-flue-sdk/" target="_blank" rel="noreferrer">查看来源：Cloudflare Blog</a>
     </article>
 
     <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="开发环境 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
         <div>
           <div class="hotspot-card__meta">
-            <span>开发环境</span>
-            <time datetime="2026-06-16">2026年6月16日</time>
+            <span>AI 编程</span>
+            <time datetime="2026-06-17">2026年6月17日</time>
           </div>
-          <h3>Vercel Sandbox 最长运行时间从 5 小时提高到 24 小时</h3>
+          <h3>GitHub Copilot app 正式 GA，桌面端成为 agent-driven development 入口</h3>
         </div>
       </div>
-      <p>Vercel Sandbox 现在可运行最长 24 小时的不间断会话，面向大规模数据处理、端到端测试流水线和长时间 agentic workflow；官方建议可与 persistent sandboxes 搭配使用，让扩展运行期间保留状态。</p>
+      <p>GitHub 宣布 Copilot app 已在 macOS、Windows 和 Linux 上正式可用，定位为原生 GitHub 的 agent-driven development 桌面入口，可从应用中启动 Copilot 会话并围绕仓库与 pull request 工作。</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
-        <p>更长沙箱适合 AI 代理跑测试、构建和批处理，但也更需要停止条件、日志、资源上限和状态清理。把超时调长前，应先确认任务是否真的需要 24 小时以及失败后怎样恢复。</p>
+        <p>桌面 Agent 工具会把本地文件、GitHub 登录状态、PR 审查和长任务会话放到同一个入口。团队启用前应检查账户范围、仓库权限、会话日志、可回滚提交和是否需要独立测试仓库。</p>
       </div>
-      <p class="hotspot-card__idea">候选：Vercel Sandbox 24 小时会话下，怎样给长测试和 AI 代理任务设置停止条件</p>
-      <a class="text-link" href="https://vercel.com/changelog/vercel-sandbox-can-now-run-for-up-to-24-hours" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
-    </article>
-
-    <article class="hotspot-card reveal">
-      <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Codex 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
-        <div>
-          <div class="hotspot-card__meta">
-            <span>Codex</span>
-            <time datetime="2026-06-16">2026年6月16日</time>
-          </div>
-          <h3>OpenAI Codex 将桌面控制、Chrome 扩展和记忆能力扩展到 EEA、英国与瑞士</h3>
-        </div>
-      </div>
-      <p>OpenAI Codex changelog 显示，EEA、英国和瑞士用户开始获得更多 Codex app 能力：macOS 与 Windows Computer Use、Codex Chrome extension、可选 Memories，以及面向 ChatGPT Pro macOS 用户的 Chronicle 研究预览。</p>
-      <div class="hotspot-card__why">
-        <strong>为什么值得关注</strong>
-        <p>这说明本地应用控制、已登录浏览器任务和长期偏好记忆正在覆盖更多地区。团队启用前仍要检查区域默认值、记忆是否开启、浏览器登录上下文和敏感操作审批。</p>
-      </div>
-      <p class="hotspot-card__idea">候选：Codex 区域功能扩展后，怎样检查 Computer Use、Chrome 扩展和记忆默认值</p>
-      <a class="text-link" href="https://developers.openai.com/codex/changelog?type=codex-app#month-2026-06" target="_blank" rel="noreferrer">查看来源：OpenAI Codex Changelog</a>
+      <p class="hotspot-card__idea">候选：GitHub Copilot app GA 后，怎样用测试仓库验证桌面 Agent 工作流</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-06-17-github-copilot-app-generally-available/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
     </article>
 <!-- STATIC_HOME_HOTSPOTS_END -->
           </div>
@@ -145,6 +145,40 @@
           <div class="recommend-grid" data-recommendations>
             <!-- STATIC_HOME_RECOMMENDATIONS_START -->
 <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/github-copilot-agent-finder-ard-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-17">2026年6月17日</time>
+        </div>
+        <h3><a href="articles/github-copilot-agent-finder-ard-guide.html">GitHub Copilot agent finder 与 ARD：新手怎样给 AI Agent 选择可信工具、Skills 和 MCP 资源</a></h3>
+        <p>GitHub 在 2026 年 6 月 17 日推出 Copilot agent finder，Google 同日公布 Agentic Resource Discovery（ARD）开放规范。它们共同指向一个变化：AI Agent 不应该把所有 MCP server、skills、agents 和工具一次性塞进上下文，而应该按任务发现、核验、安装和记录能力。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/cloudflare-flue-agents-sdk-production-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>11 分钟</span>
+          <time datetime="2026-06-17">2026年6月17日</time>
+        </div>
+        <h3><a href="articles/cloudflare-flue-agents-sdk-production-guide.html">Cloudflare Flue 与 Agents SDK：新手怎样理解 Agent 的框架、harness 和可恢复运行时</a></h3>
+        <p>Cloudflare 在 2026 年 6 月 17 日介绍 Flue 如何构建在 Agents SDK 之上，并把 durable execution、sandboxed code execution、durable filesystem 和 dynamic workflows 作为 agent 平台底座开放给更多 harness 与框架。新手应该先分清框架、harness 和运行时，再做恢复、审批和沙箱测试。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
       <a class="article-card__media article-card__media--ai" href="articles/cloudflare-agents-sdk-browser-codemode-recovery-guide.html">
         <span class="article-card__badge">推荐</span>
         <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
@@ -177,40 +211,6 @@
         <p>Vercel Functions 的 Node.js 与 Python 运行时现在可在 Pro 和 Enterprise 团队中设置最长 30 分钟执行时间，适合长推理、流式 AI、OCR、媒体处理和复杂队列任务；但它仍是 beta 能力，需要 Fluid Compute，并且不应替代队列、幂等重试和成本监控。</p>
       </div>
     </article>
-
-    <article class="article-card reveal">
-      <a class="article-card__media article-card__media--github" href="articles/claude-code-2178-permission-nested-skills-guide.html">
-        <span class="article-card__badge">推荐</span>
-        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
-        <strong>开发安全</strong>
-      </a>
-      <div class="article-card__body">
-        <div class="meta-row">
-          <span>开发安全</span>
-          <span>10 分钟</span>
-          <time datetime="2026-06-16">2026年6月16日</time>
-        </div>
-        <h3><a href="articles/claude-code-2178-permission-nested-skills-guide.html">Claude Code v2.1.178 权限与嵌套 Skills：新手怎样回归测试 subagent、工作流和远程控制</a></h3>
-        <p>Claude Code v2.1.178 新增 `Tool(param:value)` 权限规则、嵌套 `.claude/skills` 加载、最近目录优先的 agent 与 workflow 解析，并加强自动模式下 subagent 启动前的分类检查；升级后应重点回归权限、嵌套配置、远程控制和后台会话。</p>
-      </div>
-    </article>
-
-    <article class="article-card reveal">
-      <a class="article-card__media article-card__media--github" href="articles/vercel-drop-static-site-publish-guide.html">
-        <span class="article-card__badge">推荐</span>
-        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="建站实践 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
-        <strong>建站实践</strong>
-      </a>
-      <div class="article-card__body">
-        <div class="meta-row">
-          <span>建站实践</span>
-          <span>9 分钟</span>
-          <time datetime="2026-06-15">2026年6月15日</time>
-        </div>
-        <h3><a href="articles/vercel-drop-static-site-publish-guide.html">Vercel Drop 拖拽发布：新手怎样先上线原型，再迁移到可持续的 Git 部署</a></h3>
-        <p>Vercel Drop 可以把文件、文件夹或 ZIP 直接拖进浏览器并发布到生产环境，适合原型和一次性站点；真正交付前还要检查根页面、资源路径、构建结果和环境变量，并在需要持续更新时连接 Git。</p>
-      </div>
-    </article>
 <!-- STATIC_HOME_RECOMMENDATIONS_END -->
           </div>
         </section>
@@ -226,6 +226,38 @@
           <div class="latest-list" data-home-latest>
             <!-- STATIC_HOME_LATEST_START -->
 <article class="latest-item reveal">
+      <a class="latest-thumb latest-thumb--github" href="articles/claude-code-2178-permission-nested-skills-guide.html">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
+        <span>开发安全</span>
+      </a>
+      <div>
+        <h3><a href="articles/claude-code-2178-permission-nested-skills-guide.html">Claude Code v2.1.178 权限与嵌套 Skills：新手怎样回归测试 subagent、工作流和远程控制</a></h3>
+        <p>Claude Code v2.1.178 新增 `Tool(param:value)` 权限规则、嵌套 `.claude/skills` 加载、最近目录优先的 agent 与 workflow 解析，并加强自动模式下 subagent 启动前的分类检查；升级后应重点回归权限、嵌套配置、远程控制和后台会话。</p>
+        <div class="meta-row">
+          <span>开发安全</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-16">2026年6月16日</time>
+        </div>
+      </div>
+    </article>
+
+    <article class="latest-item reveal">
+      <a class="latest-thumb latest-thumb--github" href="articles/vercel-drop-static-site-publish-guide.html">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="建站实践 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
+        <span>建站实践</span>
+      </a>
+      <div>
+        <h3><a href="articles/vercel-drop-static-site-publish-guide.html">Vercel Drop 拖拽发布：新手怎样先上线原型，再迁移到可持续的 Git 部署</a></h3>
+        <p>Vercel Drop 可以把文件、文件夹或 ZIP 直接拖进浏览器并发布到生产环境，适合原型和一次性站点；真正交付前还要检查根页面、资源路径、构建结果和环境变量，并在需要持续更新时连接 Git。</p>
+        <div class="meta-row">
+          <span>建站实践</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-15">2026年6月15日</time>
+        </div>
+      </div>
+    </article>
+
+    <article class="latest-item reveal">
       <a class="latest-thumb latest-thumb--ai" href="articles/qwen-code-018-stable-agent-workflow-guide.html">
         <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
         <span>AI 编程</span>
@@ -253,38 +285,6 @@
           <span>开发安全</span>
           <span>9 分钟</span>
           <time datetime="2026-06-14">2026年6月14日</time>
-        </div>
-      </div>
-    </article>
-
-    <article class="latest-item reveal">
-      <a class="latest-thumb latest-thumb--ai" href="articles/vercel-ai-sdk-harnessagent-beginner-guide.html">
-        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
-        <span>AI 编程</span>
-      </a>
-      <div>
-        <h3><a href="articles/vercel-ai-sdk-harnessagent-beginner-guide.html">AI SDK 7 引入 HarnessAgent：新手怎样用统一接口运行 Claude Code、Codex 与 Pi</a></h3>
-        <p>Vercel AI SDK 7 的实验性 HarnessAgent 用统一接口连接 Claude Code、Codex 与 Pi，并统一处理沙箱、会话、权限、skills 和子 Agent；新手应先从可销毁沙箱和单一任务开始验证。</p>
-        <div class="meta-row">
-          <span>AI 编程</span>
-          <span>10 分钟</span>
-          <time datetime="2026-06-13">2026年6月13日</time>
-        </div>
-      </div>
-    </article>
-
-    <article class="latest-item reveal">
-      <a class="latest-thumb latest-thumb--github" href="articles/github-copilot-code-review-controls-guide.html">
-        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
-        <span>开发安全</span>
-      </a>
-      <div>
-        <h3><a href="articles/github-copilot-code-review-controls-guide.html">Copilot Code Review 新增组织级 Runner 与内容排除：新手怎样设定审查边界</a></h3>
-        <p>GitHub Copilot Code Review 新增组织级 Runner 默认值与锁定、内容排除支持，并移除仓库自定义指令的 4000 字符读取上限；团队应把运行环境、可见内容与审查规则分开配置和验证。</p>
-        <div class="meta-row">
-          <span>开发安全</span>
-          <span>9 分钟</span>
-          <time datetime="2026-06-13">2026年6月13日</time>
         </div>
       </div>
     </article>
