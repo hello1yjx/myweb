@@ -9,7 +9,7 @@ const siteData = {
     bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
       { value: "6", label: "原创下载包" },
-      { value: "43", label: "新手专题" },
+      { value: "45", label: "新手专题" },
       { value: "持续", label: "更新与核验" }
     ],
     valueCards: [
@@ -28,6 +28,164 @@ const siteData = {
     ]
   },
   posts: [
+    {
+      id: "google-a2a-collaborative-agents-guide",
+      title: "Google A2A 协作 Agent：新手怎样理解多智能体交接、边界和验收",
+      date: "2026-06-18",
+      category: "AI Agent",
+      readTime: "10 分钟",
+      excerpt: "Google Developers Blog 在 2026 年 6 月 18 日回顾 A2A 协议一周年，重点不只是“多个 Agent 能聊天”，而是让专门 Agent 在安全边界内承接任务、避免主 Agent 上下文污染，并通过标准协议分发工作负载。新手可以先从只读交接、身份边界和结果验收开始理解。",
+      tags: ["A2A", "AI Agent", "Google"],
+      featured: true,
+      intro: [
+        "很多人第一次听到多智能体协作，会把它想成“让几个聊天机器人互相对话”。真正落到工程里，问题更具体：主 Agent 不应该把所有内部数据库、专业模型、客户信息和工具调用都塞进自己的上下文；它应该能把一个明确任务交给更合适的专门 Agent，并且只拿回必要结果。这就是 Google 在 2026 年 6 月 18 日文章里强调的 A2A 场景：Agent 之间需要一种共同语言，既能交接任务，也能保持安全边界。",
+        "A2A 的价值不在于替代 REST API 或 MCP。API 更像固定接口，MCP 更偏 Agent 调工具和数据源，而 A2A 关注 Agent 与 Agent 之间怎样发现、委派、协作和返回结果。对新手来说，第一步不是马上搭一个复杂的多 Agent 系统，而是把“什么时候该交接”“交给谁”“暴露什么信息”“如何验收结果”四个问题写清楚。"
+      ],
+      audience: [
+        "正在用 Gemini CLI、GitHub Copilot、Claude Code、Codex 或内部 Agent 做研发自动化的开发者",
+        "想把客服、数据分析、DevOps、文档检索等任务拆成多个专门 Agent，但担心权限和上下文失控的团队",
+        "刚学习 MCP、A2A、ARD 等 Agent 协议，希望先建立正确边界感的新手"
+      ],
+      format: [
+        "适合整理成“主 Agent 识别任务 / 专门 Agent 承接 / 最小上下文交接 / 结果验收 / 审计记录”的实践清单",
+        "后续可以补一份 A2A 与 MCP 对照表，帮助读者判断某个需求是调工具、找资源，还是委派给另一个 Agent"
+      ],
+      roadmap: [
+        "先判断任务是否真的需要另一个 Agent。读取一个文件、查一次文档、调用一个稳定 API，通常用普通工具或 MCP 就够了；需要专门 Agent 的场景通常包含专业流程、长任务、多步骤判断、敏感数据隔离或独立团队维护的能力。",
+        "把交接内容写窄。主 Agent 不要把整段聊天历史、完整仓库、全部客户数据都转交出去，而是只提供任务目标、必要输入、权限范围、截止条件和输出格式。这样可以减少上下文污染，也能降低专门 Agent 看到无关敏感信息的概率。",
+        "给专门 Agent 设置可验收输出。不要只说“帮我分析一下”，而是要求它返回结论、证据、使用的资源、未确认假设和下一步建议。涉及写入、发消息、下单、授权、部署等动作时，先让它产出计划和差异，再由人或主系统确认。",
+        "用小场景试跑。可以从只读 DevOps 排查、文档问答、测试失败归因或数据报表说明开始；先记录每次交接的输入、接收方、返回结果和人工复核结论，再考虑引入自动触发、跨平台工单或生产系统写入。"
+      ],
+      officialLinks: [
+        {
+          label: "Google Developers Blog：How A2A is Building a World of Collaborative Agents",
+          url: "https://developers.googleblog.com/how-a2a-is-building-a-world-of-collaborative-agents/",
+          note: "说明 A2A 一周年进展，并用安全边界、零上下文污染、动态协作和工作负载分发解释协议价值。"
+        },
+        {
+          label: "Agent2Agent Protocol GitHub Repository",
+          url: "https://github.com/a2aproject/A2A",
+          note: "A2A 官方开源仓库，包含协议说明、SDK 入口、Agent Discovery 与协作路线图。"
+        },
+        {
+          label: "A2A Python SDK",
+          url: "https://github.com/a2aproject/a2a-python",
+          note: "官方 Python SDK，适合核对 1.0 兼容性、传输方式和服务端/客户端能力。"
+        },
+        {
+          label: "A2A JavaScript SDK",
+          url: "https://github.com/a2aproject/a2a-js",
+          note: "官方 JavaScript SDK，适合前端或 Node.js 生态读者了解当前支持状态。"
+        }
+      ],
+      curatedLinks: [
+        "A2A 不是让主 Agent 变得更全能，而是让它知道什么时候应该把任务交给更合适的专门 Agent。",
+        "多 Agent 协作的第一风险不是“不会调用”，而是边界过宽：把不该共享的数据、权限或长期凭据带进了交接流程。",
+        "如果结果不能被人复核，或者无法解释使用了哪个专门 Agent 与哪些输入，那么这个协作流程还不适合自动化。"
+      ],
+      downloadIdeas: [
+        "可以整理一份多 Agent 任务交接检查表，覆盖任务目标、输入范围、权限、输出格式、人工验收和回滚方式",
+        "可以补一张 MCP / A2A / ARD 边界对照卡，帮助新手判断自己需要的是工具调用、能力发现还是 Agent 委派"
+      ],
+      monetization: "适合与本站的 MCP、ARD、Copilot agent finder、Cloudflare Agents SDK 和 Vercel Agent Stack 内容互相推荐，形成 AI Agent 基础协议学习路线。",
+      extraSections: [
+        {
+          title: "第一次试跑的低风险任务",
+          items: [
+            "让主 Agent 把一个公开 issue 或错误日志交给专门排查 Agent，总结可能原因和需要补充的证据。",
+            "让文档 Agent 只读取公开文档，返回相关段落、链接和不确定点，不允许写入仓库。",
+            "让测试 Agent 复述失败用例、预期行为和复现步骤，不直接修改代码。",
+            "让数据 Agent 返回查询计划和字段解释，先不要连接生产数据库或发送报表。",
+            "每次试跑后记录输入、接收方、输出、人工复核结论和下一次是否扩大权限。"
+          ]
+        },
+        {
+          title: "交接记录模板",
+          text: "新手可以先用这份最小记录，避免多 Agent 流程变成不可追踪的黑箱。",
+          code: "任务目标：\n委派给哪个 Agent：\n传递了哪些输入：\n开放了哪些权限：\n期望输出格式：\n人工验收人：\n结论与后续动作：",
+          language: "text"
+        }
+      ]
+    },
+    {
+      id: "vercel-connect-agent-token-security-guide",
+      title: "Vercel Connect 公测：新手怎样让 Agent 安全访问 Slack、GitHub 和外部服务",
+      date: "2026-06-17",
+      category: "建站安全",
+      readTime: "10 分钟",
+      excerpt: "Vercel 在 2026 年 6 月 17 日发布 Vercel Connect 公测，让应用和 Agent 通过 connector 在运行时获取短期、可收窄范围的 token，而不是把长期 provider secret 放进环境变量。对建站和 Agent 新手来说，这是一条更安全的外部服务接入路线。",
+      tags: ["Vercel Connect", "Agent 安全", "OAuth"],
+      featured: true,
+      intro: [
+        "当一个 Agent 需要访问 Slack、GitHub、Linear、Notion、Salesforce 或自定义 API 时，最常见的偷懒做法是把长期 token 写进环境变量。这样上线很快，但一旦 token 泄露、权限过宽或环境混用，风险也会一起放大。Vercel 在 2026 年 6 月 17 日发布 Vercel Connect 公测，思路是先注册 connector，再让代码在运行时按任务请求短期 token。",
+        "这件事对个人站和小团队也有意义。很多建站工作流现在会接入 AI Agent：自动查 issue、读文档、发 Slack、建 Linear 卡片、读取 Notion 或触发 MCP server。新手不应该一开始就给 Agent 一个覆盖整个组织的长期密钥，而应该从单仓库、只读、预览环境、可撤销开始。"
+      ],
+      audience: [
+        "正在把 Vercel、Next.js、AI SDK 或自建 Agent 接入 Slack、GitHub、Linear、Notion 等外部服务的开发者",
+        "习惯把 API Key 放进环境变量，但希望减少长期凭据风险的个人站长和小团队",
+        "想理解 OAuth、短期 token、环境隔离和权限收窄如何落到 Agent 工作流的新手"
+      ],
+      format: [
+        "适合整理成“创建 connector / 按环境绑定 / 运行时取 token / 限定资源与权限 / 记录撤销方式”的安全接入步骤",
+        "后续可以补一份 Agent 外部服务权限矩阵，按只读、评论、写入、部署、账单等风险等级分层"
+      ],
+      roadmap: [
+        "先列清楚 Agent 需要访问哪个服务、为了完成什么任务、最低需要哪类权限。比如读取某个 GitHub 仓库内容只需要 contents:read，不应该顺手给整个组织写入权限。",
+        "在 Vercel 中创建 connector，并把开发、预览、生产环境分开绑定。不要用开发环境泄露的 token 访问生产资源，也不要让测试 Agent 默认触达真实客户、真实账单或真实通知频道。",
+        "让代码在运行时请求 token，而不是手写长期密钥。Vercel Connect 的重点是短期、按任务、可自动刷新和可撤销；如果某个 Agent 只执行一次只读检查，就不应该持有长期凭据。",
+        "上线前做撤销和失败演练。确认可以撤销某个 connector 或它发出的所有 token，确认 401、权限不足、webhook 验证失败和服务不可用时，Agent 会停止并给出清楚说明，而不是无限重试或改用更宽权限。"
+      ],
+      officialLinks: [
+        {
+          label: "Vercel Changelog：Vercel Connect: Secure access to external services for your agents",
+          url: "https://vercel.com/changelog/vercel-connect-secure-access-to-external-services-for-your-agents",
+          note: "发布 Vercel Connect 公测，并说明 connector、短期 token、环境隔离、撤销和触发器能力。"
+        },
+        {
+          label: "Vercel Docs：Connect",
+          url: "https://vercel.com/docs/connect",
+          note: "官方文档入口，说明 Vercel Connect 如何让 Agent 和服务注册 connector 并请求短期 token。"
+        },
+        {
+          label: "Vercel Docs：Connect Tokens",
+          url: "https://vercel.com/docs/connect/concepts/tokens",
+          note: "用于核对 token 的短期凭据定位、subject、scope、resource 与 authorizationDetails 概念。"
+        },
+        {
+          label: "Vercel Docs：Connect Quickstart",
+          url: "https://vercel.com/docs/connect/quickstart",
+          note: "适合新手按步骤创建第一个 connector，并在代码中请求 runtime provider token。"
+        }
+      ],
+      curatedLinks: [
+        "短期 token 不是万能安全保证；如果请求 token 的 Agent 没有任务边界，仍然可能拿到过宽权限。",
+        "环境隔离要真实执行：开发、预览、生产使用不同 connector，生产 connector 不给本地实验和临时 Agent 使用。",
+        "外部服务触发器要和日志、审批、速率限制一起设计，否则 Agent 很容易在消息风暴或 webhook 重放中失控。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Agent 外部服务接入前检查表，包含服务、资源范围、权限、环境、撤销命令和失败处理",
+        "可以补一个 GitHub 只读 connector 示例，演示怎样把 Agent 权限限制到单仓库 contents:read"
+      ],
+      monetization: "适合与本站的 Vercel Sandbox、skills.sh OIDC、Vercel Blob OIDC、Agent 权限安全清单和建站安全内容互相串联，帮助读者从功能接入过渡到凭据治理。",
+      extraSections: [
+        {
+          title: "给新手的最小权限顺序",
+          items: [
+            "第一轮只连接测试项目和测试频道，不连接生产仓库、真实客户数据或账单系统。",
+            "先给只读权限，确认 Agent 能正确读取、总结和停止，再考虑评论、创建工单或写入。",
+            "把 connector 绑定到明确环境，生产 connector 只用于生产项目。",
+            "记录谁创建了 connector、服务是什么、权限范围是什么、怎样撤销和谁负责复核。",
+            "对 webhook 触发器设置去重、日志和速率限制，避免重复消息触发重复动作。"
+          ]
+        },
+        {
+          title: "接入记录模板",
+          text: "每接入一个外部服务，都建议留下这份记录，后续排查和撤销会简单很多。",
+          code: "服务名称：\nconnector 名称：\n绑定环境：\n资源范围：\n权限范围：\n触发方式：\n撤销方式：\n负责人：",
+          language: "text"
+        }
+      ]
+    },
     {
       id: "github-copilot-agent-finder-ard-guide",
       title: "GitHub Copilot agent finder 与 ARD：新手怎样给 AI Agent 选择可信工具、Skills 和 MCP 资源",
@@ -4011,6 +4169,56 @@ git push origin main`,
     "github-agentic-workflows-public-preview-guide"
   ],
   hotspots: [
+    {
+      date: "2026-06-18",
+      tag: "AI Agent",
+      title: "Google 回顾 A2A 一周年：多 Agent 协作开始从概念走向工程交接",
+      summary: "Google Developers Blog 介绍 A2A 协议一周年进展，强调专门 Agent 可以通过共同协议安全接手任务，帮助主 Agent 避免上下文污染，并把生命科学、支付、实时数据、DevOps 和受监管网络等场景拆给专业能力处理。",
+      why: "这提示新手不要把多 Agent 理解成“更多聊天窗口”，而要关注交接边界、最小输入、输出验收和审计记录。A2A 适合处理需要专门能力、独立状态或敏感边界的任务，不适合把所有普通工具调用都复杂化。",
+      sourceLabel: "Google Developers Blog",
+      sourceUrl: "https://developers.googleblog.com/how-a2a-is-building-a-world-of-collaborative-agents/",
+      articleIdea: "已扩写：Google A2A 协作 Agent 新手交接、边界和验收清单"
+    },
+    {
+      date: "2026-06-18",
+      tag: "AI 编程",
+      title: "MAI-Code-1-Flash 扩展到更多 GitHub Copilot 使用入口",
+      summary: "GitHub 宣布 Microsoft 的小型编码模型 MAI-Code-1-Flash 现在可用于 Copilot CLI、GitHub Copilot app、GitHub.com Copilot Chat、Visual Studio、GitHub Mobile、JetBrains IDE、Eclipse 和 Xcode；Free、Student、Pro、Pro+ 与 Max 计划逐步开放。",
+      why: "小模型进入更多 Copilot 入口后，日常补全、轻量问答和低延迟任务可能会有更多默认选择。新手应把它当作“适合小而快任务的候选模型”，并用自己的仓库任务对比质量、速度和是否支持团队策略。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-18-mai-code-1-flash-available-on-more-copilot-surfaces/",
+      articleIdea: "候选：怎样在 Copilot 多入口里评估小型编码模型的速度、质量和适用任务"
+    },
+    {
+      date: "2026-06-18",
+      tag: "代码审查",
+      title: "Copilot code review 支持仓库根目录 AGENTS.md，并改进草稿 PR 请求入口",
+      summary: "GitHub Changelog 说明 Copilot code review 现在会读取仓库根目录的 AGENTS.md，并把相关说明用于审查反馈；同时草稿 PR 可以更直接地通过 reviewer picker 请求 Copilot，时间线中的部分 Copilot review 事件也会折叠显示。",
+      why: "这让团队约定、代码风格和审查重点更容易进入 AI 代码审查流程。新手应先把 AGENTS.md 写成可执行规则，而不是口号，并用草稿 PR 检查 Copilot 是否真的按仓库约定给出反馈。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-18-copilot-code-review-agents-md-support-and-ui-improvements/",
+      articleIdea: "候选：AGENTS.md 怎样写，才能让 AI 代码审查更贴近仓库约定"
+    },
+    {
+      date: "2026-06-17",
+      tag: "Agent 安全",
+      title: "Vercel Connect 公测：让 Agent 按任务获取短期外部服务 token",
+      summary: "Vercel 发布 Connect 公测，应用和 Agent 可以通过 connector 访问 Slack、GitHub、Salesforce、自定义 API 和 MCP server 等外部服务，并在运行时请求短期、可收窄范围的 token，减少在环境变量中保存长期 provider secret 的需求。",
+      why: "Agent 接外部服务时最容易出问题的是长期密钥、权限过宽和环境混用。Vercel Connect 把 connector、scoped token、环境绑定、撤销和触发器放到同一套流程里，适合新手学习最小权限接入。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/vercel-connect-secure-access-to-external-services-for-your-agents",
+      articleIdea: "已扩写：Vercel Connect 公测后，Agent 怎样安全访问 Slack、GitHub 和外部服务"
+    },
+    {
+      date: "2026-06-17",
+      tag: "AI Agent",
+      title: "Vercel 发布 eve 公测，把 Agent 定义成可读的文件目录",
+      summary: "Vercel 宣布 eve open-source agent framework 进入 public preview。eve 采用 filesystem-first 方式组织 Agent，目录中可以包含模型配置、instructions、tools、skills、subagents、channels 和 schedules，并内置 durable execution、sandboxed compute、human-in-the-loop approvals 与 evals。",
+      why: "这与近期 Flue、Agents SDK、Copilot agent finder 的方向一致：Agent 正从单个提示词走向可版本化、可审查、可运行的工程单元。新手可以先观察文件结构和审批边界，再决定是否把真实渠道接进去。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/introducing-eve-an-open-source-agent-framework",
+      articleIdea: "候选：filesystem-first Agent 框架怎样帮助团队审查 tools、skills、channels 和 schedules"
+    },
     {
       date: "2026-06-17",
       tag: "AI Agent",

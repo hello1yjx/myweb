@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Google A2A 协作 Agent：新手怎样理解多智能体交接、边界和验收 | 学习资源库</title>
+  <meta name="description" content="Google Developers Blog 在 2026 年 6 月 18 日回顾 A2A 协议一周年，重点不只是“多个 Agent 能聊天”，而是让专门 Agent 在安全边界内承接任务、避免主 Agent 上下文污染，并通过标准协议分发工作负载。新手可以先从只读交接、身份边界和结果验收开始理解。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/google-a2a-collaborative-agents-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Google A2A 协作 Agent：新手怎样理解多智能体交接、边界和验收","description":"Google Developers Blog 在 2026 年 6 月 18 日回顾 A2A 协议一周年，重点不只是“多个 Agent 能聊天”，而是让专门 Agent 在安全边界内承接任务、避免主 Agent 上下文污染，并通过标准协议分发工作负载。新手可以先从只读交接、身份边界和结果验收开始理解。","datePublished":"2026-06-18","dateModified":"2026-06-18","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/google-a2a-collaborative-agents-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260619-hotspots">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <nav class="site-nav">
+        <a href="../index.html">首页</a>
+        <a href="../posts.html">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../hotspots.html">AI 专区</a>
+        <a href="../editorial.html">内容标准</a>
+        <a href="../contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI Agent</span>
+      <h1>Google A2A 协作 Agent：新手怎样理解多智能体交接、边界和验收</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-18">2026年6月18日</time>
+        <span>10 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Google Developers Blog 在 2026 年 6 月 18 日回顾 A2A 协议一周年，重点不只是“多个 Agent 能聊天”，而是让专门 Agent 在安全边界内承接任务、避免主 Agent 上下文污染，并通过标准协议分发工作负载。新手可以先从只读交接、身份边界和结果验收开始理解。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://developers.googleblog.com/how-a2a-is-building-a-world-of-collaborative-agents/" target="_blank" rel="noreferrer">Google Developers Blog：How A2A is Building a World of Collaborative Agents</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>很多人第一次听到多智能体协作，会把它想成“让几个聊天机器人互相对话”。真正落到工程里，问题更具体：主 Agent 不应该把所有内部数据库、专业模型、客户信息和工具调用都塞进自己的上下文；它应该能把一个明确任务交给更合适的专门 Agent，并且只拿回必要结果。这就是 Google 在 2026 年 6 月 18 日文章里强调的 A2A 场景：Agent 之间需要一种共同语言，既能交接任务，也能保持安全边界。</p><p>A2A 的价值不在于替代 REST API 或 MCP。API 更像固定接口，MCP 更偏 Agent 调工具和数据源，而 A2A 关注 Agent 与 Agent 之间怎样发现、委派、协作和返回结果。对新手来说，第一步不是马上搭一个复杂的多 Agent 系统，而是把“什么时候该交接”“交给谁”“暴露什么信息”“如何验收结果”四个问题写清楚。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>正在用 Gemini CLI、GitHub Copilot、Claude Code、Codex 或内部 Agent 做研发自动化的开发者</li><li>想把客服、数据分析、DevOps、文档检索等任务拆成多个专门 Agent，但担心权限和上下文失控的团队</li><li>刚学习 MCP、A2A、ARD 等 Agent 协议，希望先建立正确边界感的新手</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先判断任务是否真的需要另一个 Agent。读取一个文件、查一次文档、调用一个稳定 API，通常用普通工具或 MCP 就够了；需要专门 Agent 的场景通常包含专业流程、长任务、多步骤判断、敏感数据隔离或独立团队维护的能力。</li><li>把交接内容写窄。主 Agent 不要把整段聊天历史、完整仓库、全部客户数据都转交出去，而是只提供任务目标、必要输入、权限范围、截止条件和输出格式。这样可以减少上下文污染，也能降低专门 Agent 看到无关敏感信息的概率。</li><li>给专门 Agent 设置可验收输出。不要只说“帮我分析一下”，而是要求它返回结论、证据、使用的资源、未确认假设和下一步建议。涉及写入、发消息、下单、授权、部署等动作时，先让它产出计划和差异，再由人或主系统确认。</li><li>用小场景试跑。可以从只读 DevOps 排查、文档问答、测试失败归因或数据报表说明开始；先记录每次交接的输入、接收方、返回结果和人工复核结论，再考虑引入自动触发、跨平台工单或生产系统写入。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://developers.googleblog.com/how-a2a-is-building-a-world-of-collaborative-agents/" target="_blank" rel="noreferrer">Google Developers Blog：How A2A is Building a World of Collaborative Agents</a>
+              <span>：说明 A2A 一周年进展，并用安全边界、零上下文污染、动态协作和工作负载分发解释协议价值。</span>
+            </li>
+
+            <li>
+              <a href="https://github.com/a2aproject/A2A" target="_blank" rel="noreferrer">Agent2Agent Protocol GitHub Repository</a>
+              <span>：A2A 官方开源仓库，包含协议说明、SDK 入口、Agent Discovery 与协作路线图。</span>
+            </li>
+
+            <li>
+              <a href="https://github.com/a2aproject/a2a-python" target="_blank" rel="noreferrer">A2A Python SDK</a>
+              <span>：官方 Python SDK，适合核对 1.0 兼容性、传输方式和服务端/客户端能力。</span>
+            </li>
+
+            <li>
+              <a href="https://github.com/a2aproject/a2a-js" target="_blank" rel="noreferrer">A2A JavaScript SDK</a>
+              <span>：官方 JavaScript SDK，适合前端或 Node.js 生态读者了解当前支持状态。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>A2A 不是让主 Agent 变得更全能，而是让它知道什么时候应该把任务交给更合适的专门 Agent。</li><li>多 Agent 协作的第一风险不是“不会调用”，而是边界过宽：把不该共享的数据、权限或长期凭据带进了交接流程。</li><li>如果结果不能被人复核，或者无法解释使用了哪个专门 Agent 与哪些输入，那么这个协作流程还不适合自动化。</li></ul>
+
+        <h2>第一次试跑的低风险任务</h2>
+
+        <ul><li>让主 Agent 把一个公开 issue 或错误日志交给专门排查 Agent，总结可能原因和需要补充的证据。</li><li>让文档 Agent 只读取公开文档，返回相关段落、链接和不确定点，不允许写入仓库。</li><li>让测试 Agent 复述失败用例、预期行为和复现步骤，不直接修改代码。</li><li>让数据 Agent 返回查询计划和字段解释，先不要连接生产数据库或发送报表。</li><li>每次试跑后记录输入、接收方、输出、人工复核结论和下一次是否扩大权限。</li></ul>
+
+
+
+        <h2>交接记录模板</h2>
+        <p>新手可以先用这份最小记录，避免多 Agent 流程变成不可追踪的黑箱。</p>
+
+
+        <pre><code class="language-text">任务目标：
+委派给哪个 Agent：
+传递了哪些输入：
+开放了哪些权限：
+期望输出格式：
+人工验收人：
+结论与后续动作：</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>A2A</span><span>AI Agent</span><span>Google</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-functions-30-minute-ai-tasks-guide.html">Vercel Functions 可运行 30 分钟：新手怎样给 AI 长任务设置超时、队列和验收边界</a><a href="claude-code-2178-permission-nested-skills-guide.html">Claude Code v2.1.178 权限与嵌套 Skills：新手怎样回归测试 subagent、工作流和远程控制</a><a href="vercel-drop-static-site-publish-guide.html">Vercel Drop 拖拽发布：新手怎样先上线原型，再迁移到可持续的 Git 部署</a><a href="qwen-code-018-stable-agent-workflow-guide.html">Qwen Code v0.18.0 稳定版：新手怎样组合 Skills、记忆、计划审批与后台任务</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
