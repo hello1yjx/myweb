@@ -5509,11 +5509,10 @@ function getHomeStats() {
 
 function getHeroIcons() {
   return [
-    { icon: visualIcons.python, label: "Python" },
-    { icon: visualIcons.github, label: "GitHub Pages" },
-    { icon: visualIcons.javascript, label: "JavaScript" },
-    { icon: visualIcons.vscode, label: "VS Code" },
-    { icon: visualIcons.figma, label: "模板资料" }
+    { icon: visualIcons.markdown, label: "系统化内容\n持续更新" },
+    { icon: visualIcons.github, label: "精选优质资源\n严格筛选" },
+    { icon: visualIcons.javascript, label: "以实践为导向\n可学可用" },
+    { icon: visualIcons.vscode, label: "开发者社区\n共同成长" }
   ];
 }
 
@@ -5737,11 +5736,12 @@ function injectHomePage() {
   if (rank) {
     rank.innerHTML = siteData.downloads.slice(0, 5)
       .map(
-        (item, index) => `
-          <a href="${item.link}" download>
-            <span>${index + 1}</span>
+        (item) => `
+          <a class="download-row" href="${item.link}" download>
+            <span class="download-row__icon">${buildVisualIcon(getResourceIcon(item), `${item.category} 图标`, "visual-icon visual-icon--download")}</span>
             <strong>${item.name}</strong>
             <em>${item.format}</em>
+            <b>下载</b>
           </a>
         `
       )
