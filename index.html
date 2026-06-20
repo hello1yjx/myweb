@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260619-reference">
+  <link rel="stylesheet" href="assets/styles.css?v=20260620-sitewide">
 </head>
 <body>
   <header class="site-header">
@@ -29,12 +29,12 @@
         <a href="index.html">首页</a>
         <a href="posts.html">教程</a>
         <a href="resources.html">资源下载</a>
-        <a href="resources.html">工具导航</a>
+        <a href="resources.html#official-resources">工具导航</a>
         <a href="hotspots.html">技术资讯</a>
         <a href="projects.html">开源项目</a>
         <a href="about.html">关于我们</a>
       </nav>
-      <form class="header-search" data-site-search>
+      <form class="header-search" data-site-search action="posts.html" method="get">
         <input type="search" name="q" placeholder="搜索教程、资源、工具或关键词...">
         <button type="submit" aria-label="搜索">/</button>
       </form>
@@ -80,7 +80,7 @@
         <!-- STATIC_HOME_HOTSPOTS_START -->
 <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <div>
           <div class="hotspot-card__meta">
             <span>AI Agent</span>
@@ -100,7 +100,7 @@
 
     <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <div>
           <div class="hotspot-card__meta">
             <span>AI 编程</span>
@@ -120,7 +120,7 @@
 
     <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="代码审查 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="代码审查 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <div>
           <div class="hotspot-card__meta">
             <span>代码审查</span>
@@ -156,7 +156,7 @@
 <article class="article-card reveal">
       <a class="article-card__media article-card__media--github" href="articles/google-a2a-collaborative-agents-guide.html">
         <span class="article-card__badge">推荐</span>
-        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <strong>AI Agent</strong>
       </a>
       <div class="article-card__body">
@@ -173,7 +173,7 @@
     <article class="article-card reveal">
       <a class="article-card__media article-card__media--github" href="articles/vercel-connect-agent-token-security-guide.html">
         <span class="article-card__badge">推荐</span>
-        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="建站安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="建站安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <strong>建站安全</strong>
       </a>
       <div class="article-card__body">
@@ -190,7 +190,7 @@
     <article class="article-card reveal">
       <a class="article-card__media article-card__media--ai" href="articles/github-copilot-agent-finder-ard-guide.html">
         <span class="article-card__badge">推荐</span>
-        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <strong>AI 编程</strong>
       </a>
       <div class="article-card__body">
@@ -207,7 +207,7 @@
     <article class="article-card reveal">
       <a class="article-card__media article-card__media--ai" href="articles/cloudflare-flue-agents-sdk-production-guide.html">
         <span class="article-card__badge">推荐</span>
-        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';"></span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <strong>AI 编程</strong>
       </a>
       <div class="article-card__body">
@@ -236,7 +236,7 @@
             <!-- STATIC_HOME_LATEST_START -->
 <article class="latest-item reveal">
       <a class="latest-thumb latest-thumb--ai" href="articles/cloudflare-agents-sdk-browser-codemode-recovery-guide.html">
-        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';">
         <span>AI 编程</span>
       </a>
       <div>
@@ -252,7 +252,7 @@
 
     <article class="latest-item reveal">
       <a class="latest-thumb latest-thumb--github" href="articles/vercel-functions-30-minute-ai-tasks-guide.html">
-        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="建站实践 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="建站实践 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';">
         <span>建站实践</span>
       </a>
       <div>
@@ -268,7 +268,7 @@
 
     <article class="latest-item reveal">
       <a class="latest-thumb latest-thumb--github" href="articles/claude-code-2178-permission-nested-skills-guide.html">
-        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';">
         <span>开发安全</span>
       </a>
       <div>
@@ -284,7 +284,7 @@
 
     <article class="latest-item reveal">
       <a class="latest-thumb latest-thumb--github" href="articles/vercel-drop-static-site-publish-guide.html">
-        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="建站实践 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="建站实践 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';">
         <span>建站实践</span>
       </a>
       <div>
@@ -340,7 +340,7 @@
       </a>
       <a class="quick-card" href="projects.html">
         <span>项目</span>
-        <strong>项目实战</strong>
+        <strong>开源项目</strong>
         <p>从教程到作品</p>
       </a>
       <a class="quick-card" href="editorial.html">
@@ -355,7 +355,7 @@
     <div class="page-shell footer__grid">
       <div class="footer-brand">
         <a class="brand" href="index.html">
-          <span class="brand-mark" aria-hidden="true"><img src="assets/images/brand-learning-code.svg" alt="" width="42" height="42"></span>
+          <span class="brand-mark" aria-hidden="true"><img src="assets/images/brand-book-line.png" alt="" width="36" height="33"></span>
           <span class="brand-copy">
             <strong data-site-name></strong>
             <span data-site-tagline></span>
@@ -368,13 +368,13 @@
         <a href="index.html">首页</a>
         <a href="posts.html">教程</a>
         <a href="resources.html">资源下载</a>
-        <a href="projects.html">项目实战</a>
+        <a href="projects.html">开源项目</a>
       </div>
       <div>
         <h4>热门分类</h4>
         <a href="posts.html">编程开发</a>
         <a href="resources.html">学习资料</a>
-        <a href="hotspots.html">AI 工具</a>
+        <a href="hotspots.html">技术资讯</a>
         <a href="editorial.html">内容标准</a>
         <a href="contact.html">联系</a>
         <a href="privacy.html">隐私政策</a>
@@ -387,6 +387,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260619-reference"></script>
+  <script src="assets/app.js?v=20260620-sitewide"></script>
 </body>
 </html>

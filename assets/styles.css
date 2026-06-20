@@ -2792,3 +2792,260 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* Sitewide linework reference system */
+.site-nav a:first-child:not(.is-active):not([aria-current="page"]) {
+  color: #111827;
+  border-bottom-color: transparent;
+}
+
+.site-nav a[aria-current="page"],
+.site-nav a.is-active {
+  color: #06364a;
+  border-bottom-color: #06364a;
+}
+
+.site-nav a[aria-current="page"]:hover,
+.site-nav a.is-active:hover {
+  color: #06364a;
+}
+
+main.page-shell {
+  padding-top: 0;
+}
+
+.page-hero {
+  padding: 34px 0 20px;
+}
+
+.page-hero__panel,
+.detail-hero {
+  padding: 34px 0 28px;
+  border: 0;
+  border-bottom: 1px solid #dfe5ec;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.page-hero__panel::before,
+.detail-hero::before {
+  display: none;
+}
+
+.page-hero .eyebrow,
+.detail-hero .pill,
+.section-heading .eyebrow,
+.section-title .eyebrow,
+.filter-bar .eyebrow {
+  color: #667085;
+  letter-spacing: 0;
+}
+
+.page-hero h1,
+.detail-hero h1 {
+  max-width: 940px;
+  margin-bottom: 16px;
+  font-family: "Noto Serif SC", "Source Serif 4", "Microsoft YaHei", serif;
+  color: #151515;
+  font-size: clamp(36px, 4.4vw, 58px);
+  font-weight: 900;
+  line-height: 1.16;
+  letter-spacing: 0;
+}
+
+.page-hero p,
+.detail-hero p {
+  max-width: 760px;
+  color: #475467;
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.section {
+  margin: 22px 0;
+}
+
+.section-title,
+.section-heading,
+.filter-bar {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e6ebf1;
+}
+
+.section-title h2,
+.section-heading h2,
+.filter-bar h2,
+.side-panel__head h3 {
+  font-family: "Noto Sans SC", "Segoe UI", "Microsoft YaHei", sans-serif;
+  color: #111827;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.article-card,
+.download-card,
+.resource-card,
+.project-card,
+.hotspot-card,
+.resource-trust-card,
+.promo-banner,
+.about-panel,
+.contact-card,
+.sidebar-card,
+.article-body,
+.project-showcase,
+.inline-promo {
+  border: 1px solid #dfe5ec;
+  border-radius: 6px;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.article-card:hover,
+.download-card:hover,
+.resource-card:hover,
+.project-card:hover,
+.hotspot-card:hover {
+  transform: none;
+  border-color: #cbd5df;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+}
+
+.article-card__media,
+.latest-thumb,
+.project-card__visual,
+.project-showcase__screen,
+.download-card__visual,
+.resource-card__icon,
+.hotspot-card__icon {
+  color: #06364a;
+  background: #eef6f1;
+}
+
+.article-card__media::after,
+.latest-thumb::after,
+.project-card__visual::after {
+  display: none;
+}
+
+.article-card__media--python,
+.article-card__media--vscode,
+.article-card__media--hexo,
+.article-card__media--ai,
+.article-card__media--frontend,
+.article-card__media--books,
+.article-card__media--debug,
+.article-card__media--git,
+.article-card__media--office,
+.latest-thumb--ai,
+.latest-thumb--frontend,
+.latest-thumb--books,
+.latest-thumb--debug,
+.latest-thumb--github {
+  background: #e5f0eb;
+}
+
+.article-card__badge,
+.latest-thumb span,
+.pill,
+.tag-row span,
+.download-card__includes li {
+  border-radius: 4px;
+  color: #344054;
+  background: #f7f9fb;
+  border-color: #dfe5ec;
+}
+
+.article-card h3,
+.download-card h3,
+.latest-item h3,
+.resource-card h3,
+.project-card h3,
+.hotspot-card h3,
+.contact-card h3,
+.about-panel h3,
+.inline-promo h3 {
+  font-family: "Noto Sans SC", "Segoe UI", "Microsoft YaHei", sans-serif;
+  color: #111827;
+  letter-spacing: 0;
+}
+
+.article-card p,
+.download-card p,
+.latest-item p,
+.resource-card p,
+.project-card p,
+.hotspot-card p,
+.contact-card p,
+.about-panel p,
+.article-body p,
+.article-body li,
+.inline-promo p {
+  color: #475467;
+}
+
+.download-card {
+  grid-template-columns: 156px minmax(0, 1fr);
+}
+
+.download-card__visual {
+  border-right: 1px solid #e6ebf1;
+}
+
+.download-card__pitch,
+.hotspot-card__why,
+.hotspot-card__idea,
+.resource-card__pitch {
+  border-color: #e6ebf1;
+  border-radius: 6px;
+  background: #f8fafc;
+}
+
+.resource-trust-grid {
+  gap: 16px;
+}
+
+.promo-banner {
+  background: #ffffff;
+}
+
+.article-body h2,
+.article-body h3 {
+  color: #111827;
+  letter-spacing: 0;
+}
+
+.article-sidebar,
+.side-column {
+  gap: 16px;
+}
+
+@media (max-width: 1100px) {
+  .header-search {
+    width: 100%;
+    order: 4;
+  }
+}
+
+@media (max-width: 760px) {
+  .page-hero {
+    padding-top: 26px;
+  }
+
+  .page-hero h1,
+  .detail-hero h1 {
+    font-size: 34px;
+  }
+
+  .download-card {
+    grid-template-columns: 1fr;
+  }
+
+  .download-card__visual {
+    min-height: 118px;
+    border-right: 0;
+    border-bottom: 1px solid #e6ebf1;
+  }
+}

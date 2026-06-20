@@ -5323,7 +5323,7 @@ function escapeAttribute(value) {
 }
 
 function buildVisualIcon(src, label, className = "visual-icon") {
-  return `<img class="${className}" src="${src}" alt="${escapeAttribute(label)}" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-learning-code.svg';">`;
+  return `<img class="${className}" src="${src}" alt="${escapeAttribute(label)}" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';">`;
 }
 
 function pickVisualIcon(text, fallback = visualIcons.github) {
@@ -5493,8 +5493,8 @@ function getHomeCategories() {
     { icon: visualIcons.javascript, title: "编程开发", meta: "Python / 前端 / Git", count: "新手路线", tone: "blue", query: "编程" },
     { icon: visualIcons.markdown, title: "学习资料", meta: "清单 / 模板 / 配置", count: `${siteData.downloads.length} 个原创包`, tone: "green", query: "资料" },
     { icon: visualIcons.vscode, title: "实用工具", meta: "开发 / 设计 / 效率", count: "官方入口", tone: "violet", query: "工具" },
-    { icon: visualIcons.github, title: "项目实战", meta: "源码 / 案例 / 部署", count: `${siteData.projects.length} 个项目`, tone: "orange", query: "项目" },
-    { icon: visualIcons.python, title: "AI 专区", meta: "AI 编程 / 提示词 / 工具", count: `${siteData.hotspots.length} 条热点`, tone: "rose", query: "AI" },
+    { icon: visualIcons.github, title: "开源项目", meta: "源码 / 案例 / 部署", count: `${siteData.projects.length} 个项目`, tone: "orange", query: "项目" },
+    { icon: visualIcons.python, title: "技术资讯", meta: "AI 编程 / 提示词 / 工具", count: `${siteData.hotspots.length} 条热点`, tone: "rose", query: "AI" },
     { icon: visualIcons.figma, title: "设计资源", meta: "模板 / 清单 / 页面", count: "可直接修改", tone: "cyan", query: "模板" }
   ];
 }
@@ -5979,6 +5979,41 @@ function bindMenu() {
   });
 }
 
+function setActiveNavigation() {
+  const pageName = window.location.pathname.split("/").pop() || "index.html";
+  const currentPath = pageName === "" ? "index.html" : pageName;
+  const currentHash = window.location.hash;
+  const navLinks = Array.from(document.querySelectorAll(".site-nav a"));
+  const exactHashMatch = navLinks.find((link) => {
+    const target = new URL(link.getAttribute("href"), window.location.href);
+    return target.pathname.split("/").pop() === currentPath && target.hash && target.hash === currentHash;
+  });
+  const pathMatch = navLinks.find((link) => {
+    const target = new URL(link.getAttribute("href"), window.location.href);
+    const targetPath = target.pathname.split("/").pop() || "index.html";
+    return targetPath === currentPath && !target.hash;
+  });
+  const fallbackMap = {
+    "post.html": "posts.html",
+    "project.html": "projects.html"
+  };
+  const fallbackMatch = navLinks.find((link) => {
+    const target = new URL(link.getAttribute("href"), window.location.href);
+    return target.pathname.split("/").pop() === fallbackMap[currentPath];
+  });
+  const activeLink = exactHashMatch || pathMatch || fallbackMatch;
+
+  navLinks.forEach((link) => {
+    link.classList.remove("is-active");
+    link.removeAttribute("aria-current");
+  });
+
+  if (activeLink) {
+    activeLink.classList.add("is-active");
+    activeLink.setAttribute("aria-current", "page");
+  }
+}
+
 function bindSearch() {
   document.querySelectorAll("[data-site-search]").forEach((form) => {
     form.addEventListener("submit", (event) => {
@@ -6021,6 +6056,8 @@ function revealOnScroll() {
 document.addEventListener("DOMContentLoaded", () => {
   setCanonicalUrl();
   setGlobalContent();
+  setActiveNavigation();
+  window.addEventListener("hashchange", setActiveNavigation);
   bindMenu();
   bindSearch();
   injectHomePage();
