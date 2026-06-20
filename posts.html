@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260620-sitewide">
+  <link rel="stylesheet" href="assets/styles.css?v=20260620-hotspots">
 </head>
 <body>
   <header class="site-header">
@@ -27,7 +27,7 @@
       <button class="menu-button" data-menu-button aria-expanded="false" aria-label="切换导航菜单">☰</button>
       <nav class="site-nav" data-mobile-nav>
         <a href="index.html">首页</a>
-        <a href="posts.html">教程</a>
+        <a class="is-active" href="posts.html" aria-current="page">教程</a>
         <a href="resources.html">资源下载</a>
         <a href="resources.html#official-resources">工具导航</a>
         <a href="hotspots.html">技术资讯</a>
@@ -67,6 +67,23 @@
       <div class="content-grid" data-post-list>
         <!-- STATIC_POSTS_START -->
 <article class="article-card reveal">
+      <a class="article-card__media article-card__media--github" href="articles/cloudflare-temporary-accounts-agent-deploy-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 建站 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <strong>AI 建站</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 建站</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-19">2026年6月19日</time>
+        </div>
+        <h3><a href="articles/cloudflare-temporary-accounts-agent-deploy-guide.html">Cloudflare 临时账号：新手怎样让 AI Agent 先部署、再认领和验收 Worker</a></h3>
+        <p>Cloudflare 在 2026 年 6 月 19 日推出面向 AI Agent 的 Temporary Accounts：没有 Cloudflare 登录态时，Agent 可以通过 Wrangler 的临时部署流程先把 Worker 发布到 60 分钟预览账号，再把 claim URL 交给人确认。新手重点不是“无账号上线”，而是学会给 Agent 建立可丢弃、可验收、可认领的部署闭环。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
       <a class="article-card__media article-card__media--github" href="articles/google-a2a-collaborative-agents-guide.html">
         <span class="article-card__badge">推荐</span>
         <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
@@ -849,6 +866,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260620-sitewide"></script>
+  <script src="assets/app.js?v=20260620-hotspots"></script>
 </body>
 </html>

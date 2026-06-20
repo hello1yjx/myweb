@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cloudflare 临时账号：新手怎样让 AI Agent 先部署、再认领和验收 Worker | 学习资源库</title>
+  <meta name="description" content="Cloudflare 在 2026 年 6 月 19 日推出面向 AI Agent 的 Temporary Accounts：没有 Cloudflare 登录态时，Agent 可以通过 Wrangler 的临时部署流程先把 Worker 发布到 60 分钟预览账号，再把 claim URL 交给人确认。新手重点不是“无账号上线”，而是学会给 Agent 建立可丢弃、可验收、可认领的部署闭环。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/cloudflare-temporary-accounts-agent-deploy-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Cloudflare 临时账号：新手怎样让 AI Agent 先部署、再认领和验收 Worker","description":"Cloudflare 在 2026 年 6 月 19 日推出面向 AI Agent 的 Temporary Accounts：没有 Cloudflare 登录态时，Agent 可以通过 Wrangler 的临时部署流程先把 Worker 发布到 60 分钟预览账号，再把 claim URL 交给人确认。新手重点不是“无账号上线”，而是学会给 Agent 建立可丢弃、可验收、可认领的部署闭环。","datePublished":"2026-06-19","dateModified":"2026-06-19","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/cloudflare-temporary-accounts-agent-deploy-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260620-hotspots">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-book-line.png" alt="" width="36" height="33"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <button class="menu-button" data-menu-button aria-expanded="false" aria-label="切换导航菜单">☰</button>
+      <nav class="site-nav" data-mobile-nav>
+        <a href="../index.html">首页</a>
+        <a class="is-active" href="../posts.html" aria-current="page">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../resources.html#official-resources">工具导航</a>
+        <a href="../hotspots.html">技术资讯</a>
+        <a href="../projects.html">开源项目</a>
+        <a href="../about.html">关于我们</a>
+      </nav>
+      <form class="header-search" action="../posts.html" method="get">
+        <input type="search" name="q" placeholder="搜索教程、资源、工具或关键词...">
+        <button type="submit" aria-label="搜索">/</button>
+      </form>
+      <a class="header-github" href="https://github.com/hello1yjx/hello1yjx.github.io" target="_blank" rel="noreferrer" aria-label="GitHub">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="" width="24" height="24">
+      </a>
+      <a class="header-cta" href="../posts.html">开始学习</a>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 建站</span>
+      <h1>Cloudflare 临时账号：新手怎样让 AI Agent 先部署、再认领和验收 Worker</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-19">2026年6月19日</time>
+        <span>10 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Cloudflare 在 2026 年 6 月 19 日推出面向 AI Agent 的 Temporary Accounts：没有 Cloudflare 登录态时，Agent 可以通过 Wrangler 的临时部署流程先把 Worker 发布到 60 分钟预览账号，再把 claim URL 交给人确认。新手重点不是“无账号上线”，而是学会给 Agent 建立可丢弃、可验收、可认领的部署闭环。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://blog.cloudflare.com/temporary-accounts/" target="_blank" rel="noreferrer">Cloudflare Blog：Temporary Cloudflare Accounts for AI agents</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>AI 编程助手越来越常做“写代码、部署、curl 验证、再修改”的闭环。问题在于，部署平台通常需要浏览器登录、OAuth 授权、复制 API token 或多因素认证。对坐在旁边的 copilot 来说，这只是打断；对后台运行的 Agent 来说，这往往会让任务卡住。Cloudflare 在 2026 年 6 月 19 日发布 Temporary Accounts for Agents，核心是让 Wrangler 在没有凭据时提示并支持临时部署。</p><p>这件事对新手建站很实用，但也容易被误读。`wrangler deploy --temporary` 不是替代正式账号、CI/CD 或生产发布的万能入口；它更适合一次性原型、Agent 试跑、教学演示和第一次验证部署链路。正确用法是：让 Agent 先部署到临时预览账号，拿到 60 分钟内可认领的 claim URL，再由人检查代码、访问结果、资源范围和是否需要转为正式账号。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>正在用 Codex、Claude Code、GitHub Copilot、Qwen Code 等 Agent 写 Cloudflare Workers、API 或小型网站的开发者</li><li>想让 Agent 自动完成部署和回归验证，但还不想把正式 Cloudflare token 交给临时任务的新手</li><li>需要演示“写代码到线上预览”闭环的个人站长、教程作者和小团队</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先更新 Wrangler，并确认任务确实适合临时部署。Cloudflare 文档要求使用支持临时部署的 Wrangler 版本；如果你已经有正式账号、生产项目或 CI/CD，就应继续用 `wrangler login`、API token 或现有部署流水线，不要为了省步骤把生产发布改成临时账号。</li><li>给 Agent 一个很窄的部署任务。第一次不要让它接入数据库、支付、真实邮件或生产域名，只让它创建一个最小 Worker、静态响应或 demo API。提示词里可以要求它部署后自己访问预览 URL，并把响应内容、命令输出摘要和不确定点交回来。</li><li>让 Agent 先尝试普通 `wrangler deploy`。如果当前环境没有 Cloudflare 凭据，Wrangler 会提示可以改用 `--temporary`。这一步很重要，因为 Agent 是从官方 CLI 输出里发现临时流程，而不是靠你提前把 token 或账号信息写进提示词。</li><li>部署成功后做验收，而不是只看“已上线”。至少检查 Worker URL 是否能访问、返回内容是否和代码一致、是否创建了不该创建的资源、claim URL 的有效时间、以及代码仓库里有没有残留临时 token、日志或多余配置。</li><li>最后决定认领、丢弃还是重做。如果 demo 值得保留，人在 60 分钟窗口内打开 claim URL，把临时账号转成自己的正式账号；如果只是一次试跑，允许它过期即可。不要把临时账号当成长期托管、生产域名绑定或自动化账单入口。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://blog.cloudflare.com/temporary-accounts/" target="_blank" rel="noreferrer">Cloudflare Blog：Temporary Cloudflare Accounts for AI agents</a>
+              <span>：发布 Temporary Accounts for Agents，说明 Agent 可通过 Wrangler 临时部署 Worker，并在 60 分钟窗口内由人认领。</span>
+            </li>
+
+            <li>
+              <a href="https://developers.cloudflare.com/workers/platform/claim-deployments/" target="_blank" rel="noreferrer">Cloudflare Docs：Claim deployments (temporary accounts)</a>
+              <span>：官方操作文档，说明适用场景、Wrangler 版本要求、`--temporary` 流程、claim URL 和生产场景限制。</span>
+            </li>
+
+            <li>
+              <a href="https://developers.cloudflare.com/workers/wrangler/commands/workers/" target="_blank" rel="noreferrer">Cloudflare Docs：Workers deploy command</a>
+              <span>：用于核对 `wrangler deploy --temporary` 在 Workers deploy 命令中的定位、限制和凭据行为。</span>
+            </li>
+
+            <li>
+              <a href="https://developers.cloudflare.com/workers/wrangler/" target="_blank" rel="noreferrer">Cloudflare Docs：Wrangler</a>
+              <span>：Wrangler 是 Cloudflare Developer Platform CLI，临时部署流程也建立在这个官方 CLI 入口上。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>临时账号最适合“先让 Agent 证明它能部署并自检”，不适合绕过生产账号、权限审批或长期运维流程。</li><li>对 Agent 来说，部署不是终点；它必须返回可访问地址、验证结果、命令摘要和需要人确认的 claim 信息。</li><li>如果项目已经有正式 Cloudflare 凭据或 CI/CD，临时部署反而可能制造混乱，应继续使用可审计的正式部署链路。</li></ul>
+
+        <h2>第一次试跑流程</h2>
+
+        <ul><li>新建一个空目录或 demo 仓库，不要复用生产站点目录。</li><li>安装或更新 Wrangler，并让 Agent 读取官方文档确认当前命令。</li><li>让 Agent 创建一个最小 Worker，例如返回一段纯文本或 JSON。</li><li>要求 Agent 先运行普通 deploy；如果 Wrangler 提示无凭据，再按提示使用 temporary deploy。</li><li>拿到预览地址后，让 Agent 自己访问一次，并把返回内容、HTTP 状态和 claim URL 摘要交给你。</li></ul>
+
+
+
+        <h2>部署验收记录模板</h2>
+        <p>每次让 Agent 做临时部署，都建议留下这份短记录，避免几小时后忘记哪个预览来自哪次任务。</p>
+
+
+        <pre><code class="language-text">任务目标：
+Worker 名称：
+预览 URL：
+claim 截止时间：
+Agent 自检结果：
+人工复核结论：
+认领 / 丢弃 / 重做：</code></pre>
+
+        <h2>什么时候不要用临时账号</h2>
+
+        <ul><li>项目已经绑定生产域名、真实数据库、队列、KV、R2 或账单资源。</li><li>团队要求所有部署都必须走 GitHub Actions、审批记录或变更单。</li><li>Agent 需要长期维护同一个 Worker，而不是完成一次可丢弃预览。</li><li>你无法在 60 分钟内检查 claim URL，也不确定部署出来的资源是否应该保留。</li></ul>
+
+
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Cloudflare Workers</span><span>AI Agent</span><span>Wrangler</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="cloudflare-agents-sdk-browser-codemode-recovery-guide.html">Cloudflare Agents SDK v0.16.1：新手怎样把浏览器自动化、代码执行和恢复机制接进 AI Agent</a><a href="vercel-functions-30-minute-ai-tasks-guide.html">Vercel Functions 可运行 30 分钟：新手怎样给 AI 长任务设置超时、队列和验收边界</a><a href="claude-code-2178-permission-nested-skills-guide.html">Claude Code v2.1.178 权限与嵌套 Skills：新手怎样回归测试 subagent、工作流和远程控制</a><a href="vercel-drop-static-site-publish-guide.html">Vercel Drop 拖拽发布：新手怎样先上线原型，再迁移到可持续的 Git 部署</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var button = document.querySelector("[data-menu-button]");
+      var nav = document.querySelector("[data-mobile-nav]");
+      if (!button || !nav) return;
+      button.addEventListener("click", function () {
+        var expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        nav.classList.toggle("site-nav--open", !expanded);
+      });
+    });
+  </script>
+</body>
+</html>

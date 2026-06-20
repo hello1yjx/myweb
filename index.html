@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260620-sitewide">
+  <link rel="stylesheet" href="assets/styles.css?v=20260620-hotspots">
 </head>
 <body>
   <header class="site-header">
@@ -26,7 +26,7 @@
       </a>
       <button class="menu-button" data-menu-button aria-expanded="false" aria-label="切换导航菜单">☰</button>
       <nav class="site-nav" data-mobile-nav>
-        <a href="index.html">首页</a>
+        <a class="is-active" href="index.html" aria-current="page">首页</a>
         <a href="posts.html">教程</a>
         <a href="resources.html">资源下载</a>
         <a href="resources.html#official-resources">工具导航</a>
@@ -80,62 +80,62 @@
         <!-- STATIC_HOME_HOTSPOTS_START -->
 <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 建站 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <div>
           <div class="hotspot-card__meta">
-            <span>AI Agent</span>
-            <time datetime="2026-06-18">2026年6月18日</time>
+            <span>AI 建站</span>
+            <time datetime="2026-06-19">2026年6月19日</time>
           </div>
-          <h3>Google 回顾 A2A 一周年：多 Agent 协作开始从概念走向工程交接</h3>
+          <h3>Cloudflare 推出 AI Agent 临时账号，支持先部署 Worker 再认领</h3>
         </div>
       </div>
-      <p>Google Developers Blog 介绍 A2A 协议一周年进展，强调专门 Agent 可以通过共同协议安全接手任务，帮助主 Agent 避免上下文污染，并把生命科学、支付、实时数据、DevOps 和受监管网络等场景拆给专业能力处理。</p>
+      <p>Cloudflare 发布 Temporary Accounts for Agents：当 Agent 使用 Wrangler 部署 Worker 但没有 Cloudflare 凭据时，可以按 CLI 提示改用 `wrangler deploy --temporary`，先部署到临时预览账号，拿到 60 分钟内可认领的 claim URL，再由人决定是否转为正式账号。</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
-        <p>这提示新手不要把多 Agent 理解成“更多聊天窗口”，而要关注交接边界、最小输入、输出验收和审计记录。A2A 适合处理需要专门能力、独立状态或敏感边界的任务，不适合把所有普通工具调用都复杂化。</p>
+        <p>这让 Agent 可以完成“写代码、部署、访问验证”的闭环，同时避免一开始就暴露正式 API token。新手应把它用于原型、演示和可丢弃预览，并保留人工认领、验收和正式 CI/CD 的边界。</p>
       </div>
-      <p class="hotspot-card__idea">已扩写：Google A2A 协作 Agent 新手交接、边界和验收清单</p>
-      <a class="text-link" href="https://developers.googleblog.com/how-a2a-is-building-a-world-of-collaborative-agents/" target="_blank" rel="noreferrer">查看来源：Google Developers Blog</a>
+      <p class="hotspot-card__idea">已扩写：Cloudflare 临时账号下，AI Agent 怎样先部署、再认领和验收 Worker</p>
+      <a class="text-link" href="https://blog.cloudflare.com/temporary-accounts/" target="_blank" rel="noreferrer">查看来源：Cloudflare Blog</a>
     </article>
 
     <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程管理 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <div>
           <div class="hotspot-card__meta">
-            <span>AI 编程</span>
-            <time datetime="2026-06-18">2026年6月18日</time>
+            <span>AI 编程管理</span>
+            <time datetime="2026-06-19">2026年6月19日</time>
           </div>
-          <h3>MAI-Code-1-Flash 扩展到更多 GitHub Copilot 使用入口</h3>
+          <h3>GitHub Copilot usage metrics API 新增 per-user AI credit 用量字段</h3>
         </div>
       </div>
-      <p>GitHub 宣布 Microsoft 的小型编码模型 MAI-Code-1-Flash 现在可用于 Copilot CLI、GitHub Copilot app、GitHub.com Copilot Chat、Visual Studio、GitHub Mobile、JetBrains IDE、Eclipse 和 Xcode；Free、Student、Pro、Pro+ 与 Max 计划逐步开放。</p>
+      <p>GitHub Changelog 宣布 Copilot usage metrics API 在企业和组织级用户报表中加入 `ai_credits_used` 字段，可在单日和 28 日用户级报告中查看每个用户消耗的 AI credits；官方强调它是用量分析信号，不是最终账单明细。</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
-        <p>小模型进入更多 Copilot 入口后，日常补全、轻量问答和低延迟任务可能会有更多默认选择。新手应把它当作“适合小而快任务的候选模型”，并用自己的仓库任务对比质量、速度和是否支持团队策略。</p>
+        <p>AI 编程工具进入用量计费后，团队不能只看席位数量，还要看哪些工作流真正消耗 credits、是否需要预算阈值和采用率分析。新手管理员应先把它用于趋势观察，不要把单一字段误当成模型或功能级成本归因。</p>
       </div>
-      <p class="hotspot-card__idea">候选：怎样在 Copilot 多入口里评估小型编码模型的速度、质量和适用任务</p>
-      <a class="text-link" href="https://github.blog/changelog/2026-06-18-mai-code-1-flash-available-on-more-copilot-surfaces/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+      <p class="hotspot-card__idea">候选：怎样用 Copilot usage metrics API 观察 AI credit 用量，而不把它误当账单</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-06-19-ai-credits-consumed-per-user-now-in-the-copilot-usage-metrics-api/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
     </article>
 
     <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="代码审查 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 团队管理 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <div>
           <div class="hotspot-card__meta">
-            <span>代码审查</span>
+            <span>AI 团队管理</span>
             <time datetime="2026-06-18">2026年6月18日</time>
           </div>
-          <h3>Copilot code review 支持仓库根目录 AGENTS.md，并改进草稿 PR 请求入口</h3>
+          <h3>OpenAI 为 ChatGPT Enterprise 增加 credit usage analytics 与 spend controls</h3>
         </div>
       </div>
-      <p>GitHub Changelog 说明 Copilot code review 现在会读取仓库根目录的 AGENTS.md，并把相关说明用于审查反馈；同时草稿 PR 可以更直接地通过 reviewer picker 请求 Copilot，时间线中的部分 Copilot review 事件也会折叠显示。</p>
+      <p>OpenAI 发布 ChatGPT Enterprise 新用量分析和支出控制，Global Admin Console 可按用户、产品和模型查看 ChatGPT 与 Codex credit 消耗，并通过统一 Cost API 接入内部系统；管理员还可设置默认限制、分组限制和个人例外。</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
-        <p>这让团队约定、代码风格和审查重点更容易进入 AI 代码审查流程。新手应先把 AGENTS.md 写成可执行规则，而不是口号，并用草稿 PR 检查 Copilot 是否真的按仓库约定给出反馈。</p>
+        <p>Codex 等 AI 开发工具在企业内扩散后，治理重点会从“能不能用”转向“谁在用、花在哪里、怎样给高价值工作留额度”。这类功能适合团队建立透明预算和培训信号，但不应被简化成压低使用量的单一指标。</p>
       </div>
-      <p class="hotspot-card__idea">候选：AGENTS.md 怎样写，才能让 AI 代码审查更贴近仓库约定</p>
-      <a class="text-link" href="https://github.blog/changelog/2026-06-18-copilot-code-review-agents-md-support-and-ui-improvements/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+      <p class="hotspot-card__idea">候选：研发团队怎样用 credit analytics 观察 Codex/ChatGPT 使用，而不是只做成本控制</p>
+      <a class="text-link" href="https://openai.com/index/chatgpt-enterprise-spend-controls/" target="_blank" rel="noreferrer">查看来源：OpenAI</a>
     </article>
 <!-- STATIC_HOME_HOTSPOTS_END -->
       </div>
@@ -154,6 +154,23 @@
           <div class="recommend-grid" data-recommendations>
             <!-- STATIC_HOME_RECOMMENDATIONS_START -->
 <article class="article-card reveal">
+      <a class="article-card__media article-card__media--github" href="articles/cloudflare-temporary-accounts-agent-deploy-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 建站 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <strong>AI 建站</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 建站</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-19">2026年6月19日</time>
+        </div>
+        <h3><a href="articles/cloudflare-temporary-accounts-agent-deploy-guide.html">Cloudflare 临时账号：新手怎样让 AI Agent 先部署、再认领和验收 Worker</a></h3>
+        <p>Cloudflare 在 2026 年 6 月 19 日推出面向 AI Agent 的 Temporary Accounts：没有 Cloudflare 登录态时，Agent 可以通过 Wrangler 的临时部署流程先把 Worker 发布到 60 分钟预览账号，再把 claim URL 交给人确认。新手重点不是“无账号上线”，而是学会给 Agent 建立可丢弃、可验收、可认领的部署闭环。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
       <a class="article-card__media article-card__media--github" href="articles/google-a2a-collaborative-agents-guide.html">
         <span class="article-card__badge">推荐</span>
         <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
@@ -203,23 +220,6 @@
         <p>GitHub 在 2026 年 6 月 17 日推出 Copilot agent finder，Google 同日公布 Agentic Resource Discovery（ARD）开放规范。它们共同指向一个变化：AI Agent 不应该把所有 MCP server、skills、agents 和工具一次性塞进上下文，而应该按任务发现、核验、安装和记录能力。</p>
       </div>
     </article>
-
-    <article class="article-card reveal">
-      <a class="article-card__media article-card__media--ai" href="articles/cloudflare-flue-agents-sdk-production-guide.html">
-        <span class="article-card__badge">推荐</span>
-        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
-        <strong>AI 编程</strong>
-      </a>
-      <div class="article-card__body">
-        <div class="meta-row">
-          <span>AI 编程</span>
-          <span>11 分钟</span>
-          <time datetime="2026-06-17">2026年6月17日</time>
-        </div>
-        <h3><a href="articles/cloudflare-flue-agents-sdk-production-guide.html">Cloudflare Flue 与 Agents SDK：新手怎样理解 Agent 的框架、harness 和可恢复运行时</a></h3>
-        <p>Cloudflare 在 2026 年 6 月 17 日介绍 Flue 如何构建在 Agents SDK 之上，并把 durable execution、sandboxed code execution、durable filesystem 和 dynamic workflows 作为 agent 平台底座开放给更多 harness 与框架。新手应该先分清框架、harness 和运行时，再做恢复、审批和沙箱测试。</p>
-      </div>
-    </article>
 <!-- STATIC_HOME_RECOMMENDATIONS_END -->
           </div>
         </section>
@@ -235,6 +235,22 @@
           <div class="latest-list" data-home-latest>
             <!-- STATIC_HOME_LATEST_START -->
 <article class="latest-item reveal">
+      <a class="latest-thumb latest-thumb--ai" href="articles/cloudflare-flue-agents-sdk-production-guide.html">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';">
+        <span>AI 编程</span>
+      </a>
+      <div>
+        <h3><a href="articles/cloudflare-flue-agents-sdk-production-guide.html">Cloudflare Flue 与 Agents SDK：新手怎样理解 Agent 的框架、harness 和可恢复运行时</a></h3>
+        <p>Cloudflare 在 2026 年 6 月 17 日介绍 Flue 如何构建在 Agents SDK 之上，并把 durable execution、sandboxed code execution、durable filesystem 和 dynamic workflows 作为 agent 平台底座开放给更多 harness 与框架。新手应该先分清框架、harness 和运行时，再做恢复、审批和沙箱测试。</p>
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>11 分钟</span>
+          <time datetime="2026-06-17">2026年6月17日</time>
+        </div>
+      </div>
+    </article>
+
+    <article class="latest-item reveal">
       <a class="latest-thumb latest-thumb--ai" href="articles/cloudflare-agents-sdk-browser-codemode-recovery-guide.html">
         <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';">
         <span>AI 编程</span>
@@ -278,22 +294,6 @@
           <span>开发安全</span>
           <span>10 分钟</span>
           <time datetime="2026-06-16">2026年6月16日</time>
-        </div>
-      </div>
-    </article>
-
-    <article class="latest-item reveal">
-      <a class="latest-thumb latest-thumb--github" href="articles/vercel-drop-static-site-publish-guide.html">
-        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="建站实践 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';">
-        <span>建站实践</span>
-      </a>
-      <div>
-        <h3><a href="articles/vercel-drop-static-site-publish-guide.html">Vercel Drop 拖拽发布：新手怎样先上线原型，再迁移到可持续的 Git 部署</a></h3>
-        <p>Vercel Drop 可以把文件、文件夹或 ZIP 直接拖进浏览器并发布到生产环境，适合原型和一次性站点；真正交付前还要检查根页面、资源路径、构建结果和环境变量，并在需要持续更新时连接 Git。</p>
-        <div class="meta-row">
-          <span>建站实践</span>
-          <span>9 分钟</span>
-          <time datetime="2026-06-15">2026年6月15日</time>
         </div>
       </div>
     </article>
@@ -387,6 +387,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260620-sitewide"></script>
+  <script src="assets/app.js?v=20260620-hotspots"></script>
 </body>
 </html>

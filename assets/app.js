@@ -29,6 +29,95 @@ const siteData = {
   },
   posts: [
     {
+      id: "cloudflare-temporary-accounts-agent-deploy-guide",
+      title: "Cloudflare 临时账号：新手怎样让 AI Agent 先部署、再认领和验收 Worker",
+      date: "2026-06-19",
+      category: "AI 建站",
+      readTime: "10 分钟",
+      excerpt: "Cloudflare 在 2026 年 6 月 19 日推出面向 AI Agent 的 Temporary Accounts：没有 Cloudflare 登录态时，Agent 可以通过 Wrangler 的临时部署流程先把 Worker 发布到 60 分钟预览账号，再把 claim URL 交给人确认。新手重点不是“无账号上线”，而是学会给 Agent 建立可丢弃、可验收、可认领的部署闭环。",
+      tags: ["Cloudflare Workers", "AI Agent", "Wrangler"],
+      featured: true,
+      intro: [
+        "AI 编程助手越来越常做“写代码、部署、curl 验证、再修改”的闭环。问题在于，部署平台通常需要浏览器登录、OAuth 授权、复制 API token 或多因素认证。对坐在旁边的 copilot 来说，这只是打断；对后台运行的 Agent 来说，这往往会让任务卡住。Cloudflare 在 2026 年 6 月 19 日发布 Temporary Accounts for Agents，核心是让 Wrangler 在没有凭据时提示并支持临时部署。",
+        "这件事对新手建站很实用，但也容易被误读。`wrangler deploy --temporary` 不是替代正式账号、CI/CD 或生产发布的万能入口；它更适合一次性原型、Agent 试跑、教学演示和第一次验证部署链路。正确用法是：让 Agent 先部署到临时预览账号，拿到 60 分钟内可认领的 claim URL，再由人检查代码、访问结果、资源范围和是否需要转为正式账号。"
+      ],
+      audience: [
+        "正在用 Codex、Claude Code、GitHub Copilot、Qwen Code 等 Agent 写 Cloudflare Workers、API 或小型网站的开发者",
+        "想让 Agent 自动完成部署和回归验证，但还不想把正式 Cloudflare token 交给临时任务的新手",
+        "需要演示“写代码到线上预览”闭环的个人站长、教程作者和小团队"
+      ],
+      format: [
+        "适合整理成“安装 Wrangler / 让 Agent 先普通 deploy / 按提示改用 temporary / 访问预览 / 决定是否认领”的试跑流程",
+        "后续可以补一份 Agent 部署验收表，记录生成的 Worker、预览地址、claim 截止时间、人工复核人和是否删除或认领"
+      ],
+      roadmap: [
+        "先更新 Wrangler，并确认任务确实适合临时部署。Cloudflare 文档要求使用支持临时部署的 Wrangler 版本；如果你已经有正式账号、生产项目或 CI/CD，就应继续用 `wrangler login`、API token 或现有部署流水线，不要为了省步骤把生产发布改成临时账号。",
+        "给 Agent 一个很窄的部署任务。第一次不要让它接入数据库、支付、真实邮件或生产域名，只让它创建一个最小 Worker、静态响应或 demo API。提示词里可以要求它部署后自己访问预览 URL，并把响应内容、命令输出摘要和不确定点交回来。",
+        "让 Agent 先尝试普通 `wrangler deploy`。如果当前环境没有 Cloudflare 凭据，Wrangler 会提示可以改用 `--temporary`。这一步很重要，因为 Agent 是从官方 CLI 输出里发现临时流程，而不是靠你提前把 token 或账号信息写进提示词。",
+        "部署成功后做验收，而不是只看“已上线”。至少检查 Worker URL 是否能访问、返回内容是否和代码一致、是否创建了不该创建的资源、claim URL 的有效时间、以及代码仓库里有没有残留临时 token、日志或多余配置。",
+        "最后决定认领、丢弃还是重做。如果 demo 值得保留，人在 60 分钟窗口内打开 claim URL，把临时账号转成自己的正式账号；如果只是一次试跑，允许它过期即可。不要把临时账号当成长期托管、生产域名绑定或自动化账单入口。"
+      ],
+      officialLinks: [
+        {
+          label: "Cloudflare Blog：Temporary Cloudflare Accounts for AI agents",
+          url: "https://blog.cloudflare.com/temporary-accounts/",
+          note: "发布 Temporary Accounts for Agents，说明 Agent 可通过 Wrangler 临时部署 Worker，并在 60 分钟窗口内由人认领。"
+        },
+        {
+          label: "Cloudflare Docs：Claim deployments (temporary accounts)",
+          url: "https://developers.cloudflare.com/workers/platform/claim-deployments/",
+          note: "官方操作文档，说明适用场景、Wrangler 版本要求、`--temporary` 流程、claim URL 和生产场景限制。"
+        },
+        {
+          label: "Cloudflare Docs：Workers deploy command",
+          url: "https://developers.cloudflare.com/workers/wrangler/commands/workers/",
+          note: "用于核对 `wrangler deploy --temporary` 在 Workers deploy 命令中的定位、限制和凭据行为。"
+        },
+        {
+          label: "Cloudflare Docs：Wrangler",
+          url: "https://developers.cloudflare.com/workers/wrangler/",
+          note: "Wrangler 是 Cloudflare Developer Platform CLI，临时部署流程也建立在这个官方 CLI 入口上。"
+        }
+      ],
+      curatedLinks: [
+        "临时账号最适合“先让 Agent 证明它能部署并自检”，不适合绕过生产账号、权限审批或长期运维流程。",
+        "对 Agent 来说，部署不是终点；它必须返回可访问地址、验证结果、命令摘要和需要人确认的 claim 信息。",
+        "如果项目已经有正式 Cloudflare 凭据或 CI/CD，临时部署反而可能制造混乱，应继续使用可审计的正式部署链路。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Agent 临时部署验收表，包含 Worker 名称、预览 URL、claim 截止时间、响应检查和人工决定",
+        "可以补一个最小 Worker demo，让新手比较本地 dev、正式 deploy 与 temporary deploy 的边界"
+      ],
+      monetization: "适合与本站的 Cloudflare Agents SDK、Flue、Agent 浏览器自动化和建站部署检查表内容串联，帮助读者从写代码过渡到可验收的上线流程。",
+      extraSections: [
+        {
+          title: "第一次试跑流程",
+          items: [
+            "新建一个空目录或 demo 仓库，不要复用生产站点目录。",
+            "安装或更新 Wrangler，并让 Agent 读取官方文档确认当前命令。",
+            "让 Agent 创建一个最小 Worker，例如返回一段纯文本或 JSON。",
+            "要求 Agent 先运行普通 deploy；如果 Wrangler 提示无凭据，再按提示使用 temporary deploy。",
+            "拿到预览地址后，让 Agent 自己访问一次，并把返回内容、HTTP 状态和 claim URL 摘要交给你。"
+          ]
+        },
+        {
+          title: "部署验收记录模板",
+          text: "每次让 Agent 做临时部署，都建议留下这份短记录，避免几小时后忘记哪个预览来自哪次任务。",
+          code: "任务目标：\nWorker 名称：\n预览 URL：\nclaim 截止时间：\nAgent 自检结果：\n人工复核结论：\n认领 / 丢弃 / 重做：",
+          language: "text"
+        },
+        {
+          title: "什么时候不要用临时账号",
+          items: [
+            "项目已经绑定生产域名、真实数据库、队列、KV、R2 或账单资源。",
+            "团队要求所有部署都必须走 GitHub Actions、审批记录或变更单。",
+            "Agent 需要长期维护同一个 Worker，而不是完成一次可丢弃预览。",
+            "你无法在 60 分钟内检查 claim URL，也不确定部署出来的资源是否应该保留。"
+          ]
+        }
+      ]
+    },
+    {
       id: "google-a2a-collaborative-agents-guide",
       title: "Google A2A 协作 Agent：新手怎样理解多智能体交接、边界和验收",
       date: "2026-06-18",
@@ -4169,6 +4258,46 @@ git push origin main`,
     "github-agentic-workflows-public-preview-guide"
   ],
   hotspots: [
+    {
+      date: "2026-06-19",
+      tag: "AI 建站",
+      title: "Cloudflare 推出 AI Agent 临时账号，支持先部署 Worker 再认领",
+      summary: "Cloudflare 发布 Temporary Accounts for Agents：当 Agent 使用 Wrangler 部署 Worker 但没有 Cloudflare 凭据时，可以按 CLI 提示改用 `wrangler deploy --temporary`，先部署到临时预览账号，拿到 60 分钟内可认领的 claim URL，再由人决定是否转为正式账号。",
+      why: "这让 Agent 可以完成“写代码、部署、访问验证”的闭环，同时避免一开始就暴露正式 API token。新手应把它用于原型、演示和可丢弃预览，并保留人工认领、验收和正式 CI/CD 的边界。",
+      sourceLabel: "Cloudflare Blog",
+      sourceUrl: "https://blog.cloudflare.com/temporary-accounts/",
+      articleIdea: "已扩写：Cloudflare 临时账号下，AI Agent 怎样先部署、再认领和验收 Worker"
+    },
+    {
+      date: "2026-06-19",
+      tag: "AI 编程管理",
+      title: "GitHub Copilot usage metrics API 新增 per-user AI credit 用量字段",
+      summary: "GitHub Changelog 宣布 Copilot usage metrics API 在企业和组织级用户报表中加入 `ai_credits_used` 字段，可在单日和 28 日用户级报告中查看每个用户消耗的 AI credits；官方强调它是用量分析信号，不是最终账单明细。",
+      why: "AI 编程工具进入用量计费后，团队不能只看席位数量，还要看哪些工作流真正消耗 credits、是否需要预算阈值和采用率分析。新手管理员应先把它用于趋势观察，不要把单一字段误当成模型或功能级成本归因。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-19-ai-credits-consumed-per-user-now-in-the-copilot-usage-metrics-api/",
+      articleIdea: "候选：怎样用 Copilot usage metrics API 观察 AI credit 用量，而不把它误当账单"
+    },
+    {
+      date: "2026-06-18",
+      tag: "AI 团队管理",
+      title: "OpenAI 为 ChatGPT Enterprise 增加 credit usage analytics 与 spend controls",
+      summary: "OpenAI 发布 ChatGPT Enterprise 新用量分析和支出控制，Global Admin Console 可按用户、产品和模型查看 ChatGPT 与 Codex credit 消耗，并通过统一 Cost API 接入内部系统；管理员还可设置默认限制、分组限制和个人例外。",
+      why: "Codex 等 AI 开发工具在企业内扩散后，治理重点会从“能不能用”转向“谁在用、花在哪里、怎样给高价值工作留额度”。这类功能适合团队建立透明预算和培训信号，但不应被简化成压低使用量的单一指标。",
+      sourceLabel: "OpenAI",
+      sourceUrl: "https://openai.com/index/chatgpt-enterprise-spend-controls/",
+      articleIdea: "候选：研发团队怎样用 credit analytics 观察 Codex/ChatGPT 使用，而不是只做成本控制"
+    },
+    {
+      date: "2026-06-18",
+      tag: "AI 安全",
+      title: "Cloudflare 拆解自动化漏洞发现 harness：从单次提示走向持续扫描流水线",
+      summary: "Cloudflare Blog 发布 Build your own vulnerability harness，拆解多阶段漏洞发现与自动化 triage 架构，强调不要把未来寄托在单一模型、单个提示或一次性 agent session 上，而要用可替换模型、跨模型验证、状态控制和误报压缩来形成持续扫描流水线。",
+      why: "对安全和平台团队来说，AI 漏洞发现的关键不是“换一个更强模型就够了”，而是把发现、验证、去重、跨仓依赖和人工修复队列设计成可审计系统。新手可先借鉴 harness 思路做只读扫描和结果复核，不要直接接入生产修复动作。",
+      sourceLabel: "Cloudflare Blog",
+      sourceUrl: "https://blog.cloudflare.com/build-your-own-vulnerability-harness/",
+      articleIdea: "候选：怎样把 AI 漏洞扫描从一次性 prompt 改成可复核的 harness"
+    },
     {
       date: "2026-06-18",
       tag: "AI Agent",

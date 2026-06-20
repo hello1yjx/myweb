@@ -4,7 +4,7 @@ const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const appPath = path.join(root, "assets", "app.js");
-const version = "20260620-sitewide";
+const version = "20260620-hotspots";
 const siteUrl = "https://hello1yjx.github.io";
 
 function loadSiteRuntime() {
@@ -224,7 +224,7 @@ function buildSitemap(posts) {
   ];
 
   const core = corePages
-    .map(([page, priority]) => `  <url><loc>${siteUrl}/${page}</loc><lastmod>2026-06-19</lastmod><priority>${priority}</priority></url>`)
+    .map(([page, priority]) => `  <url><loc>${siteUrl}/${page}</loc><lastmod>2026-06-20</lastmod><priority>${priority}</priority></url>`)
     .join("\n");
   const articles = posts
     .map((post) => `  <url><loc>${siteUrl}/articles/${post.id}.html</loc><lastmod>${post.date}</lastmod><priority>0.8</priority></url>`)
