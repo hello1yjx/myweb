@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkmarx AI Supply Chain 与 MCP Server：新手怎样给 AI 代码资产做安全盘点 | 学习资源库</title>
+  <meta name="description" content="Checkmarx One 3.60 在 2026 年 6 月 21 日把 MCP Server 和 AI Supply Chain scanner 推到 GA：开发者可以在 Claude、Cursor、Windsurf、Kiro、Copilot Chat 等 IDE 或 AI 助手里进入安全工作流，同时让仓库扫描识别模型、AI SDK、AI Agent、MCP client/server 等资产。新手更应该先把它理解成 AI 资产清点与权限治理入口，而不是让聊天窗口直接替代安全复核。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/checkmarx-ai-supply-chain-mcp-security-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Checkmarx AI Supply Chain 与 MCP Server：新手怎样给 AI 代码资产做安全盘点","description":"Checkmarx One 3.60 在 2026 年 6 月 21 日把 MCP Server 和 AI Supply Chain scanner 推到 GA：开发者可以在 Claude、Cursor、Windsurf、Kiro、Copilot Chat 等 IDE 或 AI 助手里进入安全工作流，同时让仓库扫描识别模型、AI SDK、AI Agent、MCP client/server 等资产。新手更应该先把它理解成 AI 资产清点与权限治理入口，而不是让聊天窗口直接替代安全复核。","datePublished":"2026-06-21","dateModified":"2026-06-21","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/checkmarx-ai-supply-chain-mcp-security-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260621-hotspots">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-book-line.png" alt="" width="36" height="33"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <button class="menu-button" data-menu-button aria-expanded="false" aria-label="切换导航菜单">☰</button>
+      <nav class="site-nav" data-mobile-nav>
+        <a href="../index.html">首页</a>
+        <a class="is-active" href="../posts.html" aria-current="page">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../resources.html#official-resources">工具导航</a>
+        <a href="../hotspots.html">技术资讯</a>
+        <a href="../projects.html">开源项目</a>
+        <a href="../about.html">关于我们</a>
+      </nav>
+      <form class="header-search" action="../posts.html" method="get">
+        <input type="search" name="q" placeholder="搜索教程、资源、工具或关键词...">
+        <button type="submit" aria-label="搜索">/</button>
+      </form>
+      <a class="header-github" href="https://github.com/hello1yjx/hello1yjx.github.io" target="_blank" rel="noreferrer" aria-label="GitHub">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="" width="24" height="24">
+      </a>
+      <a class="header-cta" href="../posts.html">开始学习</a>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 安全</span>
+      <h1>Checkmarx AI Supply Chain 与 MCP Server：新手怎样给 AI 代码资产做安全盘点</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-21">2026年6月21日</time>
+        <span>10 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Checkmarx One 3.60 在 2026 年 6 月 21 日把 MCP Server 和 AI Supply Chain scanner 推到 GA：开发者可以在 Claude、Cursor、Windsurf、Kiro、Copilot Chat 等 IDE 或 AI 助手里进入安全工作流，同时让仓库扫描识别模型、AI SDK、AI Agent、MCP client/server 等资产。新手更应该先把它理解成 AI 资产清点与权限治理入口，而不是让聊天窗口直接替代安全复核。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://docs.checkmarx.com/en/34965-281369-multi-tenant-current.html" target="_blank" rel="noreferrer">Checkmarx One 3.60 Release Notes</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>AI 编程工具进入团队以后，安全问题不再只看传统依赖包和漏洞编号。仓库里可能出现模型调用、AI SDK、Agent 配置、MCP client、MCP server、提示词规则、自动修复脚本和 IDE 助手连接配置。它们看起来像普通代码或配置，但一旦被 Agent 自动调用，就会影响代码读写、数据访问、扫描结果解释和修复建议。Checkmarx One 3.60 在 2026 年 6 月 21 日新增 MCP Server 与 AI Supply Chain scanner，正好说明 AppSec 工具开始把这些 AI 资产纳入正式扫描和工作流。</p><p>这件事对新手的启发很直接：不要只问“我的项目用了哪个大模型”，而要先列清楚项目里有哪些 AI 相关入口、它们从哪里来、能访问什么、由谁触发、扫描结果怎样复核。MCP Server 让安全平台可以被 AI 助手和 IDE 聊天界面调用，但越方便越需要边界；AI Supply Chain scanner 可以在代码仓库集成项目里自动扫描 AI 资产，但扫描结果仍要结合仓库权限、分支策略和人工判断来处理。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>正在把 Claude、Cursor、Windsurf、Kiro、GitHub Copilot Chat 或自建 MCP 工具接入代码安全流程的开发者</li><li>想知道仓库里有哪些模型、AI SDK、AI Agent、MCP client/server，但还没有固定盘点方法的个人站长和小团队</li><li>刚开始接触 AI supply chain、AI-BOM、MCP 与 AppSec 工作流，希望先建立安全边界的新手</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先把仓库里的 AI 入口列出来。不要只搜索 OpenAI、Gemini、Claude 这类模型名，也要看 package.json、requirements.txt、配置目录、CI 脚本、MCP 配置、IDE 配置和 Agent instructions。目标是知道哪些代码会调用模型，哪些工具会被 Agent 调用，哪些配置会影响安全扫描和自动修复。</li><li>给每个入口补上资产信息。至少记录资产类型、名称、提供方、所在项目、关联应用和负责人。Checkmarx 文档把 AI model、AI library、AI SDK、AI agent、MCP client、MCP server 都作为 AI Supply Chain Global Inventory 中可以展示的资产类型；新手可以照这个维度先做一张轻量表。</li><li>把 MCP 接入当成权限工作流，而不是普通聊天插件。Checkmarx 的 MCP Server 面向 AI assistant 和 IDE chat，复用 Checkmarx One 现有认证与 RBAC，并提到 OAuth client、Dynamic Client Registration 和审计日志。实际接入时应先用只读查询、最小角色和测试项目验证，确认不会让助手越权修改策略或误触发修复。</li><li>开启仓库集成扫描时先看分支和触发器。Checkmarx 说明 AI Supply Chain scanner 可在 Code Repository Integration 项目中启用，并按 SCM 事件自动触发。新手要先确认哪些仓库、哪些分支、哪些 PR 会触发扫描，避免把实验仓库、过期 fork 或不该公开的 AI 配置混进同一套结果。</li><li>最后再处理修复建议。聊天界面里能查看和修复漏洞并不代表应该直接一键接受。建议把 AI 助手给出的解释、相关文件、风险等级、变更建议和人工复核结论写进 PR 或安全工单；涉及依赖升级、权限变更、MCP 配置修改时，先跑测试和扫描，再合并。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://docs.checkmarx.com/en/34965-281369-multi-tenant-current.html" target="_blank" rel="noreferrer">Checkmarx One 3.60 Release Notes</a>
+              <span>：发布 MCP Server 与 AI Supply Chain scanner GA，说明 IDE/AI assistant 接入、RBAC、审计日志和仓库集成扫描能力。</span>
+            </li>
+
+            <li>
+              <a href="https://docs.checkmarx.com/en/34965-659697-mcp-server---interacting-with-checkmarx-one-via-ai-assistant.html" target="_blank" rel="noreferrer">Checkmarx Docs：MCP Server</a>
+              <span>：用于核对 MCP Server 与 AI assistant、IDE chat、认证和安全工作流的边界。</span>
+            </li>
+
+            <li>
+              <a href="https://docs.checkmarx.com/en/34965-591189-navigating-ai-supply-chain-security.html" target="_blank" rel="noreferrer">Checkmarx Docs：Navigating AI Supply Chain Security</a>
+              <span>：说明 AI Supply Chain Global Inventory、资产类型字段和 AI-BOM JSON 导出。</span>
+            </li>
+
+            <li>
+              <a href="https://docs.checkmarx.com/en/34965-68614-checkmarx-one-integrations.html" target="_blank" rel="noreferrer">Checkmarx One integrations</a>
+              <span>：适合继续核对仓库、CI/CD 和插件接入方式，避免只从聊天入口理解安全流程。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>AI 资产清点不是为了追热点，而是为了知道哪些模型、SDK、Agent 和 MCP 入口真正进入了代码与 CI/CD。</li><li>MCP Server 能让 AI 助手更快进入安全工作流，但认证、RBAC、审计日志和人工复核仍是上线前的基本边界。</li><li>AI-BOM 可以作为审计和合规材料的起点；它不能自动证明安全，只能帮助团队发现资产、排序风险并跟踪负责人。</li></ul>
+
+        <h2>第一次盘点可以从这些文件开始</h2>
+
+        <ul><li>依赖清单：package.json、pnpm-lock.yaml、requirements.txt、pyproject.toml、go.mod、Dockerfile。</li><li>Agent 配置：AGENTS.md、CLAUDE.md、.cursor、.windsurf、.github/copilot、skills 或 prompts 目录。</li><li>MCP 配置：本地或仓库内记录的 mcpServers、server URL、stdio 命令、OAuth client 信息和工具权限。</li><li>CI/CD：GitHub Actions、GitLab CI、Vercel、Cloudflare、Docker、Checkmarx 或其他扫描触发器。</li><li>人工记录：谁批准接入、谁负责复核、怎样撤销、扫描失败时是否阻断合并。</li></ul>
+
+
+
+        <h2>AI 资产台账模板</h2>
+        <p>即使暂时没有企业级扫描工具，也可以先用最小台账建立习惯。</p>
+
+
+        <pre><code class="language-text">资产类型：
+资产名称：
+提供方：
+所在仓库/项目：
+关联应用：
+触发方式：
+权限范围：
+最近扫描时间：
+负责人：
+处理状态：</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Checkmarx</span><span>AI Supply Chain</span><span>MCP</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="cloudflare-flue-agents-sdk-production-guide.html">Cloudflare Flue 与 Agents SDK：新手怎样理解 Agent 的框架、harness 和可恢复运行时</a><a href="cloudflare-agents-sdk-browser-codemode-recovery-guide.html">Cloudflare Agents SDK v0.16.1：新手怎样把浏览器自动化、代码执行和恢复机制接进 AI Agent</a><a href="vercel-functions-30-minute-ai-tasks-guide.html">Vercel Functions 可运行 30 分钟：新手怎样给 AI 长任务设置超时、队列和验收边界</a><a href="claude-code-2178-permission-nested-skills-guide.html">Claude Code v2.1.178 权限与嵌套 Skills：新手怎样回归测试 subagent、工作流和远程控制</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var button = document.querySelector("[data-menu-button]");
+      var nav = document.querySelector("[data-mobile-nav]");
+      if (!button || !nav) return;
+      button.addEventListener("click", function () {
+        var expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        nav.classList.toggle("site-nav--open", !expanded);
+      });
+    });
+  </script>
+</body>
+</html>

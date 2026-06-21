@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260620-hotspots">
+  <link rel="stylesheet" href="assets/styles.css?v=20260621-hotspots">
 </head>
 <body>
   <header class="site-header">
@@ -76,6 +76,66 @@
       <div class="hotspot-grid" data-hotspot-list>
         <!-- STATIC_HOTSPOTS_START -->
 <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 安全</span>
+            <time datetime="2026-06-21">2026年6月21日</time>
+          </div>
+          <h3>Checkmarx One 3.60 GA：MCP Server 与 AI Supply Chain scanner 进入代码安全工作流</h3>
+        </div>
+      </div>
+      <p>Checkmarx One 3.60 发布 MCP Server 与 AI Supply Chain scanner：前者让开发者和 AppSec 团队可从 Claude、Cursor、Windsurf、Kiro、Copilot Chat 等 AI 助手或 IDE 聊天界面进入安全工作流，后者可在代码仓库集成项目中识别模型、AI SDK、AI Agent、MCP client/server 等 AI 资产并触发扫描。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>AI 编程工具的风险已经从“某个包有没有漏洞”扩展到“仓库里有哪些模型、Agent、MCP 入口和自动修复权限”。新手可以把这次更新当成 AI-BOM 和最小权限接入的提醒：先盘点资产、确认仓库触发范围，再让聊天助手参与查询和修复建议，不要直接把安全治理交给未复核的自动化。</p>
+      </div>
+      <p class="hotspot-card__idea">已扩写：Checkmarx AI Supply Chain 与 MCP Server 新手安全盘点清单</p>
+      <a class="text-link" href="https://docs.checkmarx.com/en/34965-281369-multi-tenant-current.html" target="_blank" rel="noreferrer">查看来源：Checkmarx Docs</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 编程</span>
+            <time datetime="2026-06-20">2026年6月20日</time>
+          </div>
+          <h3>Qoder CN 1.3.0 统一个人版 credits，并开放内置专家 Agent 与自定义子 Agent 配置</h3>
+        </div>
+      </div>
+      <p>阿里云 Qoder CN release notes 显示，1.3.0 将个人版用量整合为统一 credits 池，覆盖 Qoder CN IDE、JetBrains 插件、QoderWork CN、Qoder CN CLI、QoderWake CN、移动端与 Cloud Agents；同时新增内置专家 Agent 自定义提示词，以及自定义 subagent 指定模型能力。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>国产 AI 编程套件也在从单一 IDE 插件走向账号、CLI、桌面协作、移动端和云 Agent 的统一工作流。对新手来说，重点不是追额度活动，而是学会把专家 Agent、子 Agent 模型、记忆、skills 和代码索引放进同一套账号与数据保留边界里管理。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：Qoder CN 统一 credits 后，个人开发者怎样管理 IDE、CLI、Agent 与数据迁移边界</p>
+      <a class="text-link" href="https://help.aliyun.com/en/lingma/product-overview/qoder-cn-update-log" target="_blank" rel="noreferrer">查看来源：阿里云帮助文档</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 终端 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 终端</span>
+            <time datetime="2026-06-20">2026年6月20日</time>
+          </div>
+          <h3>Claude Code 2.1.185/2.1.183 调整等待提示，并强化 destructive 命令与自动模式安全</h3>
+        </div>
+      </div>
+      <p>Claude Code changelog 显示，2.1.185 将流式响应停顿提示改为更准确的等待与重试文案，并把触发阈值从 10 秒调到 20 秒；2.1.183 还强化 auto mode safety，阻止未明确要求时的 git reset、git clean、git stash drop、terraform destroy 等破坏性操作，并修复子 Agent WebSearch、Windows Terminal TUI、headless/SDK MCP auth-stub 暴露等问题。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>终端 Agent 的体验不只看模型能力，还要看等待反馈、权限边界、子 Agent 稳定性和 Windows 终端可靠性。新手升级这类工具时，应重点回归测试自动模式、破坏性命令拦截、MCP 鉴权和长任务输出，而不是只看版本号。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：Claude Code 2.1.183 安全改动下，怎样回归测试终端 Agent 的自动模式</p>
+      <a class="text-link" href="https://code.claude.com/docs/en/changelog" target="_blank" rel="noreferrer">查看来源：Claude Code Docs</a>
+    </article>
+
+    <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
         <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 建站 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <div>
@@ -2273,6 +2333,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260620-hotspots"></script>
+  <script src="assets/app.js?v=20260621-hotspots"></script>
 </body>
 </html>

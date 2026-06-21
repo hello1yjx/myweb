@@ -29,6 +29,86 @@ const siteData = {
   },
   posts: [
     {
+      id: "checkmarx-ai-supply-chain-mcp-security-guide",
+      title: "Checkmarx AI Supply Chain 与 MCP Server：新手怎样给 AI 代码资产做安全盘点",
+      date: "2026-06-21",
+      category: "AI 安全",
+      readTime: "10 分钟",
+      excerpt: "Checkmarx One 3.60 在 2026 年 6 月 21 日把 MCP Server 和 AI Supply Chain scanner 推到 GA：开发者可以在 Claude、Cursor、Windsurf、Kiro、Copilot Chat 等 IDE 或 AI 助手里进入安全工作流，同时让仓库扫描识别模型、AI SDK、AI Agent、MCP client/server 等资产。新手更应该先把它理解成 AI 资产清点与权限治理入口，而不是让聊天窗口直接替代安全复核。",
+      tags: ["Checkmarx", "AI Supply Chain", "MCP"],
+      featured: true,
+      intro: [
+        "AI 编程工具进入团队以后，安全问题不再只看传统依赖包和漏洞编号。仓库里可能出现模型调用、AI SDK、Agent 配置、MCP client、MCP server、提示词规则、自动修复脚本和 IDE 助手连接配置。它们看起来像普通代码或配置，但一旦被 Agent 自动调用，就会影响代码读写、数据访问、扫描结果解释和修复建议。Checkmarx One 3.60 在 2026 年 6 月 21 日新增 MCP Server 与 AI Supply Chain scanner，正好说明 AppSec 工具开始把这些 AI 资产纳入正式扫描和工作流。",
+        "这件事对新手的启发很直接：不要只问“我的项目用了哪个大模型”，而要先列清楚项目里有哪些 AI 相关入口、它们从哪里来、能访问什么、由谁触发、扫描结果怎样复核。MCP Server 让安全平台可以被 AI 助手和 IDE 聊天界面调用，但越方便越需要边界；AI Supply Chain scanner 可以在代码仓库集成项目里自动扫描 AI 资产，但扫描结果仍要结合仓库权限、分支策略和人工判断来处理。"
+      ],
+      audience: [
+        "正在把 Claude、Cursor、Windsurf、Kiro、GitHub Copilot Chat 或自建 MCP 工具接入代码安全流程的开发者",
+        "想知道仓库里有哪些模型、AI SDK、AI Agent、MCP client/server，但还没有固定盘点方法的个人站长和小团队",
+        "刚开始接触 AI supply chain、AI-BOM、MCP 与 AppSec 工作流，希望先建立安全边界的新手"
+      ],
+      format: [
+        "适合整理成“识别 AI 资产 / 分清调用入口 / 最小权限连接 MCP / 导出 AI-BOM / 人工复核修复建议”的检查清单",
+        "后续可以补一份 AI 代码资产台账模板，记录资产类型、提供方、项目、应用、最近扫描时间、负责人和下线条件"
+      ],
+      roadmap: [
+        "先把仓库里的 AI 入口列出来。不要只搜索 OpenAI、Gemini、Claude 这类模型名，也要看 package.json、requirements.txt、配置目录、CI 脚本、MCP 配置、IDE 配置和 Agent instructions。目标是知道哪些代码会调用模型，哪些工具会被 Agent 调用，哪些配置会影响安全扫描和自动修复。",
+        "给每个入口补上资产信息。至少记录资产类型、名称、提供方、所在项目、关联应用和负责人。Checkmarx 文档把 AI model、AI library、AI SDK、AI agent、MCP client、MCP server 都作为 AI Supply Chain Global Inventory 中可以展示的资产类型；新手可以照这个维度先做一张轻量表。",
+        "把 MCP 接入当成权限工作流，而不是普通聊天插件。Checkmarx 的 MCP Server 面向 AI assistant 和 IDE chat，复用 Checkmarx One 现有认证与 RBAC，并提到 OAuth client、Dynamic Client Registration 和审计日志。实际接入时应先用只读查询、最小角色和测试项目验证，确认不会让助手越权修改策略或误触发修复。",
+        "开启仓库集成扫描时先看分支和触发器。Checkmarx 说明 AI Supply Chain scanner 可在 Code Repository Integration 项目中启用，并按 SCM 事件自动触发。新手要先确认哪些仓库、哪些分支、哪些 PR 会触发扫描，避免把实验仓库、过期 fork 或不该公开的 AI 配置混进同一套结果。",
+        "最后再处理修复建议。聊天界面里能查看和修复漏洞并不代表应该直接一键接受。建议把 AI 助手给出的解释、相关文件、风险等级、变更建议和人工复核结论写进 PR 或安全工单；涉及依赖升级、权限变更、MCP 配置修改时，先跑测试和扫描，再合并。"
+      ],
+      officialLinks: [
+        {
+          label: "Checkmarx One 3.60 Release Notes",
+          url: "https://docs.checkmarx.com/en/34965-281369-multi-tenant-current.html",
+          note: "发布 MCP Server 与 AI Supply Chain scanner GA，说明 IDE/AI assistant 接入、RBAC、审计日志和仓库集成扫描能力。"
+        },
+        {
+          label: "Checkmarx Docs：MCP Server",
+          url: "https://docs.checkmarx.com/en/34965-659697-mcp-server---interacting-with-checkmarx-one-via-ai-assistant.html",
+          note: "用于核对 MCP Server 与 AI assistant、IDE chat、认证和安全工作流的边界。"
+        },
+        {
+          label: "Checkmarx Docs：Navigating AI Supply Chain Security",
+          url: "https://docs.checkmarx.com/en/34965-591189-navigating-ai-supply-chain-security.html",
+          note: "说明 AI Supply Chain Global Inventory、资产类型字段和 AI-BOM JSON 导出。"
+        },
+        {
+          label: "Checkmarx One integrations",
+          url: "https://docs.checkmarx.com/en/34965-68614-checkmarx-one-integrations.html",
+          note: "适合继续核对仓库、CI/CD 和插件接入方式，避免只从聊天入口理解安全流程。"
+        }
+      ],
+      curatedLinks: [
+        "AI 资产清点不是为了追热点，而是为了知道哪些模型、SDK、Agent 和 MCP 入口真正进入了代码与 CI/CD。",
+        "MCP Server 能让 AI 助手更快进入安全工作流，但认证、RBAC、审计日志和人工复核仍是上线前的基本边界。",
+        "AI-BOM 可以作为审计和合规材料的起点；它不能自动证明安全，只能帮助团队发现资产、排序风险并跟踪负责人。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 AI 代码资产台账 CSV，字段包括资产类型、名称、提供方、项目、应用、负责人、最近扫描时间和处理状态",
+        "可以补一份 MCP 接入前检查表，覆盖 OAuth/RBAC、只读试跑、审计日志、触发器范围、人工复核和撤销路径"
+      ],
+      monetization: "适合与本站的 MCP、Agent 安全、GitHub Copilot、Claude Code 和软件供应链安全内容互相推荐，帮助读者从工具使用过渡到可审计的团队治理。",
+      extraSections: [
+        {
+          title: "第一次盘点可以从这些文件开始",
+          items: [
+            "依赖清单：package.json、pnpm-lock.yaml、requirements.txt、pyproject.toml、go.mod、Dockerfile。",
+            "Agent 配置：AGENTS.md、CLAUDE.md、.cursor、.windsurf、.github/copilot、skills 或 prompts 目录。",
+            "MCP 配置：本地或仓库内记录的 mcpServers、server URL、stdio 命令、OAuth client 信息和工具权限。",
+            "CI/CD：GitHub Actions、GitLab CI、Vercel、Cloudflare、Docker、Checkmarx 或其他扫描触发器。",
+            "人工记录：谁批准接入、谁负责复核、怎样撤销、扫描失败时是否阻断合并。"
+          ]
+        },
+        {
+          title: "AI 资产台账模板",
+          text: "即使暂时没有企业级扫描工具，也可以先用最小台账建立习惯。",
+          code: "资产类型：\n资产名称：\n提供方：\n所在仓库/项目：\n关联应用：\n触发方式：\n权限范围：\n最近扫描时间：\n负责人：\n处理状态：",
+          language: "text"
+        }
+      ]
+    },
+    {
       id: "cloudflare-temporary-accounts-agent-deploy-guide",
       title: "Cloudflare 临时账号：新手怎样让 AI Agent 先部署、再认领和验收 Worker",
       date: "2026-06-19",
@@ -4259,6 +4339,36 @@ git push origin main`,
   ],
   hotspots: [
     {
+      date: "2026-06-21",
+      tag: "AI 安全",
+      title: "Checkmarx One 3.60 GA：MCP Server 与 AI Supply Chain scanner 进入代码安全工作流",
+      summary: "Checkmarx One 3.60 发布 MCP Server 与 AI Supply Chain scanner：前者让开发者和 AppSec 团队可从 Claude、Cursor、Windsurf、Kiro、Copilot Chat 等 AI 助手或 IDE 聊天界面进入安全工作流，后者可在代码仓库集成项目中识别模型、AI SDK、AI Agent、MCP client/server 等 AI 资产并触发扫描。",
+      why: "AI 编程工具的风险已经从“某个包有没有漏洞”扩展到“仓库里有哪些模型、Agent、MCP 入口和自动修复权限”。新手可以把这次更新当成 AI-BOM 和最小权限接入的提醒：先盘点资产、确认仓库触发范围，再让聊天助手参与查询和修复建议，不要直接把安全治理交给未复核的自动化。",
+      sourceLabel: "Checkmarx Docs",
+      sourceUrl: "https://docs.checkmarx.com/en/34965-281369-multi-tenant-current.html",
+      articleIdea: "已扩写：Checkmarx AI Supply Chain 与 MCP Server 新手安全盘点清单"
+    },
+    {
+      date: "2026-06-20",
+      tag: "AI 编程",
+      title: "Qoder CN 1.3.0 统一个人版 credits，并开放内置专家 Agent 与自定义子 Agent 配置",
+      summary: "阿里云 Qoder CN release notes 显示，1.3.0 将个人版用量整合为统一 credits 池，覆盖 Qoder CN IDE、JetBrains 插件、QoderWork CN、Qoder CN CLI、QoderWake CN、移动端与 Cloud Agents；同时新增内置专家 Agent 自定义提示词，以及自定义 subagent 指定模型能力。",
+      why: "国产 AI 编程套件也在从单一 IDE 插件走向账号、CLI、桌面协作、移动端和云 Agent 的统一工作流。对新手来说，重点不是追额度活动，而是学会把专家 Agent、子 Agent 模型、记忆、skills 和代码索引放进同一套账号与数据保留边界里管理。",
+      sourceLabel: "阿里云帮助文档",
+      sourceUrl: "https://help.aliyun.com/en/lingma/product-overview/qoder-cn-update-log",
+      articleIdea: "候选：Qoder CN 统一 credits 后，个人开发者怎样管理 IDE、CLI、Agent 与数据迁移边界"
+    },
+    {
+      date: "2026-06-20",
+      tag: "AI 终端",
+      title: "Claude Code 2.1.185/2.1.183 调整等待提示，并强化 destructive 命令与自动模式安全",
+      summary: "Claude Code changelog 显示，2.1.185 将流式响应停顿提示改为更准确的等待与重试文案，并把触发阈值从 10 秒调到 20 秒；2.1.183 还强化 auto mode safety，阻止未明确要求时的 git reset、git clean、git stash drop、terraform destroy 等破坏性操作，并修复子 Agent WebSearch、Windows Terminal TUI、headless/SDK MCP auth-stub 暴露等问题。",
+      why: "终端 Agent 的体验不只看模型能力，还要看等待反馈、权限边界、子 Agent 稳定性和 Windows 终端可靠性。新手升级这类工具时，应重点回归测试自动模式、破坏性命令拦截、MCP 鉴权和长任务输出，而不是只看版本号。",
+      sourceLabel: "Claude Code Docs",
+      sourceUrl: "https://code.claude.com/docs/en/changelog",
+      articleIdea: "候选：Claude Code 2.1.183 安全改动下，怎样回归测试终端 Agent 的自动模式"
+    },
+    {
       date: "2026-06-19",
       tag: "AI 建站",
       title: "Cloudflare 推出 AI Agent 临时账号，支持先部署 Worker 再认领",
@@ -6109,7 +6219,8 @@ function bindMenu() {
 }
 
 function setActiveNavigation() {
-  const pageName = window.location.pathname.split("/").pop() || "index.html";
+  const pathname = window.location.pathname;
+  const pageName = pathname.split("/").pop() || "index.html";
   const currentPath = pageName === "" ? "index.html" : pageName;
   const currentHash = window.location.hash;
   const navLinks = Array.from(document.querySelectorAll(".site-nav a"));
@@ -6126,9 +6237,10 @@ function setActiveNavigation() {
     "post.html": "posts.html",
     "project.html": "projects.html"
   };
+  const fallbackPath = pathname.includes("/articles/") ? "posts.html" : fallbackMap[currentPath];
   const fallbackMatch = navLinks.find((link) => {
     const target = new URL(link.getAttribute("href"), window.location.href);
-    return target.pathname.split("/").pop() === fallbackMap[currentPath];
+    return target.pathname.split("/").pop() === fallbackPath;
   });
   const activeLink = exactHashMatch || pathMatch || fallbackMatch;
 
