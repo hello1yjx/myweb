@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Qwen Code v0.18.5：新手怎样给终端 AI Agent 做升级前安全检查 | 学习资源库</title>
+  <meta name="description" content="Qwen Code v0.18.5 在 2026 年 6 月 21 日发布，更新重点集中在终端 Agent 的边界校验、配置解析、路径处理、MCP 资源与提示词展示等稳定性问题。新手不要只把它看成普通小版本升级，更适合借此建立一套终端 AI Agent 的升级前检查：先看工作区边界、忽略规则、环境变量、端口、MCP 与回滚路径，再让 Agent 参与真实项目。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/qwen-code-0185-terminal-agent-safety-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Qwen Code v0.18.5：新手怎样给终端 AI Agent 做升级前安全检查","description":"Qwen Code v0.18.5 在 2026 年 6 月 21 日发布，更新重点集中在终端 Agent 的边界校验、配置解析、路径处理、MCP 资源与提示词展示等稳定性问题。新手不要只把它看成普通小版本升级，更适合借此建立一套终端 AI Agent 的升级前检查：先看工作区边界、忽略规则、环境变量、端口、MCP 与回滚路径，再让 Agent 参与真实项目。","datePublished":"2026-06-22","dateModified":"2026-06-22","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/qwen-code-0185-terminal-agent-safety-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260622-hotspots">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-book-line.png" alt="" width="36" height="33"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <button class="menu-button" data-menu-button aria-expanded="false" aria-label="切换导航菜单">☰</button>
+      <nav class="site-nav" data-mobile-nav>
+        <a href="../index.html">首页</a>
+        <a class="is-active" href="../posts.html" aria-current="page">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../resources.html#official-resources">工具导航</a>
+        <a href="../hotspots.html">技术资讯</a>
+        <a href="../projects.html">开源项目</a>
+        <a href="../about.html">关于我们</a>
+      </nav>
+      <form class="header-search" action="../posts.html" method="get">
+        <input type="search" name="q" placeholder="搜索教程、资源、工具或关键词...">
+        <button type="submit" aria-label="搜索">/</button>
+      </form>
+      <a class="header-github" href="https://github.com/hello1yjx/hello1yjx.github.io" target="_blank" rel="noreferrer" aria-label="GitHub">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="" width="24" height="24">
+      </a>
+      <a class="header-cta" href="../posts.html">开始学习</a>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 编程</span>
+      <h1>Qwen Code v0.18.5：新手怎样给终端 AI Agent 做升级前安全检查</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-22">2026年6月22日</time>
+        <span>10 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Qwen Code v0.18.5 在 2026 年 6 月 21 日发布，更新重点集中在终端 Agent 的边界校验、配置解析、路径处理、MCP 资源与提示词展示等稳定性问题。新手不要只把它看成普通小版本升级，更适合借此建立一套终端 AI Agent 的升级前检查：先看工作区边界、忽略规则、环境变量、端口、MCP 与回滚路径，再让 Agent 参与真实项目。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://github.com/QwenLM/qwen-code/releases/tag/v0.18.5" target="_blank" rel="noreferrer">Qwen Code v0.18.5 GitHub Release</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>终端里的 AI Agent 和普通聊天工具不一样。它可以读写文件、运行命令、访问语言服务、调用 MCP 资源、读取忽略规则，甚至把多个 provider 和扩展市场接到同一个工作流里。功能越靠近真实开发环境，升级时越不能只看“有没有新模型”或“回复快不快”，而要确认边界有没有变、配置有没有被严格解析、路径有没有跑出工作区。</p><p>Qwen Code v0.18.5 的发布说明里有大量看似琐碎的修复：强制 shell 目录工作区边界、校验 LSP socket 端口、严格解析 token 和并发环境变量、处理 dot-prefixed ignore 文件、限制安装路径和临时路径边界、修复 Windows 文件 mention、支持 MCP resources 并可靠展示 prompts。这些点放在一起，说明终端 Agent 正在从“能跑任务”走向“更适合放进真实仓库”。新手可以把这次更新当成一次升级检查课，而不是单纯追版本号。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>正在使用 Qwen Code、Codex、Claude Code、Cline、opencode 等终端 AI Agent 的个人开发者</li><li>想把 Agent 放进真实仓库、CI 辅助脚本或本地自动化流程，但还没有固定升级检查清单的新手</li><li>需要理解工作区边界、MCP、忽略规则、provider 配置和回滚策略的前端、后端与个人站长</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先确认你升级的到底是哪一个入口。Qwen Code 有终端、VS Code Companion、GitHub Actions、MCP、skills、hooks、channels 等能力。第一次升级不要同时改全局配置、项目配置和 provider；先记录当前版本、安装来源、默认模型、登录方式和项目根目录。</li><li>把工作区边界放在第一位。v0.18.5 提到 shell directory workspace boundary、installation path boundaries、temp path boundaries、custom theme home boundary、sibling paths absolute 等修复。新手可以用一个测试仓库试跑读取、搜索、生成补丁和临时文件任务，确认 Agent 不会把输出写到项目外，也不会把临时上传或安装路径混进仓库。</li><li>核对忽略规则和 dotfile。发布说明提到 dot-prefixed ignore 文件、dot-prefixed plans 目录、dotfile paths in Web Shell sendFile 等处理。升级后建议检查 .gitignore、.qwenignore、AGENTS.md、skills、plans、.env.example 这类文件是否仍按预期被读取或跳过，尤其不要让 .env、token、私有配置被误发给远端工具。</li><li>把环境变量和端口当成输入校验问题。v0.18.5 严格解析 max output token、tool concurrency、FORCE_HYPERLINK、NO_PROXY ports、server ports、LSP socket ports 和若干整数型配置。升级后不要只跑一次普通问答，应该试一组边界值和错误值，确认工具给出可理解错误，而不是静默降级或让任务卡住。</li><li>最后再打开 MCP 和扩展能力。发布说明新增 MCP resources 与 prompts 展示，也修复了 provider、marketplace、OAuth token response、ACP glob max results 等问题。建议先让 Agent 列出可用 MCP 资源和提示词，不立刻执行写入型工具；确认来源、权限和日志都清楚以后，再放到真实项目中。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://github.com/QwenLM/qwen-code/releases/tag/v0.18.5" target="_blank" rel="noreferrer">Qwen Code v0.18.5 GitHub Release</a>
+              <span>：2026 年 6 月 21 日发布，包含工作区边界、忽略规则、端口、环境变量、MCP resources 与 prompts 等修复和改进。</span>
+            </li>
+
+            <li>
+              <a href="https://qwenlm.github.io/qwen-code-docs/en/users/overview/" target="_blank" rel="noreferrer">Qwen Code Docs：Overview</a>
+              <span>：官方用户文档入口，说明 Qwen Code 是运行在终端里的 agentic coding tool，并列出安装、启动、MCP、skills、approval、sandboxing 等能力。</span>
+            </li>
+
+            <li>
+              <a href="https://github.com/QwenLM/qwen-code" target="_blank" rel="noreferrer">QwenLM/qwen-code GitHub Repository</a>
+              <span>：官方开源仓库，适合继续查看 README、issues、pull requests、release assets 和后续补丁。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>终端 Agent 升级不是换一个聊天窗口，而是更新一个能读写文件和运行命令的本地开发工具，必须先看边界和回滚。</li><li>发布说明里大量“严格解析”和“路径边界”类修复，通常比炫目的模型入口更值得新手关注，因为它们直接影响误操作风险。</li><li>MCP resources 和 prompts 能提高上下文质量，但也会扩大可见资源范围；第一次接入时应先列清楚来源和权限，再允许写入型动作。</li></ul>
+
+        <h2>升级前先记录这些信息</h2>
+
+        <ul><li>当前版本：运行工具自带的 version 命令或查看 GitHub Release tag。</li><li>安装来源：npm、独立安装脚本、桌面端、VS Code 扩展或 CI 镜像。</li><li>项目根目录：确认当前 shell 所在目录就是准备让 Agent 操作的仓库。</li><li>登录方式：API Key、Alibaba Cloud Coding Plan、第三方 provider 或本地配置。</li><li>回退方式：记录旧版本安装命令、锁定版本方式和配置备份位置。</li></ul>
+
+
+
+        <h2>建议做的三次试跑</h2>
+
+        <ul><li>只读试跑：让 Agent 总结项目结构，不允许编辑文件，观察它是否尊重忽略规则。</li><li>小补丁试跑：让 Agent 修改一个非关键文档或测试文件，确认 diff 只落在预期目录。</li><li>MCP 试跑：只让 Agent 列出 resources 和 prompts，不执行写入型工具，先核对来源与权限。</li></ul>
+
+
+
+        <h2>升级记录模板</h2>
+        <p>每次升级终端 Agent，都建议留下这份短记录，方便出现路径、权限或 provider 问题时回退。</p>
+
+
+        <pre><code class="language-text">工具名称：Qwen Code
+旧版本：
+新版本：v0.18.5
+安装来源：
+试跑仓库：
+改动配置：
+只读试跑结果：
+小补丁试跑结果：
+MCP 资源核对：
+是否保留升级：
+回退命令：</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Qwen Code</span><span>终端 Agent</span><span>AI 编程</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="github-copilot-agent-finder-ard-guide.html">GitHub Copilot agent finder 与 ARD：新手怎样给 AI Agent 选择可信工具、Skills 和 MCP 资源</a><a href="cloudflare-flue-agents-sdk-production-guide.html">Cloudflare Flue 与 Agents SDK：新手怎样理解 Agent 的框架、harness 和可恢复运行时</a><a href="cloudflare-agents-sdk-browser-codemode-recovery-guide.html">Cloudflare Agents SDK v0.16.1：新手怎样把浏览器自动化、代码执行和恢复机制接进 AI Agent</a><a href="vercel-functions-30-minute-ai-tasks-guide.html">Vercel Functions 可运行 30 分钟：新手怎样给 AI 长任务设置超时、队列和验收边界</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var button = document.querySelector("[data-menu-button]");
+      var nav = document.querySelector("[data-mobile-nav]");
+      if (!button || !nav) return;
+      button.addEventListener("click", function () {
+        var expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        nav.classList.toggle("site-nav--open", !expanded);
+      });
+    });
+  </script>
+</body>
+</html>

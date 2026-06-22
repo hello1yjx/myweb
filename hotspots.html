@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260621-hotspots">
+  <link rel="stylesheet" href="assets/styles.css?v=20260622-hotspots">
 </head>
 <body>
   <header class="site-header">
@@ -77,6 +77,46 @@
         <!-- STATIC_HOTSPOTS_START -->
 <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 编程</span>
+            <time datetime="2026-06-21">2026年6月21日</time>
+          </div>
+          <h3>Qwen Code v0.18.5 发布：集中修复终端 Agent 的边界、配置与 MCP 资源展示</h3>
+        </div>
+      </div>
+      <p>QwenLM/qwen-code v0.18.5 在 2026 年 6 月 21 日发布，更新包含工作区 shell 目录边界、安装路径与临时路径边界、dot-prefixed ignore 文件、LSP socket 端口、环境变量严格解析、Windows 文件 mention、MCP resources 与 prompts 展示等大量修复。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>终端 AI Agent 已经能读写文件、运行命令、接入 MCP 和 provider；升级时最值得关注的不是模型名，而是边界是否清楚、错误输入是否被拒绝、资源是否可见可审计。新手可以借这次更新建立升级前试跑清单：只读总结、小补丁、MCP 资源列举、环境变量边界和回退记录。</p>
+      </div>
+      <p class="hotspot-card__idea">已扩写：Qwen Code v0.18.5 终端 AI Agent 升级前安全检查</p>
+      <a class="text-link" href="https://github.com/QwenLM/qwen-code/releases/tag/v0.18.5" target="_blank" rel="noreferrer">查看来源：Qwen Code GitHub Release</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 终端 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 终端</span>
+            <time datetime="2026-06-21">2026年6月21日</time>
+          </div>
+          <h3>opencode v1.17.9 发布：修复 step limit、Devstral 识别与 Copilot 请求 headers</h3>
+        </div>
+      </div>
+      <p>opencode v1.17.9 在 2026 年 6 月 21 日发布，核心修复包括遵守配置的 agent step limits、provider ID 大小写不一致时的 Devstral 模型检测、向 Copilot model requests 传递自定义 headers，并新增 GLM-5.2 high/max thinking variants。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这类更新提醒新手：终端 Agent 的稳定性经常来自“任务到步数上限时怎样收尾”“provider 名称怎样匹配”“请求头是否按配置透传”这些细节。做自动化任务时，应给 Agent 设置明确步数、最终文本响应和日志检查，不要让任务在中途失败后只留下半截输出。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：用 opencode step limits 做长任务收尾与失败记录检查</p>
+      <a class="text-link" href="https://github.com/anomalyco/opencode/releases/tag/v1.17.9" target="_blank" rel="noreferrer">查看来源：opencode GitHub Release</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
         <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <div>
           <div class="hotspot-card__meta">
@@ -93,6 +133,26 @@
       </div>
       <p class="hotspot-card__idea">已扩写：Checkmarx AI Supply Chain 与 MCP Server 新手安全盘点清单</p>
       <a class="text-link" href="https://docs.checkmarx.com/en/34965-281369-multi-tenant-current.html" target="_blank" rel="noreferrer">查看来源：Checkmarx Docs</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 编程</span>
+            <time datetime="2026-06-20">2026年6月20日</time>
+          </div>
+          <h3>Cline CLI v3.0.29 发布：修复 Z.ai metadata，并回退模型显示方式</h3>
+        </div>
+      </div>
+      <p>Cline CLI v3.0.29 在 2026 年 6 月 20 日发布，隐藏 Cline free models 的成本显示，修复通过 Cline provider 访问 Z.ai models 时的 model metadata resolution，并回退 v3.0.28 的 model-name-only 显示变化，让 model picker、selector 和 status bar 回到此前行为。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>模型选择器、状态栏和 provider metadata 看似只是 UI 细节，但会影响新手判断自己正在调用哪个模型、是否产生费用、是否选错 provider。升级 Cline CLI 后，建议先核对模型列表、状态栏显示和免费模型成本提示，再跑真实项目任务。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：AI 编程 CLI 升级后怎样核对模型选择、费用提示和 provider metadata</p>
+      <a class="text-link" href="https://github.com/cline/cline/releases/tag/cli-v3.0.29" target="_blank" rel="noreferrer">查看来源：Cline GitHub Release</a>
     </article>
 
     <article class="hotspot-card reveal">
@@ -2333,6 +2393,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260621-hotspots"></script>
+  <script src="assets/app.js?v=20260622-hotspots"></script>
 </body>
 </html>

@@ -9,7 +9,7 @@ const siteData = {
     bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
       { value: "6", label: "原创下载包" },
-      { value: "45", label: "新手专题" },
+      { value: "48", label: "新手专题" },
       { value: "持续", label: "更新与核验" }
     ],
     valueCards: [
@@ -28,6 +28,89 @@ const siteData = {
     ]
   },
   posts: [
+    {
+      id: "qwen-code-0185-terminal-agent-safety-guide",
+      title: "Qwen Code v0.18.5：新手怎样给终端 AI Agent 做升级前安全检查",
+      date: "2026-06-22",
+      category: "AI 编程",
+      readTime: "10 分钟",
+      excerpt: "Qwen Code v0.18.5 在 2026 年 6 月 21 日发布，更新重点集中在终端 Agent 的边界校验、配置解析、路径处理、MCP 资源与提示词展示等稳定性问题。新手不要只把它看成普通小版本升级，更适合借此建立一套终端 AI Agent 的升级前检查：先看工作区边界、忽略规则、环境变量、端口、MCP 与回滚路径，再让 Agent 参与真实项目。",
+      tags: ["Qwen Code", "终端 Agent", "AI 编程"],
+      featured: true,
+      intro: [
+        "终端里的 AI Agent 和普通聊天工具不一样。它可以读写文件、运行命令、访问语言服务、调用 MCP 资源、读取忽略规则，甚至把多个 provider 和扩展市场接到同一个工作流里。功能越靠近真实开发环境，升级时越不能只看“有没有新模型”或“回复快不快”，而要确认边界有没有变、配置有没有被严格解析、路径有没有跑出工作区。",
+        "Qwen Code v0.18.5 的发布说明里有大量看似琐碎的修复：强制 shell 目录工作区边界、校验 LSP socket 端口、严格解析 token 和并发环境变量、处理 dot-prefixed ignore 文件、限制安装路径和临时路径边界、修复 Windows 文件 mention、支持 MCP resources 并可靠展示 prompts。这些点放在一起，说明终端 Agent 正在从“能跑任务”走向“更适合放进真实仓库”。新手可以把这次更新当成一次升级检查课，而不是单纯追版本号。"
+      ],
+      audience: [
+        "正在使用 Qwen Code、Codex、Claude Code、Cline、opencode 等终端 AI Agent 的个人开发者",
+        "想把 Agent 放进真实仓库、CI 辅助脚本或本地自动化流程，但还没有固定升级检查清单的新手",
+        "需要理解工作区边界、MCP、忽略规则、provider 配置和回滚策略的前端、后端与个人站长"
+      ],
+      format: [
+        "适合整理成“确认版本 / 检查工作区边界 / 核对忽略规则 / 试跑只读任务 / 验证 MCP 与端口 / 小范围回滚”的升级清单",
+        "后续可以补一份终端 Agent 升级记录模板，记录版本、命令、配置变更、试跑仓库、失败现象和回退方式"
+      ],
+      roadmap: [
+        "先确认你升级的到底是哪一个入口。Qwen Code 有终端、VS Code Companion、GitHub Actions、MCP、skills、hooks、channels 等能力。第一次升级不要同时改全局配置、项目配置和 provider；先记录当前版本、安装来源、默认模型、登录方式和项目根目录。",
+        "把工作区边界放在第一位。v0.18.5 提到 shell directory workspace boundary、installation path boundaries、temp path boundaries、custom theme home boundary、sibling paths absolute 等修复。新手可以用一个测试仓库试跑读取、搜索、生成补丁和临时文件任务，确认 Agent 不会把输出写到项目外，也不会把临时上传或安装路径混进仓库。",
+        "核对忽略规则和 dotfile。发布说明提到 dot-prefixed ignore 文件、dot-prefixed plans 目录、dotfile paths in Web Shell sendFile 等处理。升级后建议检查 .gitignore、.qwenignore、AGENTS.md、skills、plans、.env.example 这类文件是否仍按预期被读取或跳过，尤其不要让 .env、token、私有配置被误发给远端工具。",
+        "把环境变量和端口当成输入校验问题。v0.18.5 严格解析 max output token、tool concurrency、FORCE_HYPERLINK、NO_PROXY ports、server ports、LSP socket ports 和若干整数型配置。升级后不要只跑一次普通问答，应该试一组边界值和错误值，确认工具给出可理解错误，而不是静默降级或让任务卡住。",
+        "最后再打开 MCP 和扩展能力。发布说明新增 MCP resources 与 prompts 展示，也修复了 provider、marketplace、OAuth token response、ACP glob max results 等问题。建议先让 Agent 列出可用 MCP 资源和提示词，不立刻执行写入型工具；确认来源、权限和日志都清楚以后，再放到真实项目中。"
+      ],
+      officialLinks: [
+        {
+          label: "Qwen Code v0.18.5 GitHub Release",
+          url: "https://github.com/QwenLM/qwen-code/releases/tag/v0.18.5",
+          note: "2026 年 6 月 21 日发布，包含工作区边界、忽略规则、端口、环境变量、MCP resources 与 prompts 等修复和改进。"
+        },
+        {
+          label: "Qwen Code Docs：Overview",
+          url: "https://qwenlm.github.io/qwen-code-docs/en/users/overview/",
+          note: "官方用户文档入口，说明 Qwen Code 是运行在终端里的 agentic coding tool，并列出安装、启动、MCP、skills、approval、sandboxing 等能力。"
+        },
+        {
+          label: "QwenLM/qwen-code GitHub Repository",
+          url: "https://github.com/QwenLM/qwen-code",
+          note: "官方开源仓库，适合继续查看 README、issues、pull requests、release assets 和后续补丁。"
+        }
+      ],
+      curatedLinks: [
+        "终端 Agent 升级不是换一个聊天窗口，而是更新一个能读写文件和运行命令的本地开发工具，必须先看边界和回滚。",
+        "发布说明里大量“严格解析”和“路径边界”类修复，通常比炫目的模型入口更值得新手关注，因为它们直接影响误操作风险。",
+        "MCP resources 和 prompts 能提高上下文质量，但也会扩大可见资源范围；第一次接入时应先列清楚来源和权限，再允许写入型动作。"
+      ],
+      downloadIdeas: [
+        "可以整理一份终端 Agent 升级记录表，字段包括工具、旧版本、新版本、安装来源、试跑仓库、配置变更、失败现象和回退命令",
+        "可以补一份 Qwen Code 工作区边界检查清单，覆盖忽略规则、临时路径、MCP 资源、provider 配置和环境变量"
+      ],
+      monetization: "适合与本站的 Qwen Code、Claude Code、Codex、MCP 和 GitHub Copilot 安全边界内容互相推荐，帮助读者从“会用 Agent”过渡到“会安全升级和验收 Agent”。",
+      extraSections: [
+        {
+          title: "升级前先记录这些信息",
+          items: [
+            "当前版本：运行工具自带的 version 命令或查看 GitHub Release tag。",
+            "安装来源：npm、独立安装脚本、桌面端、VS Code 扩展或 CI 镜像。",
+            "项目根目录：确认当前 shell 所在目录就是准备让 Agent 操作的仓库。",
+            "登录方式：API Key、Alibaba Cloud Coding Plan、第三方 provider 或本地配置。",
+            "回退方式：记录旧版本安装命令、锁定版本方式和配置备份位置。"
+          ]
+        },
+        {
+          title: "建议做的三次试跑",
+          items: [
+            "只读试跑：让 Agent 总结项目结构，不允许编辑文件，观察它是否尊重忽略规则。",
+            "小补丁试跑：让 Agent 修改一个非关键文档或测试文件，确认 diff 只落在预期目录。",
+            "MCP 试跑：只让 Agent 列出 resources 和 prompts，不执行写入型工具，先核对来源与权限。"
+          ]
+        },
+        {
+          title: "升级记录模板",
+          text: "每次升级终端 Agent，都建议留下这份短记录，方便出现路径、权限或 provider 问题时回退。",
+          code: "工具名称：Qwen Code\n旧版本：\n新版本：v0.18.5\n安装来源：\n试跑仓库：\n改动配置：\n只读试跑结果：\n小补丁试跑结果：\nMCP 资源核对：\n是否保留升级：\n回退命令：",
+          language: "text"
+        }
+      ]
+    },
     {
       id: "checkmarx-ai-supply-chain-mcp-security-guide",
       title: "Checkmarx AI Supply Chain 与 MCP Server：新手怎样给 AI 代码资产做安全盘点",
@@ -4340,6 +4423,26 @@ git push origin main`,
   hotspots: [
     {
       date: "2026-06-21",
+      tag: "AI 编程",
+      title: "Qwen Code v0.18.5 发布：集中修复终端 Agent 的边界、配置与 MCP 资源展示",
+      summary: "QwenLM/qwen-code v0.18.5 在 2026 年 6 月 21 日发布，更新包含工作区 shell 目录边界、安装路径与临时路径边界、dot-prefixed ignore 文件、LSP socket 端口、环境变量严格解析、Windows 文件 mention、MCP resources 与 prompts 展示等大量修复。",
+      why: "终端 AI Agent 已经能读写文件、运行命令、接入 MCP 和 provider；升级时最值得关注的不是模型名，而是边界是否清楚、错误输入是否被拒绝、资源是否可见可审计。新手可以借这次更新建立升级前试跑清单：只读总结、小补丁、MCP 资源列举、环境变量边界和回退记录。",
+      sourceLabel: "Qwen Code GitHub Release",
+      sourceUrl: "https://github.com/QwenLM/qwen-code/releases/tag/v0.18.5",
+      articleIdea: "已扩写：Qwen Code v0.18.5 终端 AI Agent 升级前安全检查"
+    },
+    {
+      date: "2026-06-21",
+      tag: "AI 终端",
+      title: "opencode v1.17.9 发布：修复 step limit、Devstral 识别与 Copilot 请求 headers",
+      summary: "opencode v1.17.9 在 2026 年 6 月 21 日发布，核心修复包括遵守配置的 agent step limits、provider ID 大小写不一致时的 Devstral 模型检测、向 Copilot model requests 传递自定义 headers，并新增 GLM-5.2 high/max thinking variants。",
+      why: "这类更新提醒新手：终端 Agent 的稳定性经常来自“任务到步数上限时怎样收尾”“provider 名称怎样匹配”“请求头是否按配置透传”这些细节。做自动化任务时，应给 Agent 设置明确步数、最终文本响应和日志检查，不要让任务在中途失败后只留下半截输出。",
+      sourceLabel: "opencode GitHub Release",
+      sourceUrl: "https://github.com/anomalyco/opencode/releases/tag/v1.17.9",
+      articleIdea: "候选：用 opencode step limits 做长任务收尾与失败记录检查"
+    },
+    {
+      date: "2026-06-21",
       tag: "AI 安全",
       title: "Checkmarx One 3.60 GA：MCP Server 与 AI Supply Chain scanner 进入代码安全工作流",
       summary: "Checkmarx One 3.60 发布 MCP Server 与 AI Supply Chain scanner：前者让开发者和 AppSec 团队可从 Claude、Cursor、Windsurf、Kiro、Copilot Chat 等 AI 助手或 IDE 聊天界面进入安全工作流，后者可在代码仓库集成项目中识别模型、AI SDK、AI Agent、MCP client/server 等 AI 资产并触发扫描。",
@@ -4347,6 +4450,16 @@ git push origin main`,
       sourceLabel: "Checkmarx Docs",
       sourceUrl: "https://docs.checkmarx.com/en/34965-281369-multi-tenant-current.html",
       articleIdea: "已扩写：Checkmarx AI Supply Chain 与 MCP Server 新手安全盘点清单"
+    },
+    {
+      date: "2026-06-20",
+      tag: "AI 编程",
+      title: "Cline CLI v3.0.29 发布：修复 Z.ai metadata，并回退模型显示方式",
+      summary: "Cline CLI v3.0.29 在 2026 年 6 月 20 日发布，隐藏 Cline free models 的成本显示，修复通过 Cline provider 访问 Z.ai models 时的 model metadata resolution，并回退 v3.0.28 的 model-name-only 显示变化，让 model picker、selector 和 status bar 回到此前行为。",
+      why: "模型选择器、状态栏和 provider metadata 看似只是 UI 细节，但会影响新手判断自己正在调用哪个模型、是否产生费用、是否选错 provider。升级 Cline CLI 后，建议先核对模型列表、状态栏显示和免费模型成本提示，再跑真实项目任务。",
+      sourceLabel: "Cline GitHub Release",
+      sourceUrl: "https://github.com/cline/cline/releases/tag/cli-v3.0.29",
+      articleIdea: "候选：AI 编程 CLI 升级后怎样核对模型选择、费用提示和 provider metadata"
     },
     {
       date: "2026-06-20",
