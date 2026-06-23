@@ -29,6 +29,90 @@ const siteData = {
   },
   posts: [
     {
+      id: "openai-codex-long-running-workflow-guide",
+      title: "OpenAI Codex 长任务工作流：新手怎样把一次提示变成可核验的持续任务",
+      date: "2026-06-22",
+      category: "AI 效率",
+      readTime: "9 分钟",
+      excerpt: "OpenAI 在 2026 年 6 月 22 日发布 Codex-maxxing for long-running work，介绍 Jason Liu 怎样把 Codex 当成能保存上下文、拆解复杂工作流并跨时间推进任务的持久工作区。对新手来说，重点不是把提示词写得更长，而是给任务补上目标、步骤、记忆、人工监督和验收标准，让 AI Agent 的输出可以被复查、继续和回滚。",
+      tags: ["Codex", "AI Agent", "效率工具"],
+      featured: true,
+      intro: [
+        "很多人第一次用 AI 编程工具时，会把它当成“问一句、答一句”的聊天窗口：让它解释报错、写一段函数、补一个 README。这个用法很轻，但一旦任务变成“整理一批资料”“修一个跨文件问题”“生成一份可交付文档”“持续监控反馈再迭代”，单次提示就不够了。OpenAI 在 2026 年 6 月 22 日发布的 Codex-maxxing for long-running work，把重点放在 Codex 怎样帮助工作越过单次提示，变成能持续推进的工作流。",
+        "这篇内容值得新手关注，是因为它把“长任务”拆成了几个可以操作的概念：持久线程、可复用记忆、边做边转向、能操作浏览器或本地界面的工具、周期性检查、明确目标和可检查的成果面板。它不是鼓励把所有判断都交给 Agent，而是提醒你：越是长时间运行的任务，越需要写清楚成功标准、保留中间记录、让人能在关键节点复核。"
+      ],
+      audience: [
+        "已经会用 Codex、Claude Code、GitHub Copilot CLI 或类似 Agent 做小任务，但还不会安排长任务的新手",
+        "想让 AI 帮忙维护网站、整理资料、生成文档或跟进 PR 评论，却担心上下文丢失和结果难验收的个人开发者",
+        "需要把 AI Agent 放进固定流程的站长、学生和小团队维护者"
+      ],
+      format: [
+        "适合整理成“目标 / 资料 / 步骤 / 记忆 / 工具权限 / 人工检查点 / 验收输出”的长任务启动清单",
+        "后续可以补一份 Codex 长任务记录模板，记录线程目标、当前阶段、证据来源、未确认假设、下次继续点和最终验收结果"
+      ],
+      roadmap: [
+        "先把目标写成可验收结果。不要只说“帮我优化网站”，而要写清楚要更新哪些页面、需要保留哪些视觉风格、要运行哪些检查、上线后如何判断成功。OpenAI 的介绍强调把大目标拆成可验证步骤；新手可以先从 3 到 6 个明确检查点开始。",
+        "把上下文放到可复查的位置。长任务不能只依赖聊天记录，应该把关键决策、来源链接、当前版本、待办和失败原因写进仓库、笔记或 automation memory 这类可 diff 的文件。这样线程压缩、重启或换人接手时，重要信息不会只留在对话里。",
+        "给 Agent 分配窄任务，再逐步放权。第一次可以让 Codex 只读总结、列计划或生成候选；通过检查后，再允许它改文件、跑测试、打开浏览器或提交 PR。涉及部署、发消息、删除文件、改密钥和账单操作时，必须保留人工确认点。",
+        "用转向和检查点处理长流程。Jason Liu 的原文提到 steering，也就是在 Agent 还在工作时追加方向。新手可以把它理解成“边看结果边补约束”：发现文案偏广告、来源不够权威或测试失败时，及时让 Agent 收窄范围，而不是等它跑完一大段再返工。",
+        "最后用固定验收清单收尾。每个长任务都应该留下输出文件、来源列表、执行过的命令、通过的检查、没有做的事项和下次继续建议。没有这些记录，Agent 看似完成了任务，但人很难判断它是否真的可交付。"
+      ],
+      officialLinks: [
+        {
+          label: "OpenAI：Codex-maxxing for long-running work",
+          url: "https://openai.com/index/codex-maxxing-long-running-work/",
+          note: "2026 年 6 月 22 日发布，介绍 Codex 如何作为持久工作区支持复杂工作流、连续上下文和人工监督。"
+        },
+        {
+          label: "Jason Liu：Codex-maxxing",
+          url: "https://jxnl.co/writing/2026/05/10/codex-maxxing/",
+          note: "OpenAI 文章指向的原始作者实践文章，包含 durable threads、steering、memory、browser use、heartbeats、goals 和 side panel 等具体经验。"
+        },
+        {
+          label: "OpenAI Codex GitHub Releases",
+          url: "https://github.com/openai/codex/releases",
+          note: "适合继续跟踪 Codex CLI 与应用能力变化，尤其是插件、预算、时间提醒、多 Agent 与远程执行等长任务相关能力。"
+        }
+      ],
+      curatedLinks: [
+        "长任务的核心不是让提示词变长，而是让目标、资料、步骤、权限和验收结果都能被人复查。",
+        "记忆最好写进可见文件或可管理的项目记录里，避免让 Agent 在长对话里积累无法审计的隐性偏好。",
+        "越接近真实文件、浏览器、部署和外部服务的任务，越要把人类监督放到关键节点，而不是只在最后看一眼。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Codex 长任务启动清单，字段包括目标、资料来源、允许工具、禁止动作、人工检查点和验收命令",
+        "可以补一份自动化任务复盘模板，用于记录每次 Agent 长任务的来源、改动、检查结果、线上验证和下次注意事项"
+      ],
+      monetization: "适合与本站的 AI Agent、自动化更新、GitHub Pages 发布、MCP 和开发工具安全边界内容串联，帮助读者把一次性提问升级为可持续维护流程。",
+      extraSections: [
+        {
+          title: "长任务开始前的最小清单",
+          items: [
+            "目标：最终要交付什么文件、页面、PR、报告或线上结果。",
+            "边界：哪些目录、账号、外部服务和命令不能碰。",
+            "资料：优先使用哪些官方链接、仓库、文档或本地文件。",
+            "检查：必须运行哪些测试、语法检查、截图或线上验证。",
+            "记录：完成后要把结果写到哪里，方便下次继续。"
+          ]
+        },
+        {
+          title: "哪些任务更适合交给 Codex 持续推进",
+          items: [
+            "有明确成功标准，例如测试通过、页面生成、来源核验或 PR 评论关闭。",
+            "需要跨多个文件或页面整理信息，但每一步都能被人查看 diff。",
+            "可以先用只读模式试跑，再逐步允许编辑、运行命令和打开浏览器。",
+            "不依赖一次性秘密、不可恢复删除、未授权登录或无法复查的外部动作。"
+          ]
+        },
+        {
+          title: "长任务记录模板",
+          text: "每次让 Agent 跑较长任务前，先留下这段短记录，后续复盘会容易很多。",
+          code: "任务目标：\n资料来源：\n允许工具：\n禁止动作：\n当前阶段：\n人工检查点：\n必须运行的检查：\n完成证据：\n未确认事项：\n下次继续点：",
+          language: "text"
+        }
+      ]
+    },
+    {
       id: "qwen-code-0185-terminal-agent-safety-guide",
       title: "Qwen Code v0.18.5：新手怎样给终端 AI Agent 做升级前安全检查",
       date: "2026-06-22",
@@ -4421,6 +4505,56 @@ git push origin main`,
     "github-agentic-workflows-public-preview-guide"
   ],
   hotspots: [
+    {
+      date: "2026-06-23",
+      tag: "AI 建站",
+      title: "Vercel 成为 Claude Design 发送目的地，可从画布直接部署到 Vercel",
+      summary: "Vercel Changelog 显示，Claude Design 现在可以把完成的设计发送到 Vercel：用户在 Claude Design 画布中完成设计后，可把 Vercel 添加为 Share 目的地，连接 Vercel MCP server，并在已连接的 Vercel 账号中创建新项目，返回可打开和分享的 live URL。",
+      why: "AI 建站正在从“生成一段代码或截图”走向“设计稿直接进入托管平台”。新手不要只看能不能一键上线，还要检查生成项目的文件结构、首页选择、公开 URL、Vercel 账号绑定、MCP 权限和后续是否需要导出源码到自己的仓库。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/claude-design-and-vercel",
+      articleIdea: "候选：Claude Design 到 Vercel 的设计稿部署验收清单"
+    },
+    {
+      date: "2026-06-22",
+      tag: "AI 效率",
+      title: "OpenAI 发布 Codex 长任务工作流指南：把上下文、拆解和人工监督放进持久工作区",
+      summary: "OpenAI 发布 Codex-maxxing for long-running work，介绍 Jason Liu 怎样用 Codex 作为持久工作区，让复杂任务在单次提示之外继续推进：包括拆解可验证步骤、保持工作流连续性，以及判断什么时候委派给 Codex、什么时候保留人工监督。",
+      why: "这类实践提醒新手：AI Agent 的价值不只是写一段代码，而是把目标、上下文、工具权限、检查点和复盘记录组织成可继续的工作流。长任务越复杂，越要把来源、记忆、人工确认和最终验收写清楚。",
+      sourceLabel: "OpenAI",
+      sourceUrl: "https://openai.com/index/codex-maxxing-long-running-work/",
+      articleIdea: "已扩写：OpenAI Codex 长任务工作流新手指南"
+    },
+    {
+      date: "2026-06-22",
+      tag: "AI 编程",
+      title: "GitHub Copilot for JetBrains 更新：组织 Agent、CLI 排队转向与 Claude provider 公测",
+      summary: "GitHub Changelog 显示，Copilot for JetBrains IDEs 新增组织和企业级自定义 agents 支持，Copilot CLI 会话可在请求运行中追加队列、转向或停止后发送消息，并加入 Agent Debug logs summary view；Claude as agent provider 也进入 public preview。",
+      why: "IDE 里的 Agent 正在变成可治理的团队能力，而不只是个人聊天面板。新手和团队管理员应重点关注 agent 来源、CLI 长任务转向方式、debug 日志、AI credits 指示，以及 Claude provider 当前运行在 bypass permissions mode 的安全提示。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-22-new-features-and-claude-as-agent-provider-preview-in-jetbrains-ides/",
+      articleIdea: "候选：在 JetBrains 中使用组织 Agent 与 Claude provider 前的权限检查"
+    },
+    {
+      date: "2026-06-22",
+      tag: "AI 开发工具",
+      title: "OpenAI Codex 0.142.0 发布：/usage credits、插件推荐、rollout 预算与多 Agent 模式",
+      summary: "openai/codex rust-v0.142.0 在 GitHub 发布，新增 `/usage` 使用限制 reset credits 展示与兑换、远程插件分区和推荐安装、可配置 rollout token budgets、线程/turn 级 multi-agent delegation 控制、受限 indexed web-search mode，以及 UTC 时间提醒和当前时间查询能力。",
+      why: "这次更新集中在“长任务怎样被约束和审计”：预算、插件、web search、时间提醒和多 Agent 委派都会影响 Agent 能看什么、装什么、花多少、何时停止。新手升级前应先核对配置和预算提醒，再让它进入真实仓库。",
+      sourceLabel: "OpenAI Codex GitHub Release",
+      sourceUrl: "https://github.com/openai/codex/releases/tag/rust-v0.142.0",
+      articleIdea: "候选：Codex 0.142.0 下怎样给长任务设置预算、插件和多 Agent 边界"
+    },
+    {
+      date: "2026-06-22",
+      tag: "建站安全",
+      title: "Vercel CLI 5.14.5 支持 Blob signed URL：一条命令生成短期上传/读取链接",
+      summary: "Vercel Changelog 显示，Vercel CLI 新增 `vercel blob presign` 与 `vercel blob signed-token` 能力，可为 Vercel Blob 生成 scoped URL：限定单个操作、单个 pathname 和最长 7 天有效期，并支持内容类型、大小限制、JSON 输出和 delegation token。",
+      why: "个人网站和小工具经常需要临时上传图片、下载私有文件或让前端直传对象存储。signed URL 的重点不是“省一个后端接口”，而是把长期读写 token 留在服务器侧，只把短期、单用途、可过期的链接交给浏览器或 Agent。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/vercel-cli-now-supports-signing-blob-urls",
+      articleIdea: "候选：Vercel Blob signed URL 在个人站上传与私有下载中的安全用法"
+    },
     {
       date: "2026-06-21",
       tag: "AI 编程",

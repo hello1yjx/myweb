@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenAI Codex 长任务工作流：新手怎样把一次提示变成可核验的持续任务 | 学习资源库</title>
+  <meta name="description" content="OpenAI 在 2026 年 6 月 22 日发布 Codex-maxxing for long-running work，介绍 Jason Liu 怎样把 Codex 当成能保存上下文、拆解复杂工作流并跨时间推进任务的持久工作区。对新手来说，重点不是把提示词写得更长，而是给任务补上目标、步骤、记忆、人工监督和验收标准，让 AI Agent 的输出可以被复查、继续和回滚。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/openai-codex-long-running-workflow-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"OpenAI Codex 长任务工作流：新手怎样把一次提示变成可核验的持续任务","description":"OpenAI 在 2026 年 6 月 22 日发布 Codex-maxxing for long-running work，介绍 Jason Liu 怎样把 Codex 当成能保存上下文、拆解复杂工作流并跨时间推进任务的持久工作区。对新手来说，重点不是把提示词写得更长，而是给任务补上目标、步骤、记忆、人工监督和验收标准，让 AI Agent 的输出可以被复查、继续和回滚。","datePublished":"2026-06-22","dateModified":"2026-06-22","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/openai-codex-long-running-workflow-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260623-hotspots">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-book-line.png" alt="" width="36" height="33"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <button class="menu-button" data-menu-button aria-expanded="false" aria-label="切换导航菜单">☰</button>
+      <nav class="site-nav" data-mobile-nav>
+        <a href="../index.html">首页</a>
+        <a class="is-active" href="../posts.html" aria-current="page">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../resources.html#official-resources">工具导航</a>
+        <a href="../hotspots.html">技术资讯</a>
+        <a href="../projects.html">开源项目</a>
+        <a href="../about.html">关于我们</a>
+      </nav>
+      <form class="header-search" action="../posts.html" method="get">
+        <input type="search" name="q" placeholder="搜索教程、资源、工具或关键词...">
+        <button type="submit" aria-label="搜索">/</button>
+      </form>
+      <a class="header-github" href="https://github.com/hello1yjx/hello1yjx.github.io" target="_blank" rel="noreferrer" aria-label="GitHub">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="" width="24" height="24">
+      </a>
+      <a class="header-cta" href="../posts.html">开始学习</a>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 效率</span>
+      <h1>OpenAI Codex 长任务工作流：新手怎样把一次提示变成可核验的持续任务</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-22">2026年6月22日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>OpenAI 在 2026 年 6 月 22 日发布 Codex-maxxing for long-running work，介绍 Jason Liu 怎样把 Codex 当成能保存上下文、拆解复杂工作流并跨时间推进任务的持久工作区。对新手来说，重点不是把提示词写得更长，而是给任务补上目标、步骤、记忆、人工监督和验收标准，让 AI Agent 的输出可以被复查、继续和回滚。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://openai.com/index/codex-maxxing-long-running-work/" target="_blank" rel="noreferrer">OpenAI：Codex-maxxing for long-running work</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>很多人第一次用 AI 编程工具时，会把它当成“问一句、答一句”的聊天窗口：让它解释报错、写一段函数、补一个 README。这个用法很轻，但一旦任务变成“整理一批资料”“修一个跨文件问题”“生成一份可交付文档”“持续监控反馈再迭代”，单次提示就不够了。OpenAI 在 2026 年 6 月 22 日发布的 Codex-maxxing for long-running work，把重点放在 Codex 怎样帮助工作越过单次提示，变成能持续推进的工作流。</p><p>这篇内容值得新手关注，是因为它把“长任务”拆成了几个可以操作的概念：持久线程、可复用记忆、边做边转向、能操作浏览器或本地界面的工具、周期性检查、明确目标和可检查的成果面板。它不是鼓励把所有判断都交给 Agent，而是提醒你：越是长时间运行的任务，越需要写清楚成功标准、保留中间记录、让人能在关键节点复核。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>已经会用 Codex、Claude Code、GitHub Copilot CLI 或类似 Agent 做小任务，但还不会安排长任务的新手</li><li>想让 AI 帮忙维护网站、整理资料、生成文档或跟进 PR 评论，却担心上下文丢失和结果难验收的个人开发者</li><li>需要把 AI Agent 放进固定流程的站长、学生和小团队维护者</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先把目标写成可验收结果。不要只说“帮我优化网站”，而要写清楚要更新哪些页面、需要保留哪些视觉风格、要运行哪些检查、上线后如何判断成功。OpenAI 的介绍强调把大目标拆成可验证步骤；新手可以先从 3 到 6 个明确检查点开始。</li><li>把上下文放到可复查的位置。长任务不能只依赖聊天记录，应该把关键决策、来源链接、当前版本、待办和失败原因写进仓库、笔记或 automation memory 这类可 diff 的文件。这样线程压缩、重启或换人接手时，重要信息不会只留在对话里。</li><li>给 Agent 分配窄任务，再逐步放权。第一次可以让 Codex 只读总结、列计划或生成候选；通过检查后，再允许它改文件、跑测试、打开浏览器或提交 PR。涉及部署、发消息、删除文件、改密钥和账单操作时，必须保留人工确认点。</li><li>用转向和检查点处理长流程。Jason Liu 的原文提到 steering，也就是在 Agent 还在工作时追加方向。新手可以把它理解成“边看结果边补约束”：发现文案偏广告、来源不够权威或测试失败时，及时让 Agent 收窄范围，而不是等它跑完一大段再返工。</li><li>最后用固定验收清单收尾。每个长任务都应该留下输出文件、来源列表、执行过的命令、通过的检查、没有做的事项和下次继续建议。没有这些记录，Agent 看似完成了任务，但人很难判断它是否真的可交付。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://openai.com/index/codex-maxxing-long-running-work/" target="_blank" rel="noreferrer">OpenAI：Codex-maxxing for long-running work</a>
+              <span>：2026 年 6 月 22 日发布，介绍 Codex 如何作为持久工作区支持复杂工作流、连续上下文和人工监督。</span>
+            </li>
+
+            <li>
+              <a href="https://jxnl.co/writing/2026/05/10/codex-maxxing/" target="_blank" rel="noreferrer">Jason Liu：Codex-maxxing</a>
+              <span>：OpenAI 文章指向的原始作者实践文章，包含 durable threads、steering、memory、browser use、heartbeats、goals 和 side panel 等具体经验。</span>
+            </li>
+
+            <li>
+              <a href="https://github.com/openai/codex/releases" target="_blank" rel="noreferrer">OpenAI Codex GitHub Releases</a>
+              <span>：适合继续跟踪 Codex CLI 与应用能力变化，尤其是插件、预算、时间提醒、多 Agent 与远程执行等长任务相关能力。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>长任务的核心不是让提示词变长，而是让目标、资料、步骤、权限和验收结果都能被人复查。</li><li>记忆最好写进可见文件或可管理的项目记录里，避免让 Agent 在长对话里积累无法审计的隐性偏好。</li><li>越接近真实文件、浏览器、部署和外部服务的任务，越要把人类监督放到关键节点，而不是只在最后看一眼。</li></ul>
+
+        <h2>长任务开始前的最小清单</h2>
+
+        <ul><li>目标：最终要交付什么文件、页面、PR、报告或线上结果。</li><li>边界：哪些目录、账号、外部服务和命令不能碰。</li><li>资料：优先使用哪些官方链接、仓库、文档或本地文件。</li><li>检查：必须运行哪些测试、语法检查、截图或线上验证。</li><li>记录：完成后要把结果写到哪里，方便下次继续。</li></ul>
+
+
+
+        <h2>哪些任务更适合交给 Codex 持续推进</h2>
+
+        <ul><li>有明确成功标准，例如测试通过、页面生成、来源核验或 PR 评论关闭。</li><li>需要跨多个文件或页面整理信息，但每一步都能被人查看 diff。</li><li>可以先用只读模式试跑，再逐步允许编辑、运行命令和打开浏览器。</li><li>不依赖一次性秘密、不可恢复删除、未授权登录或无法复查的外部动作。</li></ul>
+
+
+
+        <h2>长任务记录模板</h2>
+        <p>每次让 Agent 跑较长任务前，先留下这段短记录，后续复盘会容易很多。</p>
+
+
+        <pre><code class="language-text">任务目标：
+资料来源：
+允许工具：
+禁止动作：
+当前阶段：
+人工检查点：
+必须运行的检查：
+完成证据：
+未确认事项：
+下次继续点：</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Codex</span><span>AI Agent</span><span>效率工具</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-connect-agent-token-security-guide.html">Vercel Connect 公测：新手怎样让 Agent 安全访问 Slack、GitHub 和外部服务</a><a href="github-copilot-agent-finder-ard-guide.html">GitHub Copilot agent finder 与 ARD：新手怎样给 AI Agent 选择可信工具、Skills 和 MCP 资源</a><a href="cloudflare-flue-agents-sdk-production-guide.html">Cloudflare Flue 与 Agents SDK：新手怎样理解 Agent 的框架、harness 和可恢复运行时</a><a href="cloudflare-agents-sdk-browser-codemode-recovery-guide.html">Cloudflare Agents SDK v0.16.1：新手怎样把浏览器自动化、代码执行和恢复机制接进 AI Agent</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var button = document.querySelector("[data-menu-button]");
+      var nav = document.querySelector("[data-mobile-nav]");
+      if (!button || !nav) return;
+      button.addEventListener("click", function () {
+        var expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        nav.classList.toggle("site-nav--open", !expanded);
+      });
+    });
+  </script>
+</body>
+</html>
