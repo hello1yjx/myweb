@@ -4,7 +4,7 @@ const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const appPath = path.join(root, "assets", "app.js");
-const version = "20260624-hotspots";
+const version = "20260624-adsense-quality";
 const siteUrl = "https://hello1yjx.github.io";
 
 function loadSiteRuntime() {
@@ -215,7 +215,6 @@ function buildSitemap(posts) {
     ["", "1.0"],
     ["posts.html", "0.9"],
     ["resources.html", "0.9"],
-    ["hotspots.html", "0.8"],
     ["projects.html", "0.7"],
     ["about.html", "0.7"],
     ["editorial.html", "0.7"],

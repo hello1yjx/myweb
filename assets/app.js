@@ -48,7 +48,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“选择任务标签页 / 引用 Issue 或 PR / 只读理解 / 最小工具配置 / 小补丁试跑 / 验收与反馈”的终端 Agent 操作清单",
-        "后续可以补一份 Copilot CLI 会话记录模板，记录任务来源、引用对象、启用工具、允许目录、执行命令、结果链接和回滚方式"
+        "可选加深：一份 Copilot CLI 会话记录模板，记录任务来源、引用对象、启用工具、允许目录、执行命令、结果链接和回滚方式"
       ],
       roadmap: [
         "先从标签页确认任务来源。GitHub 文档说明，交互式 Copilot CLI 会话在 Git 仓库中默认包含 Session、Issues、Pull requests 和 Gists 标签页。新手不要一进入会话就让 Agent 开改，先用标签页找到具体 Issue 或 PR，把它作为引用放进提示中，再要求 Copilot 总结问题、关联文件和建议步骤。",
@@ -95,7 +95,6 @@ const siteData = {
         "可以整理一份 Copilot CLI 任务启动清单，字段包括仓库、Issue/PR、允许目录、启用 MCP、启用 skills、禁止动作和验收命令",
         "可以补一份插件审查表，记录插件来源、包含组件、MCP 连接、hooks 行为、负责人、版本和卸载方式"
       ],
-      monetization: "适合与本站的 GitHub Copilot、MCP、Agent 安全边界、长任务工作流和开源项目维护内容互相推荐，帮助读者从“会问 AI”过渡到“会在终端里管理可复查任务”。",
       extraSections: [
         {
           title: "第一次试用建议按这个顺序来",
@@ -135,7 +134,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“目标 / 资料 / 步骤 / 记忆 / 工具权限 / 人工检查点 / 验收输出”的长任务启动清单",
-        "后续可以补一份 Codex 长任务记录模板，记录线程目标、当前阶段、证据来源、未确认假设、下次继续点和最终验收结果"
+        "可选加深：一份 Codex 长任务记录模板，记录线程目标、当前阶段、证据来源、未确认假设、下次继续点和最终验收结果"
       ],
       roadmap: [
         "先把目标写成可验收结果。不要只说“帮我优化网站”，而要写清楚要更新哪些页面、需要保留哪些视觉风格、要运行哪些检查、上线后如何判断成功。OpenAI 的介绍强调把大目标拆成可验证步骤；新手可以先从 3 到 6 个明确检查点开始。",
@@ -170,7 +169,6 @@ const siteData = {
         "可以整理一份 Codex 长任务启动清单，字段包括目标、资料来源、允许工具、禁止动作、人工检查点和验收命令",
         "可以补一份自动化任务复盘模板，用于记录每次 Agent 长任务的来源、改动、检查结果、线上验证和下次注意事项"
       ],
-      monetization: "适合与本站的 AI Agent、自动化更新、GitHub Pages 发布、MCP 和开发工具安全边界内容串联，帮助读者把一次性提问升级为可持续维护流程。",
       extraSections: [
         {
           title: "长任务开始前的最小清单",
@@ -219,7 +217,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“确认版本 / 检查工作区边界 / 核对忽略规则 / 试跑只读任务 / 验证 MCP 与端口 / 小范围回滚”的升级清单",
-        "后续可以补一份终端 Agent 升级记录模板，记录版本、命令、配置变更、试跑仓库、失败现象和回退方式"
+        "可选加深：一份终端 Agent 升级记录模板，记录版本、命令、配置变更、试跑仓库、失败现象和回退方式"
       ],
       roadmap: [
         "先确认你升级的到底是哪一个入口。Qwen Code 有终端、VS Code Companion、GitHub Actions、MCP、skills、hooks、channels 等能力。第一次升级不要同时改全局配置、项目配置和 provider；先记录当前版本、安装来源、默认模型、登录方式和项目根目录。",
@@ -254,7 +252,6 @@ const siteData = {
         "可以整理一份终端 Agent 升级记录表，字段包括工具、旧版本、新版本、安装来源、试跑仓库、配置变更、失败现象和回退命令",
         "可以补一份 Qwen Code 工作区边界检查清单，覆盖忽略规则、临时路径、MCP 资源、provider 配置和环境变量"
       ],
-      monetization: "适合与本站的 Qwen Code、Claude Code、Codex、MCP 和 GitHub Copilot 安全边界内容互相推荐，帮助读者从“会用 Agent”过渡到“会安全升级和验收 Agent”。",
       extraSections: [
         {
           title: "升级前先记录这些信息",
@@ -302,7 +299,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“识别 AI 资产 / 分清调用入口 / 最小权限连接 MCP / 导出 AI-BOM / 人工复核修复建议”的检查清单",
-        "后续可以补一份 AI 代码资产台账模板，记录资产类型、提供方、项目、应用、最近扫描时间、负责人和下线条件"
+        "可选加深：一份 AI 代码资产台账模板，记录资产类型、提供方、项目、应用、最近扫描时间、负责人和下线条件"
       ],
       roadmap: [
         "先把仓库里的 AI 入口列出来。不要只搜索 OpenAI、Gemini、Claude 这类模型名，也要看 package.json、requirements.txt、配置目录、CI 脚本、MCP 配置、IDE 配置和 Agent instructions。目标是知道哪些代码会调用模型，哪些工具会被 Agent 调用，哪些配置会影响安全扫描和自动修复。",
@@ -342,7 +339,6 @@ const siteData = {
         "可以整理一份 AI 代码资产台账 CSV，字段包括资产类型、名称、提供方、项目、应用、负责人、最近扫描时间和处理状态",
         "可以补一份 MCP 接入前检查表，覆盖 OAuth/RBAC、只读试跑、审计日志、触发器范围、人工复核和撤销路径"
       ],
-      monetization: "适合与本站的 MCP、Agent 安全、GitHub Copilot、Claude Code 和软件供应链安全内容互相推荐，帮助读者从工具使用过渡到可审计的团队治理。",
       extraSections: [
         {
           title: "第一次盘点可以从这些文件开始",
@@ -382,7 +378,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“安装 Wrangler / 让 Agent 先普通 deploy / 按提示改用 temporary / 访问预览 / 决定是否认领”的试跑流程",
-        "后续可以补一份 Agent 部署验收表，记录生成的 Worker、预览地址、claim 截止时间、人工复核人和是否删除或认领"
+        "可选加深：一份 Agent 部署验收表，记录生成的 Worker、预览地址、claim 截止时间、人工复核人和是否删除或认领"
       ],
       roadmap: [
         "先更新 Wrangler，并确认任务确实适合临时部署。Cloudflare 文档要求使用支持临时部署的 Wrangler 版本；如果你已经有正式账号、生产项目或 CI/CD，就应继续用 `wrangler login`、API token 或现有部署流水线，不要为了省步骤把生产发布改成临时账号。",
@@ -422,7 +418,6 @@ const siteData = {
         "可以整理一份 Agent 临时部署验收表，包含 Worker 名称、预览 URL、claim 截止时间、响应检查和人工决定",
         "可以补一个最小 Worker demo，让新手比较本地 dev、正式 deploy 与 temporary deploy 的边界"
       ],
-      monetization: "适合与本站的 Cloudflare Agents SDK、Flue、Agent 浏览器自动化和建站部署检查表内容串联，帮助读者从写代码过渡到可验收的上线流程。",
       extraSections: [
         {
           title: "第一次试跑流程",
@@ -471,7 +466,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“主 Agent 识别任务 / 专门 Agent 承接 / 最小上下文交接 / 结果验收 / 审计记录”的实践清单",
-        "后续可以补一份 A2A 与 MCP 对照表，帮助读者判断某个需求是调工具、找资源，还是委派给另一个 Agent"
+        "可选加深：一份 A2A 与 MCP 对照表，帮助读者判断某个需求是调工具、找资源，还是委派给另一个 Agent"
       ],
       roadmap: [
         "先判断任务是否真的需要另一个 Agent。读取一个文件、查一次文档、调用一个稳定 API，通常用普通工具或 MCP 就够了；需要专门 Agent 的场景通常包含专业流程、长任务、多步骤判断、敏感数据隔离或独立团队维护的能力。",
@@ -510,7 +505,6 @@ const siteData = {
         "可以整理一份多 Agent 任务交接检查表，覆盖任务目标、输入范围、权限、输出格式、人工验收和回滚方式",
         "可以补一张 MCP / A2A / ARD 边界对照卡，帮助新手判断自己需要的是工具调用、能力发现还是 Agent 委派"
       ],
-      monetization: "适合与本站的 MCP、ARD、Copilot agent finder、Cloudflare Agents SDK 和 Vercel Agent Stack 内容互相推荐，形成 AI Agent 基础协议学习路线。",
       extraSections: [
         {
           title: "第一次试跑的低风险任务",
@@ -550,7 +544,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“创建 connector / 按环境绑定 / 运行时取 token / 限定资源与权限 / 记录撤销方式”的安全接入步骤",
-        "后续可以补一份 Agent 外部服务权限矩阵，按只读、评论、写入、部署、账单等风险等级分层"
+        "可选加深：一份 Agent 外部服务权限矩阵，按只读、评论、写入、部署、账单等风险等级分层"
       ],
       roadmap: [
         "先列清楚 Agent 需要访问哪个服务、为了完成什么任务、最低需要哪类权限。比如读取某个 GitHub 仓库内容只需要 contents:read，不应该顺手给整个组织写入权限。",
@@ -589,7 +583,6 @@ const siteData = {
         "可以整理一份 Agent 外部服务接入前检查表，包含服务、资源范围、权限、环境、撤销命令和失败处理",
         "可以补一个 GitHub 只读 connector 示例，演示怎样把 Agent 权限限制到单仓库 contents:read"
       ],
-      monetization: "适合与本站的 Vercel Sandbox、skills.sh OIDC、Vercel Blob OIDC、Agent 权限安全清单和建站安全内容互相串联，帮助读者从功能接入过渡到凭据治理。",
       extraSections: [
         {
           title: "给新手的最小权限顺序",
@@ -629,7 +622,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“描述任务 / 搜索候选 / 核验来源 / 最小授权 / 只读验收 / 记录决策”的接入流程",
-        "后续可以补一份 Agent 资源评估表，记录资源名称、发布方、registry、权限、适用任务、测试结果和移除条件"
+        "可选加深：一份 Agent 资源评估表，记录资源名称、发布方、registry、权限、适用任务、测试结果和移除条件"
       ],
       roadmap: [
         "第一步先把任务写窄。不要从“帮我接入所有开发工具”开始，而是写成“读取这个仓库的 README 并找出部署命令”“检查最近一个失败的 CI job”“从内部文档中查 API 限制”。任务越窄，agent finder 或 ARD registry 返回的候选越容易判断，也越不容易装进无关工具。",
@@ -668,7 +661,6 @@ const siteData = {
         "可以整理一份 Agent 资源接入前检查表，覆盖来源、权限、试跑、日志和移除条件",
         "可以补一个 MCP / Skill / Agent registry 评估模板，帮助团队记录为什么采用或拒绝某个资源"
       ],
-      monetization: "适合与本站的 GitHub Copilot、Claude Code、Codex、Qwen Code、MCP 与 Agent 安全清单类内容互相串联，帮助读者建立稳定的工具接入方法。",
       extraSections: [
         {
           title: "第一次接入前的检查清单",
@@ -708,7 +700,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“先分层 / 再做最小 agent / 加只读工具 / 测试中断恢复 / 最后接入生产 channel”的学习路线",
-        "后续可以补一份生产 Agent 验收表，专门检查 fibers、日志、沙箱、权限、成本和用户可见状态"
+        "可选加深：一份生产 Agent 验收表，专门检查 fibers、日志、沙箱、权限、成本和用户可见状态"
       ],
       roadmap: [
         "先分清三层。框架层决定项目结构、CLI、channel 和开发体验；harness 层决定模型怎样规划、调用工具、读结果、管理上下文；运行时层决定状态放在哪里、进程中断后怎样恢复、代码在哪里执行、工具凭据怎样隔离。排查问题时也按这三层定位，不要一开始就怀疑模型。",
@@ -752,7 +744,6 @@ const siteData = {
         "可以整理一份生产 Agent 最小验收清单，覆盖恢复、幂等、沙箱、审批、日志和成本",
         "可以补一个框架 / harness / runtime 分层对照表，帮助新手排查 Agent 问题"
       ],
-      monetization: "适合与本站的 Cloudflare Agents SDK、Browser Run、Codemode、Vercel Sandbox、AI Gateway 和 Agent 安全类文章互相推荐，形成生产 Agent 学习路线。",
       extraSections: [
         {
           title: "最小验收顺序",
@@ -792,7 +783,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“先做只读浏览器检查 / 再接 Codemode / 标出审批动作 / 验证中断恢复 / 最后接入子代理”的实验路线",
-        "后续可以补一份 Agent 外部动作验收表，记录每个工具是否只读、是否需要审批、能否回放、是否有回滚方式"
+        "可选加深：一份 Agent 外部动作验收表，记录每个工具是否只读、是否需要审批、能否回放、是否有回滚方式"
       ],
       roadmap: [
         "第一步只做只读浏览器任务。给 Agent 绑定 Browser Run 后，先让它读取公开页面、抓取标题、检查控制台或生成截图，不要一开始就处理登录、支付、删除或发布操作。浏览器工具虽然可以执行 CDP 命令，但新手应把 `browser_execute` 用在可复现、低风险的页面检查上，并限制每轮最大步骤。",
@@ -831,7 +822,6 @@ const siteData = {
         "可以整理一份 Cloudflare Agent 浏览器自动化接入前检查清单",
         "可以补一个 Codemode connector 审批、回放和回滚能力盘点模板"
       ],
-      monetization: "适合与本站的 AI Agent 安全清单、Cloudflare AI Gateway、Vercel Sandbox、GitHub Copilot 沙箱和前端调试类文章互相推荐。",
       extraSections: [
         {
           title: "第一次接入建议先做小闭环",
@@ -871,7 +861,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“判断是否需要长函数 / 设置 maxDuration / 拆分前台与后台 / 验证日志与成本 / 准备回退”的上线清单",
-        "后续可以补一份长任务验收记录，记录输入规模、模型调用次数、总耗时、失败方式和用户可见状态"
+        "可选加深：一份长任务验收记录，记录输入规模、模型调用次数、总耗时、失败方式和用户可见状态"
       ],
       roadmap: [
         "先判断任务是不是必须留在同一个 Function 里。长 LLM 推理、几分钟流式响应、文档和媒体处理、OCR、网页抓取、浏览器自动化、Workflow 步骤或 Queue handler 都可能受益；但如果任务可以异步完成，仍应优先把用户请求、后台处理和结果通知拆开，避免用户一直等待同一个连接。",
@@ -909,7 +899,6 @@ const siteData = {
         "可以整理一份 AI 长任务上线前验收清单",
         "可以补一份 Vercel Function、Workflow 和 Queue 的选型对照表"
       ],
-      monetization: "适合与本站的 Vercel Drop、AI SDK HarnessAgent、AI Gateway、静态站上线检查清单和 Agent 安全清单互相推荐。",
       extraSections: [
         {
           title: "什么时候不该直接拉长 Function",
@@ -949,7 +938,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“升级前备份 / 检查权限规则 / 验证嵌套 skills / 测试 subagent / 回归远程控制”的升级路线",
-        "后续可以补一份团队 Claude Code 配置审计表，记录每个目录的 skills、workflows、agents 和权限规则"
+        "可选加深：一份团队 Claude Code 配置审计表，记录每个目录的 skills、workflows、agents 和权限规则"
       ],
       roadmap: [
         "先在可回退仓库升级到 v2.1.178，并记录升级前的 `.claude/` 目录、托管设置、项目 settings、常用 skills 和远程控制状态。升级后先运行版本检查和 `/doctor`，不要一开始就让 Agent 修改重要分支。",
@@ -988,7 +977,6 @@ const siteData = {
         "可以整理一份 Claude Code v2.1.178 升级回归测试清单",
         "可以补一个 `.claude/` 目录、skills、workflows 和权限规则盘点模板"
       ],
-      monetization: "适合与本站的 Claude Code 模型白名单、Skills 插件、回退模型、安全模式、AI Agent 安全清单和团队规范类文章互相推荐。",
       extraSections: [
         {
           title: "升级回归测试清单",
@@ -1028,7 +1016,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“发布前检查 / 拖拽上传 / 验证线上结果 / 识别限制 / 连接 Git”的首次上线流程",
-        "后续可以补一份静态站发布验收记录，保存网址、首页、资源路径、404、移动端和下一次更新方式"
+        "可选加深：一份静态站发布验收记录，保存网址、首页、资源路径、404、移动端和下一次更新方式"
       ],
       roadmap: [
         "上传前先整理一个可独立运行的发布目录。静态站应确认顶层是否有 `index.html`，并在本地直接打开或通过本地服务器检查图片、CSS、JavaScript 和站内链接；框架项目则要确认依赖清单、构建命令和输出目录完整，不要把密钥、`.env`、数据库导出或私人文件放进上传目录。",
@@ -1061,7 +1049,6 @@ const siteData = {
         "可以整理一份静态站首次上线与公开网址验收清单",
         "可以补一份从一次性拖拽部署迁移到 Git 持续部署的项目交接记录"
       ],
-      monetization: "适合与本站的静态站模板、Git/GitHub 入门、网站上线检查清单和持续部署文章互相推荐。",
       extraSections: [
         {
           title: "先判断哪种部署方式适合当前任务",
@@ -1104,7 +1091,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“升级稳定版 / 固定项目说明 / 选择 Skills / 先做计划 / 执行小任务 / 检查统计与记忆”的练习路线",
-        "后续可以补一个同一测试仓库中对比前台任务、后台 Agent 和定时检查的验证记录模板"
+        "可选加深：一个同一测试仓库中对比前台任务、后台 Agent 和定时检查的验证记录模板"
       ],
       roadmap: [
         "先升级到 v0.18.0，并在可回退的练习仓库中运行 `/about`、`/skills`、`/memory` 与 `/stats`，确认版本、可用 Skills、记忆位置和当前统计。把必须长期遵守的构建命令、测试命令与代码约定写入项目根目录的 `QWEN.md`，不要把密钥或临时聊天内容写进去。",
@@ -1142,7 +1129,6 @@ const siteData = {
         "可以整理一份 Qwen Code v0.18.0 首次升级与功能验收清单",
         "可以补一个 QWEN.md、项目 Skill、后台任务和记忆审查记录模板"
       ],
-      monetization: "适合承接国产 AI、终端编码 Agent、Agent Skills、团队规范、开发效率和自动化安全类资源位；也可以与本站的 Qwen Code v0.17、Claude Code Skills 和 Agent 安全清单互相推荐。",
       extraSections: [
         {
           title: "建议按四层逐步启用",
@@ -1184,7 +1170,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“盘点模型 / 编写托管策略 / 测试 Default 回退 / 检查子 Agent / 运行 doctor / 分批发布”的治理路线",
-        "后续可以补一个允许模型清单、回退结果、错误配置和版本要求的验收记录模板"
+        "可选加深：一个允许模型清单、回退结果、错误配置和版本要求的验收记录模板"
       ],
       roadmap: [
         "先列出组织真正允许使用的模型、适用团队和原因，并确认主会话、子 Agent 与 advisor 是否应遵循同一范围。不要直接从个人偏好复制列表；模型可用性、费用、地区和合规要求都可能不同。",
@@ -1212,7 +1198,6 @@ const siteData = {
         "可以整理一份 Claude Code 模型白名单、Default 回退与子 Agent 验收清单",
         "可以补一个托管设置分批发布、版本要求和回滚记录模板"
       ],
-      monetization: "适合承接 Claude Code、企业 AI 治理、模型路由、开发安全、合规与团队管理类资源位；也可以与本站的 Claude Code 安全模式、fallback model 和本地 Skills 文章互相推荐。",
       extraSections: [
         {
           title: "策略测试至少覆盖五种情况",
@@ -1255,7 +1240,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“安装 canary / 选择 adapter / 创建沙箱 / 运行单一任务 / 检查结果 / 销毁会话”的入门路线",
-        "后续可以补一个在同一测试仓库中切换两个 harness、比较输出与日志的最小示例"
+        "可选加深：一个在同一测试仓库中切换两个 harness、比较输出与日志的最小示例"
       ],
       roadmap: [
         "先把 `HarnessAgent` 当作实验性 API，在可删除的示例仓库和独立沙箱里安装 AI SDK canary 与一个 harness adapter。不要第一次就连接生产凭据、重要仓库或不可回退的部署环境。",
@@ -1288,7 +1273,6 @@ const siteData = {
         "可以整理一份编码 Agent harness 选型、权限与会话生命周期检查表",
         "可以补一个 Claude Code、Codex 与 Pi 同任务对照记录模板"
       ],
-      monetization: "适合承接 AI SDK、Coding Agent、TypeScript、Agent 沙箱、开发者工具和工程效率类资源位；也可以与本站的 Agentic Workflows、Vercel Sandbox 和终端 AI 配置文章互相推荐。",
       extraSections: [
         {
           title: "第一次实验建议只比较四件事",
@@ -1329,7 +1313,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“确定 runner / 排除内容 / 编写指令 / 发起测试 PR / 检查审查结果”的配置路线",
-        "后续可以补一个组织默认值、仓库例外和验证证据记录模板"
+        "可选加深：一个组织默认值、仓库例外和验证证据记录模板"
       ],
       roadmap: [
         "先列出代码审查的运行要求：使用 GitHub-hosted、自托管还是 large runner，以及哪些仓库必须遵循统一默认值。组织管理员可在 Copilot 的 Runner type configuration 中设置默认 runner，并在需要时锁定，避免仓库单独覆盖。",
@@ -1357,7 +1341,6 @@ const siteData = {
         "可以整理一份 Copilot Code Review runner、内容排除与指令配置清单",
         "可以补一个测试 PR 验证证据和组织推广记录模板"
       ],
-      monetization: "适合承接 GitHub Copilot、代码审查、DevSecOps、企业治理、GitHub Actions 和开发者培训类资源位；也可以与本站的 Copilot CLI 安全审查、第三方 Agent 安全验证和 Agentic Workflows 文章互相推荐。",
       extraSections: [
         {
           title: "三类配置不要混在一起",
@@ -1398,7 +1381,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“选低风险任务 / 写 Markdown / 编译工作流 / 检查权限 / 触发测试 / 审批输出”的入门路线",
-        "后续可以补一个只给 issue 添加建议标签、不直接修改代码的最小练习仓库"
+        "可选加深：一个只给 issue 添加建议标签、不直接修改代码的最小练习仓库"
       ],
       roadmap: [
         "先选择容易验证、失败后影响较小的任务，例如为新 issue 建议标签、汇总 CI 失败日志或检查文档链接。不要把首次实验直接设为自动修改生产代码、自动合并 PR 或访问大量敏感数据。",
@@ -1431,7 +1414,6 @@ const siteData = {
         "可以整理一份 Agentic Workflow 首次上线权限与审批清单",
         "可以补一个 issue 分类、CI 日志分析和文档更新任务的风险分级模板"
       ],
-      monetization: "适合承接 GitHub Actions、AI 编程、Agent 自动化、DevSecOps、CI/CD 和团队工程效率类资源位；也可以与本站的 Agent 沙箱、代码审查和 npm 安全文档互相推荐。",
       extraSections: [
         {
           title: "最适合第一次尝试的任务",
@@ -1472,7 +1454,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“升级 CLI / 浏览设置 / 搜索键名 / 修改与验证 / 重置默认值”的配置清单",
-        "后续可以补一份常用设置变更记录与故障回退模板"
+        "可选加深：一份常用设置变更记录与故障回退模板"
       ],
       roadmap: [
         "先运行 `copilot update` 升级 CLI，再执行 `/settings` 打开完整配置界面。使用搜索查找目标选项，阅读键名、说明和允许值，不要为了试用一次功能同时修改大量无关配置。",
@@ -1500,7 +1482,6 @@ const siteData = {
         "可以整理一份 Copilot CLI 常用设置与回退记录表",
         "可以补一个终端 AI 工具配置变更审查清单"
       ],
-      monetization: "适合承接 GitHub Copilot、终端效率、AI 编程、开发者培训和团队配置治理类资源位；也可以与本站的 Copilot CLI 安全审查和 Claude Code 故障排查文章互相推荐。",
       extraSections: [
         {
           title: "三种使用方式怎样选",
@@ -1541,7 +1522,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“检查 diff / 运行测试 / 执行安全审查 / 人工复核 / 再提交”的工作流清单",
-        "后续可以补一个包含注入、路径遍历与密钥误提交风险的最小练习仓库"
+        "可选加深：一个包含注入、路径遍历与密钥误提交风险的最小练习仓库"
       ],
       roadmap: [
         "先在 Copilot CLI 中开启 experimental mode，再在一个有未提交改动的测试项目里运行 `/security-review`。不要第一次就对重要生产改动完全依赖实验功能，先确认输出格式和检查范围。",
@@ -1574,7 +1555,6 @@ const siteData = {
         "可以整理一份提交前安全审查与人工复核清单",
         "可以补一个 AI 生成代码的测试、扫描和证据记录模板"
       ],
-      monetization: "适合承接 GitHub Copilot、代码安全、DevSecOps、CodeQL、开发者培训和终端工具类资源位；也可以与本站的 Agent 沙箱、企业插件治理和 npm 安全文章互相推荐。",
       extraSections: [
         {
           title: "推荐的提交前顺序",
@@ -1615,7 +1595,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“升级 npm 11.16 / 查看警告 / 审核脚本 / 建立允许列表 / 验证 CI”的迁移清单",
-        "后续可以补一个 package.json 依赖来源与安装脚本盘点模板"
+        "可选加深：一个 package.json 依赖来源与安装脚本盘点模板"
       ],
       roadmap: [
         "先在独立分支或可回退环境升级到 npm 11.16.0 或更高版本，执行项目正常安装流程并保存警告。npm v12 尚未正式发布，不要根据预告直接修改所有生产环境。",
@@ -1648,7 +1628,6 @@ const siteData = {
         "可以整理一份 npm v12 安装脚本与远程依赖迁移清单",
         "可以补一个 Node.js 项目供应链依赖审查表"
       ],
-      monetization: "适合承接 Node.js、npm、前端工程化、供应链安全、CI/CD 和开发者课程类资源位；也可以与本站的 GitHub 安全审查、Dependabot 和建站工具文章互相推荐。",
       extraSections: [
         {
           title: "升级前必须盘点的三类行为",
@@ -1688,7 +1667,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“写需求 / 审计划 / 限定范围 / 运行验证 / 人工复核”的 Agent 使用清单",
-        "后续可以补一个从空白 Swift 项目到模拟器截图验证的最小示例"
+        "可选加深：一个从空白 Swift 项目到模拟器截图验证的最小示例"
       ],
       roadmap: [
         "先把 Xcode 27 当作 beta 工具测试。它只会安装和运行在 Apple silicon Mac 上，并要求较新的 macOS；不要直接用它替换唯一的生产开发环境，先备份项目并确认现有构建流程可回退。",
@@ -1721,7 +1700,6 @@ const siteData = {
         "可以整理一份 Xcode Agent 计划审查与界面验证清单",
         "可以补一个 Swift 项目 Agent 权限、插件和 MCP 评估模板"
       ],
-      monetization: "适合承接 Apple 开发、Swift、Xcode、AI 编程助手、移动应用测试、开发者课程和 Mac 工具类资源位；也可以与本站的 Agent 沙箱、插件治理和代码审查文章互相推荐。",
       extraSections: [
         {
           title: "第一次试用建议",
@@ -1762,7 +1740,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“安全模式复现 / 恢复单项配置 / 定位冲突 / 更新版本 / 记录证据”的排查清单",
-        "后续可以补一个插件、hook 和 MCP server 分组启用的最小诊断示例"
+        "可选加深：一个插件、hook 和 MCP server 分组启用的最小诊断示例"
       ],
       roadmap: [
         "先保存当前工作并记录异常现象，包括启动耗时、错误文本、受影响项目和最近更新。不要一开始就删除配置，否则会失去复现问题的证据。",
@@ -1795,7 +1773,6 @@ const siteData = {
         "可以整理一份 Claude Code 插件、skills、hooks 与 MCP 排查表",
         "可以补一个 Windows 终端 Agent 启动与权限问题记录模板"
       ],
-      monetization: "适合承接 Claude Code、终端 Agent、MCP、插件治理、Windows 开发环境和 AI 编程课程类资源位；也可以与本站的回退模型、企业托管插件和 Agent 安全文章互相推荐。",
       extraSections: [
         {
           title: "推荐的最小排查顺序",
@@ -1836,7 +1813,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“记录现状 / 设置预算 / 选择阻止或回退 / 检查日志 / 调整额度”的上线清单",
-        "后续可以补一个按应用名称区分费用并切换备用模型的最小示例"
+        "可选加深：一个按应用名称区分费用并切换备用模型的最小示例"
       ],
       roadmap: [
         "先只做观察，不要一开始就设置过低的硬上限。把应用请求通过 AI Gateway 转发，确认模型、提供商、token 和费用日志完整，再按真实使用情况估算日、周或月预算。",
@@ -1869,7 +1846,6 @@ const siteData = {
         "可以整理一份 AI 应用预算与回退模型检查表",
         "可以补一个按应用、模型和环境拆分费用的配置模板"
       ],
-      monetization: "适合承接 Cloudflare、AI Gateway、多模型 API、Agent 成本治理、云平台预算和建站运维类资源位；也可以与本站的模型路由、沙箱、OIDC 和 AI 编程代理文章互相推荐。",
       extraSections: [
         {
           title: "第一次设置预算建议",
@@ -1910,7 +1886,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“申请运行环境 / 安装依赖 / 执行脚本 / 下载结果 / 停止实例”的入门清单",
-        "后续可以补一个在 Linux 或 macOS 上运行小型训练脚本的完整示例"
+        "可选加深：一个在 Linux 或 macOS 上运行小型训练脚本的完整示例"
       ],
       roadmap: [
         "先安装 CLI 并从最小 CPU 会话开始。使用 `uv tool install google-colab-cli` 或 `pip install google-colab-cli`，运行 `colab new` 后，用简单 Python 输出验证认证、连接和会话状态。",
@@ -1938,7 +1914,6 @@ const siteData = {
         "可以整理一份 Colab CLI 远程任务执行检查表",
         "可以补一个一次性 GPU 脚本与结果下载示例"
       ],
-      monetization: "适合承接 Google Colab、Python、机器学习入门、远程 GPU、AI Agent 自动化和云端开发环境类资源位；也可以与本站的沙箱、AI 编程代理和开发工具文章互相推荐。",
       extraSections: [
         {
           title: "第一次尝试建议只做五步",
@@ -1980,7 +1955,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“主模型 / 回退顺序 / 禁止工具 / 跨会话权限 / 故障复核”的配置清单",
-        "后续可以补一个低风险测试项目，用来比较主模型与回退模型的结果"
+        "可选加深：一个低风险测试项目，用来比较主模型与回退模型的结果"
       ],
       roadmap: [
         "先把回退模型当作可用性策略，而不是质量保证。选择能力和工具支持相近的模型，记录顺序、成本和适用任务，并用一个可重复的小任务验证模型切换后的输出。",
@@ -2008,7 +1983,6 @@ const siteData = {
         "可以整理一份 Claude Code 回退模型与权限审查表",
         "可以补一个主模型失败后的自动化测试用例模板"
       ],
-      monetization: "适合承接 Claude Code、AI 编程代理、模型路由、权限治理、Windows 开发环境和自动化可靠性类资源位；也可以与本站的沙箱、MCP、skills 和团队插件文章形成专题。",
       extraSections: [
         {
           title: "回退模型上线前先验证",
@@ -2048,7 +2022,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“插件市场 / 默认插件 / hooks / MCP / 登录验证”的团队上线清单",
-        "后续可以补一份最小 settings.json 示例和插件变更审查流程"
+        "可选加深：一份最小 settings.json 示例和插件变更审查流程"
       ],
       roadmap: [
         "先盘点团队真正需要共享的能力。把通用编码规范、内部文档入口、固定工具和安全检查放进受控插件，不要把每个人的临时偏好都做成企业默认。",
@@ -2076,7 +2050,6 @@ const siteData = {
         "可以整理一份企业 Copilot 插件上线检查表",
         "可以补一个最小 settings.json 模板和插件审查记录模板"
       ],
-      monetization: "适合承接 GitHub Copilot 企业管理、VS Code 团队配置、AI 编程治理、MCP 安全和开发者入职流程类资源位；也可以与本站的 Copilot skills、沙箱和模型成本文章互相推荐。",
       extraSections: [
         {
           title: "团队首次上线建议",
@@ -2116,7 +2089,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“搜索 / 详情 / 审计 / 安装前复核 / 更新检测”的 skill 管理清单",
-        "后续可以补一个使用 Vercel Function 查询 skills.sh API 的最小示例"
+        "可选加深：一个使用 Vercel Function 查询 skills.sh API 的最小示例"
       ],
       roadmap: [
         "先用搜索和官方精选接口缩小候选范围，不要只按安装量判断。记录稳定 id、来源仓库、installUrl 和是否为重复副本。",
@@ -2149,7 +2122,6 @@ const siteData = {
         "可以整理一份 AI skill 安装前安全检查表",
         "可以补一个 skills.sh API + Vercel OIDC 的入门示例项目"
       ],
-      monetization: "适合承接 AI agent、skills、Vercel Functions、OIDC、开发工具目录和供应链安全类资源位；也可以与本站的 Copilot 插件、MCP、沙箱和建站安全文章形成专题。",
       extraSections: [
         {
           title: "安装 skill 前至少检查五项",
@@ -2191,7 +2163,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“默认模式 / 大上下文 / 高推理等级”的选择清单",
-        "后续可以补一张任务复杂度和模型设置的对照表"
+        "可选加深：一张任务复杂度和模型设置的对照表"
       ],
       roadmap: [
         "先把上下文窗口理解成模型一次能参考的信息范围。范围越大，越适合跨文件、长文档和复杂项目，但也更需要你提供清晰任务边界。",
@@ -2219,7 +2191,6 @@ const siteData = {
         "可以整理一份 Copilot 模型设置选择表",
         "可以补一个“什么时候需要大上下文”的项目检查清单"
       ],
-      monetization: "适合承接 GitHub Copilot、AI 编程课程、模型成本治理、VS Code 工作流和开发效率工具类资源位；也可以和本站的 AI 编程、开发工具、建站调试专题互相推荐。",
       extraSections: [
         {
           title: "三种任务怎么选",
@@ -2259,7 +2230,7 @@ const siteData = {
       ],
       format: [
         "适合做成“值得记住 / 不该记住 / 需要复查”的使用清单",
-        "后续可以补一张 memory、custom instructions、Temporary Chat 的区别表"
+        "可选加深：一张 memory、custom instructions、Temporary Chat 的区别表"
       ],
       roadmap: [
         "先理解 memory 的价值：它能让 ChatGPT 在后续对话里带上你的偏好、项目背景和约束，减少重复解释。",
@@ -2287,7 +2258,6 @@ const siteData = {
         "可以整理一份 ChatGPT memory 复查清单",
         "可以补一个“Memory / Custom Instructions / Temporary Chat”对照表"
       ],
-      monetization: "适合承接 ChatGPT 入门、AI 效率工具、内容写作、学习规划和隐私控制类资源位；也可以和本站的自动化写作、AI 编程和资料整理专题形成连载。",
       extraSections: [
         {
           title: "哪些内容适合长期保留",
@@ -2327,7 +2297,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“代理窗口 / BYOK / 终端安全 / 浏览器验证”的入门清单",
-        "后续可以补一张 VS Code 代理工作流图：任务输入、代理会话、终端命令、浏览器检查、人工复核"
+        "可选加深：一张 VS Code 代理工作流图：任务输入、代理会话、终端命令、浏览器检查、人工复核"
       ],
       roadmap: [
         "先理解 Agents window：它是一个更偏代理任务的工作区，适合跨项目、并行会话、远程机器和变更复核，而不只是普通聊天侧栏。",
@@ -2355,7 +2325,6 @@ const siteData = {
         "可以整理一份 VS Code AI 代理首次配置检查表",
         "可以补一个“普通聊天 / Agents window / 远程代理”使用场景对照表"
       ],
-      monetization: "适合承接 VS Code、GitHub Copilot、AI 编程代理、远程开发、BYOK 模型配置和前端调试类资源位；也可以和本站的建站教程、开发工具、效率工具专题互相推荐。",
       extraSections: [
         {
           title: "新手可以先试的三个场景",
@@ -2395,7 +2364,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“服务端签名 / 浏览器直传 / 条件删除 / OIDC 配合”的安全清单",
-        "后续可以补一张上传流程图：用户选择文件、服务端签名、浏览器上传、回写资源地址、过期失效"
+        "可选加深：一张上传流程图：用户选择文件、服务端签名、浏览器上传、回写资源地址、过期失效"
       ],
       roadmap: [
         "先理解作用域：signed URL 应该绑定具体操作、具体 pathname 和具体过期时间，不要把完整存储权限交给浏览器。",
@@ -2423,7 +2392,6 @@ const siteData = {
         "可以整理一份 Vercel Blob 上传安全检查表",
         "可以补一个“普通公开 URL / signed URL / 服务端代理上传”的选择对照表"
       ],
-      monetization: "适合承接 Vercel、对象存储、文件上传、个人站资源下载、全栈安全和 AI 代理权限控制类资源位；也可以和本站的建站、部署、环境变量和存储专题形成连载。",
       extraSections: [
         {
           title: "第一次接入先做这几步",
@@ -2463,7 +2431,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“插件 / Sites / annotations 三类能力怎么理解”的入门文章",
-        "后续可以补一张 Codex 工作流图：资料输入、插件调用、结果生成、注释反馈、分享验证"
+        "可选加深：一张 Codex 工作流图：资料输入、插件调用、结果生成、注释反馈、分享验证"
       ],
       roadmap: [
         "先把角色插件理解成预置工作流：它把某类岗位常用的应用、技能、说明和流程放在一起，减少从零写提示词的成本。",
@@ -2491,7 +2459,6 @@ const siteData = {
         "可以整理一份 Codex 任务拆分检查表",
         "可以补一个“什么时候用插件，什么时候直接写提示词”的对照表"
       ],
-      monetization: "适合承接 AI 办公、自动化工作流、轻量应用搭建、数据分析和内容生产类资源位；也可以和本站的建站教程、AI 编程、效率工具专题互相推荐。",
       extraSections: [
         {
           title: "新手先试的三个低风险任务",
@@ -2531,7 +2498,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“本地沙箱 / 云端沙箱 / 适合交给代理的任务边界”的资源文章",
-        "后续可以补一张代理执行路径图：提示词、工具调用、沙箱策略、命令输出、人工确认"
+        "可选加深：一张代理执行路径图：提示词、工具调用、沙箱策略、命令输出、人工确认"
       ],
       roadmap: [
         "先理解本地沙箱：它限制的是 Copilot 在当前会话里发起的命令执行，让代理不能随意触碰无关文件、网络或系统能力。",
@@ -2559,7 +2526,6 @@ const siteData = {
         "可以整理一份 AI 代理沙箱执行检查表",
         "可以补一个“适合云端沙箱 / 适合本地沙箱 / 必须人工处理”的任务分类表"
       ],
-      monetization: "适合承接 GitHub Copilot、AI 编程代理、云开发环境、代码安全、DevOps 和团队研发规范类资源位；也适合和本站的 GitHub Pages、开发工具、问题排查专题联动。",
       extraSections: [
         {
           title: "适合先放进沙箱的任务",
@@ -2599,7 +2565,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“模型能力 / 调用入口 / 新手试用边界”的资源文章",
-        "后续可以补一张 AI 应用调用链图：前端请求、服务端 SDK、AI Gateway、模型提供商、日志与成本看板"
+        "可选加深：一张 AI 应用调用链图：前端请求、服务端 SDK、AI Gateway、模型提供商、日志与成本看板"
       ],
       roadmap: [
         "先把 AI Gateway 理解成统一模型入口：应用代码不直接分散绑定很多供应商，而是通过一个网关调用、记录和切换。",
@@ -2627,7 +2593,6 @@ const siteData = {
         "可以整理一份 AI Gateway 模型试用记录表",
         "可以补一个“哪些任务适合交给多模态代理模型”的清单"
       ],
-      monetization: "适合承接 AI SDK、Vercel、模型网关、国内大模型、AI 建站和自动化测试类资源位；也可以和本站的建站教程、开发工具、效率工具专题互相推荐。",
       extraSections: [
         {
           title: "第一次试用先看三件事",
@@ -2667,7 +2632,7 @@ const siteData = {
       ],
       format: [
         "适合整理成“长期 Token 的问题 / OIDC 的好处 / 升级检查清单”的教程",
-        "后续可以补一张凭据流转图：Vercel Function、OIDC token、Blob 操作、CLI 和代理任务"
+        "可选加深：一张凭据流转图：Vercel Function、OIDC token、Blob 操作、CLI 和代理任务"
       ],
       roadmap: [
         "先理解风险：长期 Token 像一把长期有效的钥匙，泄露后需要手动轮换，否则风险会持续存在。",
@@ -2695,7 +2660,6 @@ const siteData = {
         "可以整理一份 Vercel Blob OIDC 升级检查表",
         "可以补一个“AI 代理访问存储服务前要确认什么”的安全清单"
       ],
-      monetization: "适合承接 Vercel、对象存储、网站上传、AI 代理安全、环境变量管理和全栈部署类资源位；也可以和本站的建站、自动化发布、开发工具专题形成连载。",
       extraSections: [
         {
           title: "升级前先确认",
@@ -2735,7 +2699,7 @@ const siteData = {
       ],
       format: [
         "适合做成“会产生什么成本 / 在哪里检查 / 先怎么限流”的清单",
-        "后续可以补一张从 PR 触发到 runner 执行再到账单记录的流程图"
+        "可选加深：一张从 PR 触发到 runner 执行再到账单记录的流程图"
       ],
       roadmap: [
         "先区分仓库类型：公共仓库和私有仓库在 Actions minutes 上的影响不同。",
@@ -2763,7 +2727,6 @@ const siteData = {
         "可以整理一份 Copilot code review 成本检查表",
         "可以补一个 PR 审查触发策略模板：哪些分支、哪些标签、哪些作者需要自动审查"
       ],
-      monetization: "适合承接 GitHub Copilot、CI/CD、代码审查、团队研发规范和 AI 编程培训类资源位；也可以和本站 GitHub Pages、自动化发布、AI 编程专题互相推荐。",
       extraSections: [
         {
           title: "先记住三个判断问题",
@@ -2803,7 +2766,7 @@ const siteData = {
       ],
       format: [
         "适合做成“版本更新点 + 新手理解方式 + 适用场景”的资源文章",
-        "后续可以补一张终端代理、协作渠道、MCP、桌面操作和上下文管理的关系图"
+        "可选加深：一张终端代理、协作渠道、MCP、桌面操作和上下文管理的关系图"
       ],
       roadmap: [
         "先把 Qwen Code 理解成终端里的 AI 编程代理，而不是只会问答的聊天窗口。",
@@ -2831,7 +2794,6 @@ const siteData = {
         "可以整理一份终端 AI 代理试用清单",
         "可以补一个“适合交给代理 / 需要人工确认”的任务边界表"
       ],
-      monetization: "适合承接 AI 编程工具、终端效率、团队协作、自动化脚本和开源项目教程类资源位；也适合与本站每日热点自动更新流程形成案例联动。",
       extraSections: [
         {
           title: "v0.17.0 值得新手观察的四类变化",
@@ -2872,7 +2834,7 @@ const siteData = {
       ],
       format: [
         "适合做成“能做什么 / 不能做什么 / 先确认什么”的清单",
-        "后续可以补一张本机代理、远程控制和代码托管平台的角色关系图"
+        "可选加深：一张本机代理、远程控制和代码托管平台的角色关系图"
       ],
       roadmap: [
         "先把 Windows 机器看作真正的工作主机，项目文件、终端、应用服务器和本地上下文都在这里。",
@@ -2905,7 +2867,6 @@ const siteData = {
         "可以整理一份 Codex 本机代理安全确认表",
         "可以补一个“适合远程接管 / 必须回到电脑前处理”的任务对照表"
       ],
-      monetization: "适合承接 AI 编程工具、远程开发、桌面自动化、代码测试和开发效率课程类资源位；也可以和本站 AI 编程、开发工具专题交叉推荐。",
       extraSections: [
         {
           title: "新手最适合先试的三个任务",
@@ -2945,7 +2906,7 @@ const siteData = {
       ],
       format: [
         "适合做成目录结构示例 + 适用场景清单",
-        "后续可以补一个最小 SKILL.md 模板"
+        "可选加深：一个最小 SKILL.md 模板"
       ],
       roadmap: [
         "先从重复出现的提示里挑一个稳定流程，例如每日内容更新、提交前检查或文档生成。",
@@ -2978,7 +2939,6 @@ const siteData = {
         "可以整理一份 Claude Code skill 选题清单",
         "可以补一个本地插件安全审查表"
       ],
-      monetization: "适合承接 AI 编程培训、团队研发规范、自动化工作流、插件开发和效率工具类资源位；也适合放进本站开发工具专题长期更新。",
       extraSections: [
         {
           title: "哪些流程最适合先做成 skill",
@@ -3018,7 +2978,7 @@ const siteData = {
       ],
       format: [
         "适合做成概念解释 + 指标字段速查表",
-        "后续可以补一张“Code first / Agent first / Multi-agent”对照图"
+        "可选加深：一张“Code first / Agent first / Multi-agent”对照图"
       ],
       roadmap: [
         "先理解活跃用户数只是起点，不能代表 AI 已经真正进入开发流程。",
@@ -3046,7 +3006,6 @@ const siteData = {
         "可以整理一份 AI 编程采用阶段自查表",
         "可以补一个 Copilot 指标字段中文速查表"
       ],
-      monetization: "适合承接 GitHub Copilot、团队研发效率工具、AI 编程课程和代码审查工具类资源位；也适合放到本站 AI 编程专题里长期更新。",
       extraSections: [
         {
           title: "三个阶段可以怎么理解",
@@ -3086,7 +3045,7 @@ const siteData = {
       ],
       format: [
         "适合做成流程图 + 最小示例代码",
-        "后续可以补“AI 代理安全运行命令的检查清单”"
+        "可选加深：“AI 代理安全运行命令的检查清单”"
       ],
       roadmap: [
         "先把 Sandbox 理解成隔离执行环境，不要把它当成本机的永久替代品。",
@@ -3119,7 +3078,6 @@ const siteData = {
         "可以整理一份 AI 代理沙箱执行检查表",
         "可以补一份 Docker 测试依赖最小命令清单"
       ],
-      monetization: "适合承接云开发平台、Docker 入门课程、AI 编程代理、数据库托管和开发环境管理工具类资源位；也可以和本站建站、部署、代码质量专题交叉推荐。",
       extraSections: [
         {
           title: "新手最适合先试的 3 个场景",
@@ -3159,7 +3117,7 @@ const siteData = {
       ],
       format: [
         "适合做成图文指南 + 设置路径截图",
-        "后续可以补一段“用 Agents 修一个静态站页面”的实战演示"
+        "可选加深：一段“用 Agents 修一个静态站页面”的实战演示"
       ],
       roadmap: [
         "先升级或查看 VS Code 1.122 发布说明，确认自己关心的功能是否已经可用。",
@@ -3187,7 +3145,6 @@ const siteData = {
         "可以补一份 VS Code AI 功能试用清单",
         "可以整理个人网站移动端检查表"
       ],
-      monetization: "适合承接 VS Code 插件、AI 编程课程、前端调试工具和静态站模板类资源位；也可以放到本站“开发工具”系列入口里继续扩展。",
       extraSections: [
         {
           title: "新手建议先试的 3 个场景",
@@ -3227,7 +3184,7 @@ const siteData = {
       ],
       format: [
         "适合做成概念解释 + 工具配置清单",
-        "后续可以补一篇“常见 MCP Server 怎么选”的横向对比"
+        "可选加深：一篇“常见 MCP Server 怎么选”的横向对比"
       ],
       roadmap: [
         "先理解 MCP 的角色：它不是模型，而是让模型能使用外部资料和工具的协议。",
@@ -3260,7 +3217,6 @@ const siteData = {
         "可以整理一份 AI 编程资料源检查清单",
         "可以补 MCP Server 分类表和适用场景 PDF"
       ],
-      monetization: "适合承接 AI 编程工具、云开发课程、开发者文档整理服务和团队知识库工具类推荐。",
       extraSections: [
         {
           title: "什么时候最需要官方文档 grounding",
@@ -3301,7 +3257,7 @@ const siteData = {
       ],
       format: [
         "适合做成图文指南 + 设置路径截图",
-        "后续可以补一张“用户级记忆 / 仓库级记忆 / 不应保存内容”的对照表"
+        "可选加深：一张“用户级记忆 / 仓库级记忆 / 不应保存内容”的对照表"
       ],
       roadmap: [
         "先确认自己用的是个人 Copilot 还是组织/企业 Copilot，因为控制入口和权限不同。",
@@ -3324,7 +3280,6 @@ const siteData = {
         "可以补一份“AI 编程记忆检查清单”PDF",
         "可以整理 Copilot CLI 常用命令速查表"
       ],
-      monetization: "适合在正文中部放 GitHub、代码托管、AI 编程课程或团队协作工具的资源位；底部可以放“AI 编程工作流”系列文章入口。",
       extraSections: [
         {
           title: "新手先记住这 3 个边界",
@@ -3364,7 +3319,7 @@ const siteData = {
       ],
       format: [
         "适合做成流程图 + 最小代码示例",
-        "后续可以补一篇“AI 代理开发环境怎么选”的横向对比"
+        "可选加深：一篇“AI 代理开发环境怎么选”的横向对比"
       ],
       roadmap: [
         "先理解 sandbox 的价值：隔离运行命令，避免污染本机环境。",
@@ -3392,7 +3347,6 @@ const siteData = {
         "可以补一份“AI 代理开发环境选择表”",
         "可以整理 Vercel Sandbox 常用命令和清理策略"
       ],
-      monetization: "适合承接 Vercel、云开发平台、AI 代码代理和自动化运维工具类资源；也可以放在个人网站自动更新系列文章中作为基础设施章节。",
       extraSections: [
         {
           title: "什么时候适合开持久化",
@@ -3417,7 +3371,7 @@ pnpm install -g sandbox@latest`,
       date: "2026-05-27",
       category: "建站指南",
       readTime: "10 分钟",
-      excerpt: "适合新手程序员、学生和内容创作者的 GitHub Pages 资源导航页，先带你找到官方入口、学习顺序和可直接照着做的上线步骤。",
+      excerpt: "适合新手程序员、学生和内容创作者的 GitHub Pages 学习路线页，先带你找到官方入口、学习顺序和可直接照着做的上线步骤。",
       tags: ["GitHub Pages", "博客搭建", "新手教程"],
       featured: true,
       intro: [
@@ -3469,7 +3423,6 @@ pnpm install -g sandbox@latest`,
         "可以补一个“零基础 GitHub Pages 上线检查清单”PDF 下载",
         "可以提供示例首页代码包或最小博客模板仓库"
       ],
-      monetization: "文章中部适合放博客模板、域名、托管或主题类联盟入口；正文底部适合预留 AdSense 广告位和继续阅读卡片。",
       extraSections: [
         {
           title: "5 步快速上线路线",
@@ -3546,7 +3499,7 @@ pnpm install -g sandbox@latest`,
       featured: true,
       intro: [
         "如果你想做博客，但又不想从头写前端，Hexo 配合 NexT 仍然是很适合中文用户的经典组合。资料多、生态成熟、配置项丰富，非常适合做长期内容站。",
-        "第一阶段我们先把它整理成资源导航页，后面再扩成完整图文教程和视频演示脚本。"
+        "第一阶段我们先把它整理成学习路线页，后面再扩成完整图文教程和视频演示脚本。"
       ],
       audience: [
         "喜欢折腾博客样式和结构的个人站长",
@@ -3554,7 +3507,7 @@ pnpm install -g sandbox@latest`,
       ],
       format: [
         "适合图文教程 + GIF 演示",
-        "后续可以补一段从安装到换主题的录屏视频"
+        "可选加深：一段从安装到换主题的录屏视频"
       ],
       roadmap: [
         "先看 Hexo 官方文档，理解初始化、写作和部署命令",
@@ -3581,13 +3534,12 @@ pnpm install -g sandbox@latest`,
       curatedLinks: [
         "优先整理最常用的 5 类配置：站点信息、菜单导航、评论系统、SEO、页面美化。",
         "录 GIF 或短视频时，重点演示改配置前后页面的变化，读者更容易理解。",
-        "如果未来准备做付费主题或模板下载，这篇底部非常适合承接联盟或付费资源入口。"
+        "如果未来准备做主题配置案例或模板使用指南，这篇底部非常适合延伸到联盟或付费资源入口。"
       ],
       downloadIdeas: [
         "可以补一个 NexT 常用配置对照表",
         "可以提供自定义配置片段或 starter repo"
       ],
-      monetization: "文章底部适合放模板下载、图标库、评论服务、托管服务或付费插件联盟链接。",
       extraSections: [
         {
           title: "更适合落地的配置顺序",
@@ -3682,7 +3634,6 @@ hexo generate`,
         "可以整理一份 Python 入门学习清单 PDF",
         "可以提供练习代码压缩包和章节笔记下载"
       ],
-      monetization: "每章节底部适合放编程书籍、在线课程、IDE 插件或学习平台类联盟资源。",
       extraSections: [
         {
           title: "建议拆成的章节结构",
@@ -3801,7 +3752,6 @@ else:
         "可以提供 VS Code 新手必装插件清单",
         "可以补工作区设置模板或 settings.json 示例"
       ],
-      monetization: "插件官方下载链接适合放正文里，文章底部适合预留 AdSense 和开发工具类联盟资源。",
       extraSections: [
         {
           title: "更适合新手的阅读顺序",
@@ -3916,13 +3866,12 @@ else:
       curatedLinks: [
         "不要只给下载按钮，最好补一句每个资源适合谁、推荐怎么用。",
         "如果整理 PDF 合集，要优先核查版权与公开授权，避免放来路不清的文件。",
-        "下载区旁边的赞助或联盟入口，文案最好偏“补充工具”而不是强推广告。"
+        "下载区旁边的赞助或官方入口，文案最好偏“补充工具”而不是强推广告。"
       ],
       downloadIdeas: [
         "可以制作按主题分类的资料清单 PDF",
         "可以把常用课程入口整理成可打印版本"
       ],
-      monetization: "PDF 下载按钮旁边适合放赞助入口、学习平台、云盘会员或教育服务类联盟资源。",
       extraSections: [
         {
           title: "建议按用途整理的资源分类",
@@ -4007,13 +3956,12 @@ else:
       curatedLinks: [
         "正文建议先放最常查的 10 到 15 个命令，再继续讲协作流程。",
         "如果做长期更新页，可以追加“常见报错 -> 原因 -> 解决方法”的速查模块。",
-        "这类文章底部很适合承接 Git/GitHub 书籍、课程或进阶服务。"
+        "这类文章底部很适合延伸到 Git/GitHub 书籍、课程或进阶服务。"
       ],
       downloadIdeas: [
         "可以提供 Git 常用命令速查表",
         "可以做 Pull Request 流程图或协作清单下载"
       ],
-      monetization: "底部适合放 AdSense 与 Git/GitHub 相关书籍、课程或代码托管服务类广告。",
       extraSections: [
         {
           title: "最适合正文前半段的必学命令",
@@ -4079,7 +4027,7 @@ git push origin main`,
       ],
       format: [
         "适合系列图文教程 + 代码示例",
-        "后续可以补在线练习、小项目下载和代码仓库"
+        "可选加深：在线练习、小项目下载和代码仓库"
       ],
       roadmap: [
         "先学 HTML 结构，再学 CSS 样式，最后用 JavaScript 做交互",
@@ -4111,13 +4059,12 @@ git push origin main`,
       curatedLinks: [
         "正文里建议先放一张学习路线图，再展开每一步要学什么。",
         "代码示例最好从完整小页面出发，而不是只有零散片段。",
-        "代码下载区适合承接编辑器、图标库、模板和课程类资源。"
+        "代码下载区适合延伸到编辑器、图标库、模板和课程类资源。"
       ],
       downloadIdeas: [
         "可以提供前端入门路线图 PDF",
         "可以提供 HTML/CSS/JS 示例代码包"
       ],
-      monetization: "代码下载链接处适合放插件、工具、课程或模板类联盟资源。",
       extraSections: [
         {
           title: "更清晰的学习主线",
@@ -4191,7 +4138,7 @@ git push origin main`,
       featured: false,
       intro: [
         "报错类内容的核心价值不是堆很多错误名词，而是给读者一套稳定的排查顺序。只要顺序讲清楚，这类页面就很容易形成收藏和回访。",
-        "先做资源导航页，后续再按 Python、前端、Git 分专题扩写。"
+        "先做学习路线页，继续按 Python、前端、Git 分专题扩写。"
       ],
       audience: [
         "经常被报错卡住的学生",
@@ -4226,13 +4173,12 @@ git push origin main`,
       curatedLinks: [
         "正文可固定成一套模板：现象、原因、排查顺序、解决方法、参考链接。",
         "如果侧边栏放工具推荐，最好优先推荐调试、日志和版本管理相关工具。",
-        "后续可以补“新手最常见 20 个报错”的专题页。"
+        "可选加深：“新手最常见 20 个报错”的专题页。"
       ],
       downloadIdeas: [
         "可以做错误排查流程图",
         "可以补一个报错记录模板或调试清单"
       ],
-      monetization: "侧边栏适合放调试工具、学习书籍和开发插件类资源。",
       extraSections: [
         {
           title: "建议固定成的排查模板",
@@ -4272,7 +4218,7 @@ git push origin main`,
       date: "2026-05-27",
       category: "AI 工具",
       readTime: "10 分钟",
-      excerpt: "适合新手 AI 用户的资源导航页，优先整理官方入口、基础用法和适合快速见效的应用场景。",
+      excerpt: "适合新手 AI 用户的学习路线页，优先整理官方入口、基础用法和适合快速见效的应用场景。",
       tags: ["ChatGPT", "Midjourney", "AI 教程"],
       featured: false,
       intro: [
@@ -4317,13 +4263,12 @@ git push origin main`,
       curatedLinks: [
         "新手内容最好少讲术语，多讲“我现在就能拿它做什么”。",
         "如果后续录视频，优先录从提问到结果的短链路演示。",
-        "这类页面很适合承接工具官网、付费套餐和系统课程类资源。"
+        "这类页面很适合延伸到工具官网、付费套餐和系统课程类资源。"
       ],
       downloadIdeas: [
         "可以提供常用提示词模板清单",
         "可以整理不同场景的 AI 工具速查表"
       ],
-      monetization: "适合放工具官网、插件市场、会员套餐和课程类联盟推荐。",
       extraSections: [
         {
           title: "建议按场景组织 AI 内容",
@@ -4380,8 +4325,8 @@ git push origin main`,
         "经常做表格、汇报和文档的职场人"
       ],
       format: [
-        "适合模板下载 + 使用指南",
-        "后续可以补分类模板页和场景案例"
+        "适合模板使用指南 + 使用指南",
+        "可选加深：分类模板页和场景案例"
       ],
       roadmap: [
         "先按场景分组：简历、汇报、计划表、数据整理、课堂作业",
@@ -4414,7 +4359,6 @@ git push origin main`,
         "可以整理模板索引 PDF",
         "可以补模板使用前检查清单"
       ],
-      monetization: "模板下载旁边适合放办公工具、教育服务和存储类联盟资源。",
       extraSections: [
         {
           title: "建议按场景整理模板",
@@ -5869,7 +5813,7 @@ git push origin main`,
       `
     },
     {
-      id: "monetization-layout-kit",
+      id: "hotspot-review-flow",
       title: "每日热点核验与发布流程",
       summary: "从官方博客、changelog 和原始来源筛选开发热点，再补充适用场景、限制条件和新手实践路线。",
       stack: "来源核验 / 内容维护",
@@ -6475,7 +6419,7 @@ function injectResourcesPage() {
           <p class="eyebrow">本站原创下载</p>
           <h2>6 个能直接带走使用的资料包</h2>
         </div>
-        <p>每个 ZIP 都包含说明和可编辑文件。下载后先阅读 README，再按自己的项目调整。</p>
+        <p>每个 ZIP 都包含说明、文件清单和适用边界。下载后先阅读 README，再按自己的项目调整。</p>
       </div>
       <div class="download-grid">
         ${siteData.downloads.map(buildDownloadCard).join("")}
@@ -6505,7 +6449,7 @@ function injectResourcesPage() {
           <p class="eyebrow">精选学习路线</p>
           <h2>下载之后，顺着 6 个专题继续实践</h2>
         </div>
-        <p>这里只保留适合长期学习的基础专题，不再把全部热点文章重复铺在资源页。</p>
+        <p>这里只保留适合长期学习的基础专题，不把每日热点重复铺成资源列表。</p>
       </div>
       ${getResourcePathPosts().map(buildTopicResourceSection).join("")}
     </section>

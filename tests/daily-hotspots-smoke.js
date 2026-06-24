@@ -60,10 +60,18 @@ const requiredPostFields = [
   "roadmap",
   "officialLinks",
   "curatedLinks",
-  "downloadIdeas",
-  "monetization"
+  "downloadIdeas"
 ];
 const requiredHotspotFields = ["date", "tag", "title", "summary", "why", "sourceLabel", "sourceUrl", "articleIdea"];
+const publicRiskTerms = [
+  "monetization",
+  "广告位",
+  "联盟入口",
+  "适合承接",
+  "后续可以补",
+  "资源导航页",
+  "赞助入口"
+];
 
 function check(name, condition) {
   checks.push({ name, passed: Boolean(condition) });
@@ -76,6 +84,7 @@ check(
     requiredPostFields.every((field) => item[field] && (!Array.isArray(item[field]) || item[field].length))
   )
 );
+check("public app data avoids ad-planning terms", publicRiskTerms.every((term) => !appSource.includes(term)));
 check("hotspots remain latest-first", orderViolations.length === 0);
 check("all hotspots have required fields", data.hotspots.every((item) => requiredHotspotFields.every((field) => item[field])));
 check("hotspot source URLs are unique", new Set(data.hotspots.map((item) => item.sourceUrl)).size === data.hotspots.length);
@@ -109,6 +118,10 @@ check(
 
 context.injectHotspotsPage();
 check("hotspots page renders newest five items", data.hotspots.slice(0, 5).every((item) => nodes["[data-hotspot-list]"].innerHTML.includes(item.title)));
+
+const hotspotsPage = fs.readFileSync(path.join(root, "hotspots.html"), "utf8");
+const sitemap = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
+check("hotspots archive is accessible but not indexed", hotspotsPage.includes('name="robots" content="noindex,follow"') && !sitemap.includes("/hotspots.html"));
 
 context.injectPostsPage();
 check("posts page links the newest two static articles", publishedPosts.slice(0, 2).every((item) => nodes["[data-post-list]"].innerHTML.includes(`articles/${item.id}.html`)));
