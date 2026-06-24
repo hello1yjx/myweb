@@ -70,7 +70,11 @@ const publicRiskTerms = [
   "适合承接",
   "后续可以补",
   "资源导航页",
-  "赞助入口"
+  "赞助入口",
+  "资源位",
+  "变现建议",
+  "付费主题",
+  "未来可以放"
 ];
 
 function check(name, condition) {
