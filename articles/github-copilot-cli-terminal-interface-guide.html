@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitHub Copilot CLI 新终端界面：新手怎样把 Issue、PR、MCP、Skills 和插件放进一个可控工作台 | 学习资源库</title>
+  <meta name="description" content="GitHub 在 2026 年 6 月 23 日宣布 Copilot CLI 新终端界面正式可用，重点包括在终端标签页里浏览当前仓库的 Issues、Pull requests 和个人 Gists，以及用 /mcp、/skills、/plugin、/settings 在会话内配置工具。对新手来说，这不是把聊天窗口搬进终端，而是把任务来源、上下文引用、外部工具和权限配置放到同一个可检查的开发工作台里。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/github-copilot-cli-terminal-interface-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"GitHub Copilot CLI 新终端界面：新手怎样把 Issue、PR、MCP、Skills 和插件放进一个可控工作台","description":"GitHub 在 2026 年 6 月 23 日宣布 Copilot CLI 新终端界面正式可用，重点包括在终端标签页里浏览当前仓库的 Issues、Pull requests 和个人 Gists，以及用 /mcp、/skills、/plugin、/settings 在会话内配置工具。对新手来说，这不是把聊天窗口搬进终端，而是把任务来源、上下文引用、外部工具和权限配置放到同一个可检查的开发工作台里。","datePublished":"2026-06-23","dateModified":"2026-06-23","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/github-copilot-cli-terminal-interface-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260624-hotspots">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-book-line.png" alt="" width="36" height="33"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <button class="menu-button" data-menu-button aria-expanded="false" aria-label="切换导航菜单">☰</button>
+      <nav class="site-nav" data-mobile-nav>
+        <a href="../index.html">首页</a>
+        <a class="is-active" href="../posts.html" aria-current="page">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../resources.html#official-resources">工具导航</a>
+        <a href="../hotspots.html">技术资讯</a>
+        <a href="../projects.html">开源项目</a>
+        <a href="../about.html">关于我们</a>
+      </nav>
+      <form class="header-search" action="../posts.html" method="get">
+        <input type="search" name="q" placeholder="搜索教程、资源、工具或关键词...">
+        <button type="submit" aria-label="搜索">/</button>
+      </form>
+      <a class="header-github" href="https://github.com/hello1yjx/hello1yjx.github.io" target="_blank" rel="noreferrer" aria-label="GitHub">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="" width="24" height="24">
+      </a>
+      <a class="header-cta" href="../posts.html">开始学习</a>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 编程</span>
+      <h1>GitHub Copilot CLI 新终端界面：新手怎样把 Issue、PR、MCP、Skills 和插件放进一个可控工作台</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-23">2026年6月23日</time>
+        <span>10 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>GitHub 在 2026 年 6 月 23 日宣布 Copilot CLI 新终端界面正式可用，重点包括在终端标签页里浏览当前仓库的 Issues、Pull requests 和个人 Gists，以及用 /mcp、/skills、/plugin、/settings 在会话内配置工具。对新手来说，这不是把聊天窗口搬进终端，而是把任务来源、上下文引用、外部工具和权限配置放到同一个可检查的开发工作台里。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://github.blog/changelog/2026-06-23-copilot-cli-new-terminal-interface-is-generally-available/" target="_blank" rel="noreferrer">GitHub Changelog：Copilot CLI 新终端界面正式可用</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>很多新手第一次使用终端 AI Agent 时，会先关注它能不能改代码、能不能跑命令、能不能帮忙提交 PR。真正容易出问题的地方，往往不是模型不会写，而是任务来源、上下文和工具权限分散在不同窗口里：Issue 在浏览器，PR 在网页，MCP 配置在 JSON 文件，skills 又在另一个目录。切换越多，越容易把错误 Issue、过期 PR 或不该启用的工具带进任务。</p><p>GitHub Copilot CLI 在 2026 年 6 月 23 日把新终端界面推到正式可用，变化集中在三个方向：会话顶部可以用标签页查看 GitHub 内容；MCP、Skills、Plugins 和 Settings 可以在终端会话里引导式配置；界面本身支持主题、窄终端和屏幕阅读器等可访问性改进。它对新手的价值，不是让 Copilot 自动做更多事，而是让你在开始任务前更容易确认“要处理哪件事、引用了什么上下文、启用了哪些工具”。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>已经会在终端里使用 GitHub、npm、Vercel 或 Cloudflare CLI，但还不熟悉 AI Agent 工作流的新手开发者</li><li>经常从 GitHub Issue 或 Pull Request 开始修 bug、补文档、做代码审查的个人站长和开源维护者</li><li>想尝试 MCP、skills 和插件，却担心配置分散、权限过大、工具来源不清楚的团队成员</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先从标签页确认任务来源。GitHub 文档说明，交互式 Copilot CLI 会话在 Git 仓库中默认包含 Session、Issues、Pull requests 和 Gists 标签页。新手不要一进入会话就让 Agent 开改，先用标签页找到具体 Issue 或 PR，把它作为引用放进提示中，再要求 Copilot 总结问题、关联文件和建议步骤。</li><li>把引用动作和修改动作分开。GitHub changelog 提到可以高亮 Issue 或 PR 后按键把引用放进 prompt，再请 Copilot investigate、fix、comment 或 review。建议第一次只让它调查和列计划，等你确认目标对象、分支和文件范围后，再允许生成补丁或提交评论。</li><li>配置 MCP 时先做最小可见性。官方文档说明 GitHub MCP server 已内置，其他 MCP server 可以通过 /mcp add、copilot mcp add、配置文件或 registry 添加，并可限制启用的工具。新手应先选择只读或少量工具，避免直接启用全部外部系统；如果需要 API key，应确认它只存在本机安全位置，不要写进仓库。</li><li>把 skills 当成项目规则，而不是魔法按钮。官方 skills 文档要求项目级 skill 放在 .github/skills、.claude/skills 或 .agents/skills 等目录，并包含 SKILL.md。新手可以先写一个很小的项目技能，例如“如何跑测试和构建”，再用 /skills reload 和 /skills info 确认它真的被加载，而不是把大量模糊指令一次塞进去。</li><li>插件适合团队复用，但要看清包含内容。GitHub 文档说明插件可以打包 agents、skills、hooks 和 MCP 配置。安装插件前要先看它会带来哪些工具、是否有 hooks、是否会连接远程 MCP 服务；团队共享插件时，应把来源、版本、负责人和卸载方式写进项目文档。</li><li>收尾时保留验收证据。每次让 CLI 处理 Issue 或 PR 后，都应留下实际改动 diff、运行过的测试、引用的 Issue/PR 链接、启用的 MCP 或插件列表，以及还需要人工检查的点。这样下次继续会话时，不需要重新猜 Agent 做过什么。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://github.blog/changelog/2026-06-23-copilot-cli-new-terminal-interface-is-generally-available/" target="_blank" rel="noreferrer">GitHub Changelog：Copilot CLI 新终端界面正式可用</a>
+              <span>：2026 年 6 月 23 日发布，说明标签页、会话内工具配置、主题和可访问性更新，并给出 copilot update 的升级入口。</span>
+            </li>
+
+            <li>
+              <a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/browse-issues-prs-gists" target="_blank" rel="noreferrer">GitHub Docs：浏览 Issues、Pull requests 和 Gists</a>
+              <span>：说明 Session、Issues、Pull requests、Gists 标签页，以及在终端中查找、引用和打开 GitHub 项目的方式。</span>
+            </li>
+
+            <li>
+              <a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-mcp-servers" target="_blank" rel="noreferrer">GitHub Docs：Adding MCP servers for GitHub Copilot CLI</a>
+              <span>：用于核对 /mcp add、copilot mcp add、registry、工具限制和 MCP 配置文件位置。</span>
+            </li>
+
+            <li>
+              <a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills" target="_blank" rel="noreferrer">GitHub Docs：Adding agent skills for GitHub Copilot CLI</a>
+              <span>：说明项目级和个人级 skills 目录、SKILL.md 文件要求，以及 /skills reload 和 /skills info 的验证方式。</span>
+            </li>
+
+            <li>
+              <a href="https://docs.github.com/en/copilot/concepts/agents/about-plugins" target="_blank" rel="noreferrer">GitHub Docs：About GitHub Copilot plugins</a>
+              <span>：说明插件可以打包 custom agents、skills、hooks 和 MCP server 配置，适合团队复用但需要先审查内容。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>新终端界面的重点不是让 Agent 更自动，而是让任务来源、上下文引用和工具配置更容易被人看见。</li><li>Issue 或 PR 标签页可以减少复制链接和切换浏览器，但仍要先确认当前仓库、分支、目标对象和修改范围。</li><li>MCP、skills 和 plugins 都会扩大 Agent 能力；第一次接入时应从只读、少工具、可回滚开始，不要直接给全部权限。</li><li>把终端会话当成可审计工作台：每次任务结束都要记录引用对象、启用工具、执行命令和验收结果。</li></ul>
+
+        <h2>第一次试用建议按这个顺序来</h2>
+
+        <ul><li>运行 copilot update，把 CLI 升级到包含新终端界面的版本。</li><li>进入一个真实但低风险的 GitHub 仓库，先只在 Issues 和 Pull requests 标签页中浏览任务。</li><li>选中一个 Issue 或 PR 后先让 Copilot 总结上下文，不要立刻让它改文件。</li><li>只添加一个必要 MCP server 或一个项目 skill，并记录它的用途和权限。</li><li>允许 Copilot 做一个小补丁或文档修改，运行测试后再决定是否继续扩大范围。</li></ul>
+
+
+
+        <h2>会话记录模板</h2>
+        <p>每次用终端 Agent 处理 GitHub 任务后，建议留下这段短记录，方便复盘和继续。</p>
+
+
+        <pre><code class="language-text">仓库：
+任务来源：Issue / PR / Gist
+引用链接：
+当前分支：
+启用 MCP：
+启用 skills：
+启用 plugins：
+允许目录：
+禁止动作：
+执行命令：
+测试结果：
+线上或 PR 验收：
+下次继续点：</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>GitHub Copilot</span><span>Copilot CLI</span><span>MCP</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="google-a2a-collaborative-agents-guide.html">Google A2A 协作 Agent：新手怎样理解多智能体交接、边界和验收</a><a href="vercel-connect-agent-token-security-guide.html">Vercel Connect 公测：新手怎样让 Agent 安全访问 Slack、GitHub 和外部服务</a><a href="github-copilot-agent-finder-ard-guide.html">GitHub Copilot agent finder 与 ARD：新手怎样给 AI Agent 选择可信工具、Skills 和 MCP 资源</a><a href="cloudflare-flue-agents-sdk-production-guide.html">Cloudflare Flue 与 Agents SDK：新手怎样理解 Agent 的框架、harness 和可恢复运行时</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var button = document.querySelector("[data-menu-button]");
+      var nav = document.querySelector("[data-mobile-nav]");
+      if (!button || !nav) return;
+      button.addEventListener("click", function () {
+        var expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        nav.classList.toggle("site-nav--open", !expanded);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -29,6 +29,93 @@ const siteData = {
   },
   posts: [
     {
+      id: "github-copilot-cli-terminal-interface-guide",
+      title: "GitHub Copilot CLI 新终端界面：新手怎样把 Issue、PR、MCP、Skills 和插件放进一个可控工作台",
+      date: "2026-06-23",
+      category: "AI 编程",
+      readTime: "10 分钟",
+      excerpt: "GitHub 在 2026 年 6 月 23 日宣布 Copilot CLI 新终端界面正式可用，重点包括在终端标签页里浏览当前仓库的 Issues、Pull requests 和个人 Gists，以及用 /mcp、/skills、/plugin、/settings 在会话内配置工具。对新手来说，这不是把聊天窗口搬进终端，而是把任务来源、上下文引用、外部工具和权限配置放到同一个可检查的开发工作台里。",
+      tags: ["GitHub Copilot", "Copilot CLI", "MCP"],
+      featured: true,
+      intro: [
+        "很多新手第一次使用终端 AI Agent 时，会先关注它能不能改代码、能不能跑命令、能不能帮忙提交 PR。真正容易出问题的地方，往往不是模型不会写，而是任务来源、上下文和工具权限分散在不同窗口里：Issue 在浏览器，PR 在网页，MCP 配置在 JSON 文件，skills 又在另一个目录。切换越多，越容易把错误 Issue、过期 PR 或不该启用的工具带进任务。",
+        "GitHub Copilot CLI 在 2026 年 6 月 23 日把新终端界面推到正式可用，变化集中在三个方向：会话顶部可以用标签页查看 GitHub 内容；MCP、Skills、Plugins 和 Settings 可以在终端会话里引导式配置；界面本身支持主题、窄终端和屏幕阅读器等可访问性改进。它对新手的价值，不是让 Copilot 自动做更多事，而是让你在开始任务前更容易确认“要处理哪件事、引用了什么上下文、启用了哪些工具”。"
+      ],
+      audience: [
+        "已经会在终端里使用 GitHub、npm、Vercel 或 Cloudflare CLI，但还不熟悉 AI Agent 工作流的新手开发者",
+        "经常从 GitHub Issue 或 Pull Request 开始修 bug、补文档、做代码审查的个人站长和开源维护者",
+        "想尝试 MCP、skills 和插件，却担心配置分散、权限过大、工具来源不清楚的团队成员"
+      ],
+      format: [
+        "适合整理成“选择任务标签页 / 引用 Issue 或 PR / 只读理解 / 最小工具配置 / 小补丁试跑 / 验收与反馈”的终端 Agent 操作清单",
+        "后续可以补一份 Copilot CLI 会话记录模板，记录任务来源、引用对象、启用工具、允许目录、执行命令、结果链接和回滚方式"
+      ],
+      roadmap: [
+        "先从标签页确认任务来源。GitHub 文档说明，交互式 Copilot CLI 会话在 Git 仓库中默认包含 Session、Issues、Pull requests 和 Gists 标签页。新手不要一进入会话就让 Agent 开改，先用标签页找到具体 Issue 或 PR，把它作为引用放进提示中，再要求 Copilot 总结问题、关联文件和建议步骤。",
+        "把引用动作和修改动作分开。GitHub changelog 提到可以高亮 Issue 或 PR 后按键把引用放进 prompt，再请 Copilot investigate、fix、comment 或 review。建议第一次只让它调查和列计划，等你确认目标对象、分支和文件范围后，再允许生成补丁或提交评论。",
+        "配置 MCP 时先做最小可见性。官方文档说明 GitHub MCP server 已内置，其他 MCP server 可以通过 /mcp add、copilot mcp add、配置文件或 registry 添加，并可限制启用的工具。新手应先选择只读或少量工具，避免直接启用全部外部系统；如果需要 API key，应确认它只存在本机安全位置，不要写进仓库。",
+        "把 skills 当成项目规则，而不是魔法按钮。官方 skills 文档要求项目级 skill 放在 .github/skills、.claude/skills 或 .agents/skills 等目录，并包含 SKILL.md。新手可以先写一个很小的项目技能，例如“如何跑测试和构建”，再用 /skills reload 和 /skills info 确认它真的被加载，而不是把大量模糊指令一次塞进去。",
+        "插件适合团队复用，但要看清包含内容。GitHub 文档说明插件可以打包 agents、skills、hooks 和 MCP 配置。安装插件前要先看它会带来哪些工具、是否有 hooks、是否会连接远程 MCP 服务；团队共享插件时，应把来源、版本、负责人和卸载方式写进项目文档。",
+        "收尾时保留验收证据。每次让 CLI 处理 Issue 或 PR 后，都应留下实际改动 diff、运行过的测试、引用的 Issue/PR 链接、启用的 MCP 或插件列表，以及还需要人工检查的点。这样下次继续会话时，不需要重新猜 Agent 做过什么。"
+      ],
+      officialLinks: [
+        {
+          label: "GitHub Changelog：Copilot CLI 新终端界面正式可用",
+          url: "https://github.blog/changelog/2026-06-23-copilot-cli-new-terminal-interface-is-generally-available/",
+          note: "2026 年 6 月 23 日发布，说明标签页、会话内工具配置、主题和可访问性更新，并给出 copilot update 的升级入口。"
+        },
+        {
+          label: "GitHub Docs：浏览 Issues、Pull requests 和 Gists",
+          url: "https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/browse-issues-prs-gists",
+          note: "说明 Session、Issues、Pull requests、Gists 标签页，以及在终端中查找、引用和打开 GitHub 项目的方式。"
+        },
+        {
+          label: "GitHub Docs：Adding MCP servers for GitHub Copilot CLI",
+          url: "https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-mcp-servers",
+          note: "用于核对 /mcp add、copilot mcp add、registry、工具限制和 MCP 配置文件位置。"
+        },
+        {
+          label: "GitHub Docs：Adding agent skills for GitHub Copilot CLI",
+          url: "https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills",
+          note: "说明项目级和个人级 skills 目录、SKILL.md 文件要求，以及 /skills reload 和 /skills info 的验证方式。"
+        },
+        {
+          label: "GitHub Docs：About GitHub Copilot plugins",
+          url: "https://docs.github.com/en/copilot/concepts/agents/about-plugins",
+          note: "说明插件可以打包 custom agents、skills、hooks 和 MCP server 配置，适合团队复用但需要先审查内容。"
+        }
+      ],
+      curatedLinks: [
+        "新终端界面的重点不是让 Agent 更自动，而是让任务来源、上下文引用和工具配置更容易被人看见。",
+        "Issue 或 PR 标签页可以减少复制链接和切换浏览器，但仍要先确认当前仓库、分支、目标对象和修改范围。",
+        "MCP、skills 和 plugins 都会扩大 Agent 能力；第一次接入时应从只读、少工具、可回滚开始，不要直接给全部权限。",
+        "把终端会话当成可审计工作台：每次任务结束都要记录引用对象、启用工具、执行命令和验收结果。"
+      ],
+      downloadIdeas: [
+        "可以整理一份 Copilot CLI 任务启动清单，字段包括仓库、Issue/PR、允许目录、启用 MCP、启用 skills、禁止动作和验收命令",
+        "可以补一份插件审查表，记录插件来源、包含组件、MCP 连接、hooks 行为、负责人、版本和卸载方式"
+      ],
+      monetization: "适合与本站的 GitHub Copilot、MCP、Agent 安全边界、长任务工作流和开源项目维护内容互相推荐，帮助读者从“会问 AI”过渡到“会在终端里管理可复查任务”。",
+      extraSections: [
+        {
+          title: "第一次试用建议按这个顺序来",
+          items: [
+            "运行 copilot update，把 CLI 升级到包含新终端界面的版本。",
+            "进入一个真实但低风险的 GitHub 仓库，先只在 Issues 和 Pull requests 标签页中浏览任务。",
+            "选中一个 Issue 或 PR 后先让 Copilot 总结上下文，不要立刻让它改文件。",
+            "只添加一个必要 MCP server 或一个项目 skill，并记录它的用途和权限。",
+            "允许 Copilot 做一个小补丁或文档修改，运行测试后再决定是否继续扩大范围。"
+          ]
+        },
+        {
+          title: "会话记录模板",
+          text: "每次用终端 Agent 处理 GitHub 任务后，建议留下这段短记录，方便复盘和继续。",
+          code: "仓库：\n任务来源：Issue / PR / Gist\n引用链接：\n当前分支：\n启用 MCP：\n启用 skills：\n启用 plugins：\n允许目录：\n禁止动作：\n执行命令：\n测试结果：\n线上或 PR 验收：\n下次继续点：",
+          language: "text"
+        }
+      ]
+    },
+    {
       id: "openai-codex-long-running-workflow-guide",
       title: "OpenAI Codex 长任务工作流：新手怎样把一次提示变成可核验的持续任务",
       date: "2026-06-22",
@@ -4505,6 +4592,56 @@ git push origin main`,
     "github-agentic-workflows-public-preview-guide"
   ],
   hotspots: [
+    {
+      date: "2026-06-23",
+      tag: "AI 终端",
+      title: "GitHub Copilot CLI 新终端界面 GA：Issue、PR、Gist、MCP、Skills 和插件都进入会话内管理",
+      summary: "GitHub Changelog 宣布，Copilot CLI 在 Microsoft Build 2026 预览过的新终端界面现在正式可用：交互式会话顶部可用标签页浏览当前仓库 Issues、Pull requests 和个人 Gists；/mcp、/skills、/plugin、/settings 则把 MCP、skills、插件和设置放进终端内引导配置。官方还强调主题、窄终端适配和屏幕阅读器支持。",
+      why: "终端 Agent 正在从“聊天加命令”变成面向 GitHub 工作流的任务工作台。新手升级后应重点核对当前仓库、引用的 Issue/PR、启用的 MCP 工具、skills 和插件来源，先做只读总结和小补丁，再扩大到评论、审查或修复任务。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-23-copilot-cli-new-terminal-interface-is-generally-available/",
+      articleIdea: "已扩写：GitHub Copilot CLI 新终端界面新手工作台验收清单"
+    },
+    {
+      date: "2026-06-23",
+      tag: "AI 模型",
+      title: "GitHub Copilot app 支持 BYOK：桌面 Agent 会话可连接自有模型提供方",
+      summary: "GitHub Changelog 显示，GitHub Copilot app 现在支持 bring your own key，可在 Settings 的 Model Providers 中添加 OpenAI、Azure OpenAI、Microsoft Foundry、Anthropic、LM Studio、Ollama 或 OpenAI-compatible endpoint。添加后，自有模型会出现在模型选择器中，密钥保存在本机系统 keychain，UI 不会读回显示。",
+      why: "BYOK 让个人和团队可以在 Copilot app 的 Agent 会话里使用已有模型、配额、区域和数据处理边界。新手不要只把它看成“多几个模型”，还要核对本机密钥保存位置、组织策略、计费归属、是否走内部网关，以及每个会话选择了哪个模型。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-23-github-copilot-app-support-for-byok/",
+      articleIdea: "候选：Copilot app BYOK 下怎样核对模型、密钥和数据边界"
+    },
+    {
+      date: "2026-06-23",
+      tag: "AI 工作流",
+      title: "Vercel Workflows 重做 trace viewer：可搜索、缩放并查看每一步输入输出",
+      summary: "Vercel Changelog 宣布，Vercel Workflows 和 Workflow SDK 的 trace viewer 已重新设计，用于从头到尾检查 workflow runs：可以搜索 spans、缩放时间线、用键盘逐步查看，并点进每一步的 inputs、outputs 和 run metadata。本地开发也可通过 Workflow SDK 的 `npx workflow@beta web` 检查 runs。",
+      why: "AI Agent 和后台工作流的难点不只是“能跑完”，而是失败后能不能复盘每一步。对新手来说，trace viewer 的价值在于把长任务拆成可观察步骤，先看输入输出、耗时、错误和元数据，再决定是否重跑、回滚或改提示词。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/redesigned-trace-viewer-for-vercel-workflows",
+      articleIdea: "候选：用 Vercel Workflows trace viewer 排查 AI 工作流失败的最小清单"
+    },
+    {
+      date: "2026-06-23",
+      tag: "建站工具",
+      title: "Vercel 支持零配置部署 Node.js server.ts：CLI 本地开发和部署会自动识别",
+      summary: "Vercel Changelog 显示，现在可以把项目根目录或 src 目录下的 `server.ts` 作为 Node.js server 零配置部署到 Vercel；Vercel CLI 的 `vc dev` 和 `vc deploy` 会自动识别，不需要额外配置文件。官方示例使用 Node 的 createServer，并说明后端由 Fluid compute 和 Active CPU pricing 支撑。",
+      why: "这降低了把小型 Node API、Webhook、演示后端或教学服务部署到 Vercel 的门槛。新手仍要检查入口文件位置、PORT 监听、环境变量、冷启动和计费模型，不要因为“零配置”就忽略日志、路由和生产安全边界。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/deploy-node-servers-with-zero-configuration",
+      articleIdea: "候选：server.ts 零配置部署到 Vercel 前的新手检查表"
+    },
+    {
+      date: "2026-06-23",
+      tag: "代码质量",
+      title: "GitHub Code Quality findings REST API 公测：可读取仓库级 CodeQL 质量发现",
+      summary: "GitHub Changelog 宣布，仓库级 Code Quality findings REST API 进入 public preview，新增两个只读端点：读取单个 Code Quality CodeQL finding，以及带过滤和分页列出仓库 findings。GitHub 表示这些端点可支持工具集成和 agentic remediation workflows，目前在 github.com 可用，暂不支持 GitHub Enterprise Server。",
+      why: "代码质量结果可以被自动化工具和 Agent 工作流读取后，下一步就是排序、解释、生成修复建议和跟踪关闭状态。新手和团队应先把它用于只读报表、趋势观察和人工复核，不要让 Agent 在没有测试和代码审查的情况下自动合并修复。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-23-fetch-code-quality-findings-via-rest-api/",
+      articleIdea: "候选：用 Code Quality API 做只读质量报表，再接入 Agent 修复流程"
+    },
     {
       date: "2026-06-23",
       tag: "AI 建站",
