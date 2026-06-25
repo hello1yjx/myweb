@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cloudflare AI Search 相似缓存新鲜度：新手怎样给站内 AI 搜索设置 TTL、清理缓存和验收答案 | 学习资源库</title>
+  <meta name="description" content="Cloudflare 在 2026 年 6 月 24 日更新 AI Search 相似缓存控制：缓存默认从固定 30 天改为使用实例的 cache_ttl，默认 48 小时，并支持按需清理实例缓存。对新手站长来说，这不是单纯的性能开关，而是站内 AI 搜索的“答案新鲜度”控制点：资料更新频繁时要缩短 TTL，发布关键内容后要主动清理缓存，并用请求结果和响应头确认用户拿到的是新答案。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/cloudflare-ai-search-cache-freshness-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Cloudflare AI Search 相似缓存新鲜度：新手怎样给站内 AI 搜索设置 TTL、清理缓存和验收答案","description":"Cloudflare 在 2026 年 6 月 24 日更新 AI Search 相似缓存控制：缓存默认从固定 30 天改为使用实例的 cache_ttl，默认 48 小时，并支持按需清理实例缓存。对新手站长来说，这不是单纯的性能开关，而是站内 AI 搜索的“答案新鲜度”控制点：资料更新频繁时要缩短 TTL，发布关键内容后要主动清理缓存，并用请求结果和响应头确认用户拿到的是新答案。","datePublished":"2026-06-24","dateModified":"2026-06-24","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/cloudflare-ai-search-cache-freshness-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260625-hotspots">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-book-line.png" alt="" width="36" height="33"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <button class="menu-button" data-menu-button aria-expanded="false" aria-label="切换导航菜单">☰</button>
+      <nav class="site-nav" data-mobile-nav>
+        <a href="../index.html">首页</a>
+        <a class="is-active" href="../posts.html" aria-current="page">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../resources.html#official-resources">工具导航</a>
+        <a href="../hotspots.html">技术资讯</a>
+        <a href="../projects.html">开源项目</a>
+        <a href="../about.html">关于我们</a>
+      </nav>
+      <form class="header-search" action="../posts.html" method="get">
+        <input type="search" name="q" placeholder="搜索教程、资源、工具或关键词...">
+        <button type="submit" aria-label="搜索">/</button>
+      </form>
+      <a class="header-github" href="https://github.com/hello1yjx/hello1yjx.github.io" target="_blank" rel="noreferrer" aria-label="GitHub">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="" width="24" height="24">
+      </a>
+      <a class="header-cta" href="../posts.html">开始学习</a>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">AI 建站</span>
+      <h1>Cloudflare AI Search 相似缓存新鲜度：新手怎样给站内 AI 搜索设置 TTL、清理缓存和验收答案</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-24">2026年6月24日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Cloudflare 在 2026 年 6 月 24 日更新 AI Search 相似缓存控制：缓存默认从固定 30 天改为使用实例的 cache_ttl，默认 48 小时，并支持按需清理实例缓存。对新手站长来说，这不是单纯的性能开关，而是站内 AI 搜索的“答案新鲜度”控制点：资料更新频繁时要缩短 TTL，发布关键内容后要主动清理缓存，并用请求结果和响应头确认用户拿到的是新答案。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://developers.cloudflare.com/changelog/post/2026-06-24-ai-search-similarity-cache-controls/" target="_blank" rel="noreferrer">Cloudflare Changelog：Control AI Search similarity cache freshness</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>很多个人站和文档站接入 AI 搜索后，会先关注两个指标：回答够不够快、调用成本会不会太高。相似缓存正好解决这两个问题的一部分：用户问法接近时，可以复用已经生成过的答案，减少重复生成。但它也带来一个容易被忽略的风险：如果站点资料刚刚更新，旧答案仍被复用，读者可能看到已经过期的说明。</p><p>Cloudflare AI Search 在 2026 年 6 月 24 日把相似缓存的新鲜度控制做得更明确：缓存时长改为跟随实例的 cache_ttl，默认 48 小时；你可以把 TTL 设在 10 分钟到 6 天之间；当内容有明显更新时，也可以清理实例缓存，让后续相似问题重新生成答案。新手可以把这次更新当成一次 AI 搜索上线前的验收课：先决定资料变化频率，再设置 TTL，最后用一次发布演练确认缓存不会把旧答案留给用户。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>准备把博客、文档、下载说明或产品帮助页接入 Cloudflare AI Search 的个人站长</li><li>已经有 RAG 或站内问答功能，但还没有明确缓存时长、清理动作和验收记录的新手开发者</li><li>需要在速度、成本和资料新鲜度之间做取舍的小团队维护者</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先判断资料是不是经常变化。Cloudflare 文档说明，相似缓存会复用语义相近问题的回答，命中后速度更快、成本更低。适合放在常见问答、稳定教程和长期说明页上；如果内容每天变化、价格频繁变化或涉及实时状态，就要缩短 TTL，甚至在关键查询里关闭缓存。</li><li>把 TTL 写成可解释的选择，而不是照抄默认值。本次更新后默认值是 48 小时，允许的 cache_ttl 从 600 秒到 518400 秒。新手可以先按资料类型分档：公告和版本页用 10 分钟到 1 小时，普通教程用 24 到 48 小时，长期不变的概念说明再考虑更长时间。</li><li>创建或更新实例时同步记录 cache_ttl。Cloudflare REST API 文档说明，AI Search 实例可以通过 API 创建，也可以连接自有网站或 R2 作为数据源。无论使用 Dashboard、API 还是 Wrangler，都要把实例名称、数据源、TTL、相似度阈值和 API token 权限记录下来，方便排查。</li><li>发布重要内容后主动清理缓存。Cloudflare changelog 说明，清理相似缓存不会删除已索引内容或源文件，只是阻止继续复用旧缓存，让后续相似查询重新生成答案。对文档站来说，发布“安装步骤、限制、价格、接口路径、版本说明”这类内容后，建议把 purge cache 纳入发布检查。</li><li>用一组固定问题验收答案新鲜度。先问一个能命中旧内容的问题，记录答案和 cf-aig-cache-status；更新资料并完成索引后，再清理缓存，重新提问同一问题和一个相似问法。验收重点不是只看页面有没有更新，而是确认 AI 搜索回答是否引用了新资料。</li><li>不要把相似缓存当成唯一的准确性保障。文档说明缓存会受到阈值、并发请求、文档块变化和 per-request override 影响。新手应保留人工抽查问题，尤其是涉及账号权限、费用、部署命令和安全设置的回答，避免为了省请求而复用不该复用的答案。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://developers.cloudflare.com/changelog/post/2026-06-24-ai-search-similarity-cache-controls/" target="_blank" rel="noreferrer">Cloudflare Changelog：Control AI Search similarity cache freshness</a>
+              <span>：2026 年 6 月 24 日发布，说明 cache_ttl 默认 48 小时、可选 10 分钟到 6 天，以及按需清理缓存的入口。</span>
+            </li>
+
+            <li>
+              <a href="https://developers.cloudflare.com/ai-search/configuration/retrieval/cache/" target="_blank" rel="noreferrer">Cloudflare Docs：Similarity cache</a>
+              <span>：解释相似缓存如何命中、cf-aig-cache-status 响应头、阈值选项、cache_ttl 取值、清理缓存和单次请求覆盖。</span>
+            </li>
+
+            <li>
+              <a href="https://developers.cloudflare.com/ai-search/get-started/api/" target="_blank" rel="noreferrer">Cloudflare Docs：AI Search REST API</a>
+              <span>：说明创建 AI Search 实例、连接网站或 R2、上传内容、检查索引状态和发起搜索请求的基础步骤。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>相似缓存的价值是降低重复生成成本和延迟，但它必须和内容更新节奏一起设计。</li><li>默认 48 小时不等于所有站点都适合 48 小时；资料越容易变，TTL 越应该短，发布后越应该清理缓存。</li><li>清理缓存不是重建索引，也不会删除源内容；它解决的是旧回答被继续复用的问题。</li><li>上线验收要看 AI 搜索的实际回答和响应头，而不是只看站点页面是否已经刷新。</li></ul>
+
+        <h2>新手验收清单</h2>
+
+        <ul><li>确认实例使用的是需要缓存的资料源，而不是实时价格、登录态结果或临时数据。</li><li>记录当前 cache_ttl，并说明为什么选择这个时长。</li><li>准备三类测试问题：完全相同问法、相似问法、应该返回新资料的问题。</li><li>内容更新并完成索引后，执行一次缓存清理或在控制台手动清理。</li><li>重新提问并检查回答正文、引用资料和 cf-aig-cache-status。</li><li>把清理时间、测试问题和复核结论写进发布记录，方便下次排查。</li></ul>
+
+
+
+        <h2>清理缓存命令写法</h2>
+        <p>如果使用 API 清理实例缓存，可以把账号、实例名和 token 放在本机环境变量中，命令模板保持简单，避免把真实密钥写进仓库。</p>
+
+
+        <pre><code class="language-bash">curl -X POST "https://api.cloudflare.com/client/v4/accounts/ACCOUNT_ID/ai-search/instances/INSTANCE_NAME/purge_cache" \
+  -H "Authorization: Bearer CLOUDFLARE_API_TOKEN"</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Cloudflare AI Search</span><span>RAG</span><span>缓存策略</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="cloudflare-temporary-accounts-agent-deploy-guide.html">Cloudflare 临时账号：新手怎样让 AI Agent 先部署、再认领和验收 Worker</a><a href="google-a2a-collaborative-agents-guide.html">Google A2A 协作 Agent：新手怎样理解多智能体交接、边界和验收</a><a href="vercel-connect-agent-token-security-guide.html">Vercel Connect 公测：新手怎样让 Agent 安全访问 Slack、GitHub 和外部服务</a><a href="github-copilot-agent-finder-ard-guide.html">GitHub Copilot agent finder 与 ARD：新手怎样给 AI Agent 选择可信工具、Skills 和 MCP 资源</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var button = document.querySelector("[data-menu-button]");
+      var nav = document.querySelector("[data-mobile-nav]");
+      if (!button || !nav) return;
+      button.addEventListener("click", function () {
+        var expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        nav.classList.toggle("site-nav--open", !expanded);
+      });
+    });
+  </script>
+</body>
+</html>

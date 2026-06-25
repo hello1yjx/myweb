@@ -4,7 +4,7 @@ const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const appPath = path.join(root, "assets", "app.js");
-const version = "20260624-adsense-quality";
+const version = "20260625-hotspots";
 const siteUrl = "https://hello1yjx.github.io";
 
 function loadSiteRuntime() {

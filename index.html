@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260624-adsense-quality">
+  <link rel="stylesheet" href="assets/styles.css?v=20260625-hotspots">
 </head>
 <body>
   <header class="site-header">
@@ -80,62 +80,62 @@
         <!-- STATIC_HOME_HOTSPOTS_START -->
 <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 终端 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 终端 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <div>
           <div class="hotspot-card__meta">
             <span>AI 终端</span>
-            <time datetime="2026-06-23">2026年6月23日</time>
+            <time datetime="2026-06-24">2026年6月24日</time>
           </div>
-          <h3>GitHub Copilot CLI 新终端界面 GA：Issue、PR、Gist、MCP、Skills 和插件都进入会话内管理</h3>
+          <h3>Qwen Code v0.19.2 发布：自动模式破坏性命令保护、MCP 资源读取和图像转文本进入稳定版</h3>
         </div>
       </div>
-      <p>GitHub Changelog 宣布，Copilot CLI 在 Microsoft Build 2026 预览过的新终端界面现在正式可用：交互式会话顶部可用标签页浏览当前仓库 Issues、Pull requests 和个人 Gists；/mcp、/skills、/plugin、/settings 则把 MCP、skills、插件和设置放进终端内引导配置。官方还强调主题、窄终端适配和屏幕阅读器支持。</p>
+      <p>QwenLM/qwen-code 在 2026 年 6 月 24 日发布 v0.19.2。Release notes 显示，这次更新包括 remote LSP status route、fork 轮次上限和权限提示冒泡、text-only 模型的图像转文本、自动模式下破坏性命令的确定性保护、MCP resource read tool、裸 @ 全局匹配 MCP resources，以及 Claude MCP server transport 导入映射修复。</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
-        <p>终端 Agent 正在从“聊天加命令”变成面向 GitHub 工作流的任务工作台。新手升级后应重点核对当前仓库、引用的 Issue/PR、启用的 MCP 工具、skills 和插件来源，先做只读总结和小补丁，再扩大到评论、审查或修复任务。</p>
+        <p>国产开源终端 Agent 正在把重点放到边界控制、MCP 可见性和多模态输入上。新手升级时应关注“自动模式会不会误跑危险命令”“MCP 资源是否能被清楚引用”“图像附件是否被正确转成文本”，先在低风险仓库里做一次只读和小补丁验收。</p>
       </div>
-      <p class="hotspot-card__idea">已扩写：GitHub Copilot CLI 新终端界面新手工作台验收清单</p>
-      <a class="text-link" href="https://github.blog/changelog/2026-06-23-copilot-cli-new-terminal-interface-is-generally-available/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+      <p class="hotspot-card__idea">候选：Qwen Code v0.19.2 自动模式安全边界与 MCP 资源验收清单</p>
+      <a class="text-link" href="https://github.com/QwenLM/qwen-code/releases/tag/v0.19.2" target="_blank" rel="noreferrer">查看来源：Qwen Code GitHub Release</a>
     </article>
 
     <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 模型 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 搜索 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 搜索</span>
+            <time datetime="2026-06-24">2026年6月24日</time>
+          </div>
+          <h3>Cloudflare AI Search 可控制相似缓存新鲜度：默认 48 小时，并支持按需清理缓存</h3>
+        </div>
+      </div>
+      <p>Cloudflare Changelog 宣布，AI Search 的 similarity cache 现在使用实例的 cache_ttl 控制缓存时长，默认 48 小时，不再固定缓存 30 天。实例创建或更新时可选择 10 分钟到 6 天的 TTL；当资料可能过期时，也可以通过 API 或控制台清理实例的缓存回答。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>站内 AI 搜索不能只追求快和省调用。对资料经常更新的网站，缓存命中可能让用户看到旧答案。新手接入 AI Search 时应把 cache_ttl、清理缓存和回答验收写进发布流程，尤其是教程、接口路径、版本说明和下载文档更新之后。</p>
+      </div>
+      <p class="hotspot-card__idea">已扩写：Cloudflare AI Search 缓存新鲜度设置与验收清单</p>
+      <a class="text-link" href="https://developers.cloudflare.com/changelog/post/2026-06-24-ai-search-similarity-cache-controls/" target="_blank" rel="noreferrer">查看来源：Cloudflare Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 模型 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <div>
           <div class="hotspot-card__meta">
             <span>AI 模型</span>
-            <time datetime="2026-06-23">2026年6月23日</time>
+            <time datetime="2026-06-24">2026年6月24日</time>
           </div>
-          <h3>GitHub Copilot app 支持 BYOK：桌面 Agent 会话可连接自有模型提供方</h3>
+          <h3>Vercel AI Gateway 接入 Wafer 版 GLM 5.2 Fast：面向小上下文、大上下文和工具调用优化吞吐</h3>
         </div>
       </div>
-      <p>GitHub Changelog 显示，GitHub Copilot app 现在支持 bring your own key，可在 Settings 的 Model Providers 中添加 OpenAI、Azure OpenAI、Microsoft Foundry、Anthropic、LM Studio、Ollama 或 OpenAI-compatible endpoint。添加后，自有模型会出现在模型选择器中，密钥保存在本机系统 keychain，UI 不会读回显示。</p>
+      <p>Vercel Changelog 显示，GLM 5.2 Fast via Wafer 已可通过 AI Gateway 使用。Vercel 称其在小上下文、大上下文和工具调用场景的自测中，相比其他 serverless GLM-5.2 provider 有 2 倍吞吐；示例中只需在 AI SDK 里把 model 设为 `zai/glm-5.2-fast`。</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
-        <p>BYOK 让个人和团队可以在 Copilot app 的 Agent 会话里使用已有模型、配额、区域和数据处理边界。新手不要只把它看成“多几个模型”，还要核对本机密钥保存位置、组织策略、计费归属、是否走内部网关，以及每个会话选择了哪个模型。</p>
+        <p>AI Gateway 的价值不只是多一个模型入口，而是把模型调用、成本记录、重试、failover、预算和 BYOK 放到统一控制面。新手试用时要保留基准提示、延迟记录、失败重试和账单观察，不要只凭单次速度感受替换生产模型。</p>
       </div>
-      <p class="hotspot-card__idea">候选：Copilot app BYOK 下怎样核对模型、密钥和数据边界</p>
-      <a class="text-link" href="https://github.blog/changelog/2026-06-23-github-copilot-app-support-for-byok/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
-    </article>
-
-    <article class="hotspot-card reveal">
-      <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 工作流 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
-        <div>
-          <div class="hotspot-card__meta">
-            <span>AI 工作流</span>
-            <time datetime="2026-06-23">2026年6月23日</time>
-          </div>
-          <h3>Vercel Workflows 重做 trace viewer：可搜索、缩放并查看每一步输入输出</h3>
-        </div>
-      </div>
-      <p>Vercel Changelog 宣布，Vercel Workflows 和 Workflow SDK 的 trace viewer 已重新设计，用于从头到尾检查 workflow runs：可以搜索 spans、缩放时间线、用键盘逐步查看，并点进每一步的 inputs、outputs 和 run metadata。本地开发也可通过 Workflow SDK 的 `npx workflow@beta web` 检查 runs。</p>
-      <div class="hotspot-card__why">
-        <strong>为什么值得关注</strong>
-        <p>AI Agent 和后台工作流的难点不只是“能跑完”，而是失败后能不能复盘每一步。对新手来说，trace viewer 的价值在于把长任务拆成可观察步骤，先看输入输出、耗时、错误和元数据，再决定是否重跑、回滚或改提示词。</p>
-      </div>
-      <p class="hotspot-card__idea">候选：用 Vercel Workflows trace viewer 排查 AI 工作流失败的最小清单</p>
-      <a class="text-link" href="https://vercel.com/changelog/redesigned-trace-viewer-for-vercel-workflows" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
+      <p class="hotspot-card__idea">候选：用 AI Gateway 对比模型速度、成本和失败回退的最小实验</p>
+      <a class="text-link" href="https://vercel.com/changelog/glm-5-2-fast-via-wafer-now-available-on-ai-gateway" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
     </article>
 <!-- STATIC_HOME_HOTSPOTS_END -->
       </div>
@@ -154,6 +154,23 @@
           <div class="recommend-grid" data-recommendations>
             <!-- STATIC_HOME_RECOMMENDATIONS_START -->
 <article class="article-card reveal">
+      <a class="article-card__media article-card__media--github" href="articles/cloudflare-ai-search-cache-freshness-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 建站 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <strong>AI 建站</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 建站</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-24">2026年6月24日</time>
+        </div>
+        <h3><a href="articles/cloudflare-ai-search-cache-freshness-guide.html">Cloudflare AI Search 相似缓存新鲜度：新手怎样给站内 AI 搜索设置 TTL、清理缓存和验收答案</a></h3>
+        <p>Cloudflare 在 2026 年 6 月 24 日更新 AI Search 相似缓存控制：缓存默认从固定 30 天改为使用实例的 cache_ttl，默认 48 小时，并支持按需清理实例缓存。对新手站长来说，这不是单纯的性能开关，而是站内 AI 搜索的“答案新鲜度”控制点：资料更新频繁时要缩短 TTL，发布关键内容后要主动清理缓存，并用请求结果和响应头确认用户拿到的是新答案。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
       <a class="article-card__media article-card__media--ai" href="articles/github-copilot-cli-terminal-interface-guide.html">
         <span class="article-card__badge">推荐</span>
         <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
@@ -203,23 +220,6 @@
         <p>Qwen Code v0.18.5 在 2026 年 6 月 21 日发布，更新重点集中在终端 Agent 的边界校验、配置解析、路径处理、MCP 资源与提示词展示等稳定性问题。新手不要只把它看成普通小版本升级，更适合借此建立一套终端 AI Agent 的升级前检查：先看工作区边界、忽略规则、环境变量、端口、MCP 与回滚路径，再让 Agent 参与真实项目。</p>
       </div>
     </article>
-
-    <article class="article-card reveal">
-      <a class="article-card__media article-card__media--github" href="articles/checkmarx-ai-supply-chain-mcp-security-guide.html">
-        <span class="article-card__badge">推荐</span>
-        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
-        <strong>AI 安全</strong>
-      </a>
-      <div class="article-card__body">
-        <div class="meta-row">
-          <span>AI 安全</span>
-          <span>10 分钟</span>
-          <time datetime="2026-06-21">2026年6月21日</time>
-        </div>
-        <h3><a href="articles/checkmarx-ai-supply-chain-mcp-security-guide.html">Checkmarx AI Supply Chain 与 MCP Server：新手怎样给 AI 代码资产做安全盘点</a></h3>
-        <p>Checkmarx One 3.60 在 2026 年 6 月 21 日把 MCP Server 和 AI Supply Chain scanner 推到 GA：开发者可以在 Claude、Cursor、Windsurf、Kiro、Copilot Chat 等 IDE 或 AI 助手里进入安全工作流，同时让仓库扫描识别模型、AI SDK、AI Agent、MCP client/server 等资产。新手更应该先把它理解成 AI 资产清点与权限治理入口，而不是让聊天窗口直接替代安全复核。</p>
-      </div>
-    </article>
 <!-- STATIC_HOME_RECOMMENDATIONS_END -->
           </div>
         </section>
@@ -235,6 +235,22 @@
           <div class="latest-list" data-home-latest>
             <!-- STATIC_HOME_LATEST_START -->
 <article class="latest-item reveal">
+      <a class="latest-thumb latest-thumb--github" href="articles/checkmarx-ai-supply-chain-mcp-security-guide.html">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';">
+        <span>AI 安全</span>
+      </a>
+      <div>
+        <h3><a href="articles/checkmarx-ai-supply-chain-mcp-security-guide.html">Checkmarx AI Supply Chain 与 MCP Server：新手怎样给 AI 代码资产做安全盘点</a></h3>
+        <p>Checkmarx One 3.60 在 2026 年 6 月 21 日把 MCP Server 和 AI Supply Chain scanner 推到 GA：开发者可以在 Claude、Cursor、Windsurf、Kiro、Copilot Chat 等 IDE 或 AI 助手里进入安全工作流，同时让仓库扫描识别模型、AI SDK、AI Agent、MCP client/server 等资产。新手更应该先把它理解成 AI 资产清点与权限治理入口，而不是让聊天窗口直接替代安全复核。</p>
+        <div class="meta-row">
+          <span>AI 安全</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-21">2026年6月21日</time>
+        </div>
+      </div>
+    </article>
+
+    <article class="latest-item reveal">
       <a class="latest-thumb latest-thumb--github" href="articles/cloudflare-temporary-accounts-agent-deploy-guide.html">
         <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 建站 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';">
         <span>AI 建站</span>
@@ -276,22 +292,6 @@
         <p>Vercel 在 2026 年 6 月 17 日发布 Vercel Connect 公测，让应用和 Agent 通过 connector 在运行时获取短期、可收窄范围的 token，而不是把长期 provider secret 放进环境变量。对建站和 Agent 新手来说，这是一条更安全的外部服务接入路线。</p>
         <div class="meta-row">
           <span>建站安全</span>
-          <span>10 分钟</span>
-          <time datetime="2026-06-17">2026年6月17日</time>
-        </div>
-      </div>
-    </article>
-
-    <article class="latest-item reveal">
-      <a class="latest-thumb latest-thumb--ai" href="articles/github-copilot-agent-finder-ard-guide.html">
-        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';">
-        <span>AI 编程</span>
-      </a>
-      <div>
-        <h3><a href="articles/github-copilot-agent-finder-ard-guide.html">GitHub Copilot agent finder 与 ARD：新手怎样给 AI Agent 选择可信工具、Skills 和 MCP 资源</a></h3>
-        <p>GitHub 在 2026 年 6 月 17 日推出 Copilot agent finder，Google 同日公布 Agentic Resource Discovery（ARD）开放规范。它们共同指向一个变化：AI Agent 不应该把所有 MCP server、skills、agents 和工具一次性塞进上下文，而应该按任务发现、核验、安装和记录能力。</p>
-        <div class="meta-row">
-          <span>AI 编程</span>
           <span>10 分钟</span>
           <time datetime="2026-06-17">2026年6月17日</time>
         </div>
@@ -387,6 +387,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260624-adsense-quality"></script>
+  <script src="assets/app.js?v=20260625-hotspots"></script>
 </body>
 </html>

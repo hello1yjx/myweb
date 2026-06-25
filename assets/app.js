@@ -29,6 +29,83 @@ const siteData = {
   },
   posts: [
     {
+      id: "cloudflare-ai-search-cache-freshness-guide",
+      title: "Cloudflare AI Search 相似缓存新鲜度：新手怎样给站内 AI 搜索设置 TTL、清理缓存和验收答案",
+      date: "2026-06-24",
+      category: "AI 建站",
+      readTime: "9 分钟",
+      excerpt: "Cloudflare 在 2026 年 6 月 24 日更新 AI Search 相似缓存控制：缓存默认从固定 30 天改为使用实例的 cache_ttl，默认 48 小时，并支持按需清理实例缓存。对新手站长来说，这不是单纯的性能开关，而是站内 AI 搜索的“答案新鲜度”控制点：资料更新频繁时要缩短 TTL，发布关键内容后要主动清理缓存，并用请求结果和响应头确认用户拿到的是新答案。",
+      tags: ["Cloudflare AI Search", "RAG", "缓存策略"],
+      featured: true,
+      intro: [
+        "很多个人站和文档站接入 AI 搜索后，会先关注两个指标：回答够不够快、调用成本会不会太高。相似缓存正好解决这两个问题的一部分：用户问法接近时，可以复用已经生成过的答案，减少重复生成。但它也带来一个容易被忽略的风险：如果站点资料刚刚更新，旧答案仍被复用，读者可能看到已经过期的说明。",
+        "Cloudflare AI Search 在 2026 年 6 月 24 日把相似缓存的新鲜度控制做得更明确：缓存时长改为跟随实例的 cache_ttl，默认 48 小时；你可以把 TTL 设在 10 分钟到 6 天之间；当内容有明显更新时，也可以清理实例缓存，让后续相似问题重新生成答案。新手可以把这次更新当成一次 AI 搜索上线前的验收课：先决定资料变化频率，再设置 TTL，最后用一次发布演练确认缓存不会把旧答案留给用户。"
+      ],
+      audience: [
+        "准备把博客、文档、下载说明或产品帮助页接入 Cloudflare AI Search 的个人站长",
+        "已经有 RAG 或站内问答功能，但还没有明确缓存时长、清理动作和验收记录的新手开发者",
+        "需要在速度、成本和资料新鲜度之间做取舍的小团队维护者"
+      ],
+      format: [
+        "适合整理成“资料变化频率 / cache_ttl 选择 / 相似度阈值 / 发布后清理 / HIT-MISS 检查 / 用户验收问题”的 AI 搜索上线清单",
+        "可配套一份发布记录表，记录每次内容更新、是否清理缓存、测试问题、响应头和人工复核结论"
+      ],
+      roadmap: [
+        "先判断资料是不是经常变化。Cloudflare 文档说明，相似缓存会复用语义相近问题的回答，命中后速度更快、成本更低。适合放在常见问答、稳定教程和长期说明页上；如果内容每天变化、价格频繁变化或涉及实时状态，就要缩短 TTL，甚至在关键查询里关闭缓存。",
+        "把 TTL 写成可解释的选择，而不是照抄默认值。本次更新后默认值是 48 小时，允许的 cache_ttl 从 600 秒到 518400 秒。新手可以先按资料类型分档：公告和版本页用 10 分钟到 1 小时，普通教程用 24 到 48 小时，长期不变的概念说明再考虑更长时间。",
+        "创建或更新实例时同步记录 cache_ttl。Cloudflare REST API 文档说明，AI Search 实例可以通过 API 创建，也可以连接自有网站或 R2 作为数据源。无论使用 Dashboard、API 还是 Wrangler，都要把实例名称、数据源、TTL、相似度阈值和 API token 权限记录下来，方便排查。",
+        "发布重要内容后主动清理缓存。Cloudflare changelog 说明，清理相似缓存不会删除已索引内容或源文件，只是阻止继续复用旧缓存，让后续相似查询重新生成答案。对文档站来说，发布“安装步骤、限制、价格、接口路径、版本说明”这类内容后，建议把 purge cache 纳入发布检查。",
+        "用一组固定问题验收答案新鲜度。先问一个能命中旧内容的问题，记录答案和 cf-aig-cache-status；更新资料并完成索引后，再清理缓存，重新提问同一问题和一个相似问法。验收重点不是只看页面有没有更新，而是确认 AI 搜索回答是否引用了新资料。",
+        "不要把相似缓存当成唯一的准确性保障。文档说明缓存会受到阈值、并发请求、文档块变化和 per-request override 影响。新手应保留人工抽查问题，尤其是涉及账号权限、费用、部署命令和安全设置的回答，避免为了省请求而复用不该复用的答案。"
+      ],
+      officialLinks: [
+        {
+          label: "Cloudflare Changelog：Control AI Search similarity cache freshness",
+          url: "https://developers.cloudflare.com/changelog/post/2026-06-24-ai-search-similarity-cache-controls/",
+          note: "2026 年 6 月 24 日发布，说明 cache_ttl 默认 48 小时、可选 10 分钟到 6 天，以及按需清理缓存的入口。"
+        },
+        {
+          label: "Cloudflare Docs：Similarity cache",
+          url: "https://developers.cloudflare.com/ai-search/configuration/retrieval/cache/",
+          note: "解释相似缓存如何命中、cf-aig-cache-status 响应头、阈值选项、cache_ttl 取值、清理缓存和单次请求覆盖。"
+        },
+        {
+          label: "Cloudflare Docs：AI Search REST API",
+          url: "https://developers.cloudflare.com/ai-search/get-started/api/",
+          note: "说明创建 AI Search 实例、连接网站或 R2、上传内容、检查索引状态和发起搜索请求的基础步骤。"
+        }
+      ],
+      curatedLinks: [
+        "相似缓存的价值是降低重复生成成本和延迟，但它必须和内容更新节奏一起设计。",
+        "默认 48 小时不等于所有站点都适合 48 小时；资料越容易变，TTL 越应该短，发布后越应该清理缓存。",
+        "清理缓存不是重建索引，也不会删除源内容；它解决的是旧回答被继续复用的问题。",
+        "上线验收要看 AI 搜索的实际回答和响应头，而不是只看站点页面是否已经刷新。"
+      ],
+      downloadIdeas: [
+        "建议整理一份 AI Search 缓存策略表，字段包括资料类型、更新频率、TTL、是否允许 per-request cache、清理触发条件和验收问题",
+        "建议配一份发布后验收记录，记录实例名、内容更新时间、清理缓存时间、测试问题、HIT 或 MISS 状态、人工复核结论"
+      ],
+      extraSections: [
+        {
+          title: "新手验收清单",
+          items: [
+            "确认实例使用的是需要缓存的资料源，而不是实时价格、登录态结果或临时数据。",
+            "记录当前 cache_ttl，并说明为什么选择这个时长。",
+            "准备三类测试问题：完全相同问法、相似问法、应该返回新资料的问题。",
+            "内容更新并完成索引后，执行一次缓存清理或在控制台手动清理。",
+            "重新提问并检查回答正文、引用资料和 cf-aig-cache-status。",
+            "把清理时间、测试问题和复核结论写进发布记录，方便下次排查。"
+          ]
+        },
+        {
+          title: "清理缓存命令写法",
+          text: "如果使用 API 清理实例缓存，可以把账号、实例名和 token 放在本机环境变量中，命令模板保持简单，避免把真实密钥写进仓库。",
+          code: "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/ACCOUNT_ID/ai-search/instances/INSTANCE_NAME/purge_cache\" \\\n  -H \"Authorization: Bearer CLOUDFLARE_API_TOKEN\"",
+          language: "bash"
+        }
+      ]
+    },
+    {
       id: "github-copilot-cli-terminal-interface-guide",
       title: "GitHub Copilot CLI 新终端界面：新手怎样把 Issue、PR、MCP、Skills 和插件放进一个可控工作台",
       date: "2026-06-23",
@@ -4536,6 +4613,56 @@ git push origin main`,
     "github-agentic-workflows-public-preview-guide"
   ],
   hotspots: [
+    {
+      date: "2026-06-24",
+      tag: "AI 终端",
+      title: "Qwen Code v0.19.2 发布：自动模式破坏性命令保护、MCP 资源读取和图像转文本进入稳定版",
+      summary: "QwenLM/qwen-code 在 2026 年 6 月 24 日发布 v0.19.2。Release notes 显示，这次更新包括 remote LSP status route、fork 轮次上限和权限提示冒泡、text-only 模型的图像转文本、自动模式下破坏性命令的确定性保护、MCP resource read tool、裸 @ 全局匹配 MCP resources，以及 Claude MCP server transport 导入映射修复。",
+      why: "国产开源终端 Agent 正在把重点放到边界控制、MCP 可见性和多模态输入上。新手升级时应关注“自动模式会不会误跑危险命令”“MCP 资源是否能被清楚引用”“图像附件是否被正确转成文本”，先在低风险仓库里做一次只读和小补丁验收。",
+      sourceLabel: "Qwen Code GitHub Release",
+      sourceUrl: "https://github.com/QwenLM/qwen-code/releases/tag/v0.19.2",
+      articleIdea: "候选：Qwen Code v0.19.2 自动模式安全边界与 MCP 资源验收清单"
+    },
+    {
+      date: "2026-06-24",
+      tag: "AI 搜索",
+      title: "Cloudflare AI Search 可控制相似缓存新鲜度：默认 48 小时，并支持按需清理缓存",
+      summary: "Cloudflare Changelog 宣布，AI Search 的 similarity cache 现在使用实例的 cache_ttl 控制缓存时长，默认 48 小时，不再固定缓存 30 天。实例创建或更新时可选择 10 分钟到 6 天的 TTL；当资料可能过期时，也可以通过 API 或控制台清理实例的缓存回答。",
+      why: "站内 AI 搜索不能只追求快和省调用。对资料经常更新的网站，缓存命中可能让用户看到旧答案。新手接入 AI Search 时应把 cache_ttl、清理缓存和回答验收写进发布流程，尤其是教程、接口路径、版本说明和下载文档更新之后。",
+      sourceLabel: "Cloudflare Changelog",
+      sourceUrl: "https://developers.cloudflare.com/changelog/post/2026-06-24-ai-search-similarity-cache-controls/",
+      articleIdea: "已扩写：Cloudflare AI Search 缓存新鲜度设置与验收清单"
+    },
+    {
+      date: "2026-06-24",
+      tag: "AI 模型",
+      title: "Vercel AI Gateway 接入 Wafer 版 GLM 5.2 Fast：面向小上下文、大上下文和工具调用优化吞吐",
+      summary: "Vercel Changelog 显示，GLM 5.2 Fast via Wafer 已可通过 AI Gateway 使用。Vercel 称其在小上下文、大上下文和工具调用场景的自测中，相比其他 serverless GLM-5.2 provider 有 2 倍吞吐；示例中只需在 AI SDK 里把 model 设为 `zai/glm-5.2-fast`。",
+      why: "AI Gateway 的价值不只是多一个模型入口，而是把模型调用、成本记录、重试、failover、预算和 BYOK 放到统一控制面。新手试用时要保留基准提示、延迟记录、失败重试和账单观察，不要只凭单次速度感受替换生产模型。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/glm-5-2-fast-via-wafer-now-available-on-ai-gateway",
+      articleIdea: "候选：用 AI Gateway 对比模型速度、成本和失败回退的最小实验"
+    },
+    {
+      date: "2026-06-24",
+      tag: "AI 编程",
+      title: "GitHub Copilot Free 与 Student 计划改用 Auto model selection 作为默认且唯一的模型选择体验",
+      summary: "GitHub Changelog 宣布，Copilot Free 和 Student 计划现在将 Copilot auto model selection 作为默认且唯一的模型选择体验。Auto 会根据任务自动选择模型，并在计划限制内跨多个模型家族提供访问；GitHub 同时移除 Microsoft 发布模型的 `(Preview)` 标签。",
+      why: "这对学生和免费用户的影响很直接：新手可能不再手动挑模型，而是需要学会看计划限制、Auto 行为和实际输出质量。遇到复杂任务时，应把问题拆小、保留上下文、记录失败样例，并理解 Auto 并不等于每次都使用同一个模型。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-24-changes-to-model-selection-for-free-and-student-plans/",
+      articleIdea: "候选：Copilot Auto 模式下学生用户怎样拆任务、控上下文和验收输出"
+    },
+    {
+      date: "2026-06-24",
+      tag: "安全工具",
+      title: "GitHub 推出自助式凭据撤销：企业和个人成员可批量处理 PAT、SSH key、OAuth token 授权",
+      summary: "GitHub Changelog 宣布，Enterprise owners 和具备 `Manage enterprise credentials` 细粒度权限的成员，可以在安全事件中按用户批量撤销 SSO 授权，EMU 场景还可删除用户 token 和 SSH keys；个人成员也可以在 Settings -> Credentials 视图里查看凭据数量，并一键撤销或删除自己的凭据和授权。",
+      why: "AI 编程工具、CLI 和自动化脚本会放大凭据散落问题。新手维护 GitHub 仓库时，应把 PAT、SSH key、OAuth token 的清点和撤销流程写进事故预案，而不是等泄露后逐个页面查找。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-24-self-service-credential-revocation-for-incident-response/",
+      articleIdea: "候选：GitHub 凭据清点、撤销和审计日志检查入门流程"
+    },
     {
       date: "2026-06-23",
       tag: "AI 终端",
