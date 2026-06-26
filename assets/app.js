@@ -29,6 +29,104 @@ const siteData = {
   },
   posts: [
     {
+      id: "vercel-ai-sdk-7-upgrade-agent-checklist",
+      title: "Vercel AI SDK 7：新手怎样判断项目能不能升级到 Node 22、ESM 和生产级 Agent",
+      date: "2026-06-25",
+      category: "AI 编程",
+      readTime: "10 分钟",
+      excerpt: "Vercel 在 2026 年 6 月 25 日发布 AI SDK 7，定位从模型调用和聊天基础能力扩展到生产级 Agent 平台。官方同时给出两条破坏性要求：Node.js 22 起步、必须使用 ESM imports。对新手来说，这次升级不适合直接在主分支运行 npm update，而应该先做运行时、导入方式、工具权限、长任务持久化和观测记录的升级清单，再用一个低风险分支验证真实接口。",
+      tags: ["AI SDK 7", "Vercel", "AI Agent"],
+      featured: true,
+      intro: [
+        "很多项目最初接入 AI SDK，只是为了做一个聊天框、一次模型调用或简单的流式输出。随着工具调用、Agent、文件输入、图像生成、语音和观测能力逐步进入同一个 SDK，升级版本就不再只是改 package.json。AI SDK 7 这次把重点放在生产 Agent：推理控制、runtimeContext、toolsContext、工具审批、WorkflowAgent、超时、沙箱、OpenTelemetry 和多种 agent harness 都被放到更完整的体系里。",
+        "这篇文章不建议新手把所有新能力一次打开。更稳妥的做法是先判断项目能不能满足 Node 22 与 ESM，再挑一个真实但低风险的 AI 接口做迁移试点。能跑通基础调用只是第一步，真正要验收的是：工具是否只拿到必要上下文，高风险动作是否需要审批，长任务中断后能不能恢复，失败和耗时能不能被记录，旧版聊天或流式协议有没有被无意破坏。"
+      ],
+      audience: [
+        "已经用 AI SDK 5 或 6 做过聊天、工具调用、RAG、文件上传或 Agent 原型的前端和全栈开发者",
+        "准备把 AI 功能从本地 demo 推到生产环境，但还没有工具审批、超时、观测和回滚清单的小团队",
+        "想学习 AI SDK 7 新能力，却担心 Node 版本、ESM、导入重命名和 API 语义变化的新手"
+      ],
+      format: [
+        "适合整理成“运行时检查 / ESM 改造 / codemod / 工具上下文 / 审批与超时 / 长任务 / 观测 / 回滚”的升级清单",
+        "可配套一份测试分支记录，保存升级命令、变更文件、接口样例、工具调用日志、失败用例和验收结论"
+      ],
+      roadmap: [
+        "先确认运行时，而不是先改业务代码。AI SDK 7 迁移指南明确要求 Node.js 22 或更高版本，并要求使用 ESM imports。新手应先检查本地 Node、部署平台、CI、serverless runtime、Docker 镜像和 package.json 的 type 设置，确认测试环境和线上环境都能运行同一套版本。",
+        "把迁移拆成机械改动和语义复核两层。Vercel 的发布说明提到 v7 提供 codemods 与迁移路径，但 codemod 只能处理大部分导入和重命名。完成机械改动后，还要人工检查 instructions、telemetry、stream、finalStep、runtimeContext、toolsContext 和工具调用结果是否符合旧接口预期。",
+        "不要把聊天端点和 Agent 端点混在同一次升级里。先选一个低风险接口，例如内部摘要、草稿生成或测试数据分析，把它迁移到 AI SDK 7；确认响应格式、错误处理、超时、日志和前端展示没有回退后，再继续处理会改文件、查数据库或调用外部 API 的 Agent 场景。",
+        "重新设计工具上下文。Vercel 的 runtime/tool context 指南说明，runtimeContext 适合放整个生成或 Agent loop 共享的服务器侧状态，toolsContext 则会按工具自己的 contextSchema 验证后传给对应工具。新手可以把用户 ID、请求 ID、实验分组放进 runtimeContext，把单个工具需要的配置或短期凭据放进对应工具的 toolsContext，避免所有工具共享同一包上下文。",
+        "给高风险工具加审批、超时和失败路径。AI SDK 7 发布说明强调 tool approvals、approval replay、first-class timeouts 和 sandbox support。凡是会删除文件、改数据库、发请求、部署、写仓库或消耗大量额度的工具，都应先设置审批策略和超时预算，再记录被拒绝、超时、重试和人工接管时的表现。",
+        "长任务只在能复盘时启用 WorkflowAgent。WorkflowAgent 的价值是让执行状态在步骤之间持久保存，适合中断、延迟审批和较长的 Agent 流程。但新手不应把它当成普通函数的替代品：先在测试环境验证状态存储、恢复、重复执行、审批续跑和清理策略，再考虑放到真实任务。",
+        "最后补观测和回滚证据。AI SDK 7 强化了 telemetry、@ai-sdk/otel、生命周期回调和 step performance statistics。升级完成后至少保留一组成功请求、一组工具审批、一组超时或失败请求，以及回退到旧分支的步骤。没有这些证据，就很难判断升级是否真的稳定。"
+      ],
+      officialLinks: [
+        {
+          label: "Vercel Changelog：AI SDK 7 is now available",
+          url: "https://vercel.com/changelog/ai-sdk-7",
+          note: "2026 年 6 月 25 日发布，概述 AI SDK 7 的 Agent 平台能力、Node 22 与 ESM 要求、工具审批、WorkflowAgent、观测和 harness 集成。"
+        },
+        {
+          label: "AI SDK Docs：Migrate AI SDK 6.x to 7.0",
+          url: "https://ai-sdk.dev/v7/docs/migration-guides/migration-guide-7-0",
+          note: "用于核对 Node.js 22、ESM imports、codemods 和具体破坏性变更。"
+        },
+        {
+          label: "AI SDK Docs：WorkflowAgent",
+          url: "https://ai-sdk.dev/docs/agents/workflow-agent",
+          note: "说明 durable、resumable agent 适合怎样的长任务和恢复场景。"
+        },
+        {
+          label: "AI SDK Docs：Tools and tool calling",
+          url: "https://ai-sdk.dev/docs/ai-sdk-core/tools-and-tool-calling",
+          note: "用于核对工具调用、工具审批、多步调用、onStepFinish、工具输入生命周期和错误处理。"
+        },
+        {
+          label: "Vercel Guide：Pass state to AI SDK tools and agents with context",
+          url: "https://vercel.com/kb/guide/ai-sdk-runtime-and-tool-context",
+          note: "解释 runtimeContext 与 toolsContext 的边界，以及工具怎样只拿到自己需要的上下文。"
+        }
+      ],
+      curatedLinks: [
+        "AI SDK 7 的重点不是多一个聊天 API，而是把 Agent 的运行、审批、上下文、长任务和观测放到更完整的生产流程里。",
+        "Node 22 与 ESM 是升级前置条件；如果部署平台、CI 或旧依赖还停在 CommonJS，先解决运行时再谈新能力。",
+        "工具上下文要按最小需要拆分，避免一个工具意外拿到其他工具的配置、用户状态或敏感参数。",
+        "长任务、沙箱和 harness 适合逐步试点，不能替代测试、日志、人工审批和回滚方案。"
+      ],
+      downloadIdeas: [
+        "建议整理一份 AI SDK 7 升级检查表，字段包括 Node 版本、ESM 状态、迁移命令、受影响端点、工具清单、审批策略、超时预算和回滚分支",
+        "建议配一份 Agent 验收记录，记录每次工具调用的输入、审批、输出、耗时、失败类型、人工复核和线上观察结论"
+      ],
+      extraSections: [
+        {
+          title: "升级前检查清单",
+          items: [
+            "本地、CI、部署平台和容器镜像都能使用 Node.js 22 或更高版本。",
+            "package.json、tsconfig、测试工具和构建工具都能接受 ESM imports。",
+            "已经在独立分支运行官方迁移指南中的 codemod，并保留完整 diff。",
+            "列出所有 AI 端点：纯文本、流式、工具调用、文件上传、Agent、长任务分别标注。",
+            "给会改变外部状态的工具设置审批、超时、日志和人工接管说明。",
+            "准备至少一组成功、失败、超时和审批拒绝样例作为验收证据。"
+          ]
+        },
+        {
+          title: "第一条测试分支怎么验收",
+          items: [
+            "选择一个不写数据库、不部署、不改文件的低风险 AI 接口先升级。",
+            "用固定 prompt 跑旧版本和新版本，对比响应结构、流式事件、错误类型和耗时。",
+            "如果接口使用工具，确认每个工具只能读取自己的 toolsContext。",
+            "加入一个需要人工批准的工具调用，确认批准、拒绝、超时三种路径都能被记录。",
+            "最后再把同一套检查移到更复杂的 Agent 或 WorkflowAgent 场景。"
+          ]
+        },
+        {
+          title: "package.json 最小信号",
+          text: "升级分支里可以先把运行时意图写清楚，避免本地、CI 和线上环境各用一套 Node 版本。",
+          code: "{\n  \"type\": \"module\",\n  \"engines\": {\n    \"node\": \">=22\"\n  },\n  \"scripts\": {\n    \"typecheck\": \"tsc --noEmit\",\n    \"test\": \"node --test\"\n  }\n}",
+          language: "json"
+        }
+      ]
+    },
+    {
       id: "cloudflare-ai-search-cache-freshness-guide",
       title: "Cloudflare AI Search 相似缓存新鲜度：新手怎样给站内 AI 搜索设置 TTL、清理缓存和验收答案",
       date: "2026-06-24",
@@ -4613,6 +4711,56 @@ git push origin main`,
     "github-agentic-workflows-public-preview-guide"
   ],
   hotspots: [
+    {
+      date: "2026-06-25",
+      tag: "AI SDK",
+      title: "Vercel AI SDK 7 发布：Node 22、ESM、工具审批、WorkflowAgent 与观测能力成为升级重点",
+      summary: "Vercel 在 2026 年 6 月 25 日发布 AI SDK 7。官方将其定位为面向生产 Agent 的 TypeScript 平台，新增 reasoning control、runtimeContext、toolsContext、provider files、skills、MCP Apps、终端 UI、tool approvals、WorkflowAgent、first-class timeouts、sandbox support、@ai-sdk/otel 和 harness 集成；同时要求 Node.js 22 起步，并使用 ESM imports。",
+      why: "这不是普通小版本升级。新手如果已经用 AI SDK 做聊天、RAG 或工具调用，应先核对 Node 版本、CommonJS 依赖、部署平台、工具权限和观测记录，再在独立分支迁移一个低风险接口。生产 Agent 的关键不是能调用模型，而是能审批、限时、记录和回滚。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/ai-sdk-7",
+      articleIdea: "已扩写：AI SDK 7 升级前的 Node 22、ESM、工具审批与 Agent 验收清单"
+    },
+    {
+      date: "2026-06-25",
+      tag: "AI Agent",
+      title: "Vercel AI SDK Harness 新增 Deep Agents 与 OpenCode adapters：更多编码 Agent 可接入统一接口",
+      summary: "Vercel Changelog 显示，AI SDK Harness 在 2026 年 6 月 25 日新增 Deep Agents 与 OpenCode adapters。Deep Agents adapter 适配 LangChain deepagents runtime，带文件、shell、skills、host tools、多轮会话、attach/resume 与工具审批；OpenCode adapter 会在 Vercel Sandbox 内启动真实 OpenCode server，并通过 harness 流式输出 session events。",
+      why: "编码 Agent 正在从单一工具体验走向可嵌入应用的运行层。新手不要把 adapter 视为简单替换模型：不同 harness 的工具、审批、会话恢复和沙箱行为都要单独验收。最小实验应只跑同一个小任务，比较 diff、命令日志、权限提示和失败恢复。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/deepagents-and-opencode-harness-adapters",
+      articleIdea: "候选：用同一小任务比较 Deep Agents、OpenCode 与已有 harness 的沙箱行为"
+    },
+    {
+      date: "2026-06-25",
+      tag: "代码审查",
+      title: "Copilot code review 改用 Copilot CLI/SDK 文件探索工具，并给 Medium 分析深度增加可见性",
+      summary: "GitHub Changelog 宣布，Copilot code review 现在使用 Copilot CLI 和 SDK 内置的 grep、rg、glob、view 文件探索工具替换原有自定义工具；GitHub 称这带来约 20% 的 code review 成本下降且保持审查质量。Medium analysis depth public preview 也新增 PR overview comment 中的 Medium 标识，以及组织级默认 review level 设置。",
+      why: "AI 代码审查正在把“怎么找相关文件”变成核心能力。新手和团队应关注审查深度是否可见、组织默认值是否合适、成本是否变化，以及复杂 PR 是否真的覆盖关键路径；不要只看评论数量，要用测试 PR 验证它找到了正确文件。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-25-copilot-code-review-analysis-depth-and-efficiency-updates/",
+      articleIdea: "候选：Copilot code review Medium 深度、文件探索和成本观察的测试 PR 清单"
+    },
+    {
+      date: "2026-06-25",
+      tag: "AI 工作流",
+      title: "GitHub Copilot for Jira GA：从 Jira work item 到 GitHub PR 的 Agent 流程进入正式可用",
+      summary: "GitHub Changelog 宣布 Copilot for Jira 在 2026 年 6 月 25 日正式可用。自 3 月 public preview 以来，GitHub 已加入 model selection、Confluence context via MCP、custom agents、custom fields、space-level guidance 和 Jira 内 review request notifications；GA 版本继续强化 agent sessions 的可见性和控制。",
+      why: "这类更新说明编码 Agent 正在进入项目管理入口，而不只是在 IDE 里补代码。团队试用时应先确认 Jira 项目、GitHub 仓库权限、分支规则、PR 负责人、Confluence 上下文范围和 review 请求流转，避免一个需求卡片直接变成难追踪的自动 PR。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-25-github-copilot-for-jira-is-now-generally-available/",
+      articleIdea: "候选：Copilot for Jira GA 后怎样设置 issue、仓库、PR 与人工复核边界"
+    },
+    {
+      date: "2026-06-25",
+      tag: "企业治理",
+      title: "GitHub Copilot 企业托管设置新增 strictKnownMarketplaces：限制 CLI 与 VS Code 插件来源",
+      summary: "GitHub Changelog 宣布，enterprise-managed settings 现在在 public preview 中支持 strictKnownMarketplaces。企业可在托管 settings.json 中声明允许的 marketplaces，Copilot CLI 与 VS Code 只允许用户从这些已定义来源安装插件；GitHub 会为 Copilot Business 或 Enterprise 许可用户自动拉取并应用这些设置。",
+      why: "插件和 marketplace 会直接影响 Agent 可安装什么、连接什么工具、执行什么动作。对企业和小团队来说，插件治理应前置到工具执行前：先限制可信来源，再审查插件里的 skills、hooks、MCP 配置和卸载方式。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-25-enterprise-managed-settings-now-support-strictknownmarketplaces-in-vs-code-and-the-cli/",
+      articleIdea: "候选：Copilot CLI 与 VS Code 插件来源白名单、MCP 和 hooks 审查清单"
+    },
     {
       date: "2026-06-24",
       tag: "AI 终端",
