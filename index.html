@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260626-hotspots">
+  <link rel="stylesheet" href="assets/styles.css?v=20260627-hotspots">
 </head>
 <body>
   <header class="site-header">
@@ -80,22 +80,22 @@
         <!-- STATIC_HOME_HOTSPOTS_START -->
 <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI SDK 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开发工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <div>
           <div class="hotspot-card__meta">
-            <span>AI SDK</span>
-            <time datetime="2026-06-25">2026年6月25日</time>
+            <span>开发工具</span>
+            <time datetime="2026-06-26">2026年6月26日</time>
           </div>
-          <h3>Vercel AI SDK 7 发布：Node 22、ESM、工具审批、WorkflowAgent 与观测能力成为升级重点</h3>
+          <h3>GitHub Desktop 3.6 发布：Worktrees 成为桌面端主线能力，并把 Copilot 更深地接入提交与冲突处理</h3>
         </div>
       </div>
-      <p>Vercel 在 2026 年 6 月 25 日发布 AI SDK 7。官方将其定位为面向生产 Agent 的 TypeScript 平台，新增 reasoning control、runtimeContext、toolsContext、provider files、skills、MCP Apps、终端 UI、tool approvals、WorkflowAgent、first-class timeouts、sandbox support、@ai-sdk/otel 和 harness 集成；同时要求 Node.js 22 起步，并使用 ESM imports。</p>
+      <p>GitHub Changelog 宣布 GitHub Desktop 3.6 发布。该版本把 worktrees 放进桌面端主流程，支持在不切换当前工作区的情况下并行处理多个分支；同时继续强化 Copilot 集成，包括提交信息、改动摘要和合并冲突场景里的辅助能力。</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
-        <p>这不是普通小版本升级。新手如果已经用 AI SDK 做聊天、RAG 或工具调用，应先核对 Node 版本、CommonJS 依赖、部署平台、工具权限和观测记录，再在独立分支迁移一个低风险接口。生产 Agent 的关键不是能调用模型，而是能审批、限时、记录和回滚。</p>
+        <p>这对新手和小团队都很实际：worktree 可以把“临时修 bug、试验分支、保持主任务不被打断”变成更可见的流程；Copilot 进入提交和冲突环节后，也更需要保留人工 diff 检查和分支边界。第一次使用时建议先在示例仓库验证创建、切换、删除 worktree 的路径关系，再放到真实项目。</p>
       </div>
-      <p class="hotspot-card__idea">已扩写：AI SDK 7 升级前的 Node 22、ESM、工具审批与 Agent 验收清单</p>
-      <a class="text-link" href="https://vercel.com/changelog/ai-sdk-7" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
+      <p class="hotspot-card__idea">候选：GitHub Desktop 3.6 下怎样用 worktree 隔离任务，并复核 Copilot 生成的提交说明</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-06-26-github-desktop-3-6-worktrees-and-deeper-copilot-integration/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
     </article>
 
     <article class="hotspot-card reveal">
@@ -104,38 +104,38 @@
         <div>
           <div class="hotspot-card__meta">
             <span>AI Agent</span>
-            <time datetime="2026-06-25">2026年6月25日</time>
+            <time datetime="2026-06-26">2026年6月26日</time>
           </div>
-          <h3>Vercel AI SDK Harness 新增 Deep Agents 与 OpenCode adapters：更多编码 Agent 可接入统一接口</h3>
+          <h3>Cloudflare Agents SDK v0.17.0 发布：后台子 Agent、runTurn 与工具可靠性继续加强</h3>
         </div>
       </div>
-      <p>Vercel Changelog 显示，AI SDK Harness 在 2026 年 6 月 25 日新增 Deep Agents 与 OpenCode adapters。Deep Agents adapter 适配 LangChain deepagents runtime，带文件、shell、skills、host tools、多轮会话、attach/resume 与工具审批；OpenCode adapter 会在 Vercel Sandbox 内启动真实 OpenCode server，并通过 harness 流式输出 session events。</p>
+      <p>Cloudflare Changelog 发布 Agents SDK v0.17.0，重点包括后台子 Agent、`runTurn`、思考工具、工具组合与可靠性修复。该版本还继续改进 Agent 生命周期、状态管理和工具调用体验，面向更长链路的 Agent 应用。</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
-        <p>编码 Agent 正在从单一工具体验走向可嵌入应用的运行层。新手不要把 adapter 视为简单替换模型：不同 harness 的工具、审批、会话恢复和沙箱行为都要单独验收。最小实验应只跑同一个小任务，比较 diff、命令日志、权限提示和失败恢复。</p>
+        <p>这类更新说明 Agent SDK 正在从“能对话、能调工具”走向“能拆分后台任务、能恢复、能记录”。新手不宜直接把后台子 Agent 用在生产流程里，应该先选择只读或低风险任务，观察子 Agent 的输入、输出、失败、重试和人工接管路径，再决定是否扩大工具权限。</p>
       </div>
-      <p class="hotspot-card__idea">候选：用同一小任务比较 Deep Agents、OpenCode 与已有 harness 的沙箱行为</p>
-      <a class="text-link" href="https://vercel.com/changelog/deepagents-and-opencode-harness-adapters" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
+      <p class="hotspot-card__idea">候选：Cloudflare Agents SDK v0.17.0 后台子 Agent 的只读试跑与可靠性验收清单</p>
+      <a class="text-link" href="https://developers.cloudflare.com/changelog/post/2026-06-26-agents-sdk-v0170/" target="_blank" rel="noreferrer">查看来源：Cloudflare Changelog</a>
     </article>
 
     <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="代码审查 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="建站分析 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <div>
           <div class="hotspot-card__meta">
-            <span>代码审查</span>
-            <time datetime="2026-06-25">2026年6月25日</time>
+            <span>建站分析</span>
+            <time datetime="2026-06-26">2026年6月26日</time>
           </div>
-          <h3>Copilot code review 改用 Copilot CLI/SDK 文件探索工具，并给 Medium 分析深度增加可见性</h3>
+          <h3>Vercel CLI 新增 `vercel metrics`：可在命令行查询 Web Analytics 页面访问、访客与自定义事件</h3>
         </div>
       </div>
-      <p>GitHub Changelog 宣布，Copilot code review 现在使用 Copilot CLI 和 SDK 内置的 grep、rg、glob、view 文件探索工具替换原有自定义工具；GitHub 称这带来约 20% 的 code review 成本下降且保持审查质量。Medium analysis depth public preview 也新增 PR overview comment 中的 Medium 标识，以及组织级默认 review level 设置。</p>
+      <p>Vercel Changelog 宣布，Vercel CLI 现在可以查询 Web Analytics 指标。开发者可通过 `vercel metrics` 和 schema 命令发现可用指标、维度和聚合方式，再按项目、时间窗口、维度和输出格式查询页面访问、访客或自定义事件。</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
-        <p>AI 代码审查正在把“怎么找相关文件”变成核心能力。新手和团队应关注审查深度是否可见、组织默认值是否合适、成本是否变化，以及复杂 PR 是否真的覆盖关键路径；不要只看评论数量，要用测试 PR 验证它找到了正确文件。</p>
+        <p>站点观察进入命令行后，周报、自动巡检和 Agent 辅助分析都更容易复现。但新手要先限定项目、生产环境、时间范围和 metric-id，不能让 Agent 在没有 schema 和口径说明的情况下自由解读数据。CLI 适合固定问题，仪表盘仍适合交互式复核。</p>
       </div>
-      <p class="hotspot-card__idea">候选：Copilot code review Medium 深度、文件探索和成本观察的测试 PR 清单</p>
-      <a class="text-link" href="https://github.blog/changelog/2026-06-25-copilot-code-review-analysis-depth-and-efficiency-updates/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+      <p class="hotspot-card__idea">已扩写：Vercel Web Analytics CLI 查询前的 schema、时间窗口、JSON 输出与 Agent 边界清单</p>
+      <a class="text-link" href="https://vercel.com/changelog/query-web-analytics-from-the-vercel-cli" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
     </article>
 <!-- STATIC_HOME_HOTSPOTS_END -->
       </div>
@@ -154,6 +154,23 @@
           <div class="recommend-grid" data-recommendations>
             <!-- STATIC_HOME_RECOMMENDATIONS_START -->
 <article class="article-card reveal">
+      <a class="article-card__media article-card__media--github" href="articles/vercel-web-analytics-cli-metrics-guide.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="建站工具 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <strong>建站工具</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>建站工具</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-26">2026年6月26日</time>
+        </div>
+        <h3><a href="articles/vercel-web-analytics-cli-metrics-guide.html">Vercel Web Analytics CLI：新手怎样用 vercel metrics 查询访问数据并给 Agent 设置边界</a></h3>
+        <p>Vercel 在 2026 年 6 月 26 日宣布，Vercel CLI 可以通过 `vercel metrics` 直接查询 Web Analytics 数据点，包括页面访问、访客和自定义事件。对新手站长来说，这不是把仪表盘搬进命令行这么简单，而是让站点观察、周报整理和 Agent 辅助分析有了可复核的入口。真正要先学会的是：先看 metrics schema，再限定项目、时间窗口、生产环境和输出格式，最后决定哪些问题适合交给 Agent，哪些仍要回到仪表盘和人工判断。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
       <a class="article-card__media article-card__media--ai" href="articles/vercel-ai-sdk-7-upgrade-agent-checklist.html">
         <span class="article-card__badge">推荐</span>
         <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
@@ -203,23 +220,6 @@
         <p>GitHub 在 2026 年 6 月 23 日宣布 Copilot CLI 新终端界面正式可用，重点包括在终端标签页里浏览当前仓库的 Issues、Pull requests 和个人 Gists，以及用 /mcp、/skills、/plugin、/settings 在会话内配置工具。对新手来说，这不是把聊天窗口搬进终端，而是把任务来源、上下文引用、外部工具和权限配置放到同一个可检查的开发工作台里。</p>
       </div>
     </article>
-
-    <article class="article-card reveal">
-      <a class="article-card__media article-card__media--github" href="articles/openai-codex-long-running-workflow-guide.html">
-        <span class="article-card__badge">推荐</span>
-        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 效率 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
-        <strong>AI 效率</strong>
-      </a>
-      <div class="article-card__body">
-        <div class="meta-row">
-          <span>AI 效率</span>
-          <span>9 分钟</span>
-          <time datetime="2026-06-22">2026年6月22日</time>
-        </div>
-        <h3><a href="articles/openai-codex-long-running-workflow-guide.html">OpenAI Codex 长任务工作流：新手怎样把一次提示变成可核验的持续任务</a></h3>
-        <p>OpenAI 在 2026 年 6 月 22 日发布 Codex-maxxing for long-running work，介绍 Jason Liu 怎样把 Codex 当成能保存上下文、拆解复杂工作流并跨时间推进任务的持久工作区。对新手来说，重点不是把提示词写得更长，而是给任务补上目标、步骤、记忆、人工监督和验收标准，让 AI Agent 的输出可以被复查、继续和回滚。</p>
-      </div>
-    </article>
 <!-- STATIC_HOME_RECOMMENDATIONS_END -->
           </div>
         </section>
@@ -235,6 +235,22 @@
           <div class="latest-list" data-home-latest>
             <!-- STATIC_HOME_LATEST_START -->
 <article class="latest-item reveal">
+      <a class="latest-thumb latest-thumb--github" href="articles/openai-codex-long-running-workflow-guide.html">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 效率 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';">
+        <span>AI 效率</span>
+      </a>
+      <div>
+        <h3><a href="articles/openai-codex-long-running-workflow-guide.html">OpenAI Codex 长任务工作流：新手怎样把一次提示变成可核验的持续任务</a></h3>
+        <p>OpenAI 在 2026 年 6 月 22 日发布 Codex-maxxing for long-running work，介绍 Jason Liu 怎样把 Codex 当成能保存上下文、拆解复杂工作流并跨时间推进任务的持久工作区。对新手来说，重点不是把提示词写得更长，而是给任务补上目标、步骤、记忆、人工监督和验收标准，让 AI Agent 的输出可以被复查、继续和回滚。</p>
+        <div class="meta-row">
+          <span>AI 效率</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-22">2026年6月22日</time>
+        </div>
+      </div>
+    </article>
+
+    <article class="latest-item reveal">
       <a class="latest-thumb latest-thumb--ai" href="articles/qwen-code-0185-terminal-agent-safety-guide.html">
         <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';">
         <span>AI 编程</span>
@@ -278,22 +294,6 @@
           <span>AI 建站</span>
           <span>10 分钟</span>
           <time datetime="2026-06-19">2026年6月19日</time>
-        </div>
-      </div>
-    </article>
-
-    <article class="latest-item reveal">
-      <a class="latest-thumb latest-thumb--github" href="articles/google-a2a-collaborative-agents-guide.html">
-        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';">
-        <span>AI Agent</span>
-      </a>
-      <div>
-        <h3><a href="articles/google-a2a-collaborative-agents-guide.html">Google A2A 协作 Agent：新手怎样理解多智能体交接、边界和验收</a></h3>
-        <p>Google Developers Blog 在 2026 年 6 月 18 日回顾 A2A 协议一周年，重点不只是“多个 Agent 能聊天”，而是让专门 Agent 在安全边界内承接任务、避免主 Agent 上下文污染，并通过标准协议分发工作负载。新手可以先从只读交接、身份边界和结果验收开始理解。</p>
-        <div class="meta-row">
-          <span>AI Agent</span>
-          <span>10 分钟</span>
-          <time datetime="2026-06-18">2026年6月18日</time>
         </div>
       </div>
     </article>
@@ -387,6 +387,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260626-hotspots"></script>
+  <script src="assets/app.js?v=20260627-hotspots"></script>
 </body>
 </html>

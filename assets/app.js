@@ -29,6 +29,94 @@ const siteData = {
   },
   posts: [
     {
+      id: "vercel-web-analytics-cli-metrics-guide",
+      title: "Vercel Web Analytics CLI：新手怎样用 vercel metrics 查询访问数据并给 Agent 设置边界",
+      date: "2026-06-26",
+      category: "建站工具",
+      readTime: "9 分钟",
+      excerpt: "Vercel 在 2026 年 6 月 26 日宣布，Vercel CLI 可以通过 `vercel metrics` 直接查询 Web Analytics 数据点，包括页面访问、访客和自定义事件。对新手站长来说，这不是把仪表盘搬进命令行这么简单，而是让站点观察、周报整理和 Agent 辅助分析有了可复核的入口。真正要先学会的是：先看 metrics schema，再限定项目、时间窗口、生产环境和输出格式，最后决定哪些问题适合交给 Agent，哪些仍要回到仪表盘和人工判断。",
+      tags: ["Vercel CLI", "Web Analytics", "站点观察"],
+      featured: true,
+      intro: [
+        "很多个人站点上线以后，会先看页面有没有被访问、哪些入口增长、哪些内容需要更新。过去这些问题通常在后台仪表盘里手动点击，如果要写周报或让 Agent 帮忙总结，就会出现两个风险：一是复制数据时容易漏掉筛选条件，二是 Agent 只看一张截图，很难知道指标口径和时间范围。",
+        "Vercel 这次把 Web Analytics 查询放进 CLI，价值在于让查询本身变成一条可记录的命令。新手可以先用 schema 查看当前账号有哪些 metric、dimension 和 aggregation，再用固定时间窗口查询页面访问、访客或自定义事件。这样做比直接问 Agent“这个站最近怎么样”更可靠，因为每一次结论都能回到命令、项目、环境和数据口径。"
+      ],
+      audience: [
+        "已经把项目部署在 Vercel，并开启 Web Analytics 或 Speed Insights，希望用命令行复盘访问变化的新手站长。",
+        "想让 AI Agent 帮忙整理站点周报、页面表现和活动事件，但不想把账号里的全部观察数据一次性暴露给工具的开发者。",
+        "负责多个 Vercel 项目的小团队，需要按项目、时间窗口或维度做只读对比，而不是在仪表盘里反复手动筛选。"
+      ],
+      format: [
+        "适合整理成“查询前检查、schema 发现、最小命令、JSON 输出、Agent 边界、人工复核”的站点观察清单。",
+        "可以配套一份查询记录表，保存项目名、metric-id、时间范围、group-by 维度、输出格式、结论和下一步人工检查。"
+      ],
+      roadmap: [
+        "先确认项目真的有可查询的数据。Web Analytics 和 Speed Insights 指标可通过 `vercel metrics` 查询，但其他观察类指标可能需要额外能力或计划支持；如果项目刚开启 Analytics，先等到有真实访问数据后再做结论。",
+        "从 schema 开始，不要凭记忆写 metric-id。官方文档明确把 schema 视为指标、维度和聚合方式的事实来源。第一次使用时先运行 `vercel metrics schema`，再查看 Web Analytics 相关前缀，确认当前团队账号能查询哪些字段。",
+        "每次查询都写清楚项目、环境和时间窗口。新手容易把预览环境、本地测试或多个项目混在一起。建议固定加上 `--project`、`--prod`、`--since` 和 `--granularity`，让同一条命令在下周还能复现。",
+        "需要脚本或 Agent 使用时才切换 JSON 输出。人工快速查看可以用默认表格；如果要让 Agent 做比较、生成摘要或放进 CI 记录，应使用结构化输出，并要求 Agent 同时返回使用的命令和字段解释。",
+        "不要让 Agent 自由探索所有指标。更稳的方式是先由人选出允许查询的项目、metric-id、时间范围和维度，再让 Agent 只读执行这些命令。涉及用户行为、来源或活动事件时，也要避免把个体级信息当作内容素材。",
+        "把 CLI 和仪表盘配合使用。CLI 适合固定问题、分组对比、自动记录和跨项目查询；仪表盘更适合交互式探索、异常确认和上下文理解。两边结论不一致时，先检查时间窗口、时区、过滤条件和项目环境。",
+        "最后给结论设置验收条件。一个可靠的站点观察结论至少要包含查询命令、数据时间范围、主要变化、可能原因、不能证明的部分，以及下一次需要人工复核的页面或事件。"
+      ],
+      officialLinks: [
+        {
+          label: "Vercel Changelog：Query Web Analytics from the Vercel CLI",
+          url: "https://vercel.com/changelog/query-web-analytics-from-the-vercel-cli",
+          note: "2026 年 6 月 26 日发布，说明 Vercel CLI 可查询页面访问、访客和自定义事件，并可供 coding agent 回答站点表现问题。"
+        },
+        {
+          label: "Vercel Docs：vercel metrics",
+          url: "https://vercel.com/docs/cli/metrics",
+          note: "说明 schema、metric-id、group-by、aggregation、JSON 输出、Web Analytics / Speed Insights 访问范围和命令示例。"
+        },
+        {
+          label: "Vercel Docs：Web Analytics",
+          url: "https://vercel.com/docs/analytics/web-analytics",
+          note: "用于核对 Web Analytics 的产品边界、数据用途和仪表盘入口。"
+        }
+      ],
+      curatedLinks: [
+        "`vercel metrics` 的重点不是替代仪表盘，而是让常用观察问题可以被命令化、记录化和复现。",
+        "Agent 最适合做只读汇总和趋势解释，不适合在没有 schema 和时间范围的情况下自由猜测站点表现。",
+        "Web Analytics 指标适合观察页面和事件变化，但不能单独解释内容质量、用户满意度或技术问题原因。",
+        "输出给脚本和 Agent 时优先用 JSON，并保留原始命令；这样结论出错时可以回到同一组输入重新检查。"
+      ],
+      downloadIdeas: [
+        "建议整理一份 Vercel metrics 查询记录表，字段包括项目、环境、metric-id、时间范围、维度、输出格式、结论和复核人。",
+        "建议配一份 Agent 站点观察边界清单，列出允许查询的项目、只读命令、禁止输出的字段和人工复核步骤。"
+      ],
+      extraSections: [
+        {
+          title: "第一次查询前的检查清单",
+          items: [
+            "当前终端已经登录正确的 Vercel 账号和团队。",
+            "本地目录已经通过 `vercel link` 绑定到目标项目，或命令里明确写了 `--project`。",
+            "项目已经开启 Web Analytics，并且有足够的真实访问数据。",
+            "查询只针对生产环境或明确的预览环境，不混用两类数据。",
+            "时间范围、粒度和分组维度都写进命令或查询记录。",
+            "Agent 只能执行只读查询，并且需要把原始命令和字段解释一起返回。"
+          ]
+        },
+        {
+          title: "适合交给 Agent 的问题",
+          items: [
+            "本周访问最多的页面有哪些，和上周相比变化最大的页面是哪几个。",
+            "某个活动事件在移动端和桌面端的变化是否一致。",
+            "过去 24 小时是否有某个项目的访问量异常下降，需要人工打开仪表盘复核。",
+            "把一组 JSON 查询结果整理成简短周报，并列出不能从数据中直接证明的部分。",
+            "根据固定的查询模板生成下一次复盘命令，但不自行扩大项目、时间范围或字段。"
+          ]
+        },
+        {
+          title: "最小命令示例",
+          text: "下面示例保留占位符，实际使用前先用 schema 查到当前账号可用的 metric-id 和维度，不要直接照抄字段名。",
+          code: "vercel link\nvercel metrics schema\nvercel metrics schema web_analytics --format json\nvercel metrics <metric-id> --since 7d --granularity 1d --project <project-name> --prod\nvercel metrics <metric-id> --group-by <dimension> --since 24h --limit 5 --project <project-name> --prod --format json",
+          language: "bash"
+        }
+      ]
+    },
+    {
       id: "vercel-ai-sdk-7-upgrade-agent-checklist",
       title: "Vercel AI SDK 7：新手怎样判断项目能不能升级到 Node 22、ESM 和生产级 Agent",
       date: "2026-06-25",
@@ -4711,6 +4799,56 @@ git push origin main`,
     "github-agentic-workflows-public-preview-guide"
   ],
   hotspots: [
+    {
+      date: "2026-06-26",
+      tag: "开发工具",
+      title: "GitHub Desktop 3.6 发布：Worktrees 成为桌面端主线能力，并把 Copilot 更深地接入提交与冲突处理",
+      summary: "GitHub Changelog 宣布 GitHub Desktop 3.6 发布。该版本把 worktrees 放进桌面端主流程，支持在不切换当前工作区的情况下并行处理多个分支；同时继续强化 Copilot 集成，包括提交信息、改动摘要和合并冲突场景里的辅助能力。",
+      why: "这对新手和小团队都很实际：worktree 可以把“临时修 bug、试验分支、保持主任务不被打断”变成更可见的流程；Copilot 进入提交和冲突环节后，也更需要保留人工 diff 检查和分支边界。第一次使用时建议先在示例仓库验证创建、切换、删除 worktree 的路径关系，再放到真实项目。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-26-github-desktop-3-6-worktrees-and-deeper-copilot-integration/",
+      articleIdea: "候选：GitHub Desktop 3.6 下怎样用 worktree 隔离任务，并复核 Copilot 生成的提交说明"
+    },
+    {
+      date: "2026-06-26",
+      tag: "AI Agent",
+      title: "Cloudflare Agents SDK v0.17.0 发布：后台子 Agent、runTurn 与工具可靠性继续加强",
+      summary: "Cloudflare Changelog 发布 Agents SDK v0.17.0，重点包括后台子 Agent、`runTurn`、思考工具、工具组合与可靠性修复。该版本还继续改进 Agent 生命周期、状态管理和工具调用体验，面向更长链路的 Agent 应用。",
+      why: "这类更新说明 Agent SDK 正在从“能对话、能调工具”走向“能拆分后台任务、能恢复、能记录”。新手不宜直接把后台子 Agent 用在生产流程里，应该先选择只读或低风险任务，观察子 Agent 的输入、输出、失败、重试和人工接管路径，再决定是否扩大工具权限。",
+      sourceLabel: "Cloudflare Changelog",
+      sourceUrl: "https://developers.cloudflare.com/changelog/post/2026-06-26-agents-sdk-v0170/",
+      articleIdea: "候选：Cloudflare Agents SDK v0.17.0 后台子 Agent 的只读试跑与可靠性验收清单"
+    },
+    {
+      date: "2026-06-26",
+      tag: "建站分析",
+      title: "Vercel CLI 新增 `vercel metrics`：可在命令行查询 Web Analytics 页面访问、访客与自定义事件",
+      summary: "Vercel Changelog 宣布，Vercel CLI 现在可以查询 Web Analytics 指标。开发者可通过 `vercel metrics` 和 schema 命令发现可用指标、维度和聚合方式，再按项目、时间窗口、维度和输出格式查询页面访问、访客或自定义事件。",
+      why: "站点观察进入命令行后，周报、自动巡检和 Agent 辅助分析都更容易复现。但新手要先限定项目、生产环境、时间范围和 metric-id，不能让 Agent 在没有 schema 和口径说明的情况下自由解读数据。CLI 适合固定问题，仪表盘仍适合交互式复核。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/query-web-analytics-from-the-vercel-cli",
+      articleIdea: "已扩写：Vercel Web Analytics CLI 查询前的 schema、时间窗口、JSON 输出与 Agent 边界清单"
+    },
+    {
+      date: "2026-06-26",
+      tag: "AI 模型",
+      title: "MAI-Code-1-Flash 面向 Copilot Business 与 Enterprise GA：企业用户可在 Copilot 中使用低延迟编码模型",
+      summary: "GitHub Changelog 宣布，Microsoft AI 的 MAI-Code-1-Flash 已面向 GitHub Copilot Business 与 Copilot Enterprise 正式可用。该模型面向低延迟编码场景，管理员可在组织策略中决定是否开放给团队使用。",
+      why: "模型进入企业 Copilot 不等于所有仓库都应立即切换。团队应先明确哪些任务需要低延迟、哪些任务更依赖复杂推理，再用同一组小 PR、测试失败和代码解释任务做对比。管理员还要检查模型策略、组织默认值和使用者可见提示，避免成员误以为所有模型行为完全一致。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-26-mai-code-1-flash-for-copilot-business-and-copilot-enterprise/",
+      articleIdea: "候选：Copilot 企业模型切换时，怎样用同一组任务比较速度、质量和失败类型"
+    },
+    {
+      date: "2026-06-26",
+      tag: "边缘开发",
+      title: "Cloudflare Durable Objects 新增 US jurisdiction：可把对象实例限定在美国境内运行",
+      summary: "Cloudflare Changelog 宣布 Durable Objects 支持 US jurisdiction。开发者可以在配置中声明 jurisdiction，让对应对象实例固定在美国境内运行，以满足部分数据位置、延迟和合规需求。",
+      why: "这不是普通的性能开关，而是架构边界。使用 Durable Objects 的团队应先区分哪些数据真的需要地域限定，哪些请求可以继续走全局边缘；再验证迁移、命名空间、回滚和监控。新手不要只因为“离用户近”就启用 jurisdiction，应该先把数据类型和访问路径写清楚。",
+      sourceLabel: "Cloudflare Changelog",
+      sourceUrl: "https://developers.cloudflare.com/changelog/post/2026-06-26-durable-objects-us-jurisdiction/",
+      articleIdea: "候选：Durable Objects jurisdiction、数据位置和边缘状态迁移的入门核对表"
+    },
     {
       date: "2026-06-25",
       tag: "AI SDK",

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vercel Web Analytics CLI：新手怎样用 vercel metrics 查询访问数据并给 Agent 设置边界 | 学习资源库</title>
+  <meta name="description" content="Vercel 在 2026 年 6 月 26 日宣布，Vercel CLI 可以通过 `vercel metrics` 直接查询 Web Analytics 数据点，包括页面访问、访客和自定义事件。对新手站长来说，这不是把仪表盘搬进命令行这么简单，而是让站点观察、周报整理和 Agent 辅助分析有了可复核的入口。真正要先学会的是：先看 metrics schema，再限定项目、时间窗口、生产环境和输出格式，最后决定哪些问题适合交给 Agent，哪些仍要回到仪表盘和人工判断。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/vercel-web-analytics-cli-metrics-guide.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Vercel Web Analytics CLI：新手怎样用 vercel metrics 查询访问数据并给 Agent 设置边界","description":"Vercel 在 2026 年 6 月 26 日宣布，Vercel CLI 可以通过 `vercel metrics` 直接查询 Web Analytics 数据点，包括页面访问、访客和自定义事件。对新手站长来说，这不是把仪表盘搬进命令行这么简单，而是让站点观察、周报整理和 Agent 辅助分析有了可复核的入口。真正要先学会的是：先看 metrics schema，再限定项目、时间窗口、生产环境和输出格式，最后决定哪些问题适合交给 Agent，哪些仍要回到仪表盘和人工判断。","datePublished":"2026-06-26","dateModified":"2026-06-26","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/vercel-web-analytics-cli-metrics-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260627-hotspots">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-book-line.png" alt="" width="36" height="33"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <button class="menu-button" data-menu-button aria-expanded="false" aria-label="切换导航菜单">☰</button>
+      <nav class="site-nav" data-mobile-nav>
+        <a href="../index.html">首页</a>
+        <a class="is-active" href="../posts.html" aria-current="page">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../resources.html#official-resources">工具导航</a>
+        <a href="../hotspots.html">技术资讯</a>
+        <a href="../projects.html">开源项目</a>
+        <a href="../about.html">关于我们</a>
+      </nav>
+      <form class="header-search" action="../posts.html" method="get">
+        <input type="search" name="q" placeholder="搜索教程、资源、工具或关键词...">
+        <button type="submit" aria-label="搜索">/</button>
+      </form>
+      <a class="header-github" href="https://github.com/hello1yjx/hello1yjx.github.io" target="_blank" rel="noreferrer" aria-label="GitHub">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="" width="24" height="24">
+      </a>
+      <a class="header-cta" href="../posts.html">开始学习</a>
+    </div>
+  </header>
+
+  <main class="page-shell section">
+    <header class="detail-hero">
+      <span class="pill">建站工具</span>
+      <h1>Vercel Web Analytics CLI：新手怎样用 vercel metrics 查询访问数据并给 Agent 设置边界</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-26">2026年6月26日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Vercel 在 2026 年 6 月 26 日宣布，Vercel CLI 可以通过 `vercel metrics` 直接查询 Web Analytics 数据点，包括页面访问、访客和自定义事件。对新手站长来说，这不是把仪表盘搬进命令行这么简单，而是让站点观察、周报整理和 Agent 辅助分析有了可复核的入口。真正要先学会的是：先看 metrics schema，再限定项目、时间窗口、生产环境和输出格式，最后决定哪些问题适合交给 Agent，哪些仍要回到仪表盘和人工判断。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://vercel.com/changelog/query-web-analytics-from-the-vercel-cli" target="_blank" rel="noreferrer">Vercel Changelog：Query Web Analytics from the Vercel CLI</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>很多个人站点上线以后，会先看页面有没有被访问、哪些入口增长、哪些内容需要更新。过去这些问题通常在后台仪表盘里手动点击，如果要写周报或让 Agent 帮忙总结，就会出现两个风险：一是复制数据时容易漏掉筛选条件，二是 Agent 只看一张截图，很难知道指标口径和时间范围。</p><p>Vercel 这次把 Web Analytics 查询放进 CLI，价值在于让查询本身变成一条可记录的命令。新手可以先用 schema 查看当前账号有哪些 metric、dimension 和 aggregation，再用固定时间窗口查询页面访问、访客或自定义事件。这样做比直接问 Agent“这个站最近怎么样”更可靠，因为每一次结论都能回到命令、项目、环境和数据口径。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>已经把项目部署在 Vercel，并开启 Web Analytics 或 Speed Insights，希望用命令行复盘访问变化的新手站长。</li><li>想让 AI Agent 帮忙整理站点周报、页面表现和活动事件，但不想把账号里的全部观察数据一次性暴露给工具的开发者。</li><li>负责多个 Vercel 项目的小团队，需要按项目、时间窗口或维度做只读对比，而不是在仪表盘里反复手动筛选。</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先确认项目真的有可查询的数据。Web Analytics 和 Speed Insights 指标可通过 `vercel metrics` 查询，但其他观察类指标可能需要额外能力或计划支持；如果项目刚开启 Analytics，先等到有真实访问数据后再做结论。</li><li>从 schema 开始，不要凭记忆写 metric-id。官方文档明确把 schema 视为指标、维度和聚合方式的事实来源。第一次使用时先运行 `vercel metrics schema`，再查看 Web Analytics 相关前缀，确认当前团队账号能查询哪些字段。</li><li>每次查询都写清楚项目、环境和时间窗口。新手容易把预览环境、本地测试或多个项目混在一起。建议固定加上 `--project`、`--prod`、`--since` 和 `--granularity`，让同一条命令在下周还能复现。</li><li>需要脚本或 Agent 使用时才切换 JSON 输出。人工快速查看可以用默认表格；如果要让 Agent 做比较、生成摘要或放进 CI 记录，应使用结构化输出，并要求 Agent 同时返回使用的命令和字段解释。</li><li>不要让 Agent 自由探索所有指标。更稳的方式是先由人选出允许查询的项目、metric-id、时间范围和维度，再让 Agent 只读执行这些命令。涉及用户行为、来源或活动事件时，也要避免把个体级信息当作内容素材。</li><li>把 CLI 和仪表盘配合使用。CLI 适合固定问题、分组对比、自动记录和跨项目查询；仪表盘更适合交互式探索、异常确认和上下文理解。两边结论不一致时，先检查时间窗口、时区、过滤条件和项目环境。</li><li>最后给结论设置验收条件。一个可靠的站点观察结论至少要包含查询命令、数据时间范围、主要变化、可能原因、不能证明的部分，以及下一次需要人工复核的页面或事件。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://vercel.com/changelog/query-web-analytics-from-the-vercel-cli" target="_blank" rel="noreferrer">Vercel Changelog：Query Web Analytics from the Vercel CLI</a>
+              <span>：2026 年 6 月 26 日发布，说明 Vercel CLI 可查询页面访问、访客和自定义事件，并可供 coding agent 回答站点表现问题。</span>
+            </li>
+
+            <li>
+              <a href="https://vercel.com/docs/cli/metrics" target="_blank" rel="noreferrer">Vercel Docs：vercel metrics</a>
+              <span>：说明 schema、metric-id、group-by、aggregation、JSON 输出、Web Analytics / Speed Insights 访问范围和命令示例。</span>
+            </li>
+
+            <li>
+              <a href="https://vercel.com/docs/analytics/web-analytics" target="_blank" rel="noreferrer">Vercel Docs：Web Analytics</a>
+              <span>：用于核对 Web Analytics 的产品边界、数据用途和仪表盘入口。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>`vercel metrics` 的重点不是替代仪表盘，而是让常用观察问题可以被命令化、记录化和复现。</li><li>Agent 最适合做只读汇总和趋势解释，不适合在没有 schema 和时间范围的情况下自由猜测站点表现。</li><li>Web Analytics 指标适合观察页面和事件变化，但不能单独解释内容质量、用户满意度或技术问题原因。</li><li>输出给脚本和 Agent 时优先用 JSON，并保留原始命令；这样结论出错时可以回到同一组输入重新检查。</li></ul>
+
+        <h2>第一次查询前的检查清单</h2>
+
+        <ul><li>当前终端已经登录正确的 Vercel 账号和团队。</li><li>本地目录已经通过 `vercel link` 绑定到目标项目，或命令里明确写了 `--project`。</li><li>项目已经开启 Web Analytics，并且有足够的真实访问数据。</li><li>查询只针对生产环境或明确的预览环境，不混用两类数据。</li><li>时间范围、粒度和分组维度都写进命令或查询记录。</li><li>Agent 只能执行只读查询，并且需要把原始命令和字段解释一起返回。</li></ul>
+
+
+
+        <h2>适合交给 Agent 的问题</h2>
+
+        <ul><li>本周访问最多的页面有哪些，和上周相比变化最大的页面是哪几个。</li><li>某个活动事件在移动端和桌面端的变化是否一致。</li><li>过去 24 小时是否有某个项目的访问量异常下降，需要人工打开仪表盘复核。</li><li>把一组 JSON 查询结果整理成简短周报，并列出不能从数据中直接证明的部分。</li><li>根据固定的查询模板生成下一次复盘命令，但不自行扩大项目、时间范围或字段。</li></ul>
+
+
+
+        <h2>最小命令示例</h2>
+        <p>下面示例保留占位符，实际使用前先用 schema 查到当前账号可用的 metric-id 和维度，不要直接照抄字段名。</p>
+
+
+        <pre><code class="language-bash">vercel link
+vercel metrics schema
+vercel metrics schema web_analytics --format json
+vercel metrics &lt;metric-id&gt; --since 7d --granularity 1d --project &lt;project-name&gt; --prod
+vercel metrics &lt;metric-id&gt; --group-by &lt;dimension&gt; --since 24h --limit 5 --project &lt;project-name&gt; --prod --format json</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Vercel CLI</span><span>Web Analytics</span><span>站点观察</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="qwen-code-0185-terminal-agent-safety-guide.html">Qwen Code v0.18.5：新手怎样给终端 AI Agent 做升级前安全检查</a><a href="checkmarx-ai-supply-chain-mcp-security-guide.html">Checkmarx AI Supply Chain 与 MCP Server：新手怎样给 AI 代码资产做安全盘点</a><a href="cloudflare-temporary-accounts-agent-deploy-guide.html">Cloudflare 临时账号：新手怎样让 AI Agent 先部署、再认领和验收 Worker</a><a href="google-a2a-collaborative-agents-guide.html">Google A2A 协作 Agent：新手怎样理解多智能体交接、边界和验收</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var button = document.querySelector("[data-menu-button]");
+      var nav = document.querySelector("[data-mobile-nav]");
+      if (!button || !nav) return;
+      button.addEventListener("click", function () {
+        var expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        nav.classList.toggle("site-nav--open", !expanded);
+      });
+    });
+  </script>
+</body>
+</html>
