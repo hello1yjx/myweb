@@ -9,7 +9,7 @@ const siteData = {
     bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
       { value: "6", label: "原创下载包" },
-      { value: "48", label: "新手专题" },
+      { value: "49", label: "新手专题" },
       { value: "持续", label: "更新与核验" }
     ],
     valueCards: [
@@ -28,6 +28,99 @@ const siteData = {
     ]
   },
   posts: [
+    {
+      id: "vercel-eve-agent-runs-observability-guide",
+      title: "Vercel eve Agent Runs：新手怎样给 AI Agent 留下可复查的观测记录",
+      date: "2026-06-26",
+      category: "AI Agent",
+      readTime: "9 分钟",
+      excerpt: "Vercel 在 2026 年 6 月 26 日发布 eve Agent Runs 观测能力：eve 项目会在 Vercel 仪表盘自动出现 Agent Runs 标签，展示每次会话的触发方式、耗时、token 使用、turn、模型调用、工具调用和运行时错误。对新手来说，这不是单纯多一个日志页，而是把 Agent 从“跑完了就算”推进到“每一步都能回看、定位和复盘”。上线前应先定义低风险任务、初始化 instrumentation、触发一次可重复运行，再用 Agent Runs 和 OpenTelemetry 导出核对事实。",
+      tags: ["Vercel eve", "Agent Runs", "Observability"],
+      featured: true,
+      intro: [
+        "AI Agent 的难点不只在能不能完成任务，还在任务完成后能不能解释：它为什么触发、调用了哪些模型和工具、哪一步变慢、失败是不是来自运行时、token 用量有没有异常。没有这些记录，新手看到的往往只是一个成功或失败的最终回复，很难判断问题是提示词、工具、权限、外部 API 还是平台运行环境。",
+        "Vercel 的 eve Agent Runs 把这类信息放进项目仪表盘：每个 eve 项目会自动出现 Agent Runs 视图，开发者可以先看会话级摘要，再向下展开 turn、模型调用、工具调用和运行时错误。官方文档还说明 eve 会以 OpenTelemetry spans 记录运行过程，可以导出到自有观测平台。新手最适合把它当成 Agent 上线前的验收步骤，而不是等线上出错后再临时找日志。"
+      ],
+      audience: [
+        "正在试用 Vercel eve 或准备把文件夹式 Agent 部署到 Vercel 的前端、全栈和工具开发者。",
+        "已经能让 Agent 调用模型和工具，但还没有记录每次会话、turn、耗时、token 和错误来源的新手团队。",
+        "希望把 Agent 调试、成本观察和运行时问题定位放进同一个复盘流程的个人站长或小型产品维护者。"
+      ],
+      format: [
+        "适合整理成“任务边界 / instrumentation / 一次测试运行 / Agent Runs 复核 / OTel 导出 / 成本与保留期限”的 Agent 观测清单。",
+        "可配套一份会话复盘表，记录 run id、触发方式、输入、模型调用、工具调用、耗时、token、错误、人工结论和下一步处理。"
+      ],
+      roadmap: [
+        "先选一个低风险、可重复的 Agent 任务。观测最怕一开始就接入会写数据库、发请求或部署代码的任务。新手可以先做只读总结、文档问答或测试数据解释，保证同一输入能多次触发同一路径，便于比较 run 之间的差异。",
+        "确认项目真正使用 eve 并部署到 Vercel。官方 changelog 说明 Agent Runs 会在 eve 项目中自动出现；如果项目不是 eve，或还没有部署到 Vercel 仪表盘下，就不要把普通应用日志误认为 Agent Runs。",
+        "按文档完成 instrumentation 初始化。Vercel 文档把 Agent Runs 作为 eve 的主要观测入口，并提供 `agent/instrumentation.ts` 的初始化路径。新手应把初始化文件、导入位置和部署环境写进项目记录，避免本地能看到日志、线上却没有 spans。",
+        "触发一次已知输入并记录 run。第一轮不要只看最终回复，要逐层查看 trigger、duration、token usage、turn、model calls、tool calls 和 runtime errors。若工具调用失败，先看错误发生在哪一步，再回到工具参数、权限和外部服务状态核对。",
+        "把 Agent Runs 和应用日志一起读。Agent Runs 能解释 Agent 内部步骤，但它不能替代业务日志、请求日志、数据库审计或人工代码审查。涉及外部 API、文件修改、部署和账号权限时，应同时保留业务侧证据。",
+        "需要长期留存或跨平台分析时，再配置 OpenTelemetry 导出。eve 文档说明可通过 OTLP 端点导出 spans。新手应先确认导出目标、采样策略、保留期限和敏感字段处理，再把 traces 接到 Langfuse、Datadog 或自有观测系统。",
+        "最后设置复盘节奏，而不是无限保存所有细节。Vercel 文档区分不同计划下的 Agent Runs 可见范围、保留期限和使用量限制。团队应定期抽查失败 run、慢 run 和高 token run，把结论写回提示词、工具边界或测试用例。"
+      ],
+      officialLinks: [
+        {
+          label: "Vercel Changelog：Trace and debug eve agent sessions with Vercel Observability",
+          url: "https://vercel.com/changelog/eve-agent-observability",
+          note: "2026 年 6 月 26 日发布，说明 eve 项目会出现 Agent Runs 标签，并展示 trigger、duration、token usage、turn、模型调用、工具调用和 runtime errors。"
+        },
+        {
+          label: "Vercel Docs：eve Observability",
+          url: "https://vercel.com/docs/eve/observability",
+          note: "说明 Agent Runs 的主要入口、instrumentation 初始化、OpenTelemetry spans、OTLP 导出和外部观测平台连接方式。"
+        },
+        {
+          label: "Vercel Docs：eve Concepts",
+          url: "https://vercel.com/docs/eve/concepts",
+          note: "用于核对 eve 的 agent、tool、turn、runtime 和部署模型，避免把普通日志误认为 Agent 会话观测。"
+        },
+        {
+          label: "Vercel Docs：eve Pricing",
+          url: "https://vercel.com/docs/eve/pricing",
+          note: "用于核对不同计划下的 Agent Runs 可见性、保留期限、使用量和导出边界。"
+        }
+      ],
+      curatedLinks: [
+        "Agent Runs 的价值不是让 Agent 更自动，而是让每次自动执行都能被人回看和解释。",
+        "先用低风险、可重复任务验证观测链路，再考虑接入会修改外部状态的工具。",
+        "runtime errors、tool calls 和 token usage 要一起看；只看最终回复很容易漏掉慢步骤和隐藏失败。",
+        "OpenTelemetry 导出适合长期分析，但导出前必须确认敏感字段、采样和保留策略。"
+      ],
+      downloadIdeas: [
+        "建议整理一份 eve Agent Runs 复盘表，字段包括 run id、触发方式、输入、turn 数、模型调用、工具调用、耗时、token、错误和人工结论。",
+        "建议配一份 Agent 观测上线清单，包含 instrumentation 文件、导入位置、低风险测试任务、OTel 导出目标、保留期限和复核人。"
+      ],
+      extraSections: [
+        {
+          title: "第一次验收清单",
+          items: [
+            "确认项目使用的是 eve，并已经部署到 Vercel 项目下。",
+            "准备一个不会写数据库、不会部署、不会修改文件的测试任务。",
+            "按文档创建或检查 instrumentation 初始化文件，并确认线上环境已加载。",
+            "触发一次固定输入，记录 run id、开始时间和触发方式。",
+            "在 Agent Runs 中逐层查看 turn、model calls、tool calls、runtime errors 和 token usage。",
+            "把最终回复和观测记录一起保存，标注哪些结论能由记录证明，哪些还需要人工复核。"
+          ]
+        },
+        {
+          title: "哪些信号需要重点看",
+          items: [
+            "同一任务的 duration 突然变长，通常要检查外部工具、模型等待和运行时错误。",
+            "token usage 明显升高时，先看是否引入了过大的上下文、重复工具输出或无关文件。",
+            "工具调用失败但最终回复仍看似成功时，要把该 run 标记为需要人工复核。",
+            "模型调用和工具调用顺序变化时，要确认 prompt、工具 schema 和权限策略是否刚刚变更。",
+            "导出到外部观测平台前，先检查 traces 里是否包含用户输入、密钥片段或内部路径。"
+          ]
+        },
+        {
+          title: "最小启动记录",
+          text: "下面不是固定命令，而是新手第一次配置时应保留的记录形态。实际命令以官方文档和项目脚手架为准。",
+          code: "npm install @vercel/eve\n# 创建 agent/instrumentation.ts\n# 在应用入口导入 instrumentation\n# 部署后触发一次低风险 Agent 任务\n# 到 Vercel dashboard -> Agent Runs 复核 run 详情",
+          language: "bash"
+        }
+      ]
+    },
     {
       id: "vercel-web-analytics-cli-metrics-guide",
       title: "Vercel Web Analytics CLI：新手怎样用 vercel metrics 查询访问数据并给 Agent 设置边界",
@@ -4799,6 +4892,36 @@ git push origin main`,
     "github-agentic-workflows-public-preview-guide"
   ],
   hotspots: [
+    {
+      date: "2026-06-26",
+      tag: "AI Agent",
+      title: "Vercel eve 接入 Agent Runs：可在仪表盘追踪会话、模型调用、工具调用和运行时错误",
+      summary: "Vercel Changelog 宣布，eve 项目现在会在 Vercel dashboard 中自动出现 Agent Runs 标签。开发者可以查看每次 Agent 会话的 trigger、duration、token usage，并继续下钻到 turns、model calls、tool calls、runtime errors，以及与代码步骤相关的运行时问题。",
+      why: "这让新手调试 Agent 时不再只依赖最终回复或零散日志。真正要做的是先选低风险任务，完成 instrumentation，触发一次可重复运行，再用 Agent Runs 核对耗时、token、工具调用和错误来源；需要长期分析时再配置 OpenTelemetry 导出，而不是把所有生产问题都交给最终回答判断。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/eve-agent-observability",
+      articleIdea: "已扩写：Vercel eve Agent Runs 观测、调试与新手验收清单"
+    },
+    {
+      date: "2026-06-26",
+      tag: "终端 Agent",
+      title: "Claude Code Week 26 更新：MCP 登录命令、shell mode 回显、/rewind 与沙箱凭据提示集中增强",
+      summary: "Claude Code Docs 的 Week 26 记录显示，v2.1.185 到 v2.1.193 期间加入 `claude mcp login/logout`，可在 shell 中认证已配置 MCP server；shell mode 会提示包含 stdout 与 stderr；`/rewind` 回退体验、模型切换、沙箱凭据警告和 `--dangerously-skip-permissions` 的可见性也有更新。",
+      why: "这些更新更像终端 Agent 的日常安全与可解释性修补。新手应优先验证 MCP 登录是否只影响目标 server、shell mode 是否保留足够命令输出、/rewind 是否能回到预期位置，以及沙箱凭据提示是否能阻止把敏感凭据误带进隔离环境。",
+      sourceLabel: "Claude Code Docs",
+      sourceUrl: "https://code.claude.com/docs/en/whats-new/2026-w26",
+      articleIdea: "候选：Claude Code Week 26 下 MCP 登录、shell mode 和 /rewind 的终端回归测试清单"
+    },
+    {
+      date: "2026-06-26",
+      tag: "AI 指标",
+      title: "GitHub Copilot 指标新增按 AI 采用阶段统计合并 PR 数：企业报告能看到 adoption phase 与 merge 的关系",
+      summary: "GitHub Changelog 宣布，在此前 Copilot usage metrics API 的 AI adoption phase cohorts 基础上，enterprise 与 organization 报告新增按采用阶段统计的合并 PR 总数。新字段 `total_pull_requests_merged` 会显示某一天由对应 adoption phase 用户合并的 PR 数量。",
+      why: "AI 采用指标如果只看使用人数，很容易高估真实研发影响。把 adoption phase 和合并 PR 放在一起后，团队可以观察补全、Agent、multi-agent 等不同使用阶段是否真的进入交付链路；但它仍不是质量指标，必须和 review、测试失败率、回滚和人工复核结合解读。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-26-track-total-merges-by-adoption-phase-in-enterprise-and-organization-reports/",
+      articleIdea: "候选：Copilot 采用阶段、合并 PR 与研发指标解读清单，结合旧指标文章后再扩写"
+    },
     {
       date: "2026-06-26",
       tag: "开发工具",
