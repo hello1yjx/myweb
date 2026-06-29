@@ -6,6 +6,7 @@ const root = path.resolve(__dirname, "..");
 const appSource = fs.readFileSync(path.join(root, "assets", "app.js"), "utf8");
 const nodes = {
   "[data-hotspots-preview]": { innerHTML: "" },
+  "[data-home-resource-strip]": { innerHTML: "" },
   "[data-hotspot-list]": { innerHTML: "" },
   "[data-post-list]": { innerHTML: "" },
   "[data-post-filter]": { value: "", addEventListener() {} },
@@ -118,6 +119,20 @@ check(
   "homepage preview renders newest three hotspots",
   data.hotspots.slice(0, 3).every((item) => nodes["[data-hotspots-preview]"].innerHTML.includes(item.title)) &&
     !nodes["[data-hotspots-preview]"].innerHTML.includes(data.hotspots[3].title)
+);
+check(
+  "homepage preview is a three-card showreel",
+  (nodes["[data-hotspots-preview]"].innerHTML.match(/data-showreel-card/g) || []).length === 3 &&
+    (nodes["[data-hotspots-preview]"].innerHTML.match(/data-showreel-state="active"/g) || []).length === 1 &&
+    nodes["[data-hotspots-preview]"].innerHTML.includes(data.hotspots[0].title)
+);
+check(
+  "homepage showreel avoids video player chrome",
+  !["00:", "1.2x", "自动切换", "播放时间", "视频框"].some((term) => nodes["[data-hotspots-preview]"].innerHTML.includes(term))
+);
+check(
+  "homepage resource strip renders newest five downloads",
+  data.downloads.slice(0, 5).every((item) => nodes["[data-home-resource-strip]"].innerHTML.includes(item.name))
 );
 
 context.injectHotspotsPage();

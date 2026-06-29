@@ -6715,6 +6715,53 @@ function buildHotspotCard(item) {
   `;
 }
 
+function getHomeShowreelHotspots() {
+  return siteData.hotspots.slice(0, 3);
+}
+
+function buildHomeHotspotShowreelCard(item, index = 0) {
+  const icon = getHotspotIcon(item);
+  const tone = ["cyan", "teal", "amber"][index % 3];
+  const state = index === 0 ? "active" : index === 1 ? "next" : "previous";
+
+  return `
+    <article class="hotspot-card hotspot-showreel-card" data-showreel-card data-showreel-state="${state}" aria-current="${state === "active" ? "true" : "false"}">
+      <a class="hotspot-showreel-card__media hotspot-showreel-card__media--${tone}" href="${item.sourceUrl}" target="_blank" rel="noreferrer" aria-label="查看来源：${item.sourceLabel}">
+        <span class="hotspot-showreel-card__tag">${item.tag}</span>
+        <span class="hotspot-showreel-card__icon">${buildVisualIcon(icon, `${item.tag} 图标`, "visual-icon")}</span>
+        <span class="hotspot-showreel-card__grid" aria-hidden="true"></span>
+      </a>
+      <div class="hotspot-showreel-card__body">
+        <div class="hotspot-card__meta">
+          <span>${item.sourceLabel}</span>
+          <time datetime="${item.date}">${formatDate(item.date)}</time>
+        </div>
+        <h3>${item.title}</h3>
+        <p>${item.summary}</p>
+        <div class="hotspot-showreel-card__foot">
+          <span>来源已核验</span>
+          <a class="text-link" href="${item.sourceUrl}" target="_blank" rel="noreferrer">查看来源</a>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function buildHomeResourceStripItem(item) {
+  const icon = getResourceIcon(item);
+
+  return `
+    <a class="home-resource-card reveal" href="${item.link}" download>
+      <span class="home-resource-card__icon">${buildVisualIcon(icon, `${item.category} 图标`, "visual-icon visual-icon--download")}</span>
+      <span class="home-resource-card__body">
+        <strong>${item.name}</strong>
+        <em>${item.category}</em>
+      </span>
+      <span class="home-resource-card__meta">${item.format}</span>
+    </a>
+  `;
+}
+
 function slugify(value) {
   const map = {
     "AI 编程": "ai",
@@ -6897,6 +6944,7 @@ function injectHomePage() {
   const tags = document.querySelector("[data-home-tags]");
   const rank = document.querySelector("[data-download-rank]");
   const heroIcons = document.querySelector("[data-hero-icons]");
+  const resourceStrip = document.querySelector("[data-home-resource-strip]");
 
   if (stats) {
     stats.innerHTML = getHomeStats()
@@ -6918,7 +6966,7 @@ function injectHomePage() {
   }
 
   if (hotspots) {
-    hotspots.innerHTML = siteData.hotspots.slice(0, 3).map(buildHotspotCard).join("");
+    hotspots.innerHTML = getHomeShowreelHotspots().map(buildHomeHotspotShowreelCard).join("");
   }
 
   if (featuredPosts) {
@@ -6992,6 +7040,10 @@ function injectHomePage() {
         `
       )
       .join("");
+  }
+
+  if (resourceStrip) {
+    resourceStrip.innerHTML = siteData.downloads.slice(0, 5).map(buildHomeResourceStripItem).join("");
   }
 }
 
@@ -7301,6 +7353,94 @@ function revealOnScroll() {
   });
 }
 
+function initHotspotShowreel() {
+  const root = document.querySelector("[data-hotspot-showreel]");
+  const track = document.querySelector("[data-hotspots-preview]");
+  if (!root || !track) return;
+
+  const cards = Array.from(track.querySelectorAll("[data-showreel-card]"));
+  if (cards.length < 2) return;
+
+  const controls = root.querySelector("[data-showreel-controls]");
+  const dots = root.querySelector("[data-showreel-dots]");
+  const prev = root.querySelector("[data-showreel-prev]");
+  const next = root.querySelector("[data-showreel-next]");
+  const reducedMotion = typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let activeIndex = 0;
+  let timerId = null;
+
+  const setActive = (nextIndex) => {
+    activeIndex = (nextIndex + cards.length) % cards.length;
+    root.style.setProperty("--showreel-progress", `${((activeIndex + 1) / cards.length) * 100}%`);
+
+    cards.forEach((card, index) => {
+      const previousIndex = (activeIndex - 1 + cards.length) % cards.length;
+      const nextCardIndex = (activeIndex + 1) % cards.length;
+      const state = index === activeIndex ? "active" : index === previousIndex ? "previous" : index === nextCardIndex ? "next" : "hidden";
+      card.dataset.showreelState = state;
+      card.setAttribute("aria-current", state === "active" ? "true" : "false");
+    });
+
+    if (dots) {
+      Array.from(dots.children).forEach((dot, index) => {
+        dot.classList.toggle("is-active", index === activeIndex);
+        dot.setAttribute("aria-current", index === activeIndex ? "true" : "false");
+      });
+    }
+  };
+
+  const stop = () => {
+    if (timerId) {
+      window.clearInterval(timerId);
+      timerId = null;
+    }
+  };
+
+  const start = () => {
+    if (reducedMotion || timerId) return;
+    timerId = window.setInterval(() => setActive(activeIndex + 1), 5200);
+  };
+
+  if (dots && !dots.children.length) {
+    dots.innerHTML = cards
+      .map((_, index) => `<button type="button" aria-label="切换到第 ${index + 1} 条热点"></button>`)
+      .join("");
+  }
+
+  if (dots) {
+    Array.from(dots.children).forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        setActive(index);
+        stop();
+        start();
+      });
+    });
+  }
+
+  if (prev) {
+    prev.addEventListener("click", () => {
+      setActive(activeIndex - 1);
+      stop();
+      start();
+    });
+  }
+
+  if (next) {
+    next.addEventListener("click", () => {
+      setActive(activeIndex + 1);
+      stop();
+      start();
+    });
+  }
+
+  root.addEventListener("focusin", stop);
+  root.addEventListener("focusout", start);
+
+  if (controls) controls.hidden = false;
+  setActive(activeIndex);
+  start();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   setCanonicalUrl();
   setGlobalContent();
@@ -7315,5 +7455,6 @@ document.addEventListener("DOMContentLoaded", () => {
   injectResourcesPage();
   injectProjectsPage();
   injectProjectDetail();
+  initHotspotShowreel();
   revealOnScroll();
 });
