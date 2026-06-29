@@ -4842,6 +4842,32 @@ git push origin main`,
   ],
   downloads: [
     {
+      id: "ai-tool-source-verification-kit",
+      name: "AI 工具来源核验表",
+      category: "AI 工具",
+      badge: "本站原创",
+      description: "把新工具拆成来源、权限、数据边界、试用任务和人工验收，避免只凭截图或短视频判断。",
+      pitch: "适合试用 AI 编程、建站、效率工具前，先做一次低风险来源核验。",
+      format: "ZIP · 4 个文件",
+      includes: ["来源核验清单", "工具评估 CSV", "核验记录模板"],
+      updated: "2026-06-29",
+      cta: "下载核验表",
+      link: "downloads/ai-tool-source-verification-kit.zip"
+    },
+    {
+      id: "open-source-project-release-kit",
+      name: "开源项目发布检查包",
+      category: "开源项目",
+      badge: "本站原创",
+      description: "帮助小型项目在公开前补齐 README、许可证、运行步骤、版本记录和发布后复查。",
+      pitch: "适合课程作品、个人工具和学习项目发布到 GitHub 前逐项检查。",
+      format: "ZIP · 4 个文件",
+      includes: ["发布检查清单", "项目介绍模板", "维护记录 CSV"],
+      updated: "2026-06-29",
+      cta: "下载发布包",
+      link: "downloads/open-source-project-release-kit.zip"
+    },
+    {
       id: "website-launch-checklist",
       name: "静态网站上线检查表",
       category: "建站资料",
@@ -4921,6 +4947,42 @@ git push origin main`,
     }
   ],
   resources: [
+    {
+      name: "OpenAI Codex Web 官方文档",
+      category: "AI 编程",
+      badge: "外部官方",
+      description: "OpenAI 提供的 Codex 云端任务、代码审查、环境配置和工作流说明。",
+      pitch: "适合核对 Codex 能做什么、怎样配置仓库环境，以及哪些操作需要人工确认。",
+      cta: "打开官方文档",
+      link: "https://developers.openai.com/codex/cloud"
+    },
+    {
+      name: "Claude Code 官方文档",
+      category: "AI 编程",
+      badge: "外部官方",
+      description: "Claude Code 的安装、权限、MCP、slash commands、IDE 和终端使用说明。",
+      pitch: "适合把终端 Agent 当成开发工具前，先弄清权限、会话恢复和工具连接方式。",
+      cta: "打开官方文档",
+      link: "https://code.claude.com/docs/en/overview"
+    },
+    {
+      name: "Qwen Code 官方文档",
+      category: "AI 编程",
+      badge: "外部官方",
+      description: "Qwen Code 面向命令行 AI 工作流的安装、配置、模型、MCP 和常用命令说明。",
+      pitch: "适合需要国产模型或 OpenAI-compatible 工作流的新手，先从官方说明核对能力边界。",
+      cta: "打开官方文档",
+      link: "https://qwenlm.github.io/qwen-code-docs/en/users/overview/"
+    },
+    {
+      name: "Vercel AI SDK 文档",
+      category: "AI 建站",
+      badge: "外部官方",
+      description: "Vercel 维护的 AI SDK 文档，覆盖模型调用、流式输出、工具调用、RAG 和 UI 集成。",
+      pitch: "适合从静态站或前端项目继续学习 AI 应用开发时，查找稳定的实现入口。",
+      cta: "打开官方文档",
+      link: "https://ai-sdk.dev/docs/introduction"
+    },
     {
       name: "GitHub Git Cheat Sheet PDF",
       category: "版本控制",
@@ -6468,6 +6530,30 @@ git push origin main`,
   ],
   projects: [
     {
+      id: "official-tool-navigation",
+      title: "官方工具导航与核验入口",
+      summary: "把 AI 编程、前端、Git、VS Code、安全和建站相关的一手资料放到可核验入口，减少二手转载带来的误导。",
+      stack: "官方文档 / 工具核验",
+      status: "持续维护",
+      link: "resources.html#official-resources",
+      body: `
+        <p>工具入口优先选择官方文档、官方仓库或长期维护的原始资料，避免把来源不清的教程当成权威依据。</p>
+        <p>配套的 AI 工具来源核验表可以帮助新手在试用前记录来源、权限、数据边界和验收结论。</p>
+      `
+    },
+    {
+      id: "open-source-release-kit",
+      title: "开源项目发布检查包",
+      summary: "为小型学习项目整理 README、许可证、运行步骤、版本记录和发布后复查模板，降低公开发布时的信息缺口。",
+      stack: "GitHub / README / Release",
+      status: "新增资料包",
+      link: "resources.html#resource-downloads",
+      body: `
+        <p>资料包面向课程作品、个人工具和站内案例，强调读者能按 README 从头运行、能看懂许可证，也能追踪版本变化。</p>
+        <p>复杂团队项目仍需要更完整的 issue 模板、贡献指南、CI 和安全披露流程；本站只提供新手可操作的基础检查。</p>
+      `
+    },
+    {
       id: "resource-content-hub",
       title: "可抓取的静态文章库",
       summary: "把站内教程生成独立静态 HTML，确保无需 JavaScript 也能读取正文、标题、来源和 canonical。",
@@ -7133,7 +7219,7 @@ function injectResourcesPage() {
       <div class="section-heading">
         <div>
           <p class="eyebrow">本站原创下载</p>
-          <h2>6 个能直接带走使用的资料包</h2>
+          <h2>${siteData.downloads.length} 个能直接带走使用的资料包</h2>
         </div>
         <p>每个 ZIP 都包含说明、文件清单和适用边界。下载后先阅读 README，再按自己的项目调整。</p>
       </div>
@@ -7163,7 +7249,7 @@ function injectResourcesPage() {
       <div class="section-heading">
         <div>
           <p class="eyebrow">精选学习路线</p>
-          <h2>下载之后，顺着 6 个专题继续实践</h2>
+          <h2>下载之后，顺着 ${getResourcePathPosts().length} 个专题继续实践</h2>
         </div>
         <p>这里只保留适合长期学习的基础专题，不把每日热点重复铺成资源列表。</p>
       </div>
