@@ -1,10 +1,10 @@
-const fs = require("fs");
+﻿const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const appPath = path.join(root, "assets", "app.js");
-const version = "20260629-showreel";
+const version = "20260629-showreel-fix";
 const siteUrl = "https://hello1yjx.github.io";
 
 function loadSiteRuntime() {
@@ -139,7 +139,7 @@ function articleTemplate(runtime, post, relatedPosts) {
     </div>
   </header>
 
-  <main class="page-shell section">
+  <main class="page-shell section article-page">
     <header class="detail-hero">
       <span class="pill">${escapeHtml(post.category)}</span>
       <h1>${escapeHtml(post.title)}</h1>

@@ -4,6 +4,7 @@ const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const appSource = fs.readFileSync(path.join(root, "assets", "app.js"), "utf8");
+const stylesSource = fs.readFileSync(path.join(root, "assets", "styles.css"), "utf8");
 const nodes = {
   "[data-hotspots-preview]": { innerHTML: "" },
   "[data-home-resource-strip]": { innerHTML: "" },
@@ -129,6 +130,11 @@ check(
 check(
   "homepage showreel avoids video player chrome",
   !["00:", "1.2x", "自动切换", "播放时间", "视频框"].some((term) => nodes["[data-hotspots-preview]"].innerHTML.includes(term))
+);
+check(
+  "homepage showreel hover keeps carousel transforms",
+  stylesSource.includes(".home-hotspots-section .hotspot-card:not(.hotspot-showreel-card):hover") &&
+    !stylesSource.includes(".home-hotspots-section .hotspot-card:hover {\n  transform: none;")
 );
 check(
   "homepage resource strip renders newest five downloads",

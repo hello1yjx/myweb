@@ -2433,7 +2433,7 @@ body {
   box-shadow: none;
 }
 
-.home-hotspots-section .hotspot-card:hover {
+.home-hotspots-section .hotspot-card:not(.hotspot-showreel-card):hover {
   transform: none;
   border-color: #cbd5df;
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
@@ -2814,6 +2814,22 @@ main.page-shell {
   padding-top: 0;
 }
 
+main.article-page {
+  width: min(calc(100% - 48px), 1180px);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+main.article-page .detail-hero h1 {
+  max-width: 900px;
+  font-size: clamp(34px, 3.2vw, 48px);
+  line-height: 1.2;
+}
+
+main.article-page .detail-hero p {
+  max-width: 820px;
+}
+
 .page-hero {
   padding: 34px 0 20px;
 }
@@ -2863,7 +2879,8 @@ main.page-shell {
 }
 
 .section {
-  margin: 22px 0;
+  margin-top: 22px;
+  margin-bottom: 22px;
 }
 
 .section-title,

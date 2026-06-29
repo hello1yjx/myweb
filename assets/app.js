@@ -1,4 +1,4 @@
-const siteData = {
+﻿const siteData = {
   site: {
     name: "学习资源库",
     tagline: "分享知识 · 提升自己 · 成就未来",
@@ -6942,7 +6942,6 @@ function injectHomePage() {
   const recommendations = document.querySelector("[data-recommendations]");
   const latest = document.querySelector("[data-home-latest]");
   const tags = document.querySelector("[data-home-tags]");
-  const rank = document.querySelector("[data-download-rank]");
   const heroIcons = document.querySelector("[data-hero-icons]");
   const resourceStrip = document.querySelector("[data-home-resource-strip]");
 
@@ -7027,20 +7026,6 @@ function injectHomePage() {
       .join("");
   }
 
-  if (rank) {
-    rank.innerHTML = siteData.downloads.slice(0, 5)
-      .map(
-        (item) => `
-          <a class="download-row" href="${item.link}" download>
-            <span class="download-row__icon">${buildVisualIcon(getResourceIcon(item), `${item.category} 图标`, "visual-icon visual-icon--download")}</span>
-            <strong>${item.name}</strong>
-            <em>${item.format}</em>
-            <b>下载</b>
-          </a>
-        `
-      )
-      .join("");
-  }
 
   if (resourceStrip) {
     resourceStrip.innerHTML = siteData.downloads.slice(0, 5).map(buildHomeResourceStripItem).join("");
