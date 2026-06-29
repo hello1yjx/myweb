@@ -9,7 +9,7 @@ const siteData = {
     bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
       { value: "6", label: "原创下载包" },
-      { value: "49", label: "新手专题" },
+      { value: "55", label: "新手专题" },
       { value: "持续", label: "更新与核验" }
     ],
     valueCards: [
@@ -28,6 +28,99 @@ const siteData = {
     ]
   },
   posts: [
+    {
+      id: "qwen-code-0193-agent-stability-checklist",
+      title: "Qwen Code v0.19.3：新手怎样验收 WebFetch、流式超时、Skills 与 MCP 的稳定性更新",
+      date: "2026-06-28",
+      category: "AI 编程",
+      readTime: "9 分钟",
+      excerpt: "QwenLM/qwen-code 在 2026 年 6 月 28 日发布 v0.19.3，集中更新 WebFetch JSON 回退、OpenAI 流式管线空闲超时、Skills 使用统计、自动生成 Skills 持久化确认、MCP 配置热更新、工具展示分组、团队记忆层和 Web Shell 体验。对新手来说，这不是只看版本号的升级，而是一次终端 Agent 稳定性验收：先做只读任务，再验证联网抓取、长响应、Skills 写入、MCP 重连和工具日志是否能被人工复核。",
+      tags: ["Qwen Code", "AI Agent", "终端工具"],
+      featured: true,
+      intro: [
+        "终端 AI Agent 的版本更新很容易让人只看新增功能：能不能抓网页、能不能接 MCP、能不能自动生成技能、能不能让多 Agent 跑得更顺。但真正影响日常使用的是稳定性和可审计性。一次升级后，如果 WebFetch 对异常 JSON 没有清楚回退、流式响应卡住无法超时、Skills 被自动写入却没有确认、MCP 配置变化不能及时重连，后面排查会比写代码本身更耗时间。",
+        "Qwen Code v0.19.3 的发布记录显示，这个版本把很多改动放在这些细节上：WebFetch 增加 JSON fallback，OpenAI pipeline 增加 streaming inactivity timeout，CLI 增加 skill usage stats，自动生成 Skills 持久化前需要确认，MCP server 可在设置变化后 live reconcile，TUI 工具展示也按类型分组。新手可以把这次升级当作一套回归测试模板，而不是急着在真实项目里放开自动模式。"
+      ],
+      audience: [
+        "已经在本地试用 Qwen Code、Codex、Claude Code 或其他终端 Agent，希望比较升级后行为是否稳定的新手开发者。",
+        "准备让 Agent 读取网页、调用 MCP server、保存 Skills 或处理长输出，但还没有固定验收记录的个人站长和小团队。",
+        "维护中文开发环境、Windows 终端或混合模型 provider 配置，担心升级后出现卡住、误写记忆或工具日志不可读的人。"
+      ],
+      format: [
+        "适合整理成“升级前备份 / 只读任务 / WebFetch 样例 / 流式超时 / Skills 确认 / MCP 重连 / 工具日志复核”的终端 Agent 验收清单。",
+        "可配套一份升级记录表，记录版本号、provider、MCP server、测试任务、命令输出、是否写入 Skills、是否触发超时和人工结论。"
+      ],
+      roadmap: [
+        "先确认升级来源和版本。发布记录显示 v0.19.3 是 QwenLM/qwen-code 的最新 release，时间为 2026 年 6 月 28 日。升级前先运行当前版本命令，记录安装来源、provider、工作区路径和是否启用了 MCP、Skills、voice、web-shell 等能力。",
+        "用只读任务测试 WebFetch 和网络输入。这个版本修复了 WebFetch JSON fallback，并拒绝带 userinfo 的 URL。新手应准备一个普通文档页、一个返回 JSON 的接口和一个故意异常的 URL，确认 Agent 会说明失败原因，而不是把不可信内容直接当作事实。",
+        "验证长响应不会无限等待。OpenAI pipeline 增加 streaming inactivity timeout，并提供 `QWEN_STREAM_IDLE_TIMEOUT_MS` 配置。可以选一个低风险总结任务，临时设置较短超时，观察卡住时是否返回可理解错误，再恢复默认值，不要在生产任务里边跑边改。",
+        "检查 Skills 和记忆是否需要确认。发布记录提到 skill usage stats、自动生成 Skills 持久化确认、`/remember` 与 auto-extract 解耦、git-shared team memory tier 等变化。新手要重点确认哪些内容会写入个人记忆、项目文件或团队共享层，避免把一次临时提示误保存成长期规则。",
+        "对 MCP 做一次配置热更新演练。v0.19.3 支持 settings 变化后 live reconcile MCP servers，Web Shell 也能在 `/mcp` 对话框浏览 server resources。测试时先用一个只读 MCP server，修改配置后确认工具列表、resources、错误提示和重新连接行为，而不是直接接入会修改外部状态的工具。",
+        "看工具日志是否更容易复核。TUI 工具展示现在按类型分组，读/搜工具可折叠，修改类工具单独显示；Web Shell 也增强了 markdown 表格和会话侧栏。升级后要检查一次真实小补丁的日志，确认读文件、搜索、写文件和 shell 命令都能分开追踪。",
+        "最后再扩大到多 Agent 或自动模式。v0.19.3 修复了多 Agent 运行时的滚动闪烁、重复 provider responses、self-paced loop wakeups 等问题，但这些改动不等于可以直接放开高风险权限。建议先跑只读总结，再跑小文件改动，最后再评估自动模式和多 Agent。"
+      ],
+      officialLinks: [
+        {
+          label: "Qwen Code GitHub Release：v0.19.3",
+          url: "https://github.com/QwenLM/qwen-code/releases/tag/v0.19.3",
+          note: "2026 年 6 月 28 日发布，包含 WebFetch、流式超时、Skills、MCP、TUI、Web Shell、记忆和 CI 稳定性等变更。"
+        },
+        {
+          label: "Qwen Code Docs：Overview",
+          url: "https://qwenlm.github.io/qwen-code-docs/en/users/overview/",
+          note: "官方用户文档入口，用于核对 Qwen Code 的终端 Agent 定位、安装、认证和基础使用方式。"
+        },
+        {
+          label: "Qwen Code Docs：Agent Skills",
+          url: "https://qwenlm.github.io/qwen-code-docs/en/users/features/skills/",
+          note: "用于理解 Skills 的目录、调用、测试和共享方式，配合本次 skill usage stats 与持久化确认变化核对。"
+        },
+        {
+          label: "Qwen Code Docs：Memory",
+          url: "https://qwenlm.github.io/qwen-code-docs/en/users/features/memory/",
+          note: "用于核对 QWEN.md、记忆范围、清理方式和团队共享记忆相关风险。"
+        }
+      ],
+      curatedLinks: [
+        "v0.19.3 的重点不是某一个大功能，而是让联网读取、长响应、MCP、Skills 和工具展示更容易被人复核。",
+        "自动生成 Skills 和团队记忆都要先确认写入范围，避免把一次临时经验变成长期规则。",
+        "WebFetch、MCP 和多 Agent 都应先用只读任务验收，再逐步扩大到文件修改或外部系统操作。",
+        "流式超时和工具日志是排查稳定性的证据，升级记录里要保留测试任务、命令输出和人工结论。"
+      ],
+      downloadIdeas: [
+        "建议整理一份 Qwen Code 升级验收表，字段包括版本、provider、MCP server、Skills 状态、记忆范围、测试命令和结论。",
+        "建议配一份终端 Agent 低风险任务样例，覆盖网页读取、长文本总结、只读 MCP 查询、小文件补丁和回滚记录。"
+      ],
+      extraSections: [
+        {
+          title: "第一次升级验收清单",
+          items: [
+            "记录升级前版本、安装方式、provider 和当前工作区路径。",
+            "关闭或限制会修改外部状态的 MCP server，只保留只读测试入口。",
+            "用一个普通网页和一个 JSON 接口测试 WebFetch，并记录失败时的错误说明。",
+            "运行一次长响应任务，确认流式卡住时有超时或可理解错误。",
+            "让 Agent 生成一个临时 Skill，但不要直接持久化，先检查确认提示和保存路径。",
+            "修改 MCP 配置后观察工具列表是否重新加载，失败时是否给出明确提示。",
+            "执行一个小补丁任务，确认读、搜、写和 shell 输出在日志中容易区分。"
+          ]
+        },
+        {
+          title: "不建议立刻放开的场景",
+          items: [
+            "会批量写文件、删除目录或自动提交代码的任务。",
+            "会连接生产数据库、发布系统、支付接口或账号管理后台的 MCP 工具。",
+            "没有人工复核的自动 Skills 写入、团队记忆写入或多 Agent 长任务。",
+            "只看最终回答、不保存命令输出和工具调用记录的升级验证。"
+          ]
+        },
+        {
+          title: "最小记录模板",
+          text: "下面不是固定命令，而是每次升级后建议留下的记录形态。真实命令以官方文档和你自己的安装方式为准。",
+          code: "version: qwen-code v0.19.3\nprovider: Qwen / OpenAI-compatible / local\nworkspace: safe-demo-repo\nchecks:\n  - web_fetch_json: pass or fail reason\n  - stream_idle_timeout: pass or fail reason\n  - skills_confirm: prompt seen / not seen\n  - mcp_reconcile: tools refreshed / error shown\n  - tool_log_review: readable / unclear\nresult: keep / rollback / retest",
+          language: "yaml"
+        }
+      ]
+    },
     {
       id: "vercel-eve-agent-runs-observability-guide",
       title: "Vercel eve Agent Runs：新手怎样给 AI Agent 留下可复查的观测记录",
@@ -4893,6 +4986,36 @@ git push origin main`,
   ],
   hotspots: [
     {
+      date: "2026-06-29",
+      tag: "AI 编程",
+      title: "GitHub Copilot Opus 4.6 (fast) 退役日到来：组织需要提前切到 Opus 4.8 Fast 或其它可用模型",
+      summary: "GitHub Changelog 此前公告，Copilot 中的 Opus 4.6 (fast) 将在 2026 年 6 月 29 日下线，并建议需要相近延迟体验的用户迁移到 Opus 4.8 Fast。对企业和团队来说，今天是一次模型可用性和默认策略核对点。",
+      why: "模型退役不只是下拉框少一个选项。团队如果把某个模型写进 IDE 设置、CLI 脚本、代码审查流程或教学文档，就要检查默认模型、组织策略、失败回退和使用者提示；新手也应学会把“模型名”当作可变依赖，而不是固定不变的能力承诺。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-18-upcoming-deprecation-of-opus-4-6-fast",
+      articleIdea: "候选：Copilot 模型退役前怎样核对组织默认值、脚本配置和回退模型"
+    },
+    {
+      date: "2026-06-28",
+      tag: "AI 终端",
+      title: "Qwen Code v0.19.3 发布：WebFetch、流式超时、Skills、MCP 与工具日志稳定性集中增强",
+      summary: "QwenLM/qwen-code 发布 v0.19.3，包含 WebFetch JSON fallback、OpenAI streaming inactivity timeout、skill usage stats、自动生成 Skills 持久化确认、MCP server live reconcile、TUI 工具展示分组、Web Shell 资源浏览和团队记忆层等改动。",
+      why: "这类版本最适合新手建立终端 Agent 升级验收习惯：先跑只读任务，再分别验证网页抓取、长响应超时、Skills 写入确认、MCP 配置热更新和工具日志可读性；不要把新版本直接用于会修改生产状态的自动任务。",
+      sourceLabel: "Qwen Code GitHub Release",
+      sourceUrl: "https://github.com/QwenLM/qwen-code/releases/tag/v0.19.3",
+      articleIdea: "已扩写：Qwen Code v0.19.3 升级后怎样验收 WebFetch、流式超时、Skills 与 MCP"
+    },
+    {
+      date: "2026-06-26",
+      tag: "终端 Agent",
+      title: "Claude Code 2.1.195 更新：会话历史、权限发现和 prompt caching 指标继续补强",
+      summary: "Claude Code changelog 显示，2.1.195 在 6 月 26 日发布，更新包括 TUI 中会话与历史搜索、从 TUI 恢复对话、更清晰的 `/permissions` 相关命令，以及 usage UI 中的 prompt caching 指标可见性。",
+      why: "终端 Agent 的可恢复性和权限可见性会直接影响长任务体验。新手升级后应验证能否按会话历史找到旧任务、恢复上下文是否准确、权限入口是否容易理解，并把 prompt caching 指标作为成本和上下文复盘的一部分，而不是只看最终回答。",
+      sourceLabel: "Claude Code Changelog",
+      sourceUrl: "https://code.claude.com/docs/en/changelog#2-1-195",
+      articleIdea: "候选：Claude Code 2.1.195 下怎样回看会话、恢复任务和复核权限入口"
+    },
+    {
       date: "2026-06-26",
       tag: "AI Agent",
       title: "Vercel eve 接入 Agent Runs：可在仪表盘追踪会话、模型调用、工具调用和运行时错误",
@@ -4971,6 +5094,26 @@ git push origin main`,
       sourceLabel: "Cloudflare Changelog",
       sourceUrl: "https://developers.cloudflare.com/changelog/post/2026-06-26-durable-objects-us-jurisdiction/",
       articleIdea: "候选：Durable Objects jurisdiction、数据位置和边缘状态迁移的入门核对表"
+    },
+    {
+      date: "2026-06-25",
+      tag: "自动化",
+      title: "GitHub Actions 步骤支持并行运行：CI 可以把独立检查拆成同一 job 内的并发步骤",
+      summary: "GitHub Changelog 宣布，Actions steps 现在可以并行运行。工作流作者可以把彼此独立的步骤放进同一 job 的并行执行结构，减少串行等待，同时保留 job 级上下文和后续汇总。",
+      why: "这对测试、构建、lint 和安全扫描很实用，但新手不能简单把所有步骤都并行化。应先确认步骤之间没有文件、缓存、环境变量或服务端口依赖，再设置失败汇总和日志命名，否则并发会让 CI 更快失败也更难排查。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-25-actions-steps-can-now-be-run-in-parallel",
+      articleIdea: "候选：GitHub Actions 并行 steps 下怎样区分独立检查、共享缓存和失败日志"
+    },
+    {
+      date: "2026-06-25",
+      tag: "开源安全",
+      title: "npm 为 high-impact accounts 增加预防性账号保护：敏感变更会触发临时安全限制",
+      summary: "GitHub Changelog 宣布，npm 会在检测到 high-impact accounts 的敏感账号变更时增加临时预防性保护。这类账号负责注册表中广泛使用的包，新机制面向账号接管风险，帮助保护关键包维护者与依赖用户。",
+      why: "包管理安全不只发生在发布命令那一刻。维护热门包、内部包或构建脚本的团队，应把账号邮箱、2FA、token、发布权限和紧急撤销流程列为日常检查；依赖方也要关注维护者账号风险，而不是只盯 package-lock 版本号。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-25-npm-adds-preventive-account-protection-for-high-impact-accounts",
+      articleIdea: "候选：npm 维护者账号、2FA、token 和发布权限的入门安全检查清单"
     },
     {
       date: "2026-06-25",

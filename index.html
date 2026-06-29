@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260628-hotspots">
+  <link rel="stylesheet" href="assets/styles.css?v=20260629-hotspots">
 </head>
 <body>
   <header class="site-header">
@@ -80,22 +80,42 @@
         <!-- STATIC_HOME_HOTSPOTS_START -->
 <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <div>
           <div class="hotspot-card__meta">
-            <span>AI Agent</span>
-            <time datetime="2026-06-26">2026年6月26日</time>
+            <span>AI 编程</span>
+            <time datetime="2026-06-29">2026年6月29日</time>
           </div>
-          <h3>Vercel eve 接入 Agent Runs：可在仪表盘追踪会话、模型调用、工具调用和运行时错误</h3>
+          <h3>GitHub Copilot Opus 4.6 (fast) 退役日到来：组织需要提前切到 Opus 4.8 Fast 或其它可用模型</h3>
         </div>
       </div>
-      <p>Vercel Changelog 宣布，eve 项目现在会在 Vercel dashboard 中自动出现 Agent Runs 标签。开发者可以查看每次 Agent 会话的 trigger、duration、token usage，并继续下钻到 turns、model calls、tool calls、runtime errors，以及与代码步骤相关的运行时问题。</p>
+      <p>GitHub Changelog 此前公告，Copilot 中的 Opus 4.6 (fast) 将在 2026 年 6 月 29 日下线，并建议需要相近延迟体验的用户迁移到 Opus 4.8 Fast。对企业和团队来说，今天是一次模型可用性和默认策略核对点。</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
-        <p>这让新手调试 Agent 时不再只依赖最终回复或零散日志。真正要做的是先选低风险任务，完成 instrumentation，触发一次可重复运行，再用 Agent Runs 核对耗时、token、工具调用和错误来源；需要长期分析时再配置 OpenTelemetry 导出，而不是把所有生产问题都交给最终回答判断。</p>
+        <p>模型退役不只是下拉框少一个选项。团队如果把某个模型写进 IDE 设置、CLI 脚本、代码审查流程或教学文档，就要检查默认模型、组织策略、失败回退和使用者提示；新手也应学会把“模型名”当作可变依赖，而不是固定不变的能力承诺。</p>
       </div>
-      <p class="hotspot-card__idea">已扩写：Vercel eve Agent Runs 观测、调试与新手验收清单</p>
-      <a class="text-link" href="https://vercel.com/changelog/eve-agent-observability" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
+      <p class="hotspot-card__idea">候选：Copilot 模型退役前怎样核对组织默认值、脚本配置和回退模型</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-06-18-upcoming-deprecation-of-opus-4-6-fast" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 终端 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 终端</span>
+            <time datetime="2026-06-28">2026年6月28日</time>
+          </div>
+          <h3>Qwen Code v0.19.3 发布：WebFetch、流式超时、Skills、MCP 与工具日志稳定性集中增强</h3>
+        </div>
+      </div>
+      <p>QwenLM/qwen-code 发布 v0.19.3，包含 WebFetch JSON fallback、OpenAI streaming inactivity timeout、skill usage stats、自动生成 Skills 持久化确认、MCP server live reconcile、TUI 工具展示分组、Web Shell 资源浏览和团队记忆层等改动。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这类版本最适合新手建立终端 Agent 升级验收习惯：先跑只读任务，再分别验证网页抓取、长响应超时、Skills 写入确认、MCP 配置热更新和工具日志可读性；不要把新版本直接用于会修改生产状态的自动任务。</p>
+      </div>
+      <p class="hotspot-card__idea">已扩写：Qwen Code v0.19.3 升级后怎样验收 WebFetch、流式超时、Skills 与 MCP</p>
+      <a class="text-link" href="https://github.com/QwenLM/qwen-code/releases/tag/v0.19.3" target="_blank" rel="noreferrer">查看来源：Qwen Code GitHub Release</a>
     </article>
 
     <article class="hotspot-card reveal">
@@ -106,36 +126,16 @@
             <span>终端 Agent</span>
             <time datetime="2026-06-26">2026年6月26日</time>
           </div>
-          <h3>Claude Code Week 26 更新：MCP 登录命令、shell mode 回显、/rewind 与沙箱凭据提示集中增强</h3>
+          <h3>Claude Code 2.1.195 更新：会话历史、权限发现和 prompt caching 指标继续补强</h3>
         </div>
       </div>
-      <p>Claude Code Docs 的 Week 26 记录显示，v2.1.185 到 v2.1.193 期间加入 `claude mcp login/logout`，可在 shell 中认证已配置 MCP server；shell mode 会提示包含 stdout 与 stderr；`/rewind` 回退体验、模型切换、沙箱凭据警告和 `--dangerously-skip-permissions` 的可见性也有更新。</p>
+      <p>Claude Code changelog 显示，2.1.195 在 6 月 26 日发布，更新包括 TUI 中会话与历史搜索、从 TUI 恢复对话、更清晰的 `/permissions` 相关命令，以及 usage UI 中的 prompt caching 指标可见性。</p>
       <div class="hotspot-card__why">
         <strong>为什么值得关注</strong>
-        <p>这些更新更像终端 Agent 的日常安全与可解释性修补。新手应优先验证 MCP 登录是否只影响目标 server、shell mode 是否保留足够命令输出、/rewind 是否能回到预期位置，以及沙箱凭据提示是否能阻止把敏感凭据误带进隔离环境。</p>
+        <p>终端 Agent 的可恢复性和权限可见性会直接影响长任务体验。新手升级后应验证能否按会话历史找到旧任务、恢复上下文是否准确、权限入口是否容易理解，并把 prompt caching 指标作为成本和上下文复盘的一部分，而不是只看最终回答。</p>
       </div>
-      <p class="hotspot-card__idea">候选：Claude Code Week 26 下 MCP 登录、shell mode 和 /rewind 的终端回归测试清单</p>
-      <a class="text-link" href="https://code.claude.com/docs/en/whats-new/2026-w26" target="_blank" rel="noreferrer">查看来源：Claude Code Docs</a>
-    </article>
-
-    <article class="hotspot-card reveal">
-      <div class="hotspot-card__head">
-        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 指标 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
-        <div>
-          <div class="hotspot-card__meta">
-            <span>AI 指标</span>
-            <time datetime="2026-06-26">2026年6月26日</time>
-          </div>
-          <h3>GitHub Copilot 指标新增按 AI 采用阶段统计合并 PR 数：企业报告能看到 adoption phase 与 merge 的关系</h3>
-        </div>
-      </div>
-      <p>GitHub Changelog 宣布，在此前 Copilot usage metrics API 的 AI adoption phase cohorts 基础上，enterprise 与 organization 报告新增按采用阶段统计的合并 PR 总数。新字段 `total_pull_requests_merged` 会显示某一天由对应 adoption phase 用户合并的 PR 数量。</p>
-      <div class="hotspot-card__why">
-        <strong>为什么值得关注</strong>
-        <p>AI 采用指标如果只看使用人数，很容易高估真实研发影响。把 adoption phase 和合并 PR 放在一起后，团队可以观察补全、Agent、multi-agent 等不同使用阶段是否真的进入交付链路；但它仍不是质量指标，必须和 review、测试失败率、回滚和人工复核结合解读。</p>
-      </div>
-      <p class="hotspot-card__idea">候选：Copilot 采用阶段、合并 PR 与研发指标解读清单，结合旧指标文章后再扩写</p>
-      <a class="text-link" href="https://github.blog/changelog/2026-06-26-track-total-merges-by-adoption-phase-in-enterprise-and-organization-reports/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+      <p class="hotspot-card__idea">候选：Claude Code 2.1.195 下怎样回看会话、恢复任务和复核权限入口</p>
+      <a class="text-link" href="https://code.claude.com/docs/en/changelog#2-1-195" target="_blank" rel="noreferrer">查看来源：Claude Code Changelog</a>
     </article>
 <!-- STATIC_HOME_HOTSPOTS_END -->
       </div>
@@ -154,6 +154,23 @@
           <div class="recommend-grid" data-recommendations>
             <!-- STATIC_HOME_RECOMMENDATIONS_START -->
 <article class="article-card reveal">
+      <a class="article-card__media article-card__media--ai" href="articles/qwen-code-0193-agent-stability-checklist.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <strong>AI 编程</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>AI 编程</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-28">2026年6月28日</time>
+        </div>
+        <h3><a href="articles/qwen-code-0193-agent-stability-checklist.html">Qwen Code v0.19.3：新手怎样验收 WebFetch、流式超时、Skills 与 MCP 的稳定性更新</a></h3>
+        <p>QwenLM/qwen-code 在 2026 年 6 月 28 日发布 v0.19.3，集中更新 WebFetch JSON 回退、OpenAI 流式管线空闲超时、Skills 使用统计、自动生成 Skills 持久化确认、MCP 配置热更新、工具展示分组、团队记忆层和 Web Shell 体验。对新手来说，这不是只看版本号的升级，而是一次终端 Agent 稳定性验收：先做只读任务，再验证联网抓取、长响应、Skills 写入、MCP 重连和工具日志是否能被人工复核。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
       <a class="article-card__media article-card__media--github" href="articles/vercel-eve-agent-runs-observability-guide.html">
         <span class="article-card__badge">推荐</span>
         <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
@@ -203,23 +220,6 @@
         <p>Vercel 在 2026 年 6 月 25 日发布 AI SDK 7，定位从模型调用和聊天基础能力扩展到生产级 Agent 平台。官方同时给出两条破坏性要求：Node.js 22 起步、必须使用 ESM imports。对新手来说，这次升级不适合直接在主分支运行 npm update，而应该先做运行时、导入方式、工具权限、长任务持久化和观测记录的升级清单，再用一个低风险分支验证真实接口。</p>
       </div>
     </article>
-
-    <article class="article-card reveal">
-      <a class="article-card__media article-card__media--github" href="articles/cloudflare-ai-search-cache-freshness-guide.html">
-        <span class="article-card__badge">推荐</span>
-        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 建站 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
-        <strong>AI 建站</strong>
-      </a>
-      <div class="article-card__body">
-        <div class="meta-row">
-          <span>AI 建站</span>
-          <span>9 分钟</span>
-          <time datetime="2026-06-24">2026年6月24日</time>
-        </div>
-        <h3><a href="articles/cloudflare-ai-search-cache-freshness-guide.html">Cloudflare AI Search 相似缓存新鲜度：新手怎样给站内 AI 搜索设置 TTL、清理缓存和验收答案</a></h3>
-        <p>Cloudflare 在 2026 年 6 月 24 日更新 AI Search 相似缓存控制：缓存默认从固定 30 天改为使用实例的 cache_ttl，默认 48 小时，并支持按需清理实例缓存。对新手站长来说，这不是单纯的性能开关，而是站内 AI 搜索的“答案新鲜度”控制点：资料更新频繁时要缩短 TTL，发布关键内容后要主动清理缓存，并用请求结果和响应头确认用户拿到的是新答案。</p>
-      </div>
-    </article>
 <!-- STATIC_HOME_RECOMMENDATIONS_END -->
           </div>
         </section>
@@ -235,6 +235,22 @@
           <div class="latest-list" data-home-latest>
             <!-- STATIC_HOME_LATEST_START -->
 <article class="latest-item reveal">
+      <a class="latest-thumb latest-thumb--github" href="articles/cloudflare-ai-search-cache-freshness-guide.html">
+        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 建站 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';">
+        <span>AI 建站</span>
+      </a>
+      <div>
+        <h3><a href="articles/cloudflare-ai-search-cache-freshness-guide.html">Cloudflare AI Search 相似缓存新鲜度：新手怎样给站内 AI 搜索设置 TTL、清理缓存和验收答案</a></h3>
+        <p>Cloudflare 在 2026 年 6 月 24 日更新 AI Search 相似缓存控制：缓存默认从固定 30 天改为使用实例的 cache_ttl，默认 48 小时，并支持按需清理实例缓存。对新手站长来说，这不是单纯的性能开关，而是站内 AI 搜索的“答案新鲜度”控制点：资料更新频繁时要缩短 TTL，发布关键内容后要主动清理缓存，并用请求结果和响应头确认用户拿到的是新答案。</p>
+        <div class="meta-row">
+          <span>AI 建站</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-24">2026年6月24日</time>
+        </div>
+      </div>
+    </article>
+
+    <article class="latest-item reveal">
       <a class="latest-thumb latest-thumb--ai" href="articles/github-copilot-cli-terminal-interface-guide.html">
         <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';">
         <span>AI 编程</span>
@@ -278,22 +294,6 @@
           <span>AI 编程</span>
           <span>10 分钟</span>
           <time datetime="2026-06-22">2026年6月22日</time>
-        </div>
-      </div>
-    </article>
-
-    <article class="latest-item reveal">
-      <a class="latest-thumb latest-thumb--github" href="articles/checkmarx-ai-supply-chain-mcp-security-guide.html">
-        <img class="visual-icon visual-icon--thumb" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';">
-        <span>AI 安全</span>
-      </a>
-      <div>
-        <h3><a href="articles/checkmarx-ai-supply-chain-mcp-security-guide.html">Checkmarx AI Supply Chain 与 MCP Server：新手怎样给 AI 代码资产做安全盘点</a></h3>
-        <p>Checkmarx One 3.60 在 2026 年 6 月 21 日把 MCP Server 和 AI Supply Chain scanner 推到 GA：开发者可以在 Claude、Cursor、Windsurf、Kiro、Copilot Chat 等 IDE 或 AI 助手里进入安全工作流，同时让仓库扫描识别模型、AI SDK、AI Agent、MCP client/server 等资产。新手更应该先把它理解成 AI 资产清点与权限治理入口，而不是让聊天窗口直接替代安全复核。</p>
-        <div class="meta-row">
-          <span>AI 安全</span>
-          <span>10 分钟</span>
-          <time datetime="2026-06-21">2026年6月21日</time>
         </div>
       </div>
     </article>
@@ -387,6 +387,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260628-hotspots"></script>
+  <script src="assets/app.js?v=20260629-hotspots"></script>
 </body>
 </html>

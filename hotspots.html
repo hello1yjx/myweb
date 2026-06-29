@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260628-hotspots">
+  <link rel="stylesheet" href="assets/styles.css?v=20260629-hotspots">
 </head>
 <body>
   <header class="site-header">
@@ -76,6 +76,66 @@
       <div class="hotspot-grid" data-hotspot-list>
         <!-- STATIC_HOTSPOTS_START -->
 <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 编程</span>
+            <time datetime="2026-06-29">2026年6月29日</time>
+          </div>
+          <h3>GitHub Copilot Opus 4.6 (fast) 退役日到来：组织需要提前切到 Opus 4.8 Fast 或其它可用模型</h3>
+        </div>
+      </div>
+      <p>GitHub Changelog 此前公告，Copilot 中的 Opus 4.6 (fast) 将在 2026 年 6 月 29 日下线，并建议需要相近延迟体验的用户迁移到 Opus 4.8 Fast。对企业和团队来说，今天是一次模型可用性和默认策略核对点。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>模型退役不只是下拉框少一个选项。团队如果把某个模型写进 IDE 设置、CLI 脚本、代码审查流程或教学文档，就要检查默认模型、组织策略、失败回退和使用者提示；新手也应学会把“模型名”当作可变依赖，而不是固定不变的能力承诺。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：Copilot 模型退役前怎样核对组织默认值、脚本配置和回退模型</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-06-18-upcoming-deprecation-of-opus-4-6-fast" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 终端 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 终端</span>
+            <time datetime="2026-06-28">2026年6月28日</time>
+          </div>
+          <h3>Qwen Code v0.19.3 发布：WebFetch、流式超时、Skills、MCP 与工具日志稳定性集中增强</h3>
+        </div>
+      </div>
+      <p>QwenLM/qwen-code 发布 v0.19.3，包含 WebFetch JSON fallback、OpenAI streaming inactivity timeout、skill usage stats、自动生成 Skills 持久化确认、MCP server live reconcile、TUI 工具展示分组、Web Shell 资源浏览和团队记忆层等改动。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这类版本最适合新手建立终端 Agent 升级验收习惯：先跑只读任务，再分别验证网页抓取、长响应超时、Skills 写入确认、MCP 配置热更新和工具日志可读性；不要把新版本直接用于会修改生产状态的自动任务。</p>
+      </div>
+      <p class="hotspot-card__idea">已扩写：Qwen Code v0.19.3 升级后怎样验收 WebFetch、流式超时、Skills 与 MCP</p>
+      <a class="text-link" href="https://github.com/QwenLM/qwen-code/releases/tag/v0.19.3" target="_blank" rel="noreferrer">查看来源：Qwen Code GitHub Release</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="终端 Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>终端 Agent</span>
+            <time datetime="2026-06-26">2026年6月26日</time>
+          </div>
+          <h3>Claude Code 2.1.195 更新：会话历史、权限发现和 prompt caching 指标继续补强</h3>
+        </div>
+      </div>
+      <p>Claude Code changelog 显示，2.1.195 在 6 月 26 日发布，更新包括 TUI 中会话与历史搜索、从 TUI 恢复对话、更清晰的 `/permissions` 相关命令，以及 usage UI 中的 prompt caching 指标可见性。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>终端 Agent 的可恢复性和权限可见性会直接影响长任务体验。新手升级后应验证能否按会话历史找到旧任务、恢复上下文是否准确、权限入口是否容易理解，并把 prompt caching 指标作为成本和上下文复盘的一部分，而不是只看最终回答。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：Claude Code 2.1.195 下怎样回看会话、恢复任务和复核权限入口</p>
+      <a class="text-link" href="https://code.claude.com/docs/en/changelog#2-1-195" target="_blank" rel="noreferrer">查看来源：Claude Code Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
         <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI Agent 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <div>
@@ -233,6 +293,46 @@
       </div>
       <p class="hotspot-card__idea">候选：Durable Objects jurisdiction、数据位置和边缘状态迁移的入门核对表</p>
       <a class="text-link" href="https://developers.cloudflare.com/changelog/post/2026-06-26-durable-objects-us-jurisdiction/" target="_blank" rel="noreferrer">查看来源：Cloudflare Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="自动化 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>自动化</span>
+            <time datetime="2026-06-25">2026年6月25日</time>
+          </div>
+          <h3>GitHub Actions 步骤支持并行运行：CI 可以把独立检查拆成同一 job 内的并发步骤</h3>
+        </div>
+      </div>
+      <p>GitHub Changelog 宣布，Actions steps 现在可以并行运行。工作流作者可以把彼此独立的步骤放进同一 job 的并行执行结构，减少串行等待，同时保留 job 级上下文和后续汇总。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这对测试、构建、lint 和安全扫描很实用，但新手不能简单把所有步骤都并行化。应先确认步骤之间没有文件、缓存、环境变量或服务端口依赖，再设置失败汇总和日志命名，否则并发会让 CI 更快失败也更难排查。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：GitHub Actions 并行 steps 下怎样区分独立检查、共享缓存和失败日志</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-06-25-actions-steps-can-now-be-run-in-parallel" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="开源安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>开源安全</span>
+            <time datetime="2026-06-25">2026年6月25日</time>
+          </div>
+          <h3>npm 为 high-impact accounts 增加预防性账号保护：敏感变更会触发临时安全限制</h3>
+        </div>
+      </div>
+      <p>GitHub Changelog 宣布，npm 会在检测到 high-impact accounts 的敏感账号变更时增加临时预防性保护。这类账号负责注册表中广泛使用的包，新机制面向账号接管风险，帮助保护关键包维护者与依赖用户。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>包管理安全不只发生在发布命令那一刻。维护热门包、内部包或构建脚本的团队，应把账号邮箱、2FA、token、发布权限和紧急撤销流程列为日常检查；依赖方也要关注维护者账号风险，而不是只盯 package-lock 版本号。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：npm 维护者账号、2FA、token 和发布权限的入门安全检查清单</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-06-25-npm-adds-preventive-account-protection-for-high-impact-accounts" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
     </article>
 
     <article class="hotspot-card reveal">
@@ -2953,6 +3053,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260628-hotspots"></script>
+  <script src="assets/app.js?v=20260629-hotspots"></script>
 </body>
 </html>
