@@ -4,7 +4,7 @@ const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const appPath = path.join(root, "assets", "app.js");
-const version = "20260629-resources-projects";
+const version = "20260629-contact-projects";
 const siteUrl = "https://hello1yjx.github.io";
 
 function loadSiteRuntime() {
@@ -62,6 +62,21 @@ function replaceRegion(fileName, marker, content) {
   fs.writeFileSync(
     filePath,
     normalizeText(source.replace(pattern, `${start}\n${content.trim()}\n${end}`)),
+    "utf8"
+  );
+}
+
+function replaceFirstMatch(fileName, pattern, content) {
+  const filePath = path.join(root, fileName);
+  const source = fs.readFileSync(filePath, "utf8");
+
+  if (!pattern.test(source)) {
+    throw new Error(`Missing replace target in ${fileName}`);
+  }
+
+  fs.writeFileSync(
+    filePath,
+    normalizeText(source.replace(pattern, content.trim())),
     "utf8"
   );
 }
@@ -271,6 +286,19 @@ function main() {
   runtime.document.querySelector = (selector) => selector === "[data-resource-list]" ? resourceNode : null;
   runtime.injectResourcesPage();
   replaceRegion("resources.html", "STATIC_RESOURCES", resourceNode.innerHTML);
+
+  const projectNode = { innerHTML: "" };
+  runtime.document.querySelector = (selector) => selector === "[data-project-list]" ? projectNode : null;
+  runtime.injectProjectsPage();
+  replaceFirstMatch(
+    "projects.html",
+    /<section class="section">\s*<div class="project-grid"(?: data-project-list)?>([\s\S]*?)<\/div>\s*<\/section>/,
+    `<section class="section">
+      <div class="project-grid" data-project-list>
+        ${projectNode.innerHTML.trim()}
+      </div>
+    </section>`
+  );
 
   replaceRegion("index.html", "STATIC_HOME_HOTSPOTS", runtime.getHomeShowreelHotspots().map(runtime.buildHomeHotspotShowreelCard).join(""));
   replaceRegion("index.html", "STATIC_HOME_RESOURCE_STRIP", data.downloads.slice(0, 5).map(runtime.buildHomeResourceStripItem).join(""));

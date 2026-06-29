@@ -38,6 +38,8 @@ const projectPage = nodes["[data-project-list]"].innerHTML;
 const homeResourceStrip = nodes["[data-home-resource-strip]"].innerHTML;
 const homeCategories = nodes["[data-home-categories]"].innerHTML;
 const indexSource = fs.readFileSync(path.join(root, "index.html"), "utf8");
+const projectsSource = fs.readFileSync(path.join(root, "projects.html"), "utf8");
+const contactSource = fs.readFileSync(path.join(root, "contact.html"), "utf8");
 const checks = [];
 
 function check(name, condition) {
@@ -69,6 +71,9 @@ check("homepage categories show current pack count", homeCategories.includes(Str
 check("homepage has one resource download section", (indexSource.match(/data-home-resource-strip/g) || []).length === 1 && !indexSource.includes("data-download-rank"));
 check("project data includes new maintenance entries", data.projects.some((item) => item.id === "official-tool-navigation") && data.projects.some((item) => item.id === "open-source-release-kit"));
 check("project page links to updated resource sections", projectPage.includes("resources.html#official-resources") && projectPage.includes("resources.html#resource-downloads"));
+check("static project page renders current project count", (projectsSource.match(/class="project-card/g) || []).length >= data.projects.length);
+check("static project page includes new project titles", projectsSource.includes("官方工具导航与核验入口") && projectsSource.includes("开源项目发布检查包"));
+check("contact page includes appreciation QR images", contactSource.includes("assets/images/wechat-qr.jpg") && contactSource.includes("assets/images/alipay-qr.jpg"));
 
 for (const item of data.downloads) {
   const filePath = path.join(root, item.link);
