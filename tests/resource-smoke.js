@@ -6,8 +6,10 @@ const root = path.resolve(__dirname, "..");
 const nodes = {
   "[data-resource-list]": { innerHTML: "" },
   "[data-project-list]": { innerHTML: "" },
+  "[data-project-detail]": { innerHTML: "" },
   "[data-home-stats]": { innerHTML: "" },
   "[data-home-categories]": { innerHTML: "" },
+  "[data-home-practice]": { innerHTML: "" },
   "[data-home-resource-strip]": { innerHTML: "" }
 };
 
@@ -21,7 +23,8 @@ const context = {
       return nodes[selector] || null;
     }
   },
-  window: {}
+  window: { location: { search: "" } },
+  URLSearchParams
 };
 
 vm.createContext(context);
@@ -31,10 +34,14 @@ vm.runInContext(`${appSource};globalThis.__siteData=siteData;`, context);
 context.injectResourcesPage();
 context.injectProjectsPage();
 context.injectHomePage();
+context.window.location.search = "?id=official-tool-navigation";
+context.injectProjectDetail();
 
 const data = context.__siteData;
 const resourcePage = nodes["[data-resource-list]"].innerHTML;
 const projectPage = nodes["[data-project-list]"].innerHTML;
+const projectDetail = nodes["[data-project-detail]"].innerHTML;
+const homePractice = nodes["[data-home-practice]"].innerHTML;
 const homeResourceStrip = nodes["[data-home-resource-strip]"].innerHTML;
 const homeCategories = nodes["[data-home-categories]"].innerHTML;
 const indexSource = fs.readFileSync(path.join(root, "index.html"), "utf8");
@@ -66,13 +73,18 @@ check("new download packs are present", newDownloadIds.every((id) => data.downlo
 check("new official links are present", officialResourceLinks.every((link) => data.resources.some((item) => item.link === link)));
 check("resource page no longer renders every post", !resourcePage.includes("post-card"));
 check("download cards include direct download attributes", (resourcePage.match(/ download/g) || []).length >= data.downloads.length);
+check("download cards include previews before download", data.downloads.every((item) => item.preview && item.preview.length >= 2) && (resourcePage.match(/下载前预览/g) || []).length >= data.downloads.length);
 check("homepage resource strip links to a real ZIP", homeResourceStrip.includes("downloads/ai-tool-source-verification-kit.zip"));
+check("homepage practice module links latest source and toolkit", homePractice.includes(data.hotspots[0].sourceUrl) && homePractice.includes("downloads/ai-tool-source-verification-kit.zip"));
 check("homepage categories show current pack count", homeCategories.includes(String(data.downloads.length)));
 check("homepage has one resource download section", (indexSource.match(/data-home-resource-strip/g) || []).length === 1 && !indexSource.includes("data-download-rank"));
 check("project data includes new maintenance entries", data.projects.some((item) => item.id === "official-tool-navigation") && data.projects.some((item) => item.id === "open-source-release-kit"));
 check("project page links to updated resource sections", projectPage.includes("resources.html#official-resources") && projectPage.includes("resources.html#resource-downloads"));
+check("project cards include evidence links", data.projects.every((item) => item.evidence && item.evidence.length >= 2) && (projectPage.match(/可核验证据/g) || []).length >= data.projects.length);
+check("project detail includes evidence links", projectDetail.includes("可核验证据") && projectDetail.includes("10 个官方入口"));
 check("static project page renders current project count", (projectsSource.match(/class="project-card/g) || []).length >= data.projects.length);
 check("static project page includes new project titles", projectsSource.includes("官方工具导航与核验入口") && projectsSource.includes("开源项目发布检查包"));
+check("static project page includes evidence labels", projectsSource.includes("可核验证据") && projectsSource.includes("10 个官方入口"));
 check("contact page includes appreciation QR images", contactSource.includes("assets/images/wechat-qr.jpg") && contactSource.includes("assets/images/alipay-qr.jpg"));
 
 for (const item of data.downloads) {

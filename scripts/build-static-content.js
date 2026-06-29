@@ -4,7 +4,7 @@ const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const appPath = path.join(root, "assets", "app.js");
-const version = "20260629-contact-projects";
+const version = "20260629-engagement-modules";
 const siteUrl = "https://hello1yjx.github.io";
 
 function loadSiteRuntime() {
@@ -302,6 +302,7 @@ function main() {
 
   replaceRegion("index.html", "STATIC_HOME_HOTSPOTS", runtime.getHomeShowreelHotspots().map(runtime.buildHomeHotspotShowreelCard).join(""));
   replaceRegion("index.html", "STATIC_HOME_RESOURCE_STRIP", data.downloads.slice(0, 5).map(runtime.buildHomeResourceStripItem).join(""));
+  replaceRegion("index.html", "STATIC_HOME_PRACTICE", runtime.buildHomePracticeCard(runtime.getHomePractice()));
   replaceRegion("index.html", "STATIC_HOME_RECOMMENDATIONS", posts.filter((post) => post.featured).slice(0, 4).map(runtime.buildPostCard).join(""));
   replaceRegion("index.html", "STATIC_HOME_LATEST", posts.slice(4, 8).map(runtime.buildLatestItem).join(""));
 

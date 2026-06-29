@@ -7,6 +7,7 @@ const appSource = fs.readFileSync(path.join(root, "assets", "app.js"), "utf8");
 const stylesSource = fs.readFileSync(path.join(root, "assets", "styles.css"), "utf8");
 const nodes = {
   "[data-hotspots-preview]": { innerHTML: "" },
+  "[data-home-practice]": { innerHTML: "" },
   "[data-home-resource-strip]": { innerHTML: "" },
   "[data-hotspot-list]": { innerHTML: "" },
   "[data-post-list]": { innerHTML: "" },
@@ -139,6 +140,13 @@ check(
 check(
   "homepage resource strip renders newest five downloads",
   data.downloads.slice(0, 5).every((item) => nodes["[data-home-resource-strip]"].innerHTML.includes(item.name))
+);
+check(
+  "homepage practice turns newest hotspot into one action",
+  nodes["[data-home-practice]"].innerHTML.includes("今天 10 分钟能学什么") &&
+    nodes["[data-home-practice]"].innerHTML.includes(data.hotspots[0].title) &&
+    nodes["[data-home-practice]"].innerHTML.includes(data.hotspots[0].sourceUrl) &&
+    nodes["[data-home-practice]"].innerHTML.includes("downloads/ai-tool-source-verification-kit.zip")
 );
 
 context.injectHotspotsPage();

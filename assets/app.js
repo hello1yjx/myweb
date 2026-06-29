@@ -4850,6 +4850,7 @@ git push origin main`,
       pitch: "适合试用 AI 编程、建站、效率工具前，先做一次低风险来源核验。",
       format: "ZIP · 4 个文件",
       includes: ["来源核验清单", "工具评估 CSV", "核验记录模板"],
+      preview: ["source-checklist.md：按来源、权限、数据边界逐项核对", "tool-evaluation.csv：记录工具用途、试用任务和结论", "source-record-template.md：保留一次完整核验记录"],
       updated: "2026-06-29",
       cta: "下载核验表",
       link: "downloads/ai-tool-source-verification-kit.zip"
@@ -4863,6 +4864,7 @@ git push origin main`,
       pitch: "适合课程作品、个人工具和学习项目发布到 GitHub 前逐项检查。",
       format: "ZIP · 4 个文件",
       includes: ["发布检查清单", "项目介绍模板", "维护记录 CSV"],
+      preview: ["release-checklist.md：检查 README、许可证、运行步骤和发布说明", "project-page-template.md：快速整理项目介绍页", "maintenance-log.csv：记录版本、验证环境和下一次维护重点"],
       updated: "2026-06-29",
       cta: "下载发布包",
       link: "downloads/open-source-project-release-kit.zip"
@@ -4876,6 +4878,7 @@ git push origin main`,
       pitch: "适合个人主页、作品集、博客和资料站发布前逐项确认。",
       format: "ZIP · 4 个文件",
       includes: ["上线检查表", "页面清单 CSV", "发布记录模板"],
+      preview: ["launch-checklist.md：覆盖内容、移动端、搜索、性能和部署", "pages.csv：列出页面状态和负责人", "release-note-template.md：记录上线版本与回滚点"],
       updated: "2026-06-06",
       cta: "下载检查表",
       link: "downloads/website-launch-checklist.zip"
@@ -4889,6 +4892,7 @@ git push origin main`,
       pitch: "适合刚开始版本控制、经常忘记命令或担心误操作的新手。",
       format: "ZIP · 4 个文件",
       includes: ["中文速查表", "提交模板", "gitignore 模板"],
+      preview: ["git-cheatsheet.md：常用命令和安全恢复思路", "commit-template.txt：写清楚变更目的与验证结果", "starter.gitignore：适合前端和文档项目的基础忽略规则"],
       updated: "2026-06-06",
       cta: "下载速查包",
       link: "downloads/git-github-cheatsheet.zip"
@@ -4902,6 +4906,7 @@ git push origin main`,
       pitch: "适合建立稳定编辑习惯，不依赖一次安装大量扩展。",
       format: "ZIP · 3 个文件",
       includes: ["settings.json", "扩展选择清单", "代码片段"],
+      preview: ["settings.json：保守通用的工作区设置", "extensions.md：按用途选择少量必要扩展", "snippets.code-snippets：常用 HTML 和 Markdown 片段"],
       updated: "2026-06-06",
       cta: "下载配置包",
       link: "downloads/vscode-starter-config.zip"
@@ -4915,6 +4920,7 @@ git push origin main`,
       pitch: "重点不是堆高级词，而是把目标、限制、验收和人工确认写清楚。",
       format: "ZIP · 3 个文件",
       includes: ["6 类提示词模板", "结果复核清单", "任务说明模板"],
+      preview: ["prompt-templates.md：学习、诊断、实现、写作和整理模板", "review-checklist.md：检查输出来源、限制和遗漏", "task-brief.md：把目标、边界和验收写清楚"],
       updated: "2026-06-06",
       cta: "下载模板包",
       link: "downloads/ai-task-prompt-templates.zip"
@@ -4928,6 +4934,7 @@ git push origin main`,
       pitch: "包含低中高风险操作矩阵，适合自动化和 AI 编程任务开始前使用。",
       format: "ZIP · 3 个文件",
       includes: ["安全检查表", "审批矩阵 CSV", "异常记录模板"],
+      preview: ["agent-safety-checklist.md：区分只读、修改和高风险操作", "approval-matrix.csv：为命令、文件和外部服务设置审批", "incident-log-template.md：记录异常、回滚和复盘"],
       updated: "2026-06-06",
       cta: "下载安全包",
       link: "downloads/ai-agent-safety-checklist.zip"
@@ -4941,6 +4948,7 @@ git push origin main`,
       pitch: "适合第一次练习个人主页或作品集，并附带发布前修改清单。",
       format: "ZIP · 4 个文件",
       includes: ["响应式页面", "移动端菜单", "发布清单"],
+      preview: ["index.html：可直接修改的个人主页结构", "styles.css：响应式布局和基础视觉样式", "publish-checklist.md：发布前逐项检查标题、链接和移动端"],
       updated: "2026-06-06",
       cta: "下载网站模板",
       link: "downloads/static-site-starter.zip"
@@ -6536,6 +6544,11 @@ git push origin main`,
       stack: "官方文档 / 工具核验",
       status: "持续维护",
       link: "resources.html#official-resources",
+      evidence: [
+        { label: "10 个官方入口", url: "resources.html#official-resources" },
+        { label: "AI 工具核验表", url: "resources.html#resource-downloads" },
+        { label: "资源检查脚本", url: "resources.html" }
+      ],
       body: `
         <p>工具入口优先选择官方文档、官方仓库或长期维护的原始资料，避免把来源不清的教程当成权威依据。</p>
         <p>配套的 AI 工具来源核验表可以帮助新手在试用前记录来源、权限、数据边界和验收结论。</p>
@@ -6548,6 +6561,11 @@ git push origin main`,
       stack: "GitHub / README / Release",
       status: "新增资料包",
       link: "resources.html#resource-downloads",
+      evidence: [
+        { label: "发布检查包 ZIP", url: "downloads/open-source-project-release-kit.zip" },
+        { label: "资源下载页", url: "resources.html#resource-downloads" },
+        { label: "项目页静态卡片", url: "projects.html" }
+      ],
       body: `
         <p>资料包面向课程作品、个人工具和站内案例，强调读者能按 README 从头运行、能看懂许可证，也能追踪版本变化。</p>
         <p>复杂团队项目仍需要更完整的 issue 模板、贡献指南、CI 和安全披露流程；本站只提供新手可操作的基础检查。</p>
@@ -6560,6 +6578,11 @@ git push origin main`,
       stack: "HTML / CSS / JavaScript",
       status: "已上线",
       link: "posts.html",
+      evidence: [
+        { label: "教程列表", url: "posts.html" },
+        { label: "最新静态文章", url: "articles/qwen-code-0193-agent-stability-checklist.html" },
+        { label: "站点地图", url: "sitemap.xml" }
+      ],
       body: `
         <p>文章列表和每篇详情页都包含可直接抓取的正文，不依赖浏览器执行脚本后才显示内容。</p>
         <p>每篇文章使用唯一标题、描述、canonical、发布日期和官方来源链接，并在 sitemap 中提供稳定入口。</p>
@@ -6572,6 +6595,11 @@ git push origin main`,
       stack: "原创资料 / 学习路线",
       status: "已上线",
       link: "resources.html",
+      evidence: [
+        { label: "8 个原创包", url: "resources.html#resource-downloads" },
+        { label: "6 个学习专题", url: "resources.html#learning-paths" },
+        { label: "官方精选资料", url: "resources.html#official-resources" }
+      ],
       body: `
         <p>每个下载包都包含 README 和可编辑文件，读者可以直接检查内容并用于个人学习、课堂教学或团队内部使用。</p>
         <p>外部资料只链接到官方入口，本站不重新打包版权不明的第三方内容。</p>
@@ -6584,6 +6612,11 @@ git push origin main`,
       stack: "来源核验 / 内容维护",
       status: "每日维护",
       link: "hotspots.html",
+      evidence: [
+        { label: "热点核验档案", url: "hotspots.html" },
+        { label: "首页最新 3 条", url: "index.html" },
+        { label: "内容标准", url: "editorial.html" }
+      ],
       body: `
         <p>热点只使用官方博客、官方 changelog、官方文档或项目 release 等一手来源，不使用无来源转载填充数量。</p>
         <p>扩写文章会明确区分官方事实与本站建议，并保留限制、风险和验证步骤。</p>
@@ -6728,6 +6761,16 @@ function buildLatestItem(post) {
 
 function buildDownloadCard(item) {
   const icon = getResourceIcon(item);
+  const preview = item.preview && item.preview.length
+    ? `
+        <div class="download-card__preview">
+          <strong>下载前预览</strong>
+          <ul>
+            ${item.preview.map((entry) => `<li>${entry}</li>`).join("")}
+          </ul>
+        </div>
+      `
+    : "";
 
   return `
     <article class="download-card reveal">
@@ -6748,6 +6791,7 @@ function buildDownloadCard(item) {
         <ul class="download-card__includes">
           ${item.includes.map((entry) => `<li>${entry}</li>`).join("")}
         </ul>
+        ${preview}
         <p class="download-card__pitch">${item.pitch}</p>
         <a class="button button--primary download-card__action" href="${item.link}" download>${item.cta}</a>
       </div>
@@ -6803,6 +6847,44 @@ function buildHotspotCard(item) {
 
 function getHomeShowreelHotspots() {
   return siteData.hotspots.slice(0, 3);
+}
+
+function getHomePractice() {
+  const hotspot = siteData.hotspots[0];
+  const download = byId(siteData.downloads, "ai-tool-source-verification-kit") || siteData.downloads[0];
+
+  return {
+    hotspot,
+    download,
+    title: "今天 10 分钟能学什么",
+    headline: `把「${hotspot.title}」变成一个可验证动作`,
+    summary: "不追热点名词，先学会核对来源、判断影响范围，再在自己的工具或项目里完成一个低风险检查。",
+    steps: [
+      "打开一手来源，只记录发布日期、影响对象和需要核对的配置。",
+      "用 AI 工具来源核验表检查权限、数据边界、费用或模型依赖。",
+      "在自己的项目里做一次只读验证，例如查看默认模型、配置项或日志。",
+      "写下结论：继续使用、暂缓使用，或需要回滚到原方案。"
+    ]
+  };
+}
+
+function buildHomePracticeCard(practice = getHomePractice()) {
+  return `
+    <div class="home-practice-card reveal">
+      <div class="home-practice-card__intro">
+        <p class="label">${practice.title}</p>
+        <h3>${practice.headline}</h3>
+        <p>${practice.summary}</p>
+      </div>
+      <ol class="home-practice-steps">
+        ${practice.steps.map((step) => `<li>${step}</li>`).join("")}
+      </ol>
+      <div class="home-practice-card__actions">
+        <a class="button button--primary" href="${practice.hotspot.sourceUrl}" target="_blank" rel="noreferrer">查看今日来源</a>
+        <a class="button button--secondary" href="${practice.download.link}" download>下载核验表</a>
+      </div>
+    </div>
+  `;
 }
 
 function buildHomeHotspotShowreelCard(item, index = 0) {
@@ -6929,6 +7011,7 @@ function getResourcePathPosts() {
 
 function buildProjectCard(project) {
   const icon = getProjectIcon(project);
+  const evidence = buildProjectEvidence(project.evidence);
 
   return `
     <article class="project-card reveal">
@@ -6943,9 +7026,23 @@ function buildProjectCard(project) {
         </div>
         <h3>${project.title}</h3>
         <p>${project.summary}</p>
+        ${evidence}
         <a class="text-link" href="${project.link}">查看对应成果</a>
       </div>
     </article>
+  `;
+}
+
+function buildProjectEvidence(items = []) {
+  if (!items.length) return "";
+
+  return `
+    <div class="project-evidence">
+      <span>可核验证据</span>
+      <div>
+        ${items.map((item) => `<a href="${item.url}">${item.label}</a>`).join("")}
+      </div>
+    </div>
   `;
 }
 
@@ -7030,6 +7127,7 @@ function injectHomePage() {
   const tags = document.querySelector("[data-home-tags]");
   const heroIcons = document.querySelector("[data-hero-icons]");
   const resourceStrip = document.querySelector("[data-home-resource-strip]");
+  const practice = document.querySelector("[data-home-practice]");
 
   if (stats) {
     stats.innerHTML = getHomeStats()
@@ -7115,6 +7213,10 @@ function injectHomePage() {
 
   if (resourceStrip) {
     resourceStrip.innerHTML = siteData.downloads.slice(0, 5).map(buildHomeResourceStripItem).join("");
+  }
+
+  if (practice) {
+    practice.innerHTML = buildHomePracticeCard();
   }
 }
 
@@ -7277,6 +7379,8 @@ function injectProjectDetail() {
   document.title = `${project.title} | ${siteData.site.name}`;
   if (description) description.setAttribute("content", project.summary);
 
+  const evidence = buildProjectEvidence(project.evidence);
+
   detail.innerHTML = `
     <header class="detail-hero">
       <span class="pill">项目展示</span>
@@ -7294,6 +7398,7 @@ function injectProjectDetail() {
       <div class="sidebar-card">
         <p class="label">项目说明</p>
         ${project.body}
+        ${evidence}
         <a class="button button--secondary" href="${project.link}">打开相关页面</a>
       </div>
     </section>
