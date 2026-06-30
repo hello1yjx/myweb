@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260629-engagement-modules">
+  <link rel="stylesheet" href="assets/styles.css?v=20260630-large-functions">
 </head>
 <body>
   <header class="site-header">
@@ -67,6 +67,23 @@
       <div class="content-grid" data-post-list>
         <!-- STATIC_POSTS_START -->
 <article class="article-card reveal">
+      <a class="article-card__media article-card__media--github" href="articles/vercel-large-functions-5gb-beta-checklist.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="云端部署 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <strong>云端部署</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>云端部署</span>
+          <span>9 分钟</span>
+          <time datetime="2026-06-30">2026年6月30日</time>
+        </div>
+        <h3><a href="articles/vercel-large-functions-5gb-beta-checklist.html">Vercel Large Functions 5GB Beta：新手怎样判断大依赖、AI 库和浏览器自动化能不能安全部署</a></h3>
+        <p>Vercel Changelog 显示，Vercel Functions 在 Fluid compute 上开始支持 Node.js 和 Python 函数最高 5GB 的包体积 Beta，相比原先 250MB 标准限制提升很大，面向 Python 数据与 AI 库、大型生成客户端、浏览器自动化依赖、图像视频处理包和共享代码较多的路由。新手不要把它理解成“可以不管包体积”，而应先确认项目是否真的超过标准限制、是否启用 Fluid compute、是否只在预览环境试开 `VERCEL_SUPPORT_LARGE_FUNCTIONS=1`，并核对 Secure Compute、Static IPs、运行时和成本边界。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
       <a class="article-card__media article-card__media--ai" href="articles/qwen-code-0193-agent-stability-checklist.html">
         <span class="article-card__badge">推荐</span>
         <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
@@ -1019,6 +1036,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260629-engagement-modules"></script>
+  <script src="assets/app.js?v=20260630-large-functions"></script>
 </body>
 </html>

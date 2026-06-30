@@ -29,6 +29,94 @@
   },
   posts: [
     {
+      id: "vercel-large-functions-5gb-beta-checklist",
+      title: "Vercel Large Functions 5GB Beta：新手怎样判断大依赖、AI 库和浏览器自动化能不能安全部署",
+      date: "2026-06-30",
+      category: "云端部署",
+      readTime: "9 分钟",
+      excerpt: "Vercel Changelog 显示，Vercel Functions 在 Fluid compute 上开始支持 Node.js 和 Python 函数最高 5GB 的包体积 Beta，相比原先 250MB 标准限制提升很大，面向 Python 数据与 AI 库、大型生成客户端、浏览器自动化依赖、图像视频处理包和共享代码较多的路由。新手不要把它理解成“可以不管包体积”，而应先确认项目是否真的超过标准限制、是否启用 Fluid compute、是否只在预览环境试开 `VERCEL_SUPPORT_LARGE_FUNCTIONS=1`，并核对 Secure Compute、Static IPs、运行时和成本边界。",
+      tags: ["Vercel Functions", "Fluid compute", "部署验收"],
+      featured: true,
+      intro: [
+        "很多新手遇到部署失败时，会先怀疑代码本身。实际在 AI 应用、Python 数据处理、Playwright 浏览器自动化、图像处理和大型 SDK 场景里，函数包体积也经常是失败原因。以前 Vercel Functions 的标准路径主要按 250MB（Python 为 500MB）限制思考，项目一旦把模型文件、浏览器依赖或大型二进制一起打进函数，就需要回到依赖边界、构建产物和运行时约束重新判断。",
+        "Vercel 这次把 Large Functions 放到 public beta：在 Fluid compute 上，Node.js 和 Python 函数可以部署最高 5GB 的未压缩包体积。这个变化对 AI 和自动化后端很有用，但它不是让每个函数都变大，也不是替代依赖裁剪。官方说明同时强调：新项目默认符合条件，旧项目可以用 `VERCEL_SUPPORT_LARGE_FUNCTIONS=1` 选择加入；只有超过标准限制的函数会走 Large Functions Beta；Secure Compute 和 Static IPs 目前不支持。"
+      ],
+      audience: [
+        "部署 AI 应用时遇到 Python 库、浏览器自动化依赖、图像视频处理包或大型生成客户端导致函数体积超限的新手开发者。",
+        "已经使用 Vercel Functions 和 Fluid compute，但还没有记录包体积、运行时、环境变量和预览验证步骤的个人站长或小团队。",
+        "准备把原本拆到外部服务的轻量后台任务迁回 Vercel，但需要先判断成本、运行时限制和回滚路径的人。"
+      ],
+      format: [
+        "适合整理成“包体积证据 / 是否需要 5GB / Fluid compute 状态 / 预览环境变量 / 部署标识 / 限制核对 / 回滚记录”的部署验收清单。",
+        "可配套一份函数依赖记录表，分别记录路由、运行时、最大依赖、构建产物大小、是否超过标准限制、是否触发 Large Functions Beta 和人工结论。"
+      ],
+      roadmap: [
+        "先确认问题真的是包体积。不要看到 5GB 就直接开启 Beta。先查看部署日志、构建输出和函数大小提示，区分是函数包体积超限、请求体 4.5MB 限制、内存不足、运行时间超限，还是外部依赖下载失败。",
+        "把每个函数的依赖拆开看。Large Functions 适合大型 Python 数据与 AI 库、浏览器自动化依赖、图像视频处理包、大型生成客户端和共享代码较多的路由；如果只是误把测试数据、缓存目录、训练产物或无关文件打进函数，优先用 includeFiles、excludeFiles 或框架 tracing 配置清理。",
+        "确认项目使用 Fluid compute。官方文档说明 Large Functions 需要 Fluid compute 并启用 Active CPU。新项目通常默认启用；旧项目可以在 Dashboard 的 Functions Settings 或 `vercel.json` 中核对 Fluid compute 状态，别只在本地猜测。",
+        "旧项目先只在预览环境打开。对已有项目，设置 `VERCEL_SUPPORT_LARGE_FUNCTIONS=1` 后重新部署即可选择加入；建议先把环境变量限制在 Preview，确认部署标识、函数运行、日志和成本观察都正常，再考虑 Production。",
+        "核对运行时和不支持场景。Large Functions 目前支持 Node.js 和 Python 函数，不支持 Secure Compute 或 Static IPs 项目。若项目依赖固定出口 IP、私有网络或安全隔离能力，就不能只看 5GB 上限，还要保留原来的部署方案或拆分架构。",
+        "部署后看 Dashboard 是否真的使用 Large Functions。官方 changelog 说明 Dashboard 会显示部署是否使用 Large Functions。新手要把这一步当作验收证据：如果函数仍低于标准限制，它应该继续走标准路径，而不是为了启用而启用。",
+        "最后写清楚回滚条件。比如预览环境冷启动变慢、成本异常、文件描述符或内存接近上限、Secure Compute/Static IPs 需求无法满足，就把 `VERCEL_SUPPORT_LARGE_FUNCTIONS` 改回 `0` 或移除，并继续做依赖裁剪或任务拆分。"
+      ],
+      officialLinks: [
+        {
+          label: "Vercel Changelog：Vercel Functions can now be up to 5GB in package size",
+          url: "https://vercel.com/changelog/vercel-functions-can-now-be-up-to-5-gb-in-package-size-7yAwSyCig0IQDXUIDistvS",
+          note: "说明 Node.js 和 Python Functions 在 Fluid compute 上进入最高 5GB 包体积 public beta，以及旧项目通过 `VERCEL_SUPPORT_LARGE_FUNCTIONS=1` 选择加入。"
+        },
+        {
+          label: "Vercel Docs：Functions Limits - Large functions Beta",
+          url: "https://vercel.com/docs/functions/limitations#large-functions-beta",
+          note: "列出标准 250MB / Python 500MB 限制、Large Functions 最高 5GB、支持运行时、启用方式和 Secure Compute / Static IPs 限制。"
+        },
+        {
+          label: "Vercel Docs：Fluid compute",
+          url: "https://vercel.com/docs/fluid-compute",
+          note: "解释 Fluid compute 的启用方式、Node.js / Python 支持、并发、bytecode caching、默认限制和设置优先级。"
+        }
+      ],
+      curatedLinks: [
+        "5GB 上限解决的是少数大依赖函数的部署边界，不是鼓励把所有文件都塞进函数包。",
+        "先在 Preview 环境用 `VERCEL_SUPPORT_LARGE_FUNCTIONS=1` 验证，再决定是否扩大到 Production。",
+        "Secure Compute、Static IPs、运行时、内存、文件描述符和请求体大小仍然是硬限制，不能只看包体积。",
+        "真正的验收证据应包括部署日志、Dashboard 标识、函数路径、触发样例、回滚条件和人工结论。"
+      ],
+      downloadIdeas: [
+        "建议整理一份 Vercel 函数包体积核验表，字段包括路由、运行时、最大依赖、构建产物大小、是否超过标准限制、是否启用 Beta、验证结果和回滚条件。",
+        "建议配一份部署日志摘录模板，把 Preview 部署 URL、函数运行结果、Dashboard 标识、错误码和人工结论放在同一页。"
+      ],
+      extraSections: [
+        {
+          title: "10 分钟预览环境验收清单",
+          items: [
+            "在部署日志中找到触发包体积问题的函数或路由，而不是只看项目总大小。",
+            "确认该函数是 Node.js 或 Python 运行时，并且项目已经启用 Fluid compute。",
+            "检查项目是否依赖 Secure Compute 或 Static IPs；如果依赖，先不要开启 Large Functions。",
+            "只在 Preview 环境设置 `VERCEL_SUPPORT_LARGE_FUNCTIONS=1`，重新部署一次。",
+            "打开 Vercel Dashboard，确认超过标准限制的函数是否显示 Large Functions 相关状态。",
+            "用一个低风险请求触发函数，记录响应、日志、耗时和错误码。",
+            "写下结论：保留 Beta、继续裁剪依赖，或回滚环境变量。"
+          ]
+        },
+        {
+          title: "常见误判",
+          items: [
+            "把请求体 4.5MB 限制误认为函数包体积限制。",
+            "把训练数据、缓存目录或浏览器下载产物打进函数，而没有先清理构建输入。",
+            "以为启用 5GB 后内存、时长、文件描述符和并发限制也会自动提高。",
+            "在 Production 直接开启 Beta，没有先用 Preview 记录部署和回滚证据。"
+          ]
+        },
+        {
+          title: "最小记录模板",
+          text: "下面是一份适合新手在 Preview 环境保留的核验记录。真实字段可以按项目调整，但要保留来源、限制和回滚结论。",
+          code: "source: Vercel Large Functions changelog\nfunction: api/report-export\nruntime: nodejs\ncurrent_size: 310MB uncompressed\nstandard_limit: 250MB\nfluid_compute: enabled\npreview_env: VERCEL_SUPPORT_LARGE_FUNCTIONS=1\nunsupported_features_checked:\n  secure_compute: no\n  static_ips: no\nverification:\n  deploy_status: pass\n  dashboard_large_function_marker: seen\n  sample_request: pass\n  rollback_plan: set VERCEL_SUPPORT_LARGE_FUNCTIONS=0",
+          language: "yaml"
+        }
+      ]
+    },
+    {
       id: "qwen-code-0193-agent-stability-checklist",
       title: "Qwen Code v0.19.3：新手怎样验收 WebFetch、流式超时、Skills 与 MCP 的稳定性更新",
       date: "2026-06-28",
@@ -5056,6 +5144,46 @@ git push origin main`,
   ],
   hotspots: [
     {
+      date: "2026-06-30",
+      tag: "云端部署",
+      title: "Vercel Functions 进入 5GB 包体积 Beta：AI 库、浏览器自动化和大型 Python 依赖有了新部署路径",
+      summary: "Vercel Changelog 宣布，Vercel Functions 在 Fluid compute 上支持 Node.js 和 Python 函数最高 5GB 的包体积 public beta，相比标准 250MB 限制显著提高。旧项目可通过 `VERCEL_SUPPORT_LARGE_FUNCTIONS=1` 选择加入，超过标准限制的函数才会走 Large Functions Beta。",
+      why: "这对 AI 后端、Python 数据库、浏览器自动化、图像视频处理和大型生成客户端很实用，但不能理解成“随便打包”。新手应先确认是否真是包体积超限，再核对 Fluid compute、运行时、Preview 环境变量、Dashboard 标识，以及 Secure Compute / Static IPs 暂不支持等限制。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/vercel-functions-can-now-be-up-to-5-gb-in-package-size-7yAwSyCig0IQDXUIDistvS",
+      articleIdea: "已扩写：Vercel Large Functions 5GB Beta 下怎样核对包体积、预览环境和回滚条件"
+    },
+    {
+      date: "2026-06-30",
+      tag: "AI 终端",
+      title: "Qwen Code 发布 v0.19.3-nightly.20260630：扩展创建、CUA driver、WebFetch 校验和工具展示继续预演",
+      summary: "QwenLM/qwen-code 的 6 月 30 日 nightly 预发布包含扩展创建技能、`@extension` 输入补全、qwen-cua-driver 集成、`QWEN_STREAM_IDLE_TIMEOUT_MS` 配置、WebFetch userinfo URL 校验、工具展示分组和多项 CI / Web Shell 稳定性修复。",
+      why: "nightly 版本适合跟进方向，不适合直接替代稳定版。新手可以把它当作观察清单：哪些能力会改变扩展、浏览器控制、WebFetch 安全校验和流式超时；真正项目仍应保留当前稳定版，先在示例仓库做只读验证和回滚记录。",
+      sourceLabel: "Qwen Code GitHub Release",
+      sourceUrl: "https://github.com/QwenLM/qwen-code/releases/tag/v0.19.3-nightly.20260630.e00fe6a27",
+      articleIdea: "候选：Qwen Code nightly 下扩展、CUA driver 和 WebFetch 安全校验的试跑清单"
+    },
+    {
+      date: "2026-06-29",
+      tag: "AI 编程",
+      title: "Claude Opus 4.8 fast mode 进入 GitHub Copilot 预览：企业管理员需要手动开启策略",
+      summary: "GitHub Changelog 宣布 Claude Opus 4.8 fast mode 开始在 GitHub Copilot 中渐进预览，面向 Copilot Pro+、Max、Business 和 Enterprise。它覆盖 VS Code、Visual Studio、Copilot CLI、cloud agent、Copilot app、github.com、移动端、JetBrains、Xcode 和 Eclipse 等入口。",
+      why: "fast mode 更适合交互式编码和 Agent 工作流，但 GitHub 同时说明它按 provider list pricing 计入 Usage Based Billing，Business 和 Enterprise 管理员还需要在 Copilot 设置中启用默认关闭的策略。团队应先核对模型选择、费用边界和默认回退，不要只看速度。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-29-claude-opus-4-8-fast-mode-is-now-in-preview-for-github-copilot/",
+      articleIdea: "候选：Copilot fast mode 预览前怎样核对模型策略、费用和 IDE 默认值"
+    },
+    {
+      date: "2026-06-29",
+      tag: "协作安全",
+      title: "GitHub 仓库可限制只有协作者创建 Issue：Issues、Comments、Discussions、Projects 和 Copilot 入口都会受影响",
+      summary: "GitHub Changelog 宣布，仓库管理员现在可以把 Issue 创建权限限制为拥有写权限的协作者。启用后，没有写权限的人无法从 Issues、Comments、Discussions、Projects 和 Copilot 等入口创建 Issue，设置路径位于 repository Settings 的 Features / Issues 区域。",
+      why: "这不是单纯的反垃圾开关，而是开源协作和 AI 辅助工作流的边界控制。对课程项目、个人工具和小团队来说，可以先判断是否需要公开 Issue；若改为 collaborators only，应同步说明反馈渠道，避免真实用户不知道该在哪里报告问题。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-29-restrict-issue-creation-to-collaborators-only/",
+      articleIdea: "候选：GitHub Issue 创建权限收紧后怎样保留反馈渠道和协作边界"
+    },
+    {
       date: "2026-06-29",
       tag: "AI 编程",
       title: "GitHub Copilot Opus 4.6 (fast) 退役日到来：组织需要提前切到 Opus 4.8 Fast 或其它可用模型",
@@ -6580,7 +6708,7 @@ git push origin main`,
       link: "posts.html",
       evidence: [
         { label: "教程列表", url: "posts.html" },
-        { label: "最新静态文章", url: "articles/qwen-code-0193-agent-stability-checklist.html" },
+        { label: "最新静态文章", url: "articles/vercel-large-functions-5gb-beta-checklist.html" },
         { label: "站点地图", url: "sitemap.xml" }
       ],
       body: `

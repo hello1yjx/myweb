@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260629-engagement-modules">
+  <link rel="stylesheet" href="assets/styles.css?v=20260630-large-functions">
 </head>
 <body>
   <header class="site-header">
@@ -76,6 +76,86 @@
       <div class="hotspot-grid" data-hotspot-list>
         <!-- STATIC_HOTSPOTS_START -->
 <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="云端部署 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>云端部署</span>
+            <time datetime="2026-06-30">2026年6月30日</time>
+          </div>
+          <h3>Vercel Functions 进入 5GB 包体积 Beta：AI 库、浏览器自动化和大型 Python 依赖有了新部署路径</h3>
+        </div>
+      </div>
+      <p>Vercel Changelog 宣布，Vercel Functions 在 Fluid compute 上支持 Node.js 和 Python 函数最高 5GB 的包体积 public beta，相比标准 250MB 限制显著提高。旧项目可通过 `VERCEL_SUPPORT_LARGE_FUNCTIONS=1` 选择加入，超过标准限制的函数才会走 Large Functions Beta。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这对 AI 后端、Python 数据库、浏览器自动化、图像视频处理和大型生成客户端很实用，但不能理解成“随便打包”。新手应先确认是否真是包体积超限，再核对 Fluid compute、运行时、Preview 环境变量、Dashboard 标识，以及 Secure Compute / Static IPs 暂不支持等限制。</p>
+      </div>
+      <p class="hotspot-card__idea">已扩写：Vercel Large Functions 5GB Beta 下怎样核对包体积、预览环境和回滚条件</p>
+      <a class="text-link" href="https://vercel.com/changelog/vercel-functions-can-now-be-up-to-5-gb-in-package-size-7yAwSyCig0IQDXUIDistvS" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 终端 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 终端</span>
+            <time datetime="2026-06-30">2026年6月30日</time>
+          </div>
+          <h3>Qwen Code 发布 v0.19.3-nightly.20260630：扩展创建、CUA driver、WebFetch 校验和工具展示继续预演</h3>
+        </div>
+      </div>
+      <p>QwenLM/qwen-code 的 6 月 30 日 nightly 预发布包含扩展创建技能、`@extension` 输入补全、qwen-cua-driver 集成、`QWEN_STREAM_IDLE_TIMEOUT_MS` 配置、WebFetch userinfo URL 校验、工具展示分组和多项 CI / Web Shell 稳定性修复。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>nightly 版本适合跟进方向，不适合直接替代稳定版。新手可以把它当作观察清单：哪些能力会改变扩展、浏览器控制、WebFetch 安全校验和流式超时；真正项目仍应保留当前稳定版，先在示例仓库做只读验证和回滚记录。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：Qwen Code nightly 下扩展、CUA driver 和 WebFetch 安全校验的试跑清单</p>
+      <a class="text-link" href="https://github.com/QwenLM/qwen-code/releases/tag/v0.19.3-nightly.20260630.e00fe6a27" target="_blank" rel="noreferrer">查看来源：Qwen Code GitHub Release</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 编程</span>
+            <time datetime="2026-06-29">2026年6月29日</time>
+          </div>
+          <h3>Claude Opus 4.8 fast mode 进入 GitHub Copilot 预览：企业管理员需要手动开启策略</h3>
+        </div>
+      </div>
+      <p>GitHub Changelog 宣布 Claude Opus 4.8 fast mode 开始在 GitHub Copilot 中渐进预览，面向 Copilot Pro+、Max、Business 和 Enterprise。它覆盖 VS Code、Visual Studio、Copilot CLI、cloud agent、Copilot app、github.com、移动端、JetBrains、Xcode 和 Eclipse 等入口。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>fast mode 更适合交互式编码和 Agent 工作流，但 GitHub 同时说明它按 provider list pricing 计入 Usage Based Billing，Business 和 Enterprise 管理员还需要在 Copilot 设置中启用默认关闭的策略。团队应先核对模型选择、费用边界和默认回退，不要只看速度。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：Copilot fast mode 预览前怎样核对模型策略、费用和 IDE 默认值</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-06-29-claude-opus-4-8-fast-mode-is-now-in-preview-for-github-copilot/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="协作安全 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>协作安全</span>
+            <time datetime="2026-06-29">2026年6月29日</time>
+          </div>
+          <h3>GitHub 仓库可限制只有协作者创建 Issue：Issues、Comments、Discussions、Projects 和 Copilot 入口都会受影响</h3>
+        </div>
+      </div>
+      <p>GitHub Changelog 宣布，仓库管理员现在可以把 Issue 创建权限限制为拥有写权限的协作者。启用后，没有写权限的人无法从 Issues、Comments、Discussions、Projects 和 Copilot 等入口创建 Issue，设置路径位于 repository Settings 的 Features / Issues 区域。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这不是单纯的反垃圾开关，而是开源协作和 AI 辅助工作流的边界控制。对课程项目、个人工具和小团队来说，可以先判断是否需要公开 Issue；若改为 collaborators only，应同步说明反馈渠道，避免真实用户不知道该在哪里报告问题。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：GitHub Issue 创建权限收紧后怎样保留反馈渠道和协作边界</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-06-29-restrict-issue-creation-to-collaborators-only/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
         <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <div>
@@ -3053,6 +3133,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260629-engagement-modules"></script>
+  <script src="assets/app.js?v=20260630-large-functions"></script>
 </body>
 </html>

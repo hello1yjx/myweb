@@ -4,7 +4,7 @@ const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const appPath = path.join(root, "assets", "app.js");
-const version = "20260629-engagement-modules";
+const version = "20260630-large-functions";
 const siteUrl = "https://hello1yjx.github.io";
 
 function loadSiteRuntime() {
@@ -79,6 +79,20 @@ function replaceFirstMatch(fileName, pattern, content) {
     normalizeText(source.replace(pattern, content.trim())),
     "utf8"
   );
+}
+
+function refreshRootAssetVersions() {
+  for (const file of fs.readdirSync(root).filter((name) => name.endsWith(".html"))) {
+    const filePath = path.join(root, file);
+    const source = fs.readFileSync(filePath, "utf8");
+    const updated = source
+      .replace(/(assets\/styles\.css\?v=)[^"]+/g, `$1${version}`)
+      .replace(/(assets\/app\.js\?v=)[^"]+/g, `$1${version}`);
+
+    if (updated !== source) {
+      fs.writeFileSync(filePath, normalizeText(updated), "utf8");
+    }
+  }
 }
 
 function articleTemplate(runtime, post, relatedPosts) {
@@ -305,6 +319,8 @@ function main() {
   replaceRegion("index.html", "STATIC_HOME_PRACTICE", runtime.buildHomePracticeCard(runtime.getHomePractice()));
   replaceRegion("index.html", "STATIC_HOME_RECOMMENDATIONS", posts.filter((post) => post.featured).slice(0, 4).map(runtime.buildPostCard).join(""));
   replaceRegion("index.html", "STATIC_HOME_LATEST", posts.slice(4, 8).map(runtime.buildLatestItem).join(""));
+
+  refreshRootAssetVersions();
 
   fs.writeFileSync(path.join(root, "sitemap.xml"), buildSitemap(posts), "utf8");
   console.log(`Generated ${posts.length} static articles and refreshed crawlable page content.`);

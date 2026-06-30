@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vercel Large Functions 5GB Beta：新手怎样判断大依赖、AI 库和浏览器自动化能不能安全部署 | 学习资源库</title>
+  <meta name="description" content="Vercel Changelog 显示，Vercel Functions 在 Fluid compute 上开始支持 Node.js 和 Python 函数最高 5GB 的包体积 Beta，相比原先 250MB 标准限制提升很大，面向 Python 数据与 AI 库、大型生成客户端、浏览器自动化依赖、图像视频处理包和共享代码较多的路由。新手不要把它理解成“可以不管包体积”，而应先确认项目是否真的超过标准限制、是否启用 Fluid compute、是否只在预览环境试开 `VERCEL_SUPPORT_LARGE_FUNCTIONS=1`，并核对 Secure Compute、Static IPs、运行时和成本边界。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/vercel-large-functions-5gb-beta-checklist.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Vercel Large Functions 5GB Beta：新手怎样判断大依赖、AI 库和浏览器自动化能不能安全部署","description":"Vercel Changelog 显示，Vercel Functions 在 Fluid compute 上开始支持 Node.js 和 Python 函数最高 5GB 的包体积 Beta，相比原先 250MB 标准限制提升很大，面向 Python 数据与 AI 库、大型生成客户端、浏览器自动化依赖、图像视频处理包和共享代码较多的路由。新手不要把它理解成“可以不管包体积”，而应先确认项目是否真的超过标准限制、是否启用 Fluid compute、是否只在预览环境试开 `VERCEL_SUPPORT_LARGE_FUNCTIONS=1`，并核对 Secure Compute、Static IPs、运行时和成本边界。","datePublished":"2026-06-30","dateModified":"2026-06-30","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/vercel-large-functions-5gb-beta-checklist.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260630-large-functions">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-book-line.png" alt="" width="36" height="33"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <button class="menu-button" data-menu-button aria-expanded="false" aria-label="切换导航菜单">☰</button>
+      <nav class="site-nav" data-mobile-nav>
+        <a href="../index.html">首页</a>
+        <a class="is-active" href="../posts.html" aria-current="page">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../resources.html#official-resources">工具导航</a>
+        <a href="../hotspots.html">技术资讯</a>
+        <a href="../projects.html">开源项目</a>
+        <a href="../about.html">关于我们</a>
+      </nav>
+      <form class="header-search" action="../posts.html" method="get">
+        <input type="search" name="q" placeholder="搜索教程、资源、工具或关键词...">
+        <button type="submit" aria-label="搜索">/</button>
+      </form>
+      <a class="header-github" href="https://github.com/hello1yjx/hello1yjx.github.io" target="_blank" rel="noreferrer" aria-label="GitHub">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="" width="24" height="24">
+      </a>
+      <a class="header-cta" href="../posts.html">开始学习</a>
+    </div>
+  </header>
+
+  <main class="page-shell section article-page">
+    <header class="detail-hero">
+      <span class="pill">云端部署</span>
+      <h1>Vercel Large Functions 5GB Beta：新手怎样判断大依赖、AI 库和浏览器自动化能不能安全部署</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-30">2026年6月30日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Vercel Changelog 显示，Vercel Functions 在 Fluid compute 上开始支持 Node.js 和 Python 函数最高 5GB 的包体积 Beta，相比原先 250MB 标准限制提升很大，面向 Python 数据与 AI 库、大型生成客户端、浏览器自动化依赖、图像视频处理包和共享代码较多的路由。新手不要把它理解成“可以不管包体积”，而应先确认项目是否真的超过标准限制、是否启用 Fluid compute、是否只在预览环境试开 `VERCEL_SUPPORT_LARGE_FUNCTIONS=1`，并核对 Secure Compute、Static IPs、运行时和成本边界。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://vercel.com/changelog/vercel-functions-can-now-be-up-to-5-gb-in-package-size-7yAwSyCig0IQDXUIDistvS" target="_blank" rel="noreferrer">Vercel Changelog：Vercel Functions can now be up to 5GB in package size</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>很多新手遇到部署失败时，会先怀疑代码本身。实际在 AI 应用、Python 数据处理、Playwright 浏览器自动化、图像处理和大型 SDK 场景里，函数包体积也经常是失败原因。以前 Vercel Functions 的标准路径主要按 250MB（Python 为 500MB）限制思考，项目一旦把模型文件、浏览器依赖或大型二进制一起打进函数，就需要回到依赖边界、构建产物和运行时约束重新判断。</p><p>Vercel 这次把 Large Functions 放到 public beta：在 Fluid compute 上，Node.js 和 Python 函数可以部署最高 5GB 的未压缩包体积。这个变化对 AI 和自动化后端很有用，但它不是让每个函数都变大，也不是替代依赖裁剪。官方说明同时强调：新项目默认符合条件，旧项目可以用 `VERCEL_SUPPORT_LARGE_FUNCTIONS=1` 选择加入；只有超过标准限制的函数会走 Large Functions Beta；Secure Compute 和 Static IPs 目前不支持。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>部署 AI 应用时遇到 Python 库、浏览器自动化依赖、图像视频处理包或大型生成客户端导致函数体积超限的新手开发者。</li><li>已经使用 Vercel Functions 和 Fluid compute，但还没有记录包体积、运行时、环境变量和预览验证步骤的个人站长或小团队。</li><li>准备把原本拆到外部服务的轻量后台任务迁回 Vercel，但需要先判断成本、运行时限制和回滚路径的人。</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先确认问题真的是包体积。不要看到 5GB 就直接开启 Beta。先查看部署日志、构建输出和函数大小提示，区分是函数包体积超限、请求体 4.5MB 限制、内存不足、运行时间超限，还是外部依赖下载失败。</li><li>把每个函数的依赖拆开看。Large Functions 适合大型 Python 数据与 AI 库、浏览器自动化依赖、图像视频处理包、大型生成客户端和共享代码较多的路由；如果只是误把测试数据、缓存目录、训练产物或无关文件打进函数，优先用 includeFiles、excludeFiles 或框架 tracing 配置清理。</li><li>确认项目使用 Fluid compute。官方文档说明 Large Functions 需要 Fluid compute 并启用 Active CPU。新项目通常默认启用；旧项目可以在 Dashboard 的 Functions Settings 或 `vercel.json` 中核对 Fluid compute 状态，别只在本地猜测。</li><li>旧项目先只在预览环境打开。对已有项目，设置 `VERCEL_SUPPORT_LARGE_FUNCTIONS=1` 后重新部署即可选择加入；建议先把环境变量限制在 Preview，确认部署标识、函数运行、日志和成本观察都正常，再考虑 Production。</li><li>核对运行时和不支持场景。Large Functions 目前支持 Node.js 和 Python 函数，不支持 Secure Compute 或 Static IPs 项目。若项目依赖固定出口 IP、私有网络或安全隔离能力，就不能只看 5GB 上限，还要保留原来的部署方案或拆分架构。</li><li>部署后看 Dashboard 是否真的使用 Large Functions。官方 changelog 说明 Dashboard 会显示部署是否使用 Large Functions。新手要把这一步当作验收证据：如果函数仍低于标准限制，它应该继续走标准路径，而不是为了启用而启用。</li><li>最后写清楚回滚条件。比如预览环境冷启动变慢、成本异常、文件描述符或内存接近上限、Secure Compute/Static IPs 需求无法满足，就把 `VERCEL_SUPPORT_LARGE_FUNCTIONS` 改回 `0` 或移除，并继续做依赖裁剪或任务拆分。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://vercel.com/changelog/vercel-functions-can-now-be-up-to-5-gb-in-package-size-7yAwSyCig0IQDXUIDistvS" target="_blank" rel="noreferrer">Vercel Changelog：Vercel Functions can now be up to 5GB in package size</a>
+              <span>：说明 Node.js 和 Python Functions 在 Fluid compute 上进入最高 5GB 包体积 public beta，以及旧项目通过 `VERCEL_SUPPORT_LARGE_FUNCTIONS=1` 选择加入。</span>
+            </li>
+
+            <li>
+              <a href="https://vercel.com/docs/functions/limitations#large-functions-beta" target="_blank" rel="noreferrer">Vercel Docs：Functions Limits - Large functions Beta</a>
+              <span>：列出标准 250MB / Python 500MB 限制、Large Functions 最高 5GB、支持运行时、启用方式和 Secure Compute / Static IPs 限制。</span>
+            </li>
+
+            <li>
+              <a href="https://vercel.com/docs/fluid-compute" target="_blank" rel="noreferrer">Vercel Docs：Fluid compute</a>
+              <span>：解释 Fluid compute 的启用方式、Node.js / Python 支持、并发、bytecode caching、默认限制和设置优先级。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>5GB 上限解决的是少数大依赖函数的部署边界，不是鼓励把所有文件都塞进函数包。</li><li>先在 Preview 环境用 `VERCEL_SUPPORT_LARGE_FUNCTIONS=1` 验证，再决定是否扩大到 Production。</li><li>Secure Compute、Static IPs、运行时、内存、文件描述符和请求体大小仍然是硬限制，不能只看包体积。</li><li>真正的验收证据应包括部署日志、Dashboard 标识、函数路径、触发样例、回滚条件和人工结论。</li></ul>
+
+        <h2>10 分钟预览环境验收清单</h2>
+
+        <ul><li>在部署日志中找到触发包体积问题的函数或路由，而不是只看项目总大小。</li><li>确认该函数是 Node.js 或 Python 运行时，并且项目已经启用 Fluid compute。</li><li>检查项目是否依赖 Secure Compute 或 Static IPs；如果依赖，先不要开启 Large Functions。</li><li>只在 Preview 环境设置 `VERCEL_SUPPORT_LARGE_FUNCTIONS=1`，重新部署一次。</li><li>打开 Vercel Dashboard，确认超过标准限制的函数是否显示 Large Functions 相关状态。</li><li>用一个低风险请求触发函数，记录响应、日志、耗时和错误码。</li><li>写下结论：保留 Beta、继续裁剪依赖，或回滚环境变量。</li></ul>
+
+
+
+        <h2>常见误判</h2>
+
+        <ul><li>把请求体 4.5MB 限制误认为函数包体积限制。</li><li>把训练数据、缓存目录或浏览器下载产物打进函数，而没有先清理构建输入。</li><li>以为启用 5GB 后内存、时长、文件描述符和并发限制也会自动提高。</li><li>在 Production 直接开启 Beta，没有先用 Preview 记录部署和回滚证据。</li></ul>
+
+
+
+        <h2>最小记录模板</h2>
+        <p>下面是一份适合新手在 Preview 环境保留的核验记录。真实字段可以按项目调整，但要保留来源、限制和回滚结论。</p>
+
+
+        <pre><code class="language-yaml">source: Vercel Large Functions changelog
+function: api/report-export
+runtime: nodejs
+current_size: 310MB uncompressed
+standard_limit: 250MB
+fluid_compute: enabled
+preview_env: VERCEL_SUPPORT_LARGE_FUNCTIONS=1
+unsupported_features_checked:
+  secure_compute: no
+  static_ips: no
+verification:
+  deploy_status: pass
+  dashboard_large_function_marker: seen
+  sample_request: pass
+  rollback_plan: set VERCEL_SUPPORT_LARGE_FUNCTIONS=0</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Vercel Functions</span><span>Fluid compute</span><span>部署验收</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="cloudflare-ai-search-cache-freshness-guide.html">Cloudflare AI Search 相似缓存新鲜度：新手怎样给站内 AI 搜索设置 TTL、清理缓存和验收答案</a><a href="github-copilot-cli-terminal-interface-guide.html">GitHub Copilot CLI 新终端界面：新手怎样把 Issue、PR、MCP、Skills 和插件放进一个可控工作台</a><a href="openai-codex-long-running-workflow-guide.html">OpenAI Codex 长任务工作流：新手怎样把一次提示变成可核验的持续任务</a><a href="qwen-code-0185-terminal-agent-safety-guide.html">Qwen Code v0.18.5：新手怎样给终端 AI Agent 做升级前安全检查</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var button = document.querySelector("[data-menu-button]");
+      var nav = document.querySelector("[data-mobile-nav]");
+      if (!button || !nav) return;
+      button.addEventListener("click", function () {
+        var expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        nav.classList.toggle("site-nav--open", !expanded);
+      });
+    });
+  </script>
+</body>
+</html>
