@@ -7746,7 +7746,10 @@ function setActiveNavigation() {
   });
   const fallbackMap = {
     "post.html": "posts.html",
-    "project.html": "projects.html"
+    "project.html": "projects.html",
+    "contact.html": "about.html",
+    "editorial.html": "about.html",
+    "privacy.html": "about.html"
   };
   const fallbackPath = pathname.includes("/articles/") ? "posts.html" : fallbackMap[currentPath];
   const fallbackMatch = navLinks.find((link) => {
