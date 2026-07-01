@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vercel Services Beta：新手怎样把前端、后端和内部调用放进同一个项目验收 | 学习资源库</title>
+  <meta name="description" content="Vercel 在 2026 年 6 月 30 日宣布 Services 可用，允许在一个 Vercel 项目中部署多个前端和后端服务，并通过 `vercel.json` 的 `services`、顶层 `rewrites` 和内部 `bindings` 管理公开入口与服务间调用。它适合 Next.js 前端加 FastAPI、Express、Go 或 Rust 后端的 polyglot monorepo，但不是把所有应用混在一起的理由。新手应先画清楚公开路由、内部绑定、环境变量、`vercel dev` 本地验证、计费口径和回滚边界，再决定是否迁移。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/vercel-services-polyglot-monorepo-checklist.html">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Vercel Services Beta：新手怎样把前端、后端和内部调用放进同一个项目验收","description":"Vercel 在 2026 年 6 月 30 日宣布 Services 可用，允许在一个 Vercel 项目中部署多个前端和后端服务，并通过 `vercel.json` 的 `services`、顶层 `rewrites` 和内部 `bindings` 管理公开入口与服务间调用。它适合 Next.js 前端加 FastAPI、Express、Go 或 Rust 后端的 polyglot monorepo，但不是把所有应用混在一起的理由。新手应先画清楚公开路由、内部绑定、环境变量、`vercel dev` 本地验证、计费口径和回滚边界，再决定是否迁移。","datePublished":"2026-06-30","dateModified":"2026-06-30","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/vercel-services-polyglot-monorepo-checklist.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260701-vercel-services">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-book-line.png" alt="" width="36" height="33"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <button class="menu-button" data-menu-button aria-expanded="false" aria-label="切换导航菜单">☰</button>
+      <nav class="site-nav" data-mobile-nav>
+        <a href="../index.html">首页</a>
+        <a class="is-active" href="../posts.html" aria-current="page">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../resources.html#official-resources">工具导航</a>
+        <a href="../hotspots.html">技术资讯</a>
+        <a href="../projects.html">开源项目</a>
+        <a href="../about.html">关于我们</a>
+      </nav>
+      <form class="header-search" action="../posts.html" method="get">
+        <input type="search" name="q" placeholder="搜索教程、资源、工具或关键词...">
+        <button type="submit" aria-label="搜索">/</button>
+      </form>
+      <a class="header-github" href="https://github.com/hello1yjx/hello1yjx.github.io" target="_blank" rel="noreferrer" aria-label="GitHub">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="" width="24" height="24">
+      </a>
+      <a class="header-cta" href="../posts.html">开始学习</a>
+    </div>
+  </header>
+
+  <main class="page-shell section article-page">
+    <header class="detail-hero">
+      <span class="pill">云端部署</span>
+      <h1>Vercel Services Beta：新手怎样把前端、后端和内部调用放进同一个项目验收</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-06-30">2026年6月30日</time>
+        <span>10 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>Vercel 在 2026 年 6 月 30 日宣布 Services 可用，允许在一个 Vercel 项目中部署多个前端和后端服务，并通过 `vercel.json` 的 `services`、顶层 `rewrites` 和内部 `bindings` 管理公开入口与服务间调用。它适合 Next.js 前端加 FastAPI、Express、Go 或 Rust 后端的 polyglot monorepo，但不是把所有应用混在一起的理由。新手应先画清楚公开路由、内部绑定、环境变量、`vercel dev` 本地验证、计费口径和回滚边界，再决定是否迁移。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://vercel.com/changelog/run-multiple-frameworks-in-one-project-with-vercel-services" target="_blank" rel="noreferrer">Vercel Changelog：Run multiple frameworks in one project with Vercel Services</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>很多小项目一开始只有一个 Next.js 应用，后来逐渐长出 Python API、独立后台、队列消费者或 Go 小服务。最常见的做法是把它们拆成多个 Vercel 项目，再用环境变量和公开域名互相调用。这样能跑起来，但新人很快会遇到三个问题：预览环境不容易对齐、服务间调用走公网、一个改动需要分别看多个部署和日志。</p><p>Vercel Services 的重点是把这些服务放回同一个项目里管理。官方说明显示，每个 service 是独立构建单元，顶层 `rewrites` 决定哪些请求能从公网进入某个 service，`bindings` 则让服务端代码通过注入的 URL 私下调用另一个 service。这个能力仍处于 Beta，所以更适合先做低风险验收，而不是直接把生产单体拆成很多服务。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>已经有前端和一个独立后端，希望在同一个仓库、同一个 Vercel 项目里一起预览、构建和回滚的新手开发者。</li><li>正在用 Next.js 加 FastAPI、Express、Hono、Go 或 Rust 服务，但还没有固定服务边界和公开路由记录的小团队。</li><li>准备让 AI Agent 或自动化脚本改部署配置，需要一份能人工复核的 `vercel.json` 验收清单的人。</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先判断是否真的需要 Services。如果只是一个 Next.js 应用加少量 API routes，继续使用单项目结构更简单；Services 更适合 polyglot monorepo、多后端、不同依赖和不同构建步骤并存的场景。</li><li>给每个服务起稳定名称。不要用 `app1`、`api2` 这类临时名字，建议用 `web`、`admin`、`api`、`worker`、`inventory` 这类能看出职责的名称，因为顶层 rewrite、binding 和日志都会引用它们。</li><li>把公网入口全部写在顶层 `rewrites`。官方文档说明，服务只有被顶层 rewrite 指向时才接收公开流量；没有 rewrite 的服务默认不从公网进入。新手要把 `/api/(.*)`、`/(.*)` 等入口逐条写清楚。</li><li>把内部调用改成 binding，不要硬编码预览域名。调用方 service 声明 `bindings` 后，Vercel 会注入目标 service 的 URL。这样 Preview 调 Preview、Production 调 Production，避免把某个固定 hostname 写死在代码里。</li><li>用 `vercel dev` 或 `vercel dev -L` 做本地验证。重点不是只看页面能否打开，而是确认绑定环境变量存在、前端能请求后端、内部服务没有被公网 rewrite 暴露，以及日志能按 service 过滤。</li><li>补上权限和鉴权。binding 只解决服务间可达性，不等于业务鉴权。即使目标服务没有公网入口，也要在服务代码里保留调用身份、请求签名或内部权限判断，尤其是订单、账户、文件和管理接口。</li><li>最后核对费用和限制。Services 的计算、服务间请求、返回数据和函数限制都有独立口径；如果一次页面请求会触发多个内部调用，就要记录调用链和成本预期，避免迁移后只看同一个域名而忽略后端请求数量。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://vercel.com/changelog/run-multiple-frameworks-in-one-project-with-vercel-services" target="_blank" rel="noreferrer">Vercel Changelog：Run multiple frameworks in one project with Vercel Services</a>
+              <span>：说明 Services 在 2026 年 6 月 30 日可用，支持同一项目部署多个前端和后端，并通过共享域名、私有调用、统一构建、预览和回滚管理。</span>
+            </li>
+
+            <li>
+              <a href="https://vercel.com/docs/services" target="_blank" rel="noreferrer">Vercel Docs：Services</a>
+              <span>：解释 Services Beta 的适用场景、`services` 配置、公开 rewrite、内部 binding、本地开发和容器 runtime。</span>
+            </li>
+
+            <li>
+              <a href="https://vercel.com/docs/services/routing" target="_blank" rel="noreferrer">Vercel Docs：Services routing</a>
+              <span>：说明顶层 `rewrites` 如何决定公网请求进入哪个 service，以及 service 内部路由如何继续处理请求。</span>
+            </li>
+
+            <li>
+              <a href="https://vercel.com/docs/services/bindings" target="_blank" rel="noreferrer">Vercel Docs：Service bindings</a>
+              <span>：说明 binding 如何让一个 service 的服务端代码通过注入 URL 访问另一个 service，并提醒 binding 不等于业务鉴权。</span>
+            </li>
+
+            <li>
+              <a href="https://vercel.com/docs/services/pricing" target="_blank" rel="noreferrer">Vercel Docs：Services Pricing and Limits</a>
+              <span>：列出 Services 的计算、服务间请求、数据传输和函数限制口径。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>Services 适合有清晰边界的多服务项目，不适合把还没拆清楚的代码强行塞进多个目录。</li><li>顶层 `rewrites` 是公网入口清单；没有 rewrite 的服务默认不接收公网请求。</li><li>`bindings` 解决内部可达和预览环境对齐，但业务鉴权仍要写在服务代码里。</li><li>迁移前要记录服务间调用次数、日志过滤方式、回滚步骤和费用口径。</li></ul>
+
+        <h2>10 分钟最小验收清单</h2>
+
+        <ul><li>列出项目里真正需要独立构建的前端和后端，不要为了新能力拆分单一应用。</li><li>给每个 service 写清楚 `root`，必要时补上 `framework`、`runtime` 或 `entrypoint`。</li><li>只把需要公网访问的 service 写进顶层 `rewrites`。</li><li>内部后端优先通过 `bindings` 被调用，不要写死预览域名。</li><li>运行 `vercel dev` 或 `vercel dev -L`，确认绑定环境变量在服务端函数中可用。</li><li>用一个请求链路验证前端、公开 API 和内部服务的日志都能定位到对应 service。</li><li>写下回滚方式：恢复旧 `vercel.json`、拆回独立项目，或只保留单 service。</li></ul>
+
+
+
+        <h2>常见误判</h2>
+
+        <ul><li>以为写了 `services` 后所有目录都会自动对外公开，实际公开入口仍由顶层 rewrite 决定。</li><li>把 binding 当成鉴权机制，忽略了服务代码里的身份校验和权限判断。</li><li>在代码里写死某个 Preview URL，导致分支预览调用到另一个环境。</li><li>只看一个域名部署成功，没有统计 service-to-service 调用、Fast Origin Transfer 和函数限制。</li></ul>
+
+
+
+        <h2>最小配置记录模板</h2>
+        <p>下面的模板适合先放进测试仓库验证。真实项目应按业务路由、鉴权和费用口径补充字段。</p>
+
+
+        <pre><code class="language-yaml">services:
+  web:
+    root: frontend/
+    framework: nextjs
+    public_rewrite: /(.*)
+  api:
+    root: backend/
+    framework: fastapi
+    entrypoint: main:app
+    public_rewrite: /api/(.*)
+  inventory:
+    root: services/inventory/
+    framework: express
+    public_rewrite: none
+bindings:
+  api -&gt; inventory:
+    env: INVENTORY_URL
+checks:
+  local_dev: vercel dev -L
+  public_routes_reviewed: true
+  internal_auth_reviewed: true
+  rollback: restore previous vercel.json</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>Vercel Services</span><span>Monorepo</span><span>部署验收</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-ai-sdk-7-upgrade-agent-checklist.html">Vercel AI SDK 7：新手怎样判断项目能不能升级到 Node 22、ESM 和生产级 Agent</a><a href="cloudflare-ai-search-cache-freshness-guide.html">Cloudflare AI Search 相似缓存新鲜度：新手怎样给站内 AI 搜索设置 TTL、清理缓存和验收答案</a><a href="github-copilot-cli-terminal-interface-guide.html">GitHub Copilot CLI 新终端界面：新手怎样把 Issue、PR、MCP、Skills 和插件放进一个可控工作台</a><a href="openai-codex-long-running-workflow-guide.html">OpenAI Codex 长任务工作流：新手怎样把一次提示变成可核验的持续任务</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var button = document.querySelector("[data-menu-button]");
+      var nav = document.querySelector("[data-mobile-nav]");
+      if (!button || !nav) return;
+      button.addEventListener("click", function () {
+        var expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        nav.classList.toggle("site-nav--open", !expanded);
+      });
+    });
+  </script>
+</body>
+</html>

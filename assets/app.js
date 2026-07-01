@@ -9,7 +9,7 @@
     bio: "把官方入口、学习路线、示例代码和可扩展资料放进同一张地图里，让第一次来的人也能马上知道从哪里开始。",
     heroStats: [
       { value: "6", label: "原创下载包" },
-      { value: "55", label: "新手专题" },
+      { value: "56", label: "新手专题" },
       { value: "持续", label: "更新与核验" }
     ],
     valueCards: [
@@ -28,6 +28,104 @@
     ]
   },
   posts: [
+    {
+      id: "vercel-services-polyglot-monorepo-checklist",
+      title: "Vercel Services Beta：新手怎样把前端、后端和内部调用放进同一个项目验收",
+      date: "2026-06-30",
+      category: "云端部署",
+      readTime: "10 分钟",
+      excerpt: "Vercel 在 2026 年 6 月 30 日宣布 Services 可用，允许在一个 Vercel 项目中部署多个前端和后端服务，并通过 `vercel.json` 的 `services`、顶层 `rewrites` 和内部 `bindings` 管理公开入口与服务间调用。它适合 Next.js 前端加 FastAPI、Express、Go 或 Rust 后端的 polyglot monorepo，但不是把所有应用混在一起的理由。新手应先画清楚公开路由、内部绑定、环境变量、`vercel dev` 本地验证、计费口径和回滚边界，再决定是否迁移。",
+      tags: ["Vercel Services", "Monorepo", "部署验收"],
+      featured: true,
+      intro: [
+        "很多小项目一开始只有一个 Next.js 应用，后来逐渐长出 Python API、独立后台、队列消费者或 Go 小服务。最常见的做法是把它们拆成多个 Vercel 项目，再用环境变量和公开域名互相调用。这样能跑起来，但新人很快会遇到三个问题：预览环境不容易对齐、服务间调用走公网、一个改动需要分别看多个部署和日志。",
+        "Vercel Services 的重点是把这些服务放回同一个项目里管理。官方说明显示，每个 service 是独立构建单元，顶层 `rewrites` 决定哪些请求能从公网进入某个 service，`bindings` 则让服务端代码通过注入的 URL 私下调用另一个 service。这个能力仍处于 Beta，所以更适合先做低风险验收，而不是直接把生产单体拆成很多服务。"
+      ],
+      audience: [
+        "已经有前端和一个独立后端，希望在同一个仓库、同一个 Vercel 项目里一起预览、构建和回滚的新手开发者。",
+        "正在用 Next.js 加 FastAPI、Express、Hono、Go 或 Rust 服务，但还没有固定服务边界和公开路由记录的小团队。",
+        "准备让 AI Agent 或自动化脚本改部署配置，需要一份能人工复核的 `vercel.json` 验收清单的人。"
+      ],
+      format: [
+        "适合整理成“服务名称 / root / runtime 或 framework / 是否公开 / 顶层 rewrite / 绑定环境变量 / 本地验证 / 费用口径 / 回滚条件”的部署表。",
+        "可配套一份最小 `vercel.json` 样例，把公开入口和内部调用分开标记，方便代码审查时确认没有误把内部服务暴露到公网。"
+      ],
+      roadmap: [
+        "先判断是否真的需要 Services。如果只是一个 Next.js 应用加少量 API routes，继续使用单项目结构更简单；Services 更适合 polyglot monorepo、多后端、不同依赖和不同构建步骤并存的场景。",
+        "给每个服务起稳定名称。不要用 `app1`、`api2` 这类临时名字，建议用 `web`、`admin`、`api`、`worker`、`inventory` 这类能看出职责的名称，因为顶层 rewrite、binding 和日志都会引用它们。",
+        "把公网入口全部写在顶层 `rewrites`。官方文档说明，服务只有被顶层 rewrite 指向时才接收公开流量；没有 rewrite 的服务默认不从公网进入。新手要把 `/api/(.*)`、`/(.*)` 等入口逐条写清楚。",
+        "把内部调用改成 binding，不要硬编码预览域名。调用方 service 声明 `bindings` 后，Vercel 会注入目标 service 的 URL。这样 Preview 调 Preview、Production 调 Production，避免把某个固定 hostname 写死在代码里。",
+        "用 `vercel dev` 或 `vercel dev -L` 做本地验证。重点不是只看页面能否打开，而是确认绑定环境变量存在、前端能请求后端、内部服务没有被公网 rewrite 暴露，以及日志能按 service 过滤。",
+        "补上权限和鉴权。binding 只解决服务间可达性，不等于业务鉴权。即使目标服务没有公网入口，也要在服务代码里保留调用身份、请求签名或内部权限判断，尤其是订单、账户、文件和管理接口。",
+        "最后核对费用和限制。Services 的计算、服务间请求、返回数据和函数限制都有独立口径；如果一次页面请求会触发多个内部调用，就要记录调用链和成本预期，避免迁移后只看同一个域名而忽略后端请求数量。"
+      ],
+      officialLinks: [
+        {
+          label: "Vercel Changelog：Run multiple frameworks in one project with Vercel Services",
+          url: "https://vercel.com/changelog/run-multiple-frameworks-in-one-project-with-vercel-services",
+          note: "说明 Services 在 2026 年 6 月 30 日可用，支持同一项目部署多个前端和后端，并通过共享域名、私有调用、统一构建、预览和回滚管理。"
+        },
+        {
+          label: "Vercel Docs：Services",
+          url: "https://vercel.com/docs/services",
+          note: "解释 Services Beta 的适用场景、`services` 配置、公开 rewrite、内部 binding、本地开发和容器 runtime。"
+        },
+        {
+          label: "Vercel Docs：Services routing",
+          url: "https://vercel.com/docs/services/routing",
+          note: "说明顶层 `rewrites` 如何决定公网请求进入哪个 service，以及 service 内部路由如何继续处理请求。"
+        },
+        {
+          label: "Vercel Docs：Service bindings",
+          url: "https://vercel.com/docs/services/bindings",
+          note: "说明 binding 如何让一个 service 的服务端代码通过注入 URL 访问另一个 service，并提醒 binding 不等于业务鉴权。"
+        },
+        {
+          label: "Vercel Docs：Services Pricing and Limits",
+          url: "https://vercel.com/docs/services/pricing",
+          note: "列出 Services 的计算、服务间请求、数据传输和函数限制口径。"
+        }
+      ],
+      curatedLinks: [
+        "Services 适合有清晰边界的多服务项目，不适合把还没拆清楚的代码强行塞进多个目录。",
+        "顶层 `rewrites` 是公网入口清单；没有 rewrite 的服务默认不接收公网请求。",
+        "`bindings` 解决内部可达和预览环境对齐，但业务鉴权仍要写在服务代码里。",
+        "迁移前要记录服务间调用次数、日志过滤方式、回滚步骤和费用口径。"
+      ],
+      downloadIdeas: [
+        "建议整理一份 Vercel Services 迁移验收表，字段包括 service 名称、root、framework、公开 rewrite、binding env、是否需要鉴权、本地验证结果和回滚条件。",
+        "建议配一份 `vercel.json` 对照模板，把公开路由、内部绑定、运行时和费用备注放在同一页，方便 Pull Request 审查。"
+      ],
+      extraSections: [
+        {
+          title: "10 分钟最小验收清单",
+          items: [
+            "列出项目里真正需要独立构建的前端和后端，不要为了新能力拆分单一应用。",
+            "给每个 service 写清楚 `root`，必要时补上 `framework`、`runtime` 或 `entrypoint`。",
+            "只把需要公网访问的 service 写进顶层 `rewrites`。",
+            "内部后端优先通过 `bindings` 被调用，不要写死预览域名。",
+            "运行 `vercel dev` 或 `vercel dev -L`，确认绑定环境变量在服务端函数中可用。",
+            "用一个请求链路验证前端、公开 API 和内部服务的日志都能定位到对应 service。",
+            "写下回滚方式：恢复旧 `vercel.json`、拆回独立项目，或只保留单 service。"
+          ]
+        },
+        {
+          title: "常见误判",
+          items: [
+            "以为写了 `services` 后所有目录都会自动对外公开，实际公开入口仍由顶层 rewrite 决定。",
+            "把 binding 当成鉴权机制，忽略了服务代码里的身份校验和权限判断。",
+            "在代码里写死某个 Preview URL，导致分支预览调用到另一个环境。",
+            "只看一个域名部署成功，没有统计 service-to-service 调用、Fast Origin Transfer 和函数限制。"
+          ]
+        },
+        {
+          title: "最小配置记录模板",
+          text: "下面的模板适合先放进测试仓库验证。真实项目应按业务路由、鉴权和费用口径补充字段。",
+          code: "services:\n  web:\n    root: frontend/\n    framework: nextjs\n    public_rewrite: /(.*)\n  api:\n    root: backend/\n    framework: fastapi\n    entrypoint: main:app\n    public_rewrite: /api/(.*)\n  inventory:\n    root: services/inventory/\n    framework: express\n    public_rewrite: none\nbindings:\n  api -> inventory:\n    env: INVENTORY_URL\nchecks:\n  local_dev: vercel dev -L\n  public_routes_reviewed: true\n  internal_auth_reviewed: true\n  rollback: restore previous vercel.json",
+          language: "yaml"
+        }
+      ]
+    },
     {
       id: "vercel-large-functions-5gb-beta-checklist",
       title: "Vercel Large Functions 5GB Beta：新手怎样判断大依赖、AI 库和浏览器自动化能不能安全部署",
@@ -5143,6 +5241,56 @@ git push origin main`,
     "github-agentic-workflows-public-preview-guide"
   ],
   hotspots: [
+    {
+      date: "2026-07-01",
+      tag: "AI 终端",
+      title: "Qwen Code 发布 v0.19.3-nightly.20260701：自动压缩阈值、断点恢复、桌面语音和 safe-mode 继续预演",
+      summary: "QwenLM/qwen-code 的 7 月 1 日 nightly 预发布包含可配置 auto-compact threshold、不中断式恢复 turn、桌面端语音听写、Chrome extension daemon-direct 架构、`--safe-mode` 排障、MCP allowed/excluded glob、Web Shell 原始 diff 和多项 Windows / daemon 稳定性修复。",
+      why: "这是预发布版本，更适合作为终端 Agent 能力观察清单。新手可以先在示例仓库验证断点恢复、safe-mode、Web Shell diff、MCP glob 和 Windows shell tree 处理，不要把 nightly 直接用于会改生产状态的自动化任务。",
+      sourceLabel: "Qwen Code GitHub Release",
+      sourceUrl: "https://github.com/QwenLM/qwen-code/releases/tag/v0.19.3-nightly.20260701.a974594d7",
+      articleIdea: "候选：Qwen Code nightly 下断点恢复、safe-mode 和 MCP glob 的只读试跑清单"
+    },
+    {
+      date: "2026-06-30",
+      tag: "AI 终端",
+      title: "GitHub Copilot CLI v1.0.67 发布：Sonnet 5、沙箱切换、子 Agent 限制和 MCP OAuth 修复进入终端工作流",
+      summary: "GitHub Copilot CLI v1.0.67 的发布记录显示，本次更新加入 Claude Sonnet 5 支持，沙箱禁用会立即对本会话生效，子 Agent 会继承父级工具限制，并修复 Microsoft Entra vanity domain 后方 MCP OAuth 重新认证失败等问题。",
+      why: "这些改动影响终端 Agent 的权限、模型和长会话可靠性。新手升级后应先跑只读仓库任务，核对沙箱提示、子 Agent 工具边界、MCP 服务器重连和模型选择结果，再决定是否用于真实项目修改。",
+      sourceLabel: "GitHub Copilot CLI Release",
+      sourceUrl: "https://github.com/github/copilot-cli/releases/tag/v1.0.67",
+      articleIdea: "候选：Copilot CLI v1.0.67 升级后怎样复核沙箱、模型和 MCP 登录状态"
+    },
+    {
+      date: "2026-06-30",
+      tag: "云端部署",
+      title: "Vercel Services 可在一个项目内运行多个前端和后端：polyglot monorepo 有了统一预览与内部调用路径",
+      summary: "Vercel Changelog 宣布 Services 可用，允许在一个 Vercel 项目中部署多个前端和后端，服务通过共享域名、统一构建、预览和回滚协作；`vercel.json` 中的 `services` 定义服务，顶层 `rewrites` 控制公开入口，`bindings` 支持服务间内部调用。",
+      why: "这对 Next.js 前端加 FastAPI、Express、Go 或 Rust 后端的项目很实用，但它仍是 Beta 能力。新手要先区分公开 route 和内部 binding，确认 `vercel dev` 本地行为、服务间鉴权、计费口径和回滚条件，而不是只把多个目录放到同一个仓库。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/run-multiple-frameworks-in-one-project-with-vercel-services",
+      articleIdea: "已扩写：Vercel Services Beta 下怎样验收前端、后端、公开路由和内部调用"
+    },
+    {
+      date: "2026-06-30",
+      tag: "AI 编程",
+      title: "Claude Sonnet 5 在 GitHub Copilot 中正式可用：IDE、CLI、cloud agent 和移动端会逐步出现模型入口",
+      summary: "GitHub Changelog 宣布 Claude Sonnet 5 在 GitHub Copilot 中 GA，面向 Copilot Pro、Pro+、Max、Business 和 Enterprise 用户逐步开放，可在 VS Code、Visual Studio、Copilot CLI、cloud agent、GitHub Copilot App、github.com、移动端、JetBrains、Xcode 和 Eclipse 等入口选择。",
+      why: "新模型进入 Copilot 不是单纯换下拉框。个人用户应记录模型、任务类型和失败样例；Business 和 Enterprise 管理员还要在模型策略中启用访问，并核对 Usage Based Billing、Zero Data Retention 和团队默认模型说明。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-30-claude-sonnet-5-is-generally-available-for-github-copilot/",
+      articleIdea: "候选：Claude Sonnet 5 进入 Copilot 后怎样核对模型策略、费用和 IDE 默认值"
+    },
+    {
+      date: "2026-06-30",
+      tag: "代码质量",
+      title: "GitHub Code Quality 支持覆盖率合并保护：可用 branch ruleset 阻止测试覆盖率下降的 PR 合并",
+      summary: "GitHub Changelog 宣布，GitHub Code Quality 用户现在可以在 branch rulesets 中设置代码覆盖率合并保护，按最低覆盖率百分比、相对默认分支最大下降幅度或两者同时拦截 PR；也可以先用 evaluate mode 观察影响，再切换到 active mode。",
+      why: "这把测试覆盖率从报告指标推进到合并门禁。新手和小团队不应立即设过高阈值，而应先在 evaluate mode 记录基线、确认测试上传口径、观察误报，再决定哪些仓库和分支适合启用强制保护。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-06-30-github-code-coverage-merge-protection-for-pull-requests/",
+      articleIdea: "候选：GitHub 覆盖率合并保护下怎样设置基线、evaluate mode 和失败处理"
+    },
     {
       date: "2026-06-30",
       tag: "云端部署",

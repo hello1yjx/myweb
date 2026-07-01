@@ -4,7 +4,7 @@ const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const appPath = path.join(root, "assets", "app.js");
-const version = "20260630-large-functions";
+const version = "20260701-vercel-services";
 const siteUrl = "https://hello1yjx.github.io";
 
 function loadSiteRuntime() {

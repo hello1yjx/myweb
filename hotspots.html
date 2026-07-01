@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260630-large-functions">
+  <link rel="stylesheet" href="assets/styles.css?v=20260701-vercel-services">
 </head>
 <body>
   <header class="site-header">
@@ -76,6 +76,106 @@
       <div class="hotspot-grid" data-hotspot-list>
         <!-- STATIC_HOTSPOTS_START -->
 <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 终端 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 终端</span>
+            <time datetime="2026-07-01">2026年7月1日</time>
+          </div>
+          <h3>Qwen Code 发布 v0.19.3-nightly.20260701：自动压缩阈值、断点恢复、桌面语音和 safe-mode 继续预演</h3>
+        </div>
+      </div>
+      <p>QwenLM/qwen-code 的 7 月 1 日 nightly 预发布包含可配置 auto-compact threshold、不中断式恢复 turn、桌面端语音听写、Chrome extension daemon-direct 架构、`--safe-mode` 排障、MCP allowed/excluded glob、Web Shell 原始 diff 和多项 Windows / daemon 稳定性修复。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这是预发布版本，更适合作为终端 Agent 能力观察清单。新手可以先在示例仓库验证断点恢复、safe-mode、Web Shell diff、MCP glob 和 Windows shell tree 处理，不要把 nightly 直接用于会改生产状态的自动化任务。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：Qwen Code nightly 下断点恢复、safe-mode 和 MCP glob 的只读试跑清单</p>
+      <a class="text-link" href="https://github.com/QwenLM/qwen-code/releases/tag/v0.19.3-nightly.20260701.a974594d7" target="_blank" rel="noreferrer">查看来源：Qwen Code GitHub Release</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 终端 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 终端</span>
+            <time datetime="2026-06-30">2026年6月30日</time>
+          </div>
+          <h3>GitHub Copilot CLI v1.0.67 发布：Sonnet 5、沙箱切换、子 Agent 限制和 MCP OAuth 修复进入终端工作流</h3>
+        </div>
+      </div>
+      <p>GitHub Copilot CLI v1.0.67 的发布记录显示，本次更新加入 Claude Sonnet 5 支持，沙箱禁用会立即对本会话生效，子 Agent 会继承父级工具限制，并修复 Microsoft Entra vanity domain 后方 MCP OAuth 重新认证失败等问题。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这些改动影响终端 Agent 的权限、模型和长会话可靠性。新手升级后应先跑只读仓库任务，核对沙箱提示、子 Agent 工具边界、MCP 服务器重连和模型选择结果，再决定是否用于真实项目修改。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：Copilot CLI v1.0.67 升级后怎样复核沙箱、模型和 MCP 登录状态</p>
+      <a class="text-link" href="https://github.com/github/copilot-cli/releases/tag/v1.0.67" target="_blank" rel="noreferrer">查看来源：GitHub Copilot CLI Release</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="云端部署 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>云端部署</span>
+            <time datetime="2026-06-30">2026年6月30日</time>
+          </div>
+          <h3>Vercel Services 可在一个项目内运行多个前端和后端：polyglot monorepo 有了统一预览与内部调用路径</h3>
+        </div>
+      </div>
+      <p>Vercel Changelog 宣布 Services 可用，允许在一个 Vercel 项目中部署多个前端和后端，服务通过共享域名、统一构建、预览和回滚协作；`vercel.json` 中的 `services` 定义服务，顶层 `rewrites` 控制公开入口，`bindings` 支持服务间内部调用。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这对 Next.js 前端加 FastAPI、Express、Go 或 Rust 后端的项目很实用，但它仍是 Beta 能力。新手要先区分公开 route 和内部 binding，确认 `vercel dev` 本地行为、服务间鉴权、计费口径和回滚条件，而不是只把多个目录放到同一个仓库。</p>
+      </div>
+      <p class="hotspot-card__idea">已扩写：Vercel Services Beta 下怎样验收前端、后端、公开路由和内部调用</p>
+      <a class="text-link" href="https://vercel.com/changelog/run-multiple-frameworks-in-one-project-with-vercel-services" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 编程</span>
+            <time datetime="2026-06-30">2026年6月30日</time>
+          </div>
+          <h3>Claude Sonnet 5 在 GitHub Copilot 中正式可用：IDE、CLI、cloud agent 和移动端会逐步出现模型入口</h3>
+        </div>
+      </div>
+      <p>GitHub Changelog 宣布 Claude Sonnet 5 在 GitHub Copilot 中 GA，面向 Copilot Pro、Pro+、Max、Business 和 Enterprise 用户逐步开放，可在 VS Code、Visual Studio、Copilot CLI、cloud agent、GitHub Copilot App、github.com、移动端、JetBrains、Xcode 和 Eclipse 等入口选择。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>新模型进入 Copilot 不是单纯换下拉框。个人用户应记录模型、任务类型和失败样例；Business 和 Enterprise 管理员还要在模型策略中启用访问，并核对 Usage Based Billing、Zero Data Retention 和团队默认模型说明。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：Claude Sonnet 5 进入 Copilot 后怎样核对模型策略、费用和 IDE 默认值</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-06-30-claude-sonnet-5-is-generally-available-for-github-copilot/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="代码质量 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>代码质量</span>
+            <time datetime="2026-06-30">2026年6月30日</time>
+          </div>
+          <h3>GitHub Code Quality 支持覆盖率合并保护：可用 branch ruleset 阻止测试覆盖率下降的 PR 合并</h3>
+        </div>
+      </div>
+      <p>GitHub Changelog 宣布，GitHub Code Quality 用户现在可以在 branch rulesets 中设置代码覆盖率合并保护，按最低覆盖率百分比、相对默认分支最大下降幅度或两者同时拦截 PR；也可以先用 evaluate mode 观察影响，再切换到 active mode。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这把测试覆盖率从报告指标推进到合并门禁。新手和小团队不应立即设过高阈值，而应先在 evaluate mode 记录基线、确认测试上传口径、观察误报，再决定哪些仓库和分支适合启用强制保护。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：GitHub 覆盖率合并保护下怎样设置基线、evaluate mode 和失败处理</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-06-30-github-code-coverage-merge-protection-for-pull-requests/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
         <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="云端部署 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <div>
@@ -3133,6 +3233,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260630-large-functions"></script>
+  <script src="assets/app.js?v=20260701-vercel-services"></script>
 </body>
 </html>

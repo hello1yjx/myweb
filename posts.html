@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260630-large-functions">
+  <link rel="stylesheet" href="assets/styles.css?v=20260701-vercel-services">
 </head>
 <body>
   <header class="site-header">
@@ -67,6 +67,23 @@
       <div class="content-grid" data-post-list>
         <!-- STATIC_POSTS_START -->
 <article class="article-card reveal">
+      <a class="article-card__media article-card__media--github" href="articles/vercel-services-polyglot-monorepo-checklist.html">
+        <span class="article-card__badge">推荐</span>
+        <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="云端部署 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <strong>云端部署</strong>
+      </a>
+      <div class="article-card__body">
+        <div class="meta-row">
+          <span>云端部署</span>
+          <span>10 分钟</span>
+          <time datetime="2026-06-30">2026年6月30日</time>
+        </div>
+        <h3><a href="articles/vercel-services-polyglot-monorepo-checklist.html">Vercel Services Beta：新手怎样把前端、后端和内部调用放进同一个项目验收</a></h3>
+        <p>Vercel 在 2026 年 6 月 30 日宣布 Services 可用，允许在一个 Vercel 项目中部署多个前端和后端服务，并通过 `vercel.json` 的 `services`、顶层 `rewrites` 和内部 `bindings` 管理公开入口与服务间调用。它适合 Next.js 前端加 FastAPI、Express、Go 或 Rust 后端的 polyglot monorepo，但不是把所有应用混在一起的理由。新手应先画清楚公开路由、内部绑定、环境变量、`vercel dev` 本地验证、计费口径和回滚边界，再决定是否迁移。</p>
+      </div>
+    </article>
+
+    <article class="article-card reveal">
       <a class="article-card__media article-card__media--github" href="articles/vercel-large-functions-5gb-beta-checklist.html">
         <span class="article-card__badge">推荐</span>
         <span class="article-card__icon"><img class="visual-icon visual-icon--card" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="云端部署 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
@@ -1036,6 +1053,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260630-large-functions"></script>
+  <script src="assets/app.js?v=20260701-vercel-services"></script>
 </body>
 </html>
