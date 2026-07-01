@@ -133,6 +133,7 @@ function articleTemplate(runtime, post, relatedPosts) {
   <meta name="description" content="${escapeAttribute(post.excerpt)}">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="${canonical}">
+  <link rel="icon" type="image/png" href="../assets/images/brand-book-line.png">
   <script type="application/ld+json">${jsonLd}</script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
