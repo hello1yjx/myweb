@@ -29,6 +29,92 @@
   },
   posts: [
     {
+      id: "github-copilot-browser-tools-vscode-testing-guide",
+      title: "GitHub Copilot 浏览器工具 GA：新手怎样让 Agent 打开网页、测试交互并保留控制权",
+      date: "2026-07-01",
+      category: "AI 编程",
+      readTime: "9 分钟",
+      excerpt: "GitHub 在 2026 年 7 月 1 日宣布 VS Code 中的 GitHub Copilot 浏览器工具正式可用，Agent 可以驱动真实浏览器打开页面、点击、输入、悬停、拖拽、处理弹窗、读取页面内容、抓取控制台错误和截图。对新手来说，这不是让 Agent 随便接管浏览器，而是把本地网页验证、交互测试和错误复现纳入可审查流程：先用低风险页面练习，再确认共享标签页、隔离会话、权限审批、企业域名控制和测试记录。",
+      tags: ["GitHub Copilot", "VS Code", "浏览器测试"],
+      featured: true,
+      intro: [
+        "前端和建站新手最容易跳过的环节，是在真实浏览器里把页面点一遍。按钮能不能提交、弹窗有没有遮挡、控制台有没有报错、移动端菜单是否能打开，这些问题单靠代码阅读很难发现。GitHub Copilot 浏览器工具 GA 的意义，是让 Agent 可以在 VS Code 的集成浏览器里执行这些动作，并把页面内容、错误和截图带回对话。",
+        "但这类能力也更接近真实操作，不能当作“自动点完就算”。官方资料强调，用户自己打开的标签页默认不会被 Agent 读取，必须选择 Share with Agent；Agent 自己打开的页面使用隔离会话；摄像头、麦克风、位置、通知和剪贴板读取等敏感权限仍需要用户批准。新手应该先把它当作测试助手，而不是让它直接处理登录态、支付、账号设置或生产后台。"
+      ],
+      audience: [
+        "正在学习 HTML、CSS、JavaScript 或 React，希望让 Copilot 帮忙检查页面交互、控制台错误和布局状态的新手。",
+        "维护个人站点、课程项目或小型工具，需要把“打开页面、点按钮、看报错、截图复核”写进发布检查的人。",
+        "准备在团队中启用 VS Code Agent 浏览器能力，但需要先理解共享标签页、隔离会话、权限审批和网络域名限制的管理员或学生负责人。"
+      ],
+      format: [
+        "适合整理成“测试页面 / 操作步骤 / 预期结果 / Agent 实际结果 / 控制台错误 / 截图证据 / 是否需要人工复核”的浏览器验收表。",
+        "可配一份 VS Code 设置核对清单，记录 `workbench.browser.enableChatTools`、域名 allow/deny、工作区信任、是否共享人工打开的标签页，以及测试完成后是否撤销共享。"
+      ],
+      roadmap: [
+        "先更新 VS Code 和 Copilot 扩展，再确认浏览器工具已经可用。官方说明显示，浏览器工具 GA 后默认开启，管理员可通过 `workbench.browser.enableChatTools` 统一管理。",
+        "从本地静态页面或 localhost 测试开始。不要一上来让 Agent 进入带真实账号、客户数据或生产操作的页面；先用一个登录页、计算器、表单或个人站点首页验证基本能力。",
+        "让 Agent 自己打开页面做第一轮只读检查。可以要求它读取标题、检查主要按钮、抓取控制台错误、截图并说明观察到的页面状态。这一步不需要共享你已经打开的私人标签页。",
+        "再让 Agent 做一条可复现交互流程。示例可以是：打开本地页面，点击菜单，提交空表单，确认错误提示是否出现，最后列出控制台错误和截图结论。",
+        "需要共享已有标签页时，手动点击 Share with Agent，并在任务结束后撤销共享。共享页会使用你已有的 cookie 和登录状态；Agent 自己打开的新页则使用隔离会话，这是理解隐私边界的关键。",
+        "把权限请求留给人工判断。摄像头、麦克风、位置、通知和剪贴板读取不会被自动批准；如果测试场景需要这些能力，先写清楚为什么需要、在哪个站点触发、什么时候关闭。",
+        "把结果写成可复查记录。至少保留测试 URL、浏览器动作、发现的问题、截图或控制台摘要、修改文件和二次验证结果。不要只记录“Agent 说通过”。"
+      ],
+      officialLinks: [
+        {
+          label: "GitHub Changelog：Browser tools for GitHub Copilot in VS Code are generally available",
+          url: "https://github.blog/changelog/2026-07-01-browser-tools-for-github-copilot-in-vs-code-are-generally-available/",
+          note: "2026 年 7 月 1 日发布，说明 Copilot Agent 可以驱动真实浏览器、读取页面和控制台、截图，并列出用户控制、企业开关和域名限制。"
+        },
+        {
+          label: "VS Code Docs：Integrated browser",
+          url: "https://code.visualstudio.com/docs/debugtest/integrated-browser",
+          note: "解释 VS Code 集成浏览器、页面上下文添加、站点权限、会话存储、Agent 浏览器工具、共享标签页和隔离会话。"
+        },
+        {
+          label: "VS Code Docs：Build and test web apps with browser agent tools",
+          url: "https://code.visualstudio.com/docs/agents/guides/browser-agent-testing-guide",
+          note: "给出用浏览器 Agent 工具构建、测试、调试和修复网页应用的官方练习流程，并提醒共享页面与 Agent 自开页面的会话差异。"
+        }
+      ],
+      curatedLinks: [
+        "浏览器工具的价值在可复现测试，不在让 Agent 代替人工判断敏感操作。",
+        "人工打开的标签页默认不共享；需要共享时必须明确点击 Share with Agent，并在完成后撤销。",
+        "Agent 自己打开的页面使用隔离会话，适合做无登录或低风险测试。",
+        "团队启用前应核对 `workbench.browser.enableChatTools`、网络域名 allow/deny、工作区信任和审批提示。"
+      ],
+      downloadIdeas: [
+        "建议整理一份浏览器 Agent 测试记录表，字段包括 URL、测试目标、操作步骤、截图、控制台错误、修改文件和二次验证结果。",
+        "建议配一份权限与共享核对卡，逐项确认共享标签页、敏感权限、站点会话、域名范围和测试完成后的撤销动作。"
+      ],
+      extraSections: [
+        {
+          title: "10 分钟练习：让 Agent 检查一个本地页面",
+          items: [
+            "打开一个只有 HTML、CSS、JavaScript 的本地练习项目，确保页面可以在浏览器中访问。",
+            "在 Copilot Chat 中要求：打开页面，读取主标题，点击主要按钮，提交一次空表单，记录页面提示和控制台错误。",
+            "让 Agent 输出三项内容：它执行了哪些浏览器动作、发现了什么问题、需要你人工确认什么。",
+            "如果 Agent 修改了代码，要求它再次打开页面验证同一条流程，而不是只说明代码已经修复。",
+            "把截图、控制台摘要和二次验证结果写进项目笔记，作为发布前检查依据。"
+          ]
+        },
+        {
+          title: "不要跳过的边界",
+          items: [
+            "不要把真实支付、账号安全、后台删除、客户数据导出这类动作交给未复核的浏览器流程。",
+            "不要长期共享带登录态的标签页；任务结束后要撤销共享。",
+            "不要把浏览器工具当作无头测试框架的完全替代品。稳定流程仍应沉淀到 Playwright、单元测试或人工发布清单里。",
+            "不要忽略企业域名限制。allow list 和 deny list 会影响 Agent 与集成浏览器能访问哪些站点。"
+          ]
+        },
+        {
+          title: "可直接复制的提示词",
+          text: "把下面的提示词改成自己的本地地址，用来做第一轮低风险验收。",
+          code: "请打开 http://localhost:3000，完成这条浏览器测试：\n1. 读取页面标题和首屏主要按钮。\n2. 点击主要按钮，记录页面状态变化。\n3. 提交一次空表单，检查是否出现清晰错误提示。\n4. 抓取控制台错误和一张截图。\n5. 用清单列出：通过项、失败项、需要人工确认的项。\n不要登录真实账号，不要执行删除、支付或发送动作。",
+          language: "text"
+        }
+      ]
+    },
+    {
       id: "vercel-services-polyglot-monorepo-checklist",
       title: "Vercel Services Beta：新手怎样把前端、后端和内部调用放进同一个项目验收",
       date: "2026-06-30",
@@ -5241,6 +5327,56 @@ git push origin main`,
     "github-agentic-workflows-public-preview-guide"
   ],
   hotspots: [
+    {
+      date: "2026-07-01",
+      tag: "AI 编程",
+      title: "GitHub Copilot 浏览器工具在 VS Code 正式可用：Agent 可以打开真实网页、点击、截图并读取控制台错误",
+      summary: "GitHub Changelog 宣布，VS Code 中的 GitHub Copilot 浏览器工具已经 GA。Agent 可以驱动真实浏览器打开页面、导航、点击、输入、悬停、拖拽、处理弹窗、读取页面内容、捕获控制台错误、截图，并可运行脚本化流程。",
+      why: "这把前端调试和发布前验收推进到可观察的真实浏览器流程。新手应先在 localhost 或静态练习页测试，理解共享标签页、隔离会话、敏感权限审批、企业开关和域名限制，再把它用于登录态页面或团队项目。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-07-01-browser-tools-for-github-copilot-in-vs-code-are-generally-available/",
+      articleIdea: "已扩写：GitHub Copilot 浏览器工具 GA 后怎样做低风险网页交互验收"
+    },
+    {
+      date: "2026-07-01",
+      tag: "AI 检索",
+      title: "Cloudflare Vectorize 写入延迟明显降低：向量变更从提交到可查询的等待时间缩短",
+      summary: "Cloudflare AI changelog 显示，Vectorize WAL 的向量变更处理延迟已经优化，median end-to-end latency 从约 2 分钟降到 30 秒以内，p99 从约 5 分钟降到 2 分钟以内，影响插入、更新和删除后被查询到的速度。",
+      why: "这对 RAG、站内搜索和 AI 知识库很实用，但它不等于索引永远实时。新手应把写入后查询等待、重试间隔、批量更新窗口和用户提示写进验收清单，避免把刚上传的资料立即当作必然可检索事实。",
+      sourceLabel: "Cloudflare AI Changelog",
+      sourceUrl: "https://developers.cloudflare.com/changelog/product-group/ai/",
+      articleIdea: "候选：Vectorize 延迟降低后怎样设计 RAG 写入、等待和查询验收"
+    },
+    {
+      date: "2026-07-01",
+      tag: "代码质量",
+      title: "Vercel 开源 konsistent：用结构规则约束 TypeScript 项目，让 Agent 和人类按同一套约定改代码",
+      summary: "Vercel Changelog 宣布 `konsistent` 已开源。这是面向 TypeScript 代码库的 CLI linter，可通过项目级 `konsistent.json` 约束结构约定，例如某类文件必须导出指定函数、某个目录出现文件 X 时也必须有文件 Y、某类导出 class 必须实现指定类型。",
+      why: "AI Agent 写代码时最容易破坏项目结构而不触发 TypeScript 或 ESLint 错误。新手可以先把重复出现的目录、导出和桥接协议写成结构规则，让 Agent 修改后也能用确定性检查发现遗漏。",
+      sourceLabel: "Vercel Changelog",
+      sourceUrl: "https://vercel.com/changelog/enforce-consistent-code-for-agents-and-humans-with-konsistent",
+      articleIdea: "候选：konsistent 下怎样把项目结构约定变成 Agent 可执行检查"
+    },
+    {
+      date: "2026-07-01",
+      tag: "AI 终端",
+      title: "Copilot CLI 和 SDK 支持 AI credit session limit：自动化任务可以给单次会话设置消耗上限",
+      summary: "GitHub Changelog 宣布 Copilot CLI 和 GitHub Copilot SDK 现在可设置 AI credit session limits，用于限制一次 Agent 会话的消耗。交互式会话可用 `/limits` 查看、设置或移除限制；非交互运行可用 `--max-ai-credits` 控制单次任务。",
+      why: "这对无人值守脚本和长任务很关键。它是单会话软上限，不替代整体预算，且正在进行中的响应可能略超出设置值；新手应把上限、停止后的恢复方式和任务拆分写进自动化运行记录。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-07-01-set-ai-credit-session-limits-in-copilot-cli-and-sdk/",
+      articleIdea: "候选：Copilot CLI session limit 下怎样给自动化任务设置预算和恢复点"
+    },
+    {
+      date: "2026-07-01",
+      tag: "AI 编程",
+      title: "Copilot Vision 正式可用：图片和 PDF 可以直接加入 Chat，让 Copilot 结合代码理解视觉材料",
+      summary: "GitHub Changelog 宣布 Copilot Vision GA，用户可把 JPEG、PNG、GIF、WebP 图片和 PDF 附到提示词中；能力覆盖 VS Code Copilot Chat、github.com Copilot Chat 和 Copilot CLI，Free、Pro、Pro+、Business、Enterprise 订阅均可使用。",
+      why: "这适合让 Copilot 读取报错截图、界面稿和 PDF 说明，但不要把它当成事实来源替代人工核对。Business 和 Enterprise 场景还应注意附件保留时间、敏感材料脱敏和截图来源记录。",
+      sourceLabel: "GitHub Changelog",
+      sourceUrl: "https://github.blog/changelog/2026-07-01-copilot-vision-is-generally-available/",
+      articleIdea: "候选：Copilot Vision 下怎样把截图、PDF 和代码问题一起核验"
+    },
     {
       date: "2026-07-01",
       tag: "AI 终端",

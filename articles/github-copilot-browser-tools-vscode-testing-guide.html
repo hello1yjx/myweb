@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitHub Copilot 浏览器工具 GA：新手怎样让 Agent 打开网页、测试交互并保留控制权 | 学习资源库</title>
+  <meta name="description" content="GitHub 在 2026 年 7 月 1 日宣布 VS Code 中的 GitHub Copilot 浏览器工具正式可用，Agent 可以驱动真实浏览器打开页面、点击、输入、悬停、拖拽、处理弹窗、读取页面内容、抓取控制台错误和截图。对新手来说，这不是让 Agent 随便接管浏览器，而是把本地网页验证、交互测试和错误复现纳入可审查流程：先用低风险页面练习，再确认共享标签页、隔离会话、权限审批、企业域名控制和测试记录。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hello1yjx.github.io/articles/github-copilot-browser-tools-vscode-testing-guide.html">
+  <link rel="icon" type="image/png" href="../assets/images/brand-book-line.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"GitHub Copilot 浏览器工具 GA：新手怎样让 Agent 打开网页、测试交互并保留控制权","description":"GitHub 在 2026 年 7 月 1 日宣布 VS Code 中的 GitHub Copilot 浏览器工具正式可用，Agent 可以驱动真实浏览器打开页面、点击、输入、悬停、拖拽、处理弹窗、读取页面内容、抓取控制台错误和截图。对新手来说，这不是让 Agent 随便接管浏览器，而是把本地网页验证、交互测试和错误复现纳入可审查流程：先用低风险页面练习，再确认共享标签页、隔离会话、权限审批、企业域名控制和测试记录。","datePublished":"2026-07-01","dateModified":"2026-07-01","author":{"@type":"Person","name":"Avery Lin","url":"https://hello1yjx.github.io/about.html"},"publisher":{"@type":"Organization","name":"学习资源库","url":"https://hello1yjx.github.io/"},"mainEntityOfPage":"https://hello1yjx.github.io/articles/github-copilot-browser-tools-vscode-testing-guide.html","inLanguage":"zh-CN"}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6621999105936318" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260702-hotspots-browser-tools">
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="brand" href="../index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><img src="../assets/images/brand-book-line.png" alt="" width="36" height="33"></span>
+        <span class="brand-copy"><strong>学习资源库</strong><span>分享知识 · 提升自己 · 成就未来</span></span>
+      </a>
+      <button class="menu-button" data-menu-button aria-expanded="false" aria-label="切换导航菜单">☰</button>
+      <nav class="site-nav" data-mobile-nav>
+        <a href="../index.html">首页</a>
+        <a class="is-active" href="../posts.html" aria-current="page">教程</a>
+        <a href="../resources.html">资源下载</a>
+        <a href="../resources.html#official-resources">工具导航</a>
+        <a href="../hotspots.html">技术资讯</a>
+        <a href="../projects.html">开源项目</a>
+        <a href="../about.html">关于我们</a>
+      </nav>
+      <form class="header-search" action="../posts.html" method="get">
+        <input type="search" name="q" placeholder="搜索教程、资源、工具或关键词...">
+        <button type="submit" aria-label="搜索">/</button>
+      </form>
+      <a class="header-github" href="https://github.com/hello1yjx/hello1yjx.github.io" target="_blank" rel="noreferrer" aria-label="GitHub">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="" width="24" height="24">
+      </a>
+      <a class="header-cta" href="../posts.html">开始学习</a>
+    </div>
+  </header>
+
+  <main class="page-shell section article-page">
+    <header class="detail-hero">
+      <span class="pill">AI 编程</span>
+      <h1>GitHub Copilot 浏览器工具 GA：新手怎样让 Agent 打开网页、测试交互并保留控制权</h1>
+      <div class="detail-hero__meta">
+        <time datetime="2026-07-01">2026年7月1日</time>
+        <span>9 分钟</span>
+        <span>作者：Avery Lin</span>
+      </div>
+      <p>GitHub 在 2026 年 7 月 1 日宣布 VS Code 中的 GitHub Copilot 浏览器工具正式可用，Agent 可以驱动真实浏览器打开页面、点击、输入、悬停、拖拽、处理弹窗、读取页面内容、抓取控制台错误和截图。对新手来说，这不是让 Agent 随便接管浏览器，而是把本地网页验证、交互测试和错误复现纳入可审查流程：先用低风险页面练习，再确认共享标签页、隔离会话、权限审批、企业域名控制和测试记录。</p>
+    </header>
+    <div class="article-layout">
+      <article class="article-body">
+        <div class="inline-promo">
+          <p class="label">来源与增量价值</p>
+          <h3>本文基于官方资料整理，并补充适用场景、限制条件和实践检查步骤。</h3>
+          <p>首要来源：<a href="https://github.blog/changelog/2026-07-01-browser-tools-for-github-copilot-in-vs-code-are-generally-available/" target="_blank" rel="noreferrer">GitHub Changelog：Browser tools for GitHub Copilot in VS Code are generally available</a>。事实以原始来源为准，本站建议需结合自己的环境验证。</p>
+        </div>
+
+    <p>前端和建站新手最容易跳过的环节，是在真实浏览器里把页面点一遍。按钮能不能提交、弹窗有没有遮挡、控制台有没有报错、移动端菜单是否能打开，这些问题单靠代码阅读很难发现。GitHub Copilot 浏览器工具 GA 的意义，是让 Agent 可以在 VS Code 的集成浏览器里执行这些动作，并把页面内容、错误和截图带回对话。</p><p>但这类能力也更接近真实操作，不能当作“自动点完就算”。官方资料强调，用户自己打开的标签页默认不会被 Agent 读取，必须选择 Share with Agent；Agent 自己打开的页面使用隔离会话；摄像头、麦克风、位置、通知和剪贴板读取等敏感权限仍需要用户批准。新手应该先把它当作测试助手，而不是让它直接处理登录态、支付、账号设置或生产后台。</p>
+    <h2>这篇内容适合谁</h2>
+    <ul><li>正在学习 HTML、CSS、JavaScript 或 React，希望让 Copilot 帮忙检查页面交互、控制台错误和布局状态的新手。</li><li>维护个人站点、课程项目或小型工具，需要把“打开页面、点按钮、看报错、截图复核”写进发布检查的人。</li><li>准备在团队中启用 VS Code Agent 浏览器能力，但需要先理解共享标签页、隔离会话、权限审批和网络域名限制的管理员或学生负责人。</li></ul>
+    <h2>实践与验证步骤</h2>
+    <ul><li>先更新 VS Code 和 Copilot 扩展，再确认浏览器工具已经可用。官方说明显示，浏览器工具 GA 后默认开启，管理员可通过 `workbench.browser.enableChatTools` 统一管理。</li><li>从本地静态页面或 localhost 测试开始。不要一上来让 Agent 进入带真实账号、客户数据或生产操作的页面；先用一个登录页、计算器、表单或个人站点首页验证基本能力。</li><li>让 Agent 自己打开页面做第一轮只读检查。可以要求它读取标题、检查主要按钮、抓取控制台错误、截图并说明观察到的页面状态。这一步不需要共享你已经打开的私人标签页。</li><li>再让 Agent 做一条可复现交互流程。示例可以是：打开本地页面，点击菜单，提交空表单，确认错误提示是否出现，最后列出控制台错误和截图结论。</li><li>需要共享已有标签页时，手动点击 Share with Agent，并在任务结束后撤销共享。共享页会使用你已有的 cookie 和登录状态；Agent 自己打开的新页则使用隔离会话，这是理解隐私边界的关键。</li><li>把权限请求留给人工判断。摄像头、麦克风、位置、通知和剪贴板读取不会被自动批准；如果测试场景需要这些能力，先写清楚为什么需要、在哪个站点触发、什么时候关闭。</li><li>把结果写成可复查记录。至少保留测试 URL、浏览器动作、发现的问题、截图或控制台摘要、修改文件和二次验证结果。不要只记录“Agent 说通过”。</li></ul>
+    <h2>官方资料入口</h2>
+
+    <ul>
+
+            <li>
+              <a href="https://github.blog/changelog/2026-07-01-browser-tools-for-github-copilot-in-vs-code-are-generally-available/" target="_blank" rel="noreferrer">GitHub Changelog：Browser tools for GitHub Copilot in VS Code are generally available</a>
+              <span>：2026 年 7 月 1 日发布，说明 Copilot Agent 可以驱动真实浏览器、读取页面和控制台、截图，并列出用户控制、企业开关和域名限制。</span>
+            </li>
+
+            <li>
+              <a href="https://code.visualstudio.com/docs/debugtest/integrated-browser" target="_blank" rel="noreferrer">VS Code Docs：Integrated browser</a>
+              <span>：解释 VS Code 集成浏览器、页面上下文添加、站点权限、会话存储、Agent 浏览器工具、共享标签页和隔离会话。</span>
+            </li>
+
+            <li>
+              <a href="https://code.visualstudio.com/docs/agents/guides/browser-agent-testing-guide" target="_blank" rel="noreferrer">VS Code Docs：Build and test web apps with browser agent tools</a>
+              <span>：给出用浏览器 Agent 工具构建、测试、调试和修复网页应用的官方练习流程，并提醒共享页面与 Agent 自开页面的会话差异。</span>
+            </li>
+
+    </ul>
+
+    <h2>重点判断与使用建议</h2>
+    <ul><li>浏览器工具的价值在可复现测试，不在让 Agent 代替人工判断敏感操作。</li><li>人工打开的标签页默认不共享；需要共享时必须明确点击 Share with Agent，并在完成后撤销。</li><li>Agent 自己打开的页面使用隔离会话，适合做无登录或低风险测试。</li><li>团队启用前应核对 `workbench.browser.enableChatTools`、网络域名 allow/deny、工作区信任和审批提示。</li></ul>
+
+        <h2>10 分钟练习：让 Agent 检查一个本地页面</h2>
+
+        <ul><li>打开一个只有 HTML、CSS、JavaScript 的本地练习项目，确保页面可以在浏览器中访问。</li><li>在 Copilot Chat 中要求：打开页面，读取主标题，点击主要按钮，提交一次空表单，记录页面提示和控制台错误。</li><li>让 Agent 输出三项内容：它执行了哪些浏览器动作、发现了什么问题、需要你人工确认什么。</li><li>如果 Agent 修改了代码，要求它再次打开页面验证同一条流程，而不是只说明代码已经修复。</li><li>把截图、控制台摘要和二次验证结果写进项目笔记，作为发布前检查依据。</li></ul>
+
+
+
+        <h2>不要跳过的边界</h2>
+
+        <ul><li>不要把真实支付、账号安全、后台删除、客户数据导出这类动作交给未复核的浏览器流程。</li><li>不要长期共享带登录态的标签页；任务结束后要撤销共享。</li><li>不要把浏览器工具当作无头测试框架的完全替代品。稳定流程仍应沉淀到 Playwright、单元测试或人工发布清单里。</li><li>不要忽略企业域名限制。allow list 和 deny list 会影响 Agent 与集成浏览器能访问哪些站点。</li></ul>
+
+
+
+        <h2>可直接复制的提示词</h2>
+        <p>把下面的提示词改成自己的本地地址，用来做第一轮低风险验收。</p>
+
+
+        <pre><code class="language-text">请打开 http://localhost:3000，完成这条浏览器测试：
+1. 读取页面标题和首屏主要按钮。
+2. 点击主要按钮，记录页面状态变化。
+3. 提交一次空表单，检查是否出现清晰错误提示。
+4. 抓取控制台错误和一张截图。
+5. 用清单列出：通过项、失败项、需要人工确认的项。
+不要登录真实账号，不要执行删除、支付或发送动作。</code></pre>
+
+
+        <div class="inline-promo">
+          <p class="label">更正与更新</p>
+          <h3>发现版本变化、来源失效或事实错误时，请通过联系页反馈。</h3>
+          <p>本站会核对一手来源后更新内容，不使用无来源转载填充文章。</p>
+          <a class="button button--secondary" href="../editorial.html">查看内容标准</a>
+        </div>
+      </article>
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <p class="label">本页标签</p>
+          <div class="tag-row"><span>GitHub Copilot</span><span>VS Code</span><span>浏览器测试</span></div>
+        </div>
+        <div class="sidebar-card">
+          <p class="label">继续阅读</p>
+          <a href="vercel-web-analytics-cli-metrics-guide.html">Vercel Web Analytics CLI：新手怎样用 vercel metrics 查询访问数据并给 Agent 设置边界</a><a href="vercel-ai-sdk-7-upgrade-agent-checklist.html">Vercel AI SDK 7：新手怎样判断项目能不能升级到 Node 22、ESM 和生产级 Agent</a><a href="cloudflare-ai-search-cache-freshness-guide.html">Cloudflare AI Search 相似缓存新鲜度：新手怎样给站内 AI 搜索设置 TTL、清理缓存和验收答案</a><a href="github-copilot-cli-terminal-interface-guide.html">GitHub Copilot CLI 新终端界面：新手怎样把 Issue、PR、MCP、Skills 和插件放进一个可控工作台</a>
+        </div>
+        <div class="sidebar-card sidebar-card--accent">
+          <p class="label">作者与方法</p>
+          <h3>了解本站如何选题、核验来源与处理更正。</h3>
+          <a class="button button--dark" href="../about.html">关于作者</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer__inner">
+      <div><strong>学习资源库</strong><p>分享知识 · 提升自己 · 成就未来</p></div>
+      <div>
+        <a href="../editorial.html">内容标准</a><br>
+        <a href="../privacy.html">隐私政策</a><br>
+        <a href="../contact.html">联系</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var button = document.querySelector("[data-menu-button]");
+      var nav = document.querySelector("[data-mobile-nav]");
+      if (!button || !nav) return;
+      button.addEventListener("click", function () {
+        var expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        nav.classList.toggle("site-nav--open", !expanded);
+      });
+    });
+  </script>
+</body>
+</html>

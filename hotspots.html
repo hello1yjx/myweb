@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=20260701-maintenance-audit">
+  <link rel="stylesheet" href="assets/styles.css?v=20260702-hotspots-browser-tools">
 </head>
 <body>
   <header class="site-header">
@@ -77,6 +77,106 @@
       <div class="hotspot-grid" data-hotspot-list>
         <!-- STATIC_HOTSPOTS_START -->
 <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 编程</span>
+            <time datetime="2026-07-01">2026年7月1日</time>
+          </div>
+          <h3>GitHub Copilot 浏览器工具在 VS Code 正式可用：Agent 可以打开真实网页、点击、截图并读取控制台错误</h3>
+        </div>
+      </div>
+      <p>GitHub Changelog 宣布，VS Code 中的 GitHub Copilot 浏览器工具已经 GA。Agent 可以驱动真实浏览器打开页面、导航、点击、输入、悬停、拖拽、处理弹窗、读取页面内容、捕获控制台错误、截图，并可运行脚本化流程。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这把前端调试和发布前验收推进到可观察的真实浏览器流程。新手应先在 localhost 或静态练习页测试，理解共享标签页、隔离会话、敏感权限审批、企业开关和域名限制，再把它用于登录态页面或团队项目。</p>
+      </div>
+      <p class="hotspot-card__idea">已扩写：GitHub Copilot 浏览器工具 GA 后怎样做低风险网页交互验收</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-07-01-browser-tools-for-github-copilot-in-vs-code-are-generally-available/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 检索 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 检索</span>
+            <time datetime="2026-07-01">2026年7月1日</time>
+          </div>
+          <h3>Cloudflare Vectorize 写入延迟明显降低：向量变更从提交到可查询的等待时间缩短</h3>
+        </div>
+      </div>
+      <p>Cloudflare AI changelog 显示，Vectorize WAL 的向量变更处理延迟已经优化，median end-to-end latency 从约 2 分钟降到 30 秒以内，p99 从约 5 分钟降到 2 分钟以内，影响插入、更新和删除后被查询到的速度。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这对 RAG、站内搜索和 AI 知识库很实用，但它不等于索引永远实时。新手应把写入后查询等待、重试间隔、批量更新窗口和用户提示写进验收清单，避免把刚上传的资料立即当作必然可检索事实。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：Vectorize 延迟降低后怎样设计 RAG 写入、等待和查询验收</p>
+      <a class="text-link" href="https://developers.cloudflare.com/changelog/product-group/ai/" target="_blank" rel="noreferrer">查看来源：Cloudflare AI Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="代码质量 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>代码质量</span>
+            <time datetime="2026-07-01">2026年7月1日</time>
+          </div>
+          <h3>Vercel 开源 konsistent：用结构规则约束 TypeScript 项目，让 Agent 和人类按同一套约定改代码</h3>
+        </div>
+      </div>
+      <p>Vercel Changelog 宣布 `konsistent` 已开源。这是面向 TypeScript 代码库的 CLI linter，可通过项目级 `konsistent.json` 约束结构约定，例如某类文件必须导出指定函数、某个目录出现文件 X 时也必须有文件 Y、某类导出 class 必须实现指定类型。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>AI Agent 写代码时最容易破坏项目结构而不触发 TypeScript 或 ESLint 错误。新手可以先把重复出现的目录、导出和桥接协议写成结构规则，让 Agent 修改后也能用确定性检查发现遗漏。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：konsistent 下怎样把项目结构约定变成 Agent 可执行检查</p>
+      <a class="text-link" href="https://vercel.com/changelog/enforce-consistent-code-for-agents-and-humans-with-konsistent" target="_blank" rel="noreferrer">查看来源：Vercel Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 终端 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 终端</span>
+            <time datetime="2026-07-01">2026年7月1日</time>
+          </div>
+          <h3>Copilot CLI 和 SDK 支持 AI credit session limit：自动化任务可以给单次会话设置消耗上限</h3>
+        </div>
+      </div>
+      <p>GitHub Changelog 宣布 Copilot CLI 和 GitHub Copilot SDK 现在可设置 AI credit session limits，用于限制一次 Agent 会话的消耗。交互式会话可用 `/limits` 查看、设置或移除限制；非交互运行可用 `--max-ai-credits` 控制单次任务。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这对无人值守脚本和长任务很关键。它是单会话软上限，不替代整体预算，且正在进行中的响应可能略超出设置值；新手应把上限、停止后的恢复方式和任务拆分写进自动化运行记录。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：Copilot CLI session limit 下怎样给自动化任务设置预算和恢复点</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-07-01-set-ai-credit-session-limits-in-copilot-cli-and-sdk/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
+      <div class="hotspot-card__head">
+        <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="AI 编程 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
+        <div>
+          <div class="hotspot-card__meta">
+            <span>AI 编程</span>
+            <time datetime="2026-07-01">2026年7月1日</time>
+          </div>
+          <h3>Copilot Vision 正式可用：图片和 PDF 可以直接加入 Chat，让 Copilot 结合代码理解视觉材料</h3>
+        </div>
+      </div>
+      <p>GitHub Changelog 宣布 Copilot Vision GA，用户可把 JPEG、PNG、GIF、WebP 图片和 PDF 附到提示词中；能力覆盖 VS Code Copilot Chat、github.com Copilot Chat 和 Copilot CLI，Free、Pro、Pro+、Business、Enterprise 订阅均可使用。</p>
+      <div class="hotspot-card__why">
+        <strong>为什么值得关注</strong>
+        <p>这适合让 Copilot 读取报错截图、界面稿和 PDF 说明，但不要把它当成事实来源替代人工核对。Business 和 Enterprise 场景还应注意附件保留时间、敏感材料脱敏和截图来源记录。</p>
+      </div>
+      <p class="hotspot-card__idea">候选：Copilot Vision 下怎样把截图、PDF 和代码问题一起核验</p>
+      <a class="text-link" href="https://github.blog/changelog/2026-07-01-copilot-vision-is-generally-available/" target="_blank" rel="noreferrer">查看来源：GitHub Changelog</a>
+    </article>
+
+    <article class="hotspot-card reveal">
       <div class="hotspot-card__head">
         <span class="hotspot-card__icon"><img class="visual-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="AI 终端 图标" width="48" height="48" loading="lazy" onerror="this.onerror=null;this.src='assets/images/brand-book-line.png';"></span>
         <div>
@@ -3234,6 +3334,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=20260701-maintenance-audit"></script>
+  <script src="assets/app.js?v=20260702-hotspots-browser-tools"></script>
 </body>
 </html>
